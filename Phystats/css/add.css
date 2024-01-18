@@ -1,0 +1,24 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Jan 3, 2024, 1:05:53 AM
+    Author     : fretz
+*/
+
+@import url("https://fonts.googleapis.com/css?family=Jura");
+
+.addform{
+    width: 70%;
+    margin: 100px auto;
+}
+form{
+    padding: 2.5%;
+    background-color: #b6ffff;
+    border: 3px solid rgba(21 162 241 / 0.25);
+    border-radius: 30px;
+}
+h1{
+    text-align: center;
+}

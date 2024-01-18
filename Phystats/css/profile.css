@@ -1,0 +1,121 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Dec 13, 2023, 4:15:46 AM
+    Author     : fretzen
+*/
+
+@import url("https://fonts.googleapis.com/css?family=Jura");
+
+section{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.prof{
+    width: 75%;
+    height: 500px;
+    padding: 2.5%;
+    background-color: #b6ffff;
+    border: 3px solid rgba(21 162 241 / 0.25);
+    border-radius: 30px;
+    display: flex;
+    flex-direction: row;
+}
+.prof div{
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+    align-content: space-evenly;
+}
+.prof h1{
+    margin: 0;
+    margin-bottom: 50px;
+    font-size: 28pt;
+}
+input[type=text],[type=password]{
+    margin: 1%;
+    padding: 1%;
+    padding-left: 50px;
+    width: 75%;
+    height: 40px;
+    border-radius: 45px;
+    border: none;
+    background-color: #7cdaf9;
+    color: #6A6A6A;
+    font-family: jura;
+    font-size: 18pt;
+    font-weight: bold;
+    box-shadow: inset 0px 4px 4px 0px rgba(0 0 0 / 0.25);
+}
+.prof div div{
+    padding: 1%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+label{
+    padding-left: 87px;
+    font-size: 18pt;
+    font-weight: bold;
+}
+p{
+    margin: 3.25% auto;
+    font-size: 18pt;
+    font-weight: bold;
+}
+select{
+    margin-right: 50px;
+    width: 30%;
+    height: 50px;
+    padding: 1%;
+    border-radius: 45px;
+    border: none;
+    background-color: #7cdaf9;
+    color: #6A6A6A;
+    font-family: jura;
+    font-weight: bold;
+    font-size: 18pt;
+    text-align: center;
+    box-shadow: inset 0px 4px 4px 0px rgba(0 0 0 / 0.25);
+}
+input[type=submit]:not(.logout){
+    margin-top: 7.5%;
+    padding: 1.5%;
+    width: 45%;
+    height: 60px;
+    border-radius: 25px;
+    border: none;
+    background-color: #FFDE31;
+    color: #2B2B2B;
+    font-family: jura;
+    font-size: 18pt;
+    font-weight: bold;
+    box-shadow: 0px 0px 10px 1px rgba(0 0 0 / 0.25);
+    transition: all 400ms ease-in-out;
+}
+input[type=submit]:hover:not(.logout){
+    background-color: #FFFF33;
+}
+.logout{
+    margin-top: 7.5%;
+    padding: 1.5%;
+    width: 45%;
+    height: 60px;
+    border-radius: 25px;
+    border: none;
+    background-color: #db0000;
+    color: #2B2B2B;
+    font-family: jura;
+    font-size: 18pt;
+    font-weight: bold;
+    box-shadow: 0px 0px 10px 1px rgba(0 0 0 / 0.25);
+    transition: all 400ms ease-in-out;
+}
+.logout:hover{
+    background-color: #ff2600;
+}

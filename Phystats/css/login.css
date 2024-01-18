@@ -1,0 +1,81 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Dec 13, 2023, 4:14:47 AM
+    Author     : fretzen
+*/
+
+@import url("https://fonts.googleapis.com/css?family=Jura");
+
+body{
+    margin: 0 auto;
+    padding-top: 10%;
+    padding-bottom: 5%;
+}
+div,form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    font-family: jura;
+}
+div{
+    background-color: #40CFFF;
+    border: 3px solid rgba(21 162 241 / 0.25);
+    border-radius: 30px;
+    box-shadow: 2px 4px 4px 3px rgba(0 0 0 / 0.25);
+    width: 55%;
+    margin: auto;
+    padding-bottom: 1.5%;
+}
+h1{
+    font-size: 36pt;
+    color: white;
+}
+input[type=email],[type=password]{
+    margin: 2.5%;
+    padding: 1%;
+    padding-left: 50px;
+    padding-right: 30px;
+    width: 120%;
+    height: 60px    ;
+    border-radius: 45px;
+    border: none;
+    background-color: #B6FFFF;
+    color: #6A6A6A;
+    font-family: jura;
+    font-size: 18pt;
+    font-weight: bold;
+    box-shadow: inset 0px 4px 4px 0px rgba(0 0 0 / 0.25);
+}
+input[type=submit]{
+    margin: 5%;
+    padding: 1.5%;
+    width: 50%;
+    height: 60px;
+    border-radius: 25px;
+    border: none;
+    background-color: #FFDE31;
+    color: #2B2B2B;
+    font-family: jura;
+    font-size: 18pt;
+    font-weight: bold;
+    box-shadow: 0px 0px 10px 1px rgba(0 0 0 / 0.25);
+    transition: all 400ms ease-in-out;
+}
+input[type=submit]:hover{
+    background-color: #FFFF33;
+}
+p{
+    font-size: 14pt;
+    font-weight: bold;
+}
+a{
+    color: #82590A;
+    transition: all 400ms;
+}
+a:hover{
+    color: #A5923B;
+}
