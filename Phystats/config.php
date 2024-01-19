@@ -92,3 +92,196 @@ function flexibility($zipperRight, $zipperLeft, $sitReach1, $sitReach2)
     $flexibility = round($temp);
     return interpretation_score($flexibility);
 }
+function pushups_interpretation($pushupsNo)
+{
+    if ($pushupsNo <= 0) {
+        return "Poor";
+    } else if (0 < $pushupsNo && $pushupsNo < 6) {
+        return "Needs Improvement";
+    } else if (5 < $pushupsNo && $pushupsNo < 11) {
+        return "Fair";
+    } else if (10 < $pushupsNo && $pushupsNo < 16) {
+        return "Good";
+    } else if (15 < $pushupsNo && $pushupsNo < 21) {
+        return "Very Good";
+    } else if ($pushupsNo > 20) {
+        return "Excellent";
+    } else {
+        return "Error";
+    }
+}
+function plank_interpretation($plankTime){
+    if ($plankTime <= 0) {
+        return "Poor";
+    } else if (0 < $plankTime && $plankTime < 16) {
+        return "Needs Improvement";
+    } else if (15 < $plankTime && $plankTime < 31) {
+        return "Fair";
+    } else if (30 < $plankTime && $plankTime < 46) {
+        return "Good";
+    } else if (45 < $plankTime && $plankTime < 51) {
+        return "Very Good";
+    } else if ($plankTime > 50) {
+        return "Excellent";
+    } else {
+        return "Error";
+    }
+}
+function strength($pushupsNo, $plankTime){
+    $pushupsInterpretation = zippertest_interpretation($pushupsNo);
+    $plankInterpretation = sitAndReach_interpretation($plankTime);
+    $pushupScore = interpretation_score($pushupsInterpretation);
+    $plankScore = interpretation_score($plankInterpretation);
+    $temp = ($pushupScore + $plankScore) / 2;
+    $strength = round($temp);
+    return interpretation_score($strength);
+}
+function standingLongJump_interpretation($SLJ){
+    if ($SLJ < 55) {
+        return "Poor";
+    } else if (54 < $SLJ && $SLJ < 101) {
+        return "Needs Improvement";
+    } else if (100 < $SLJ && $SLJ < 126) {
+        return "Fair";
+    } else if (125 < $SLJ && $SLJ < 151) {
+        return "Good";
+    } else if (150 < $SLJ && $SLJ < 201) {
+        return "Very Good";
+    } else if ($SLJ > 200) {
+        return "Excellent";
+    } else {
+        return "Error";
+    }
+}
+function power($SLJ1, $SLJ2){
+    $SLJ1Interpretation = standingLongJump_interpretation($SLJ1);
+    $SLJ2Interpretation = standingLongJump_interpretation($SLJ2);
+    $SLJ1score = interpretation_score($SLJ1Interpretation);
+    $SLJ2score = interpretation_score($SLJ2Interpretation);
+    $temp = ($SLJ1score + $SLJ2score) / 2;
+    $power = round($temp);
+    return interpretation_score($power);
+}
+function hexagonAgility_interpretation($hexagon){
+    if ($hexagon > 25) {
+        return "Poor";
+    } else if (20 < $hexagon && $hexagon < 26) {
+        return "Needs Improvement";
+    } else if (15 < $hexagon && $hexagon < 21) {
+        return "Fair";
+    } else if (10 < $hexagon && $hexagon < 16) {
+        return "Good";
+    } else if (5 < $hexagon && $hexagon < 11) {
+        return "Very Good";
+    } else if ($hexagon < 6) {
+        return "Excellent";
+    } else {
+        return "Error";
+    }
+}
+function agility($hexagon1, $hexagon2){
+    $hexagonAgility = ($hexagon1 + $hexagon2) / 2;
+    $hexagonInterpretation = hexagonAgility_interpretation($hexagonAgility);
+    return $hexagonInterpretation;
+}
+function stickDrop_interpretation($stickDrop){
+    if ($stickDrop > 30.48) {
+        return "Poor";
+    } else if (26.66 < $stickDrop && $stickDrop < 30.49) {
+        return "Needs Improvement";
+    } else if (19.04 < $stickDrop && $stickDrop < 26.67) {
+        return "Fair";
+    } else if (11.42 < $stickDrop && $stickDrop < 19.05) {
+        return "Good";
+    } else if (3.74 < $stickDrop && $stickDrop < 11.43) {
+        return "Very Good";
+    } else if ($stickDrop < 3.75) {
+        return "Excellent";
+    } else {
+        return "Error";
+    }
+}
+function reactionTime($stick1, $stick2, $stick3){
+    if (($stick2 >= $stick1 && $stick1 >= $stick3) || ($stick3 >= $stick1 && $stick1 >= $stick2)) {
+        $stickMiddle = $stick1;
+    }else if (($stick1 >= $stick2 && $stick2 >= $stick3) || ($stick3 >= $stick2 && $stick2 >= $stick1)) {
+        $stickMiddle = $stick2;
+    }else if (($stick2 >= $stick3 && $stick3 >= $stick1) || ($stick1 >= $stick3 && $stick3 >= $stick2)) {
+        $stickMiddle = $stick3;
+    }
+    $stickDropInterpretation = stickDrop_interpretation($stickMiddle);
+    return $stickDropInterpretation;
+}
+function coordination($juggling){
+    if ($juggling <= 0) {
+        return "Poor";
+    } else if (0 < $juggling && $juggling < 11) {
+        return "Needs Improvement";
+    } else if (10 < $juggling && $juggling < 21) {
+        return "Fair";
+    } else if (20 < $juggling && $juggling < 31) {
+        return "Good";
+    } else if (30 < $juggling && $juggling < 41) {
+        return "Very Good";
+    } else if ($juggling > 40) {
+        return "Excellent";
+    } else {
+        return "Error";
+    }
+}
+function interpretStorkTest($score, $age) {
+    if ($age >= 9 && $age <= 12) {
+        if ($score >= 41 && $score <= 60) {
+            return "Excellent";
+        } elseif ($score >= 31 && $score <= 40) {
+            return "Very Good";
+        } elseif ($score >= 21 && $score <= 30) {
+            return "Good";
+        } elseif ($score >= 11 && $score <= 20) {
+            return "Fair";
+        } elseif ($score >= 1 && $score <= 10) {
+            return "Needs Improvement";
+        }
+    } elseif ($age >= 13 && $age <= 14) {
+        if ($score >= 81 && $score <= 100) {
+            return "Excellent";
+        } elseif ($score >= 61 && $score <= 80) {
+            return "Very Good";
+        } elseif ($score >= 41 && $score <= 60) {
+            return "Good";
+        } elseif ($score >= 21 && $score <= 40) {
+            return "Fair";
+        } elseif ($score >= 1 && $score <= 20) {
+            return "Needs Improvement";
+        }
+    } elseif ($age >= 15 && $age <= 16) {
+        if ($score >= 121 && $score <= 150) {
+            return "Excellent";
+        } elseif ($score >= 91 && $score <= 120) {
+            return "Very Good";
+        } elseif ($score >= 61 && $score <= 90) {
+            return "Good";
+        } elseif ($score >= 31 && $score <= 60) {
+            return "Fair";
+        } elseif ($score >= 1 && $score <= 30) {
+            return "Needs Improvement";
+        }
+    } elseif ($age >= 17) {
+        if ($score >= 161 && $score <= 180) {
+            return "Excellent";
+        } elseif ($score >= 121 && $score <= 160) {
+            return "Very Good";
+        } elseif ($score >= 81 && $score <= 120) {
+            return "Good";
+        } elseif ($score >= 41 && $score <= 80) {
+            return "Fair";
+        } elseif ($score >= 1 && $score <= 40) {
+            return "Needs Improvement";
+        }
+    }
+}
+function speed($sprintTime, $age){
+    if ($age > 8 && $age < 13){
+        
+    }
+}
