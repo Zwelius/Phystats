@@ -9,52 +9,62 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 
 @import url("https://fonts.googleapis.com/css?family=Jura");
 
-body{
+body {
     margin: 0 auto;
-    font-family: Jura;
+
 }
-nav{
-    width: 100%;
-    height: 75px;
-    background-color: #40cfff;
-    border: 3px solid rgba(25 87 208 / 0.20);
+
+nav {
+    background-color: #0679E2;
+    height: 100px;
+    padding: 0 10%;
     display: flex;
+    font-family: Jura;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 2.5%;
 }
-nav div{
-    margin-left: 0.5%;
-    margin-right: 0.5%;
+
+nav div {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-
 }
-.logo{
+
+.nav-options {
+    font-family: 'Poppins';
+    font-size: 16px;
+}
+
+.logo {
     width: 75px;
 }
-.title{
+
+.title {
     margin: 0 auto;
     font-size: 28pt;
     color: white;
 }
-.profile{
+
+.profile {
     width: 50px;
 }
-nav div a{
+
+nav div a {
     text-decoration: none;
     color: white;
     font-size: 18pt;
     transition: all 200ms ease-in-out;
 }
-nav div a:hover{
+
+nav div a:hover {
     border-bottom: 3px solid #efad4a;
 }
-nav div > *{
+
+nav div>* {
     margin-left: 15px;
     margin-right: 15px;
 }
-.here{
+
+.here {
     border-bottom: 3px solid #efad4a;
 }

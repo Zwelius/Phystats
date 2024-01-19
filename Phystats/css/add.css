@@ -9,16 +9,62 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 
 @import url("https://fonts.googleapis.com/css?family=Jura");
 
-.addform{
-    width: 70%;
-    margin: 100px auto;
+body {
+    background-color: #C2D7EA;
+    font-family: 'Poppins';
 }
-form{
-    padding: 2.5%;
-    background-color: #b6ffff;
-    border: 3px solid rgba(21 162 241 / 0.25);
-    border-radius: 30px;
+
+.add-form {
+    padding: 0 11%;
+    margin: 45px auto;
 }
-h1{
+
+form {
+    padding: 30px;
+    background-color: #FFFFFF;
+    border-radius: 5px;
+}
+
+.add-form p {
+    font-size: 32px;
     text-align: center;
+    font-weight: bold;
+}
+
+/*****tabs*****/
+.mytabs {
+    color: white;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 25px;
+}
+
+.mytabs input[type="radio"] {
+    display: none;
+}
+
+.mytabs label[for="student-information"],
+.mytabs label[for="tabsilver"],
+.mytabs label[for="tabgold"] {
+    background: #C2D7EA;
+    width: 205px;
+    padding: 15px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    text-align: center;
+}
+
+.mytabs .tab {
+    color: black;
+    width: 100%;
+    order: 1;
+    display: none;
+}
+
+.mytabs input[type='radio']:checked+label+.tab {
+    display: block;
+}
+
+.mytabs input[type="radio"]:checked+label {
+    background: #0679E2;
 }
