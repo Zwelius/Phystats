@@ -60,7 +60,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
         </nav>
         <div class="addform">
             <form method="POST">
-                <h1>Physical Fitness Test <?php $interpretation = zippertest_interpretation($data['zipperRight']); echo $interpretation;?></h1>
+                <h1>Physical Fitness Test</h1>
 
                 <select name="syear">
                     <?php
