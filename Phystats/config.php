@@ -14,43 +14,30 @@ function interpretation_score($interpretation)
     switch ($interpretation) {
         case "Poor":
             return 0;
-            break;
         case "Needs Improvement":
             return 1;
-            break;
         case "Fair":
             return 2;
-            break;
         case "Good":
             return 3;
-            break;
         case "Very Good":
             return 4;
-            break;
         case "Excellent":
             return 5;
-            break;
         case 0:
             return "Poor";
-            break;
         case 1:
             return "Needs Improvement";
-            break;
         case 2:
             return "Fair";
-            break;
         case 3:
             return "Good";
-            break;
         case 4:
             return "Very Good";
-            break;
         case 5:
             return "Excellent";
-            break;
         default:
             return 404;
-            break;
     }
 }
 function zippertest_interpretation($zipper)
