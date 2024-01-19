@@ -9,21 +9,20 @@ if (!$connection) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
-function zippertest_interpretation($zipper, $interpretation){
+function zippertest_interpretation($zipper){
     if ($zipper < 0) {
-        $interpretation = "Poor";
+        return "Poor";
     }else if ($zipper = 0){
-        $interpretation = "Needs Improvement";
+        return "Needs Improvement";
     }else if (0 < $zipper && $zipper < 2){
-        $interpretation = "Fair";
+        return "Fair";
     }else if (1.9 < $zipper && $zipper < 4){
-        $interpretation = "Good";
+        return "Good";
     }else if (3.9 < $zipper && $zipper < 6){
-        $interpretation = "Very Good";
+        return "Very Good";
     }else if (5.9 < $zipper){
-        $interpretation = "Excellent";
+        return "Excellent";
     }
-    return $interpretation;
 }
 function flexibility(){
 
