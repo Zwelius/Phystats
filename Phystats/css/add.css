@@ -32,20 +32,20 @@ form {
 }
 
 /*****tabs*****/
-.mytabs {
+.tab-container {
     color: white;
     display: flex;
     flex-wrap: wrap;
     padding: 25px;
 }
 
-.mytabs input[type="radio"] {
+.tab-container input[type="radio"] {
     display: none;
 }
 
-.mytabs label[for="student-information"],
-.mytabs label[for="tabsilver"],
-.mytabs label[for="tabgold"] {
+.tab-container label[for="student-information"],
+.tab-container label[for="tabsilver"],
+.tab-container label[for="tabgold"] {
     background: #C2D7EA;
     width: 205px;
     padding: 15px;
@@ -54,17 +54,21 @@ form {
     text-align: center;
 }
 
-.mytabs .tab {
+.tab-container .tab {
     color: black;
     width: 100%;
     order: 1;
     display: none;
 }
 
-.mytabs input[type='radio']:checked+label+.tab {
+.tab-flex {
+    display: flex;
+}
+
+.tab-container input[type='radio']:checked+label+.tab {
     display: block;
 }
 
-.mytabs input[type="radio"]:checked+label {
+.tab-container input[type="radio"]:checked+label {
     background: #0679E2;
 }

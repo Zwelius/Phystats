@@ -61,10 +61,11 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
     <div class="add-form">
         <form method="POST">
             <p>Physical Fitness Test</p>
-            <div class="mytabs">
-                <input type="radio" id="student-information" name="mytabs" checked="checked">
+            <div class="tab-container">
+                <input type="radio" id="student-information" name="tab-container" checked="checked">
                 <label for="student-information">Student Information</label>
                 <div class="tab">
+                    <label for="syear">SCHOOL YEAR</label><br>
                     <select name="syear">
                         <?php
                         while ($row1 = mysqli_fetch_array($syears)) {
@@ -72,6 +73,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                         }
                         ?>
                     </select>
+                    <label for="quarter">QUARTER</label><br>
                     <select name="quarter">
                         <?php
                         while ($qtr = mysqli_fetch_array($quarter)) {
@@ -87,18 +89,32 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                         ?>
                     </select>
 
-                    <label for="name">Name:</label>
+                    <br>
+
+                    <label for="name">NAME</label><br>
                     <input type="text" name="name" required>
-                    <label for="bday">Birth Date:</label>
-                    <input type="date" name="bday" required>
-                    <label for="sex">Sex:</label>
-                    <select name="sex">
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                    </select>
-                    
-                    <label for="age">Age:</label>
-                    <input type="number" name="age" required>
+
+                    <div class="tab-flex">
+                        <div>
+                            <label for="bday">BIRTH DATE</label><br>
+                            <input type="date" name="bday" required>
+                        </div>
+                        <div>
+                            <label for="sex">SEX</label><br>
+                            <select name="sex">
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="age">AGE</label><br>
+                            <input type="number" name="age" required>
+                        </div>
+                    </div>
+
+
+
+
                     <label for="height">Height(m):</label>
                     <input type="number" name="height" step="0.01" required>
                     <label for="weight">Weight(kg):</label>
@@ -120,7 +136,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                     </select>
                 </div>
 
-                <input type="radio" id="tabsilver" name="mytabs">
+                <input type="radio" id="tabsilver" name="tab-container">
                 <label for="tabsilver">Health-Related Test</label>
                 <div class="tab">
                     <label for="HRbefore">Heart Rate Before Activity(bpm):</label>
@@ -141,7 +157,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                     <input type="number" name="sar2" step="0.01" required>
                 </div>
 
-                <input type="radio" id="tabgold" name="mytabs">
+                <input type="radio" id="tabgold" name="tab-container">
                 <label for="tabgold">Skill-Related Test</label>
                 <div class="tab">
                     <label for="juggling">Juggling:</label>
