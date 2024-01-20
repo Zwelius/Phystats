@@ -94,14 +94,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                         <span>SORT BY</span>
                         <select>
                             <option>Name</option>
-                            <option>Birthday</option>
                             <option>Height</option>
                             <option>Weight</option>
-                            <option>Sex</option>
                             <option>Age</option>
-                            <option>BMI</option>
-                            <option>Nutritional Status</option>
-                            <option>Height-for-Age</option>
                         </select>
                     </div>
                 </div>
