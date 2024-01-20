@@ -41,6 +41,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
         $testtype = mysqli_query($connection, "SELECT * FROM `test`");
     }
     ?>
+
     <nav>
         <div>
             <img class="logo" src="assets/wlogo.png">
@@ -52,12 +53,13 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
             <a href="profile.php" class="nav-options"><img class="profile" src="assets/wprof.png"></a>
         </div>
     </nav>
+
     <section class="content">
-        <div class="studlist">
-            <div class="filtercontent">
+        <div class="student-list">
+            <div class="filter-content">
                 <div class="filter">
                     <select name="syear">
-                        <option value="">School Year</option>
+                        <option value="">SCHOOL YEAR</option>
                         <?php
                         while ($row1 = mysqli_fetch_array($syears)) {
                             echo "<option value='" . $row1['sy_id'] . "'>" . $row1['year'] . "</option>";
@@ -71,9 +73,25 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                         }
                         ?>
                     </select>
+                    <select name="quarter">
+                        <?php
+                        while ($qtr = mysqli_fetch_array($quarter)) {
+                            echo "<option value='" . $qtr['q_id'] . "'>" . $qtr['quarter'] . "</option>";
+                        }
+                        ?>
+                    </select>
+                    <select name="testtype">
+                        <?php
+                        while ($tt = mysqli_fetch_array($testtype)) {
+                            echo "<option value='" . $tt['testID'] . "'>" . $tt['testtype'] . "</option>";
+                        }
+                        ?>
+                    </select>
+
                     <input type="text" placeholder="Search...">
+
                     <div>
-                        <span>Sort by</span>
+                        <span>SORT BY</span>
                         <select>
                             <option>Name</option>
                             <option>Birthday</option>
@@ -87,66 +105,50 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                         </select>
                     </div>
                 </div>
-                <div class="filter">
-                    <div>
-                        <select name="quarter">
-                            <?php
-                            while ($qtr = mysqli_fetch_array($quarter)) {
-                                echo "<option value='" . $qtr['q_id'] . "'>" . $qtr['quarter'] . "</option>";
-                            }
-                            ?>
-                        </select>
-                        <select name="testtype">
-                            <?php
-                            while ($tt = mysqli_fetch_array($testtype)) {
-                                echo "<option value='" . $tt['testID'] . "'>" . $tt['testtype'] . "</option>";
-                            }
-                            ?>
-                        </select>
-                    </div>
-                    <a href="add.php"><button>Add Student</button></a>
-                    <script>
-                    </script>
-                </div>
             </div>
-            <center>
-                <table class="rounded-corners">
-                    <tr>
-                        <th>Name</th>
-                        <th>Birth Date</th>
-                        <th>Height (m)</th>
-                        <th>Weight (kg)</th>
-                        <th>Sex</th>
-                        <th>Age</th>
-                        <th>BMI</th>
-                        <th>Nutritional Status</th>
-                        <th>Height-for-Age</th>
-                        <th>Action</th>
-                    </tr>
-                    <?php
-                    while ($row = mysqli_fetch_assoc($studlist)) {
-                        echo "<tr>";
-                        echo "<td>{$row['name']}</td>";
-                        echo "<td>{$row['birthdate']}</td>";
-                        echo "<td>{$row['height']}</td>";
-                        echo "<td>{$row['weight']}</td>";
-                        echo "<td>{$row['sex']}</td>";
-                        echo "<td>{$row['age']}</td>";
-                        echo "<td>{$row['BMI']}</td>";
-                        echo "<td>{$row['nutritional status']}</td>";
-                        echo "<td>{$row['heightforage']}</td>";
-                        echo "<td><a href='viewstudent.php?s_id={$row['s_id']}' target='_blank'><img class='action' src='assets/view.png'></a>&nbsp;&nbsp;<a href='updatestudent.php?s_id={$row['s_id']}'><img class='action' src='assets/edit.png'></a>&nbsp;&nbsp;<a href='delete.php?s_id={$row['s_id']}'><img class='action' src='assets/delete.png'></a></td>";
-                        echo "</tr>";
-                        $hasStudents = true;
-                    }
-                    if (!$hasStudents) {
-                        echo "<tr>";
-                        echo "<td class='none' colspan=10>No Students Found</td>";
-                        echo "<tr>";
-                    }
-                    ?>
-                </table>
-            </center>
+
+            <div>
+                <a href="add.php"><button class="add-student">Add Student</button></a>
+                <center>
+                    <table class="rounded-corners">
+                        <tr>
+                            <th>Name</th>
+                            <th>Birth Date</th>
+                            <th>Height (m)</th>
+                            <th>Weight (kg)</th>
+                            <th>Sex</th>
+                            <th>Age</th>
+                            <th>BMI</th>
+                            <th>Nutritional Status</th>
+                            <th>Height-for-Age</th>
+                            <th>Action</th>
+                        </tr>
+                        <?php
+                        while ($row = mysqli_fetch_assoc($studlist)) {
+                            echo "<tr>";
+                            echo "<td>{$row['name']}</td>";
+                            echo "<td>{$row['birthdate']}</td>";
+                            echo "<td>{$row['height']}</td>";
+                            echo "<td>{$row['weight']}</td>";
+                            echo "<td>{$row['sex']}</td>";
+                            echo "<td>{$row['age']}</td>";
+                            echo "<td>{$row['BMI']}</td>";
+                            echo "<td>{$row['nutritional status']}</td>";
+                            echo "<td>{$row['heightforage']}</td>";
+                            echo "<td><a href='viewstudent.php?s_id={$row['s_id']}' target='_blank'><img class='action' src='assets/view.png'></a>&nbsp;&nbsp;<a href='updatestudent.php?s_id={$row['s_id']}'><img class='action' src='assets/edit.png'></a>&nbsp;&nbsp;<a href='delete.php?s_id={$row['s_id']}'><img class='action' src='assets/delete.png'></a></td>";
+                            echo "</tr>";
+                            $hasStudents = true;
+                        }
+                        if (!$hasStudents) {
+                            echo "<tr>";
+                            echo "<td class='none' colspan=10>No Students Found</td>";
+                            echo "<tr>";
+                        }
+                        ?>
+                    </table>
+                </center>
+            </div>
+
         </div>
     </section>
 </body>
