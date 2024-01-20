@@ -88,7 +88,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                         ?>
                     </select>
 
-                    <input type="text" placeholder="Search...">
+                    <input type="text" id="search" onkeyup="searchFunction()" placeholder="Search Names...">
 
                     <div>
                         <span>SORT BY</span>
