@@ -255,11 +255,16 @@ function interpretation_score($interpretation)
             return "Error";
     }
 }
-function bodyComposition($bodyComposition){
+function bodyComposition($bodyComposition)
+{
     switch ($bodyComposition) {
-        case "Severely Wasted" || "Obese":
+        case "Severely Wasted":
             return 1;
-        case "Wasted" || "Overweight":
+        case "Obese":
+            return 1;
+        case "Wasted":
+            return 3;
+        case "Overweight":
             return 3;
         case "Normal":
             return 5;
@@ -470,12 +475,13 @@ function reactionTime($stick1, $stick2, $stick3)
     $stickDropInterpretation = stickDrop_interpretation($stickMiddle);
     return $stickDropInterpretation;
 }
-function physicallyFit($bodyComposition, $cardiovascularEndurance, $strength, $flexibility, $coordination, $agility, $speed, $power, $balance, $reactionTime){
-    $fitness = (bodyComposition($bodyComposition) + interpretation_score($cardiovascularEndurance) + interpretation_score($cardiovascularEndurance) + interpretation_score($cardiovascularEndurance) + interpretation_score($cardiovascularEndurance) + interpretation_score($cardiovascularEndurance) + interpretation_score($cardiovascularEndurance) + interpretation_score($cardiovascularEndurance) + interpretation_score($cardiovascularEndurance) + interpretation_score($cardiovascularEndurance)) / 10;
+function physicallyFit($bodyComposition, $cardiovascularEndurance, $strength, $flexibility, $coordination, $agility, $speed, $power, $balance, $reactionTime)
+{
+    $fitness = (bodyComposition($bodyComposition) + interpretation_score($cardiovascularEndurance) + interpretation_score($strength) + interpretation_score($flexibility) + interpretation_score($coordination) + interpretation_score($agility) + interpretation_score($speed) + interpretation_score($power) + interpretation_score($balance) + interpretation_score($reactionTime)) / 10;
     $result = round($fitness);
-    if ($result <= 3){
+    if ($result >= 3) {
         return "Physically Fit";
-    }else{
+    } else {
         return "Not Physically Fit";
     }
 }
