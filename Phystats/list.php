@@ -88,7 +88,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                         ?>
                     </select>
 
-                    <input type="text" id="search" onkeyup="searchFunction()" placeholder="Search Names...">
+                    <input type="text" name="search" id="search" onkeyup="searchFunction()"
+                        placeholder="Search Names...">
 
                     <div>
                         <span>SORT BY</span>
@@ -99,11 +100,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                             <option>Age</option>
                         </select>
                     </div>
+                    <a href="add.php"><button class="add-student">Add Student</button></a>
                 </div>
             </div>
 
             <div>
-                <a href="add.php"><button class="add-student">Add Student</button></a>
+
                 <table class="rounded-corners">
                     <tr>
                         <th>NAME</th>
