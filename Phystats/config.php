@@ -37,11 +37,8 @@ function interpretation_score($interpretation)
         case 5:
             return "Excellent";
         default:
-            return 404;
+            return "Error";
     }
-}
-function minuteStep_interpretation(){
-    
 }
 function zippertest_interpretation($zipper)
 {
@@ -76,6 +73,35 @@ function sitAndReach_interpretation($sitreach)
     } else if ($sitreach > 60.9) {
         return "Excellent";
     } else {
+        return "Error";
+    }
+}
+function minuteStep_interpretation($HRate, $age){
+    if ($age >= 7 && $age <= 11) {
+        if ($HRate < 80){
+            return "Excellent";
+        } else if (80 <= $HRate && $HRate <=94 ){
+            return "Very Good";
+        } else if (95 <= $HRate && $HRate <=104 ){
+            return "Good";
+        } else if (105 <= $HRate && $HRate <=115 ){
+            return "Fair";
+        } else if (116 <= $HRate){
+            return "Needs Improvement";
+        }
+    }else if ($age >= 12 && $age <= 17) {
+        if ($HRate < 75){
+            return "Excellent";
+        } else if (75 <= $HRate && $HRate <=89 ){
+            return "Very Good";
+        } else if (90 <= $HRate && $HRate <=99 ){
+            return "Good";
+        } else if (100 <= $HRate && $HRate <=109 ){
+            return "Fair";
+        } else if (110 <= $HRate){
+            return "Needs Improvement";
+        }
+    }else{
         return "Error";
     }
 }
@@ -291,6 +317,8 @@ function storkBalance_interpretation($score, $age)
         } elseif ($score >= 1 && $score <= 40) {
             return "Needs Improvement";
         }
+    } else{
+        return "Error";
     }
 }
 function balance($storkRight, $storkLeft, $age){
@@ -353,6 +381,8 @@ function speed($sprintTime, $age, $sex)
             } else {
                 return 'Needs Improvement';
             }
+        } else{
+            return "Error";
         }
     } elseif ($sex == 'girls') {
         if ($sex == 'boys') {
@@ -404,6 +434,8 @@ function speed($sprintTime, $age, $sex)
                 } else {
                     return 'Needs Improvement';
                 }
+            } else{
+                return "Error";
             }
         }
     }
