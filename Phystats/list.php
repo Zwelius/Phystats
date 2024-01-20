@@ -109,44 +109,43 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
 
             <div>
                 <a href="add.php"><button class="add-student">Add Student</button></a>
-                <center>
-                    <table class="rounded-corners">
-                        <tr>
-                            <th>Name</th>
-                            <th>Birth Date</th>
-                            <th>Height (m)</th>
-                            <th>Weight (kg)</th>
-                            <th>Sex</th>
-                            <th>Age</th>
-                            <th>BMI</th>
-                            <th>Nutritional Status</th>
-                            <th>Height-for-Age</th>
-                            <th>Action</th>
-                        </tr>
-                        <?php
-                        while ($row = mysqli_fetch_assoc($studlist)) {
-                            echo "<tr>";
-                            echo "<td>{$row['name']}</td>";
-                            echo "<td>{$row['birthdate']}</td>";
-                            echo "<td>{$row['height']}</td>";
-                            echo "<td>{$row['weight']}</td>";
-                            echo "<td>{$row['sex']}</td>";
-                            echo "<td>{$row['age']}</td>";
-                            echo "<td>{$row['BMI']}</td>";
-                            echo "<td>{$row['nutritional status']}</td>";
-                            echo "<td>{$row['heightforage']}</td>";
-                            echo "<td><a href='viewstudent.php?s_id={$row['s_id']}' target='_blank'><img class='action' src='assets/view.png'></a>&nbsp;&nbsp;<a href='updatestudent.php?s_id={$row['s_id']}'><img class='action' src='assets/edit.png'></a>&nbsp;&nbsp;<a href='delete.php?s_id={$row['s_id']}'><img class='action' src='assets/delete.png'></a></td>";
-                            echo "</tr>";
-                            $hasStudents = true;
-                        }
-                        if (!$hasStudents) {
-                            echo "<tr>";
-                            echo "<td class='none' colspan=10>No Students Found</td>";
-                            echo "<tr>";
-                        }
-                        ?>
-                    </table>
-                </center>
+                <table class="rounded-corners">
+                    <tr>
+                        <th>NAME</th>
+                        <th>BIRTH DATE</th>
+                        <th>HEIGHT (m)</th>
+                        <th>WEIGHT (kg)</th>
+                        <th>SEX</th>
+                        <th>AGE</th>
+                        <th>BMI</th>
+                        <th>NUTRUTIONAL STATUS</th>
+                        <th>HEIGHT-FOR-AGE</th>
+                        <th>ACTION</th>
+                    </tr>
+
+                    <?php
+                    while ($row = mysqli_fetch_assoc($studlist)) {
+                        echo "<tr>";
+                        echo "<td>{$row['name']}</td>";
+                        echo "<td>{$row['birthdate']}</td>";
+                        echo "<td>{$row['height']}</td>";
+                        echo "<td>{$row['weight']}</td>";
+                        echo "<td>{$row['sex']}</td>";
+                        echo "<td>{$row['age']}</td>";
+                        echo "<td>{$row['BMI']}</td>";
+                        echo "<td>{$row['nutritional status']}</td>";
+                        echo "<td>{$row['heightforage']}</td>";
+                        echo "<td><a href='viewstudent.php?s_id={$row['s_id']}' target='_blank'><img class='action' src='assets/view.png'></a>&nbsp;&nbsp;<a href='updatestudent.php?s_id={$row['s_id']}'><img class='action' src='assets/edit.png'></a>&nbsp;&nbsp;<a href='delete.php?s_id={$row['s_id']}'><img class='action' src='assets/delete.png'></a></td>";
+                        echo "</tr>";
+                        $hasStudents = true;
+                    }
+                    if (!$hasStudents) {
+                        echo "<tr>";
+                        echo "<td class='none' colspan=10>No Students Found</td>";
+                        echo "<tr>";
+                    }
+                    ?>
+                </table>
             </div>
 
         </div>
