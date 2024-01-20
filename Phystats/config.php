@@ -255,6 +255,18 @@ function interpretation_score($interpretation)
             return "Error";
     }
 }
+function bodyComposition($bodyComposition){
+    switch ($bodyComposition) {
+        case "Severely Wasted" || "Obese":
+            return 1;
+        case "Wasted" || "Overweight":
+            return 3;
+        case "Normal":
+            return 5;
+        default:
+            return "Error";
+    }
+}
 function cardiovasulcarEndurance($HRbefore, $HRafter, $age)
 {
     $HRateB = minuteStep_interpretation($HRbefore, $age);
@@ -457,4 +469,13 @@ function reactionTime($stick1, $stick2, $stick3)
     }
     $stickDropInterpretation = stickDrop_interpretation($stickMiddle);
     return $stickDropInterpretation;
+}
+function physicallyFit($bodyComposition, $cardiovascularEndurance, $strength, $flexibility, $coordination, $agility, $speed, $power, $balance, $reactionTime){
+    $fitness = (bodyComposition($bodyComposition) + interpretation_score($cardiovascularEndurance) + interpretation_score($cardiovascularEndurance) + interpretation_score($cardiovascularEndurance) + interpretation_score($cardiovascularEndurance) + interpretation_score($cardiovascularEndurance) + interpretation_score($cardiovascularEndurance) + interpretation_score($cardiovascularEndurance) + interpretation_score($cardiovascularEndurance) + interpretation_score($cardiovascularEndurance)) / 10;
+    $result = round($fitness);
+    if ($result <= 3){
+        return "Physically Fit";
+    }else{
+        return "Not Physically Fit";
+    }
 }
