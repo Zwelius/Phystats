@@ -45,7 +45,7 @@ form {
 }
 
 .tab-container label[for="student-information"],
-.tab-container label[for="tabsilver"],
+.tab-container label[for="health-related-test"],
 .tab-container label[for="tabgold"] {
     background: #C2D7EA;
     width: 205px;
@@ -137,6 +137,6 @@ input[name="cancel"] {
     transition: all 400ms ease-in-out;
 }
 
-input[name="cancel"]:hover{
+input[name="cancel"]:hover {
     background-color: #c02615;
 }

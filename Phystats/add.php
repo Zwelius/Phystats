@@ -175,26 +175,66 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                 </div>
                 <!--end of student info tab-->
 
-                <input type="radio" id="tabsilver" name="tab-container">
-                <label for="tabsilver">Health-Related Test</label>
+
+                <input type="radio" id="health-related-test" name="tab-container">
+                <label for="health-related-test">Health-Related Test</label>
                 <div class="tab">
-                    <label for="HRbefore">Heart Rate Before Activity(bpm):</label>
-                    <input type="number" name="HRbefore" step="0.01" required>
-                    <label for="HRafter">Heart Rate After Activity(bpm):</label>
-                    <input type="number" name="HRafter" step="0.01" required>
-                    <label for="pushups">No. of Push Ups:</label>
-                    <input type="number" name="pushups" required>
-                    <label for="plank">Basic Plank Time(sec):</label>
-                    <input type="number" name="plank" required>
-                    <label for="zipperR">Zipper Test Overlap/Gap Right(cm):</label>
-                    <input type="number" name="zipperR" step="0.01" required>
-                    <label for="zipperL">Zipper Test Overlap/Gap Left(cm):</label>
-                    <input type="number" name="zipperL" step="0.01" required>
-                    <label for="sar1">Sit and Reach Score 1st Try(cm):</label>
-                    <input type="number" name="sar1" step="0.01" required>
-                    <label for="sar2">Sit and Reach Score 2nd Try(cm):</label>
-                    <input type="number" name="sar2" step="0.01" required>
+                    <table class="health-related-test">
+                        <tr>
+                            <th colspan="2" class="category"><label for="category">CARDIOVASCULAR
+                                    ENDURANCE</label><br><label>3-MINUTE STEP (Heart rate per minute)</label></th>
+                            <th>&nbsp;</th>
+                            <th>&nbsp;</th>
+                            <th colspan="2" class="category"><label for="category">FLEXIBILITY</label><br><label
+                                    for="zipperR">ZIPPER TEST OVERLAP/GAP (cm)</label></th>
+
+                        </tr>
+                        <tr>
+                            <th><label for="HRbefore">Before Activity</label><br><input type="number" name="HRbefore"
+                                    step="0.01" required></th>
+                            <th><label for="HRafter">After Activity</label><br><input type="number" name="HRafter"
+                                    step="0.01" required></th>
+                            <th>&nbsp;</th>
+                            <th>&nbsp;</th>
+                            <th><label for="HRafter">After Activity</label><br><input type="number" name="HRafter"
+                                    step="0.01" required></th>
+                        </tr>
+                        <tr>
+                            <!--empty-->
+                            <th colspan="2">&nbsp;</th>
+                        </tr>
+                        <tr>
+                            <th colspan="2" class="category"><label for="category">STRENGTH</label>
+                        </tr>
+                        <tr>
+                            <th> <label for="pushups">NO. OF PUSH UPS</label><br> <input type="number" name="pushups"
+                                    required></th>
+                            <th> <label for="plank">BASIC PLANK (sec):</label><br><input type="number" name="plank"
+                                    required></th>
+                        </tr>
+
+
+
+
+
+
+
+
+
+                        <input type="number" name="zipperR" step="0.01" required>
+                        <label for="zipperL">Zipper Test Overlap/Gap Left(cm):</label>
+                        <input type="number" name="zipperL" step="0.01" required>
+                        <label for="sar1">Sit and Reach Score 1st Try(cm):</label>
+                        <input type="number" name="sar1" step="0.01" required>
+                        <label for="sar2">Sit and Reach Score 2nd Try(cm):</label>
+                        <input type="number" name="sar2" step="0.01" required>
+
+
+                    </table>
                 </div>
+
+
+
 
                 <input type="radio" id="tabgold" name="tab-container">
                 <label for="tabgold">Skill-Related Test</label>
@@ -222,12 +262,11 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                     <label for="stick3">Stick Drop Test 3rd Trial(cm):</label>
                     <input type="number" name="stick3" step="0.01" required>
                 </div>
-
             </div>
 
             <div class="button-container">
                 <input type="submit" name="save" value="Save">
-                <input type="submit" name="cancel" value="Cancel"formnovalidate>
+                <input type="submit" name="cancel" value="Cancel" formnovalidate>
             </div>
         </form>
     </div>
