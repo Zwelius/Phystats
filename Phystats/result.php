@@ -23,7 +23,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
     } else {
         $t_id = $_SESSION["t_id"];
         $hasStudents = false;
-        $studlist = mysqli_query($connection, "SELECT * FROM `student` INNER JOIN `testdate` ON testdate.tdID = student.tdID WHERE testdate.t_id = $t_id");
+        $studlist = mysqli_query($connection, "SELECT * FROM `student` INNER JOIN `testdate` ON testdate.tdID = student.tdID INNER JOIN `testresult` ON testresult.s_id = student.s_id INNER JOIN resultinterpretation ON resultinterpretation.tr_ID = testresult.tr_ID");
         $syears = mysqli_query($connection, "SELECT * FROM `schoolyear` ORDER BY `year` DESC");
         $grade = mysqli_query($connection, "SELECT * FROM `gradesection` WHERE t_id = $t_id");
         $quarter = mysqli_query($connection, "SELECT * FROM `quarter`");
@@ -101,14 +101,17 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                     while ($row = mysqli_fetch_assoc($studlist)) {
                         echo "<tr>";
                         echo "<td>{$row['name']}</td>";
-                        //echo "<td>{$row['bodyComposition']}</td>";
-                        //echo "<td>{$row['cardiovascularEndurance']}</td>";
-                       // echo "<td>{$row['strength']}</td>";
-                        //echo "<td>{$row['flexibility']}</td>";
-                        //echo "<td>{$row['age']}</td>";
-                        //echo "<td>{$row['BMI']}</td>";
-                        //echo "<td>{$row['nutritional status']}</td>";
-                        //echo "<td>{$row['heightforage']}</td>";
+                        echo "<td>{$row['bodyComposition']}</td>";
+                        echo "<td>{$row['cardiovascularEndurance']}</td>";
+                        echo "<td>{$row['strength']}</td>";
+                        echo "<td>{$row['flexibility']}</td>";
+                        echo "<td>{$row['coordination']}</td>";
+                        echo "<td>{$row['agility']}</td>";
+                        echo "<td>{$row['speed']}</td>";
+                        echo "<td>{$row['power']}</td>";
+                        echo "<td>{$row['balance']}</td>";
+                        echo "<td>{$row['reactionTime']}</td>";
+                        echo "<td>{$row['fitnessResult']}</td>";
                         echo "</tr>";
                         $hasStudents = true;
                     }

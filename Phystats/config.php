@@ -335,7 +335,7 @@ function agility($hexagon1, $hexagon2)
 }
 function speed($sprintTime, $age, $sex)
 {
-    if ($sex == 'boys') {
+    if ($sex == 'Male') {
         if ($age >= 9 && $age <= 12) {
             if ($sprintTime < 6.0) {
                 return 'Excellent';
@@ -387,62 +387,61 @@ function speed($sprintTime, $age, $sex)
         } else {
             return "Error";
         }
-    } elseif ($sex == 'girls') {
-        if ($sex == 'boys') {
-            if ($age >= 9 && $age <= 12) {
-                if ($sprintTime < 7.0) {
-                    return 'Excellent';
-                } elseif ($sprintTime >= 7.1 && $sprintTime <= 8.4) {
-                    return 'Very Good';
-                } elseif ($sprintTime >= 8.5 && $sprintTime <= 9.5) {
-                    return 'Good';
-                } elseif ($sprintTime >= 9.6 && $sprintTime <= 10.5) {
-                    return 'Fair';
-                } else {
-                    return 'Needs Improvement';
-                }
-            } elseif ($age >= 13 && $age <= 14) {
-                if ($sprintTime < 6.5) {
-                    return 'Excellent';
-                } elseif ($sprintTime >= 6.6 && $sprintTime <= 7.6) {
-                    return 'Very Good';
-                } elseif ($sprintTime >= 7.7 && $sprintTime <= 8.8) {
-                    return 'Good';
-                } elseif ($sprintTime >= 8.9 && $sprintTime <= 9.5) {
-                    return 'Fair';
-                } else {
-                    return 'Needs Improvement';
-                }
-            } elseif ($age >= 15 && $age <= 16) {
-                if ($sprintTime < 5.5) {
-                    return 'Excellent';
-                } elseif ($sprintTime >= 5.6 && $sprintTime <= 6.1) {
-                    return 'Very Good';
-                } elseif ($sprintTime >= 6.2 && $sprintTime <= 7.2) {
-                    return 'Good';
-                } elseif ($sprintTime >= 7.3 && $sprintTime <= 8.5) {
-                    return 'Fair';
-                } else {
-                    return 'Needs Improvement';
-                }
-            } elseif ($age >= 17) {
-                if ($sprintTime < 4.5) {
-                    return 'Excellent';
-                } elseif ($sprintTime >= 4.6 && $sprintTime <= 5.9) {
-                    return 'Very Good';
-                } elseif ($sprintTime >= 6.0 && $sprintTime <= 7.0) {
-                    return 'Good';
-                } elseif ($sprintTime >= 7.1 && $sprintTime <= 8.1) {
-                    return 'Fair';
-                } else {
-                    return 'Needs Improvement';
-                }
+    } elseif ($sex == 'Female') {
+        if ($age >= 9 && $age <= 12) {
+            if ($sprintTime < 7.0) {
+                return 'Excellent';
+            } elseif ($sprintTime >= 7.1 && $sprintTime <= 8.4) {
+                return 'Very Good';
+            } elseif ($sprintTime >= 8.5 && $sprintTime <= 9.5) {
+                return 'Good';
+            } elseif ($sprintTime >= 9.6 && $sprintTime <= 10.5) {
+                return 'Fair';
             } else {
-                return "Error";
+                return 'Needs Improvement';
             }
+        } elseif ($age >= 13 && $age <= 14) {
+            if ($sprintTime < 6.5) {
+                return 'Excellent';
+            } elseif ($sprintTime >= 6.6 && $sprintTime <= 7.6) {
+                return 'Very Good';
+            } elseif ($sprintTime >= 7.7 && $sprintTime <= 8.8) {
+                return 'Good';
+            } elseif ($sprintTime >= 8.9 && $sprintTime <= 9.5) {
+                return 'Fair';
+            } else {
+                return 'Needs Improvement';
+            }
+        } elseif ($age >= 15 && $age <= 16) {
+            if ($sprintTime < 5.5) {
+                return 'Excellent';
+            } elseif ($sprintTime >= 5.6 && $sprintTime <= 6.1) {
+                return 'Very Good';
+            } elseif ($sprintTime >= 6.2 && $sprintTime <= 7.2) {
+                return 'Good';
+            } elseif ($sprintTime >= 7.3 && $sprintTime <= 8.5) {
+                return 'Fair';
+            } else {
+                return 'Needs Improvement';
+            }
+        } elseif ($age >= 17) {
+            if ($sprintTime < 4.5) {
+                return 'Excellent';
+            } elseif ($sprintTime >= 4.6 && $sprintTime <= 5.9) {
+                return 'Very Good';
+            } elseif ($sprintTime >= 6.0 && $sprintTime <= 7.0) {
+                return 'Good';
+            } elseif ($sprintTime >= 7.1 && $sprintTime <= 8.1) {
+                return 'Fair';
+            } else {
+                return 'Needs Improvement';
+            }
+        } else {
+            return "Error";
         }
     }
 }
+
 function power($SLJ1, $SLJ2)
 {
     $SLJ1Interpretation = standingLongJump_interpretation($SLJ1);
