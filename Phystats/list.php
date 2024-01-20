@@ -123,7 +123,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                     <?php
                     while ($row = mysqli_fetch_assoc($studlist)) {
                         echo "<tr>";
-                        echo "<td>{$row['name']}</td>";
+                        echo "<td id='names'>{$row['name']}</td>";
                         echo "<td>{$row['birthdate']}</td>";
                         echo "<td>{$row['height']}</td>";
                         echo "<td>{$row['weight']}</td>";
@@ -147,6 +147,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
 
         </div>
     </section>
+    <script type="text/javascript" src="/js/script.js"></script>
 </body>
 
 </html>
