@@ -107,6 +107,41 @@ select {
     padding: 10px;
 }
 
+select[name="nutritionalstatus"],
+select[name="heightforage"] {
+    width: 215px;
+}
+
+
+/*****health / skill related tabs*****/
+label[for="category"] {
+    color: #133A84;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+label[for="HRbefore"],
+label[for="HRafter"],
+label[for="zipperL"],
+label[for="zipperR"],
+label[for="sar1"],
+label[for="sar2"] {
+    font-size: 12px;
+    font-weight: lighter;
+}
+
+input[name="HRbefore"],
+input[name="HRafter"],
+input[name="zipperL"],
+input[name="zipperR"],
+input[name="pushups"],
+input[name="plank"],
+input[name="sar1"],
+input[name="sar2"] {
+    padding: 10px;
+}
+
+
 /*****buttons*****/
 .button-container {
     padding: 0 25px;
@@ -119,7 +154,6 @@ input[type="submit"] {
     border: none;
     border-radius: 2px;
     font-weight: bold;
-
     cursor: pointer;
 }
 
