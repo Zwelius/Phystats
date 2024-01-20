@@ -62,14 +62,81 @@ form {
     display: none;
 }
 
-.tab-flex {
-    display: flex;
-}
-
 .tab-container input[type='radio']:checked+label+.tab {
     display: block;
 }
 
 .tab-container input[type="radio"]:checked+label {
     background: #0679E2;
+}
+
+
+/*****table*****/
+table {
+    margin-top: 10px;
+    text-align: left;
+}
+
+table label {
+    font-size: 12px;
+}
+
+input[name="name"] {
+    width: 445px;
+    padding: 10px;
+}
+
+input[type="date"] {
+    width: 130px;
+    padding: 9px;
+}
+
+input[name="age"] {
+    width: 130px;
+    padding: 10px;
+}
+
+input[name="weight"],
+input[name="height"] {
+    width: 128px;
+    padding: 10px;
+}
+
+select {
+    width: 150px;
+    padding: 10px;
+}
+
+/*****buttons*****/
+.button-container {
+    padding: 0 25px;
+}
+
+input[type="submit"] {
+    color: white;
+    width: 100px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 2px;
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+input[name="save"] {
+    background-color: #0679E2;
+    transition: all 400ms ease-in-out;
+}
+
+input[name="save"]:hover {
+    background-color: #133A84;
+}
+
+input[name="cancel"] {
+    background-color: #FE6F5F;
+    transition: all 400ms ease-in-out;
+}
+
+input[name="cancel"]:hover{
+    background-color: #c02615;
 }

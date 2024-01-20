@@ -65,76 +65,115 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                 <input type="radio" id="student-information" name="tab-container" checked="checked">
                 <label for="student-information">Student Information</label>
                 <div class="tab">
-                    <label for="syear">SCHOOL YEAR</label><br>
-                    <select name="syear">
-                        <?php
-                        while ($row1 = mysqli_fetch_array($syears)) {
-                            echo "<option value='" . $row1['sy_id'] . "'>" . $row1['year'] . "</option>";
-                        }
-                        ?>
-                    </select>
-                    <label for="quarter">QUARTER</label><br>
-                    <select name="quarter">
-                        <?php
-                        while ($qtr = mysqli_fetch_array($quarter)) {
-                            echo "<option value='" . $qtr['q_id'] . "'>" . $qtr['quarter'] . "</option>";
-                        }
-                        ?>
-                    </select>
-                    <select name="testtype">
-                        <?php
-                        while ($tt = mysqli_fetch_array($testtype)) {
-                            echo "<option value='" . $tt['testID'] . "'>" . $tt['testtype'] . "</option>";
-                        }
-                        ?>
-                    </select>
+                    <table>
+                        <tr>
+                            <th colspan="2"><label for="syear">SCHOOL YEAR</label></th>
+                            <th colspan="2"><label for="quarter">QUARTER</label></th>
+                            <th colspan="2"><label for="testtype">TEST TYPE</label></th>
+                        </tr>
+                        <tr>
+                            <th colspan="2"><select name="syear">
+                                    <?php
+                                    while ($row1 = mysqli_fetch_array($syears)) {
+                                        echo "<option value='" . $row1['sy_id'] . "'>" . $row1['year'] . "</option>";
+                                    }
+                                    ?>
+                                </select>
+                            </th>
 
-                    <br>
+                            <th colspan="2"><select name="quarter">
+                                    <?php
+                                    while ($qtr = mysqli_fetch_array($quarter)) {
+                                        echo "<option value='" . $qtr['q_id'] . "'>" . $qtr['quarter'] . "</option>";
+                                    }
+                                    ?>
+                                </select>
+                            </th>
+                            <th colspan="2"><select name="testtype">
+                                    <?php
+                                    while ($tt = mysqli_fetch_array($testtype)) {
+                                        echo "<option value='" . $tt['testID'] . "'>" . $tt['testtype'] . "</option>";
+                                    }
+                                    ?>
+                                </select>
+                            </th>
+                        </tr>
 
-                    <label for="name">NAME</label><br>
-                    <input type="text" name="name" required>
+                        <tr>
+                            <!--empty-->
+                            <th colspan="6">&nbsp;</th>
+                        </tr>
 
-                    <div class="tab-flex">
-                        <div>
-                            <label for="bday">BIRTH DATE</label><br>
-                            <input type="date" name="bday" required>
-                        </div>
-                        <div>
-                            <label for="sex">SEX</label><br>
-                            <select name="sex">
-                                <option value="Male">Male</option>
-                                <option value="Female">Female</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label for="age">AGE</label><br>
-                            <input type="number" name="age" required>
-                        </div>
-                    </div>
+                        <tr>
+                            <th colspan="6"><label for="name">NAME</label></th>
+                            <th>&nbsp;</th>
+                            <th>&nbsp;</th>
+                            <th><label for="nutritionalstatus">NUTRITIONAL STATUS</label></th>
 
+                        </tr>
+                        <tr>
+                            <th colspan="6"><input type="text" name="name" required></th>
+                            <th>&nbsp;</th>
+                            <th>&nbsp;</th>
+                            <th>
+                                <select name="nutritionalstatus">
+                                    <option value="Severely Wasted">Severely Wasted</option>
+                                    <option value="Wasted">Wasted</option>
+                                    <option value="Normal">Normal</option>
+                                    <option value="Overweight">Overweight</option>
+                                    <option value="Obese">Obese</option>
+                                </select>
+                            </th>
+                        </tr>
 
+                        <tr>
+                            <th colspan="2"><label for="bday">BIRTH DATE</label></th>
+                            <th colspan="2"><label for="sex">SEX</label></th>
+                            <th colspan="2"><label for="age">AGE</label></th>
+                            <th>&nbsp;</th>
+                            <th>&nbsp;</th>
+                            <th colspan="2"><label for="heightforage">HEIGHT-FOR-AGE</label></th>
+                        </tr>
 
+                        <tr>
+                            <th colspan="2"><input type="date" name="bday" required></th>
+                            <th colspan="2">
+                                <select name="sex">
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                </select>
+                            </th>
+                            <th colspan="2">
+                                <input type="number" name="age" required>
+                            </th>
+                            <th>&nbsp;</th>
+                            <th>&nbsp;</th>
+                            <th colspan="2">
+                                <select name="heightforage">
+                                    <option value="Severely Stunted">Severely Stunted</option>
+                                    <option value="Stunted">Stunted</option>
+                                    <option value="Normal">Normal</option>
+                                    <option value="Tall">Tall</option>
+                                </select>
+                            </th>
+                        </tr>
 
-                    <label for="height">Height(m):</label>
-                    <input type="number" name="height" step="0.01" required>
-                    <label for="weight">Weight(kg):</label>
-                    <input type="number" name="weight" step="0.01" required>
-                    <label for="nutritionalstatus">Nutritional Status:</label>
-                    <select name="nutritionalstatus">
-                        <option value="Severely Wasted">Severely Wasted</option>
-                        <option value="Wasted">Wasted</option>
-                        <option value="Normal">Normal</option>
-                        <option value="Overweight">Overweight</option>
-                        <option value="Obese">Obese</option>
-                    </select>
-                    <label for="heightforage">Height-for-Age:</label>
-                    <select name="heightforage">
-                        <option value="Severely Stunted">Severely Stunted</option>
-                        <option value="Stunted">Stunted</option>
-                        <option value="Normal">Normal</option>
-                        <option value="Tall">Tall</option>
-                    </select>
+                        <tr>
+                            <!--empty-->
+                            <th colspan="6">&nbsp;</th>
+                        </tr>
+
+                        <tr>
+                            <th colspan="2"><label for="height">HEIGHT (m):</label></th>
+                            <th colspan="2"><label for="weight">WEIGHT (kg):</label></th>
+                        </tr>
+                        <tr>
+                            <th colspan="2"><input type="number" name="height" step="0.01" required></th>
+                            <th colspan="2"><input type="number" name="weight" step="0.01" required></th>
+                        </tr>
+                    </table>
                 </div>
+                <!--end of student info tab-->
 
                 <input type="radio" id="tabsilver" name="tab-container">
                 <label for="tabsilver">Health-Related Test</label>
@@ -185,8 +224,11 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                 </div>
 
             </div>
-            <input type="submit" name="cancel" value="Cancel" formnovalidate>
-            <input type="submit" name="save" value="Save">
+
+            <div class="button-container">
+                <input type="submit" name="save" value="Save">
+                <input type="submit" name="cancel" value="Cancel"formnovalidate>
+            </div>
         </form>
     </div>
 </body>
