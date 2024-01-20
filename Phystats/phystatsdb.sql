@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 17, 2024 at 07:56 AM
--- Server version: 10.4.18-MariaDB
--- PHP Version: 8.0.3
+-- Generation Time: Jan 20, 2024 at 07:24 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -31,7 +31,7 @@ CREATE TABLE `gradesection` (
   `t_id` int(11) NOT NULL DEFAULT 0,
   `grade` varchar(25) NOT NULL DEFAULT '',
   `section` varchar(25) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `gradesection`
@@ -50,7 +50,7 @@ CREATE TABLE `login` (
   `email` varchar(75) NOT NULL,
   `pass` varchar(75) NOT NULL,
   `t_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `login`
@@ -70,7 +70,7 @@ CREATE TABLE `principal` (
   `name` varchar(75) NOT NULL,
   `email` varchar(75) NOT NULL,
   `pass` varchar(75) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `principal`
@@ -88,7 +88,7 @@ INSERT INTO `principal` (`p_id`, `name`, `email`, `pass`) VALUES
 CREATE TABLE `quarter` (
   `q_id` int(11) NOT NULL,
   `quarter` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `quarter`
@@ -103,13 +103,43 @@ INSERT INTO `quarter` (`q_id`, `quarter`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `resultinterpretation`
+--
+
+CREATE TABLE `resultinterpretation` (
+  `resultID` int(11) NOT NULL,
+  `tr_ID` int(11) NOT NULL,
+  `bodyComposition` varchar(25) NOT NULL,
+  `cardiovascularEndurance` varchar(25) NOT NULL,
+  `strength` varchar(25) NOT NULL,
+  `flexibility` varchar(25) NOT NULL,
+  `coordination` varchar(25) NOT NULL,
+  `agility` varchar(25) NOT NULL,
+  `speed` varchar(25) NOT NULL,
+  `power` varchar(25) NOT NULL,
+  `balance` varchar(25) NOT NULL,
+  `reactionTime` varchar(25) NOT NULL,
+  `fitnessResult` varchar(25) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `resultinterpretation`
+--
+
+INSERT INTO `resultinterpretation` (`resultID`, `tr_ID`, `bodyComposition`, `cardiovascularEndurance`, `strength`, `flexibility`, `coordination`, `agility`, `speed`, `power`, `balance`, `reactionTime`, `fitnessResult`) VALUES
+(2, 9, 'Normal', 'Excellent', 'Excellent', 'Excellent', 'Good', 'Fair', 'Excellent', 'Needs Improvement', 'Excellent', 'Very Good', 'Physically Fit'),
+(5, 11, 'Normal', 'Fair', 'Needs Improvement', 'Good', 'Needs Improvement', 'Fair', 'Needs Improvement', 'Needs Improvement', 'Needs Improvement', 'Fair', 'Not Physically Fit');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `schoolyear`
 --
 
 CREATE TABLE `schoolyear` (
   `sy_id` int(11) NOT NULL,
   `year` varchar(25) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `schoolyear`
@@ -137,14 +167,15 @@ CREATE TABLE `student` (
   `BMI` double NOT NULL,
   `nutritional status` varchar(50) NOT NULL,
   `heightforage` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `student`
 --
 
 INSERT INTO `student` (`s_id`, `tdID`, `name`, `birthdate`, `height`, `weight`, `sex`, `age`, `BMI`, `nutritional status`, `heightforage`) VALUES
-(2, 1, 'Esteban Julio Ramon Ramirez', '1999-04-14', '1.48', '29.00', 'Male', 24, 13.2, 'Severely Wasted', 'Stunted');
+(11, 1, 'Jugemu Jugemu Gokkoro no Surikke Furaimatsu Unraimatsu Yabrakojji Brakkojji', '2014-11-26', 1.56, 47.00, 'Female', 9, 19.31, 'Normal', 'Normal'),
+(13, 1, 'Nico Mark A. Andales', '2012-08-30', 1.48, 55.00, 'Male', 11, 25.11, 'Normal', 'Normal');
 
 -- --------------------------------------------------------
 
@@ -158,7 +189,7 @@ CREATE TABLE `teacher` (
   `t_lname` varchar(75) NOT NULL,
   `position` varchar(50) NOT NULL,
   `p_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `teacher`
@@ -176,7 +207,7 @@ INSERT INTO `teacher` (`t_id`, `t_fname`, `t_lname`, `position`, `p_id`) VALUES
 CREATE TABLE `test` (
   `testID` int(11) NOT NULL,
   `testtype` varchar(15) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `test`
@@ -198,14 +229,15 @@ CREATE TABLE `testdate` (
   `q_id` int(11) NOT NULL,
   `testID` int(11) NOT NULL,
   `t_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `testdate`
 --
 
 INSERT INTO `testdate` (`tdID`, `sy_id`, `q_id`, `testID`, `t_id`) VALUES
-(1, 1, 1, 1, 1);
+(1, 1, 1, 1, 1),
+(2, 2, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -236,7 +268,15 @@ CREATE TABLE `testresult` (
   `stick1` decimal(10,2) NOT NULL,
   `stick2` decimal(10,2) NOT NULL,
   `stick3` decimal(10,2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `testresult`
+--
+
+INSERT INTO `testresult` (`tr_ID`, `s_id`, `tdID`, `HRbefore`, `HRafter`, `pushupsNo`, `plankTime`, `zipperRight`, `zipperLeft`, `SaR1`, `SaR2`, `juggling`, `hexagonClockwise`, `hexagonCounter`, `sprintTime`, `SLJ1`, `SLJ2`, `storkRight`, `storkLeft`, `stick1`, `stick2`, `stick3`) VALUES
+(9, 11, 1, 60.00, 80.00, 25, 60, 5.00, 7.00, 100.00, 94.00, 25, 15, 18, 6.90, 100.00, 98.00, 57, 46, 5.00, 7.80, 9.40),
+(11, 13, 1, 96.00, 204.00, 0, 0, 0.10, 10.00, 28.00, 28.00, 1, 23, 16, 13.80, 71.50, 62.10, 3, 2, 0.00, 21.00, 22.00);
 
 --
 -- Indexes for dumped tables
@@ -265,6 +305,13 @@ ALTER TABLE `principal`
 --
 ALTER TABLE `quarter`
   ADD PRIMARY KEY (`q_id`);
+
+--
+-- Indexes for table `resultinterpretation`
+--
+ALTER TABLE `resultinterpretation`
+  ADD PRIMARY KEY (`resultID`),
+  ADD KEY `tr_ID` (`tr_ID`);
 
 --
 -- Indexes for table `schoolyear`
@@ -327,6 +374,12 @@ ALTER TABLE `quarter`
   MODIFY `q_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
+-- AUTO_INCREMENT for table `resultinterpretation`
+--
+ALTER TABLE `resultinterpretation`
+  MODIFY `resultID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `schoolyear`
 --
 ALTER TABLE `schoolyear`
@@ -336,7 +389,7 @@ ALTER TABLE `schoolyear`
 -- AUTO_INCREMENT for table `student`
 --
 ALTER TABLE `student`
-  MODIFY `s_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `s_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `teacher`
@@ -354,13 +407,13 @@ ALTER TABLE `test`
 -- AUTO_INCREMENT for table `testdate`
 --
 ALTER TABLE `testdate`
-  MODIFY `tdID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `tdID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `testresult`
 --
 ALTER TABLE `testresult`
-  MODIFY `tr_ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `tr_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Constraints for dumped tables
@@ -377,6 +430,12 @@ ALTER TABLE `gradesection`
 --
 ALTER TABLE `login`
   ADD CONSTRAINT `login_ibfk_1` FOREIGN KEY (`t_id`) REFERENCES `teacher` (`t_id`);
+
+--
+-- Constraints for table `resultinterpretation`
+--
+ALTER TABLE `resultinterpretation`
+  ADD CONSTRAINT `resultinterpretation_ibfk_1` FOREIGN KEY (`tr_ID`) REFERENCES `testresult` (`tr_ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `student`
@@ -398,6 +457,13 @@ ALTER TABLE `testdate`
   ADD CONSTRAINT `testdate_ibfk_2` FOREIGN KEY (`t_id`) REFERENCES `teacher` (`t_id`),
   ADD CONSTRAINT `testdate_ibfk_3` FOREIGN KEY (`sy_id`) REFERENCES `schoolyear` (`sy_id`),
   ADD CONSTRAINT `testdate_ibfk_4` FOREIGN KEY (`q_id`) REFERENCES `quarter` (`q_id`);
+
+--
+-- Constraints for table `testresult`
+--
+ALTER TABLE `testresult`
+  ADD CONSTRAINT `testresult_ibfk_1` FOREIGN KEY (`s_id`) REFERENCES `student` (`s_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `testresult_ibfk_2` FOREIGN KEY (`tdID`) REFERENCES `testdate` (`tdID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
