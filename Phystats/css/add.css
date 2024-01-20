@@ -46,7 +46,7 @@ form {
 
 .tab-container label[for="student-information"],
 .tab-container label[for="health-related-test"],
-.tab-container label[for="tabgold"] {
+.tab-container label[for="skill-related-test"] {
     background: #C2D7EA;
     width: 205px;
     padding: 15px;

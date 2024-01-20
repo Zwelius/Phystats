@@ -43,7 +43,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
             mysqli_query($connection, "INSERT INTO `testresult`(`s_id`, `tdID`, `HRbefore`, `HRafter`, `pushupsNo`, `plankTime`, `zipperRight`, `zipperLeft`, `SaR1`, `SaR2`, `juggling`, `hexagonClockwise`, `hexagonCounter`, `sprintTime`, `SLJ1`, `SLJ2`, `storkRight`, `storkLeft`, `stick1`, `stick2`, `stick3`) VALUES ('$s_id','$tdID','" . $_POST['HRbefore'] . "','" . $_POST['HRafter'] . "','" . $_POST['pushups'] . "','" . $_POST['plank'] . "','" . $_POST['zipperR'] . "','" . $_POST['zipperL'] . "','" . $_POST['sar1'] . "','" . $_POST['sar2'] . "','" . $_POST['juggling'] . "','" . $_POST['hexclock'] . "','" . $_POST['hexcounter'] . "','" . $_POST['sprinttime'] . "','" . $_POST['slj1'] . "','" . $_POST['slj2'] . "','" . $_POST['storkright'] . "','" . $_POST['storkleft'] . "','" . $_POST['stick1'] . "','" . $_POST['stick2'] . "','" . $_POST['stick3'] . "')");
             $tr_ID = mysqli_insert_id($connection);
             $bodyComposition = $_POST['nutritionalstatus'];
-            $cardiovascularEndurance = cardiovasulcarEndurance($_POST['HRbefore'],$_POST['HRafter'], $_POST['age']);
+            $cardiovascularEndurance = cardiovasulcarEndurance($_POST['HRbefore'], $_POST['HRafter'], $_POST['age']);
             $strength = strength($_POST['pushups'], $_POST['plank']);
             $flexibility = flexibility($_POST['zipperR'], $_POST['zipperL'], $_POST['sar1'], $_POST['sar2']);
             $coordination = coordination($_POST['juggling']);
@@ -195,9 +195,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                         <tr>
                             <th colspan="2" class="category"><label for="category">CARDIOVASCULAR
                                     ENDURANCE</label><br><label>3-MINUTE STEP (Heart rate per minute)</label></th>
-                            <th>&nbsp;</th>
-                            <th>&nbsp;</th>
-                            <th>&nbsp;</th>
+                            <th>&nbsp;</th><!--empty-->
+                            <th>&nbsp;</th><!--empty-->
+                            <th>&nbsp;</th><!--empty-->
                             <th colspan="2" class="category"><label for="category">FLEXIBILITY</label><br><label
                                     for="zipper">ZIPPER TEST OVERLAP/GAP (cm)</label></th>
 
@@ -207,17 +207,16 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                                     step="0.01" required></th>
                             <th><label for="HRafter">After Activity</label><br><input type="number" name="HRafter"
                                     step="0.01" required></th>
-                            <th>&nbsp;</th>
-                            <th>&nbsp;</th>
-                            <th>&nbsp;</th>
+                            <th>&nbsp;</th><!--empty-->
+                            <th>&nbsp;</th><!--empty-->
+                            <th>&nbsp;</th><!--empty-->
                             <th><label for="zipperL">Left</label><br> <input type="number" name="zipperL" step="0.01"
                                     required></th>
                             <th><label for="zipperR">Right</label><br><input type="number" name="zipperR" step="0.01"
                                     required></th>
                         </tr>
                         <tr>
-                            <!--empty-->
-                            <th colspan="2">&nbsp;</th>
+                            <th colspan="2">&nbsp;</th><!--empty-->
                         </tr>
                         <tr>
                             <th colspan="5" class="category"><label for="category">STRENGTH</label></th>
@@ -228,9 +227,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                                     required></th>
                             <th><label for="plank">BASIC PLANK (sec)</label><br><input type="number" name="plank"
                                     required></th>
-                            <th>&nbsp;</th>
-                            <th>&nbsp;</th>
-                            <th>&nbsp;</th>
+                            <th>&nbsp;</th><!--empty-->
+                            <th>&nbsp;</th><!--empty-->
+                            <th>&nbsp;</th><!--empty-->
                             <th><label for="sar1">First Trial</label><br><input type="number" name="sar1" step="0.01"
                                     required></th>
                             <th><label for="sar2">Second Trial</label><br><input type="number" name="sar2" step="0.01"
@@ -240,33 +239,91 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                 </div>
 
 
-
-
-                <input type="radio" id="tabgold" name="tab-container">
-                <label for="tabgold">Skill-Related Test</label>
+                <input type="radio" id="skill-related-test" name="tab-container">
+                <label for="skill-related-test">Skill-Related Test</label>
                 <div class="tab">
-                    <label for="juggling">Juggling:</label>
-                    <input type="number" name="juggling" required>
-                    <label for="hexclock">Hexagon Agility Test Clockwise Time(sec):</label>
-                    <input type="number" name="hexclock" required>
-                    <label for="hexcounter">Hexagon Agility Test Counter Clockwise Time(sec):</label>
-                    <input type="number" name="hexcounter" required>
-                    <label for="sprinttime">40-Meter Sprint(min.sec):</label>
-                    <input type="number" name="sprinttime" step="0.01" required>
-                    <label for="slj1">Standing Long Jump 1st Trial(cm):</label>
-                    <input type="number" name="slj1" step="0.01" required>
-                    <label for="slj2">Standing Long Jump 2nd Trial(cm):</label>
-                    <input type="number" name="slj2" step="0.01" required>
-                    <label for="storkright">Stork Balance Stand Test Right Feet(sec):</label>
-                    <input type="number" name="storkright" required>
-                    <label for="storkleft">Stork Balance Stand Test Left Feet(sec):</label>
-                    <input type="number" name="storkleft" required>
-                    <label for="stick1">Stick Drop Test 1st Trial(cm):</label>
-                    <input type="number" name="stick1" step="0.01" required>
-                    <label for="stick2">Stick Drop Test 2nd Trial(cm):</label>
-                    <input type="number" name="stick2" step="0.01" required>
-                    <label for="stick3">Stick Drop Test 3rd Trial(cm):</label>
-                    <input type="number" name="stick3" step="0.01" required>
+                    <table class="skill-related-test">
+                        <tr>
+                            <th colspan="2" class="category"><label for="category">COORDINATION</label></th>
+                            <th colspan="2" class="category"><label for="category">POWER</label></th>
+                        </tr>
+                        <tr>
+                            <th colspan="2">&nbsp;</th><!--empty--></th>
+                            <th><label for="slg">STANDING LONG JUMP (cm)</label></th>
+                        </tr>
+                        <tr>
+                            <th><label for="juggling">Juggling:</label><br><input type="number" name="juggling"
+                                    required></th>
+                            <th>&nbsp;</th><!--empty-->
+                            <th><label for="slj1">First Trial</label><br>
+                                <input type="number" name="slj1" step="0.01" required>
+                            </th>
+                            <th><label for="slj2">Second Trial</label><br>
+                                <input type="number" name="slj2" step="0.01" required>
+                            </th>
+                        </tr>
+
+                        <tr>
+                            <th>&nbsp;</th><!--empty-->
+                        </tr>
+
+                        <tr>
+                            <th colspan="2" class="category"><label for="category">AGILITY</label></th>
+                        </tr>
+                        <tr>
+                            <th><label for="hexclock">HEXAGON AGILITY TEST (sec)</label></th>
+                        </tr>
+                        <tr>
+                            <th><label for="clockwise">Clockwise</label><br><input type="number" name="hexclock"
+                                    required></th>
+                            <th><label for="hexcounter">Counter Clockwise</label><br><input type="number"
+                                    name="hexcounter" required></th>
+                        </tr>
+
+                        <tr>
+                            <th>&nbsp;</th><!--empty-->
+                        </tr>
+
+                        <tr>
+                            <th colspan="2" class="category"><label for="category">SPEED</label></th>
+                        </tr>
+                        <tr>
+                            <th><label for="sprinttime">40 METER SPRINT (min.sec)</label><br><input type="number"
+                                    name="sprinttime" step="0.01" required>
+                            </th>
+                        </tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        <label for="storkright">Stork Balance Stand Test Right Feet(sec):</label>
+                        <input type="number" name="storkright" required>
+                        <label for="storkleft">Stork Balance Stand Test Left Feet(sec):</label>
+                        <input type="number" name="storkleft" required>
+                        <label for="stick1">Stick Drop Test 1st Trial(cm):</label>
+                        <input type="number" name="stick1" step="0.01" required>
+                        <label for="stick2">Stick Drop Test 2nd Trial(cm):</label>
+                        <input type="number" name="stick2" step="0.01" required>
+                        <label for="stick3">Stick Drop Test 3rd Trial(cm):</label>
+                        <input type="number" name="stick3" step="0.01" required>
+                    </table>
                 </div>
             </div>
 
