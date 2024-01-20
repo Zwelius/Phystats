@@ -40,7 +40,7 @@ function interpretation_score($interpretation)
             return 404;
     }
 }
-function minuteStep_interpretation($){
+function minuteStep_interpretation(){
     
 }
 function zippertest_interpretation($zipper)
