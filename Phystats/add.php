@@ -41,19 +41,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
             mysqli_query($connection, "INSERT INTO `student` (`tdID`, `name`, `birthdate`, `height`, `weight`, `sex`, `age`, `BMI`, `nutritional status`, `heightforage`) VALUES ('$tdID','" . $_POST['name'] . "','" . $_POST['bday'] . "','" . $_POST['height'] . "','" . $_POST['weight'] . "','" . $_POST['sex'] . "','" . $_POST['age'] . "','$bmi','" . $_POST['nutritionalstatus'] . "','" . $_POST['heightforage'] . "')");
             $s_id = mysqli_insert_id($connection);
             mysqli_query($connection, "INSERT INTO `testresult`(`s_id`, `tdID`, `HRbefore`, `HRafter`, `pushupsNo`, `plankTime`, `zipperRight`, `zipperLeft`, `SaR1`, `SaR2`, `juggling`, `hexagonClockwise`, `hexagonCounter`, `sprintTime`, `SLJ1`, `SLJ2`, `storkRight`, `storkLeft`, `stick1`, `stick2`, `stick3`) VALUES ('$s_id','$tdID','" . $_POST['HRbefore'] . "','" . $_POST['HRafter'] . "','" . $_POST['pushups'] . "','" . $_POST['plank'] . "','" . $_POST['zipperR'] . "','" . $_POST['zipperL'] . "','" . $_POST['sar1'] . "','" . $_POST['sar2'] . "','" . $_POST['juggling'] . "','" . $_POST['hexclock'] . "','" . $_POST['hexcounter'] . "','" . $_POST['sprinttime'] . "','" . $_POST['slj1'] . "','" . $_POST['slj2'] . "','" . $_POST['storkright'] . "','" . $_POST['storkleft'] . "','" . $_POST['stick1'] . "','" . $_POST['stick2'] . "','" . $_POST['stick3'] . "')");
-            $tr_ID = mysqli_insert_id($connection);
-            $bodyComposition = $_POST['nutritionalstatus'];
-            $cardiovascularEndurance = cardiovasulcarEndurance($_POST['HRbefore'],$_POST['HRafter'], $_POST['age']);
-            $strength = strength($_POST['pushups'], $_POST['plank']);
-            $flexibility = flexibility($_POST['zipperR'], $_POST['zipperL'], $_POST['sar1'], $_POST['sar2']);
-            $coordination = coordination($_POST['juggling']);
-            $agility = agility($_POST['hexclock'], $_POST['hexcounter']);
-            $speed = speed($_POST['sprinttime'], $_POST['age'], $_POST['sex']);
-            $power = power($_POST['slj1'], $_POST['slj2']);
-            $balance = balance($_POST['storkright'], $_POST['storkleft'], $_POST['age']);
-            $reactionTime = reactionTime($_POST['stick1'], $_POST['stick2'], $_POST['stick3']);
-            $fitnessResult = physicallyFit($bodyComposition, $cardiovascularEndurance, $strength, $flexibility, $coordination, $agility, $speed, $power, $balance, $reactionTime);
-            mysqli_query($connection, "INSERT INTO `resultinterpretation`(`tr_ID`, `bodyComposition`, `cardiovascularEndurance`, `strength`, `flexibility`, `coordination`, `agility`, `speed`, `power`, `balance`, `reactionTime`, `fitnessResult`) VALUES ($tr_ID, '$bodyComposition', '$cardiovascularEndurance', '$strength', '$flexibility', '$coordination', '$agility', '$speed', '$power', '$balance', '$reactionTime', '$fitnessResult')");
             echo '<script>alert("Added data successfully");</script>';
         }
     }
@@ -78,7 +65,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                 <input type="radio" id="student-information" name="tab-container" checked="checked">
                 <label for="student-information">Student Information</label>
                 <div class="tab">
-                    <table>
+                    <table class="student-information-table">
                         <tr>
                             <th colspan="2"><label for="syear">SCHOOL YEAR</label></th>
                             <th colspan="2"><label for="quarter">QUARTER</label></th>
@@ -122,7 +109,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                             <th>&nbsp;</th>
                             <th>&nbsp;</th>
                             <th><label for="nutritionalstatus">NUTRITIONAL STATUS</label></th>
-
                         </tr>
                         <tr>
                             <th colspan="6"><input type="text" name="name" required></th>
@@ -198,8 +184,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                                     ENDURANCE</label><br><label>3-MINUTE STEP (Heart rate per minute)</label></th>
                             <th>&nbsp;</th>
                             <th>&nbsp;</th>
+                            <th>&nbsp;</th>
                             <th colspan="2" class="category"><label for="category">FLEXIBILITY</label><br><label
-                                    for="zipperR">ZIPPER TEST OVERLAP/GAP (cm)</label></th>
+                                    for="zipper">ZIPPER TEST OVERLAP/GAP (cm)</label></th>
 
                         </tr>
                         <tr>
@@ -209,40 +196,33 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                                     step="0.01" required></th>
                             <th>&nbsp;</th>
                             <th>&nbsp;</th>
-                            <th><label for="HRafter">After Activity</label><br><input type="number" name="HRafter"
-                                    step="0.01" required></th>
+                            <th>&nbsp;</th>
+                            <th><label for="zipperL">Left</label><br> <input type="number" name="zipperL" step="0.01"
+                                    required></th>
+                            <th><label for="zipperR">Right</label><br><input type="number" name="zipperR" step="0.01"
+                                    required></th>
                         </tr>
                         <tr>
                             <!--empty-->
                             <th colspan="2">&nbsp;</th>
                         </tr>
                         <tr>
-                            <th colspan="2" class="category"><label for="category">STRENGTH</label>
+                            <th colspan="5" class="category"><label for="category">STRENGTH</label></th>
+                            <th><label for="sar">SIT AND REACH SCORE (cm)</label></th>
                         </tr>
                         <tr>
-                            <th> <label for="pushups">NO. OF PUSH UPS</label><br> <input type="number" name="pushups"
+                            <th><label for="pushups">NO. OF PUSH UPS</label><br> <input type="number" name="pushups"
                                     required></th>
-                            <th> <label for="plank">BASIC PLANK (sec):</label><br><input type="number" name="plank"
+                            <th><label for="plank">BASIC PLANK (sec)</label><br><input type="number" name="plank"
+                                    required></th>
+                            <th>&nbsp;</th>
+                            <th>&nbsp;</th>
+                            <th>&nbsp;</th>
+                            <th><label for="sar1">First Trial</label><br><input type="number" name="sar1" step="0.01"
+                                    required></th>
+                            <th><label for="sar2">Second Trial</label><br><input type="number" name="sar2" step="0.01"
                                     required></th>
                         </tr>
-
-
-
-
-
-
-
-
-
-                        <input type="number" name="zipperR" step="0.01" required>
-                        <label for="zipperL">Zipper Test Overlap/Gap Left(cm):</label>
-                        <input type="number" name="zipperL" step="0.01" required>
-                        <label for="sar1">Sit and Reach Score 1st Try(cm):</label>
-                        <input type="number" name="sar1" step="0.01" required>
-                        <label for="sar2">Sit and Reach Score 2nd Try(cm):</label>
-                        <input type="number" name="sar2" step="0.01" required>
-
-
                     </table>
                 </div>
 
