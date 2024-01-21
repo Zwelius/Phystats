@@ -125,7 +125,16 @@ label[for="HRafter"],
 label[for="zipperL"],
 label[for="zipperR"],
 label[for="sar1"],
-label[for="sar2"] {
+label[for="sar2"],
+label[for="slj1"],
+label[for="slj2"],
+label[for="clockwise"],
+label[for="hexcounter"],
+label[for="storkleft"],
+label[for="storkright"],
+label[for="stick1"],
+label[for="stick2"],
+label[for="stick3"] {
     font-size: 12px;
     font-weight: lighter;
 }
@@ -137,7 +146,18 @@ input[name="zipperR"],
 input[name="pushups"],
 input[name="plank"],
 input[name="sar1"],
-input[name="sar2"] {
+input[name="sar2"],
+input[name="juggling"],
+input[name="slj1"],
+input[name="slj2"],
+input[name="hexclock"],
+input[name="hexcounter"],
+input[name="storkleft"],
+input[name="storkright"],
+input[name="sprinttime"],
+input[name="stick1"],
+input[name="stick2"],
+input[name="stick3"] {
     padding: 10px;
 }
 

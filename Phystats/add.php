@@ -119,14 +119,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
 
                         <tr>
                             <th colspan="6"><label for="name">NAME</label></th>
-                            <th>&nbsp;</th>
-                            <th>&nbsp;</th>
+                            <th colspan="2">&nbsp;</th><!--empty-->
                             <th><label for="nutritionalstatus">NUTRITIONAL STATUS</label></th>
                         </tr>
                         <tr>
                             <th colspan="6"><input type="text" name="name" required></th>
-                            <th>&nbsp;</th>
-                            <th>&nbsp;</th>
+                            <th colspan="2">&nbsp;</th><!--empty-->
                             <th>
                                 <select name="nutritionalstatus">
                                     <option value="Severely Wasted">Severely Wasted</option>
@@ -142,8 +140,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                             <th colspan="2"><label for="bday">BIRTH DATE</label></th>
                             <th colspan="2"><label for="sex">SEX</label></th>
                             <th colspan="2"><label for="age">AGE</label></th>
-                            <th>&nbsp;</th>
-                            <th>&nbsp;</th>
+                            <th colspan="2">&nbsp;</th><!--empty-->
                             <th colspan="2"><label for="heightforage">HEIGHT-FOR-AGE</label></th>
                         </tr>
 
@@ -158,8 +155,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                             <th colspan="2">
                                 <input type="number" name="age" required>
                             </th>
-                            <th>&nbsp;</th>
-                            <th>&nbsp;</th>
+                            <th colspan="2">&nbsp;</th><!--empty-->
                             <th colspan="2">
                                 <select name="heightforage">
                                     <option value="Severely Stunted">Severely Stunted</option>
@@ -169,12 +165,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                                 </select>
                             </th>
                         </tr>
-
                         <tr>
                             <!--empty-->
                             <th colspan="6">&nbsp;</th>
                         </tr>
-
                         <tr>
                             <th colspan="2"><label for="height">HEIGHT (m):</label></th>
                             <th colspan="2"><label for="weight">WEIGHT (kg):</label></th>
@@ -187,7 +181,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                 </div>
                 <!--end of student info tab-->
 
-
+                <!--start of health related test-->
                 <input type="radio" id="health-related-test" name="tab-container">
                 <label for="health-related-test">Health-Related Test</label>
                 <div class="tab">
@@ -195,9 +189,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                         <tr>
                             <th colspan="2" class="category"><label for="category">CARDIOVASCULAR
                                     ENDURANCE</label><br><label>3-MINUTE STEP (Heart rate per minute)</label></th>
-                            <th>&nbsp;</th><!--empty-->
-                            <th>&nbsp;</th><!--empty-->
-                            <th>&nbsp;</th><!--empty-->
+                            <th colspan="3">&nbsp;</th><!--empty-->
                             <th colspan="2" class="category"><label for="category">FLEXIBILITY</label><br><label
                                     for="zipper">ZIPPER TEST OVERLAP/GAP (cm)</label></th>
 
@@ -207,9 +199,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                                     step="0.01" required></th>
                             <th><label for="HRafter">After Activity</label><br><input type="number" name="HRafter"
                                     step="0.01" required></th>
-                            <th>&nbsp;</th><!--empty-->
-                            <th>&nbsp;</th><!--empty-->
-                            <th>&nbsp;</th><!--empty-->
+                            <th colspan="3">&nbsp;</th><!--empty-->
                             <th><label for="zipperL">Left</label><br> <input type="number" name="zipperL" step="0.01"
                                     required></th>
                             <th><label for="zipperR">Right</label><br><input type="number" name="zipperR" step="0.01"
@@ -227,9 +217,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                                     required></th>
                             <th><label for="plank">BASIC PLANK (sec)</label><br><input type="number" name="plank"
                                     required></th>
-                            <th>&nbsp;</th><!--empty-->
-                            <th>&nbsp;</th><!--empty-->
-                            <th>&nbsp;</th><!--empty-->
+                            <th colspan="3">&nbsp;</th><!--empty-->
                             <th><label for="sar1">First Trial</label><br><input type="number" name="sar1" step="0.01"
                                     required></th>
                             <th><label for="sar2">Second Trial</label><br><input type="number" name="sar2" step="0.01"
@@ -237,24 +225,26 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                         </tr>
                     </table>
                 </div>
+                <!--end of health related test-->
 
-
+                <!--start of skill related test-->
                 <input type="radio" id="skill-related-test" name="tab-container">
                 <label for="skill-related-test">Skill-Related Test</label>
                 <div class="tab">
                     <table class="skill-related-test">
                         <tr>
                             <th colspan="2" class="category"><label for="category">COORDINATION</label></th>
+                            <th colspan="3">&nbsp;</th><!--empty-->
                             <th colspan="2" class="category"><label for="category">POWER</label></th>
                         </tr>
                         <tr>
-                            <th colspan="2">&nbsp;</th><!--empty--></th>
+                            <th colspan="5">&nbsp;</th><!--empty-->
                             <th><label for="slg">STANDING LONG JUMP (cm)</label></th>
                         </tr>
                         <tr>
                             <th><label for="juggling">Juggling:</label><br><input type="number" name="juggling"
                                     required></th>
-                            <th>&nbsp;</th><!--empty-->
+                            <th colspan="4">&nbsp;</th><!--empty-->
                             <th><label for="slj1">First Trial</label><br>
                                 <input type="number" name="slj1" step="0.01" required>
                             </th>
@@ -269,62 +259,58 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
 
                         <tr>
                             <th colspan="2" class="category"><label for="category">AGILITY</label></th>
+                            <th colspan="3">&nbsp;</th><!--empty-->
+                            <th colspan="2" class="category"><label for="category">BALANCE</label></th>
                         </tr>
                         <tr>
-                            <th><label for="hexclock">HEXAGON AGILITY TEST (sec)</label></th>
+                            <th><label for="hexagon">HEXAGON AGILITY TEST (sec)</label></th>
+                            <th colspan="4">&nbsp;</th><!--empty-->
+                            <th><label for="stork-balance">STORK BALANCE TEST (sec)</label></th>
                         </tr>
                         <tr>
                             <th><label for="clockwise">Clockwise</label><br><input type="number" name="hexclock"
                                     required></th>
                             <th><label for="hexcounter">Counter Clockwise</label><br><input type="number"
                                     name="hexcounter" required></th>
+                            <th colspan="3">&nbsp;</th><!--empty-->
+                            <th><label for="storkleft">Left Foot</label><br><input type="number" name="storkleft"
+                                    required>
+                            </th>
+                            <th><label for="storkright">Right Foot</label><br><input type="number" name="storkright"
+                                    required>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th colspan="5">&nbsp;</th><!--empty-->
                         </tr>
 
                         <tr>
-                            <th>&nbsp;</th><!--empty-->
+                            <th colspan="5">&nbsp;</th><!--empty-->
+                            <th colspan="2" class="category"><label for="category">REACTION TIME</label></th>
                         </tr>
-
                         <tr>
                             <th colspan="2" class="category"><label for="category">SPEED</label></th>
+                            <th colspan="3">&nbsp;</th><!--empty-->
+                            <th colspan="2"><label for="stick">STICK DROP TEST (cm)</label></th>
                         </tr>
                         <tr>
                             <th><label for="sprinttime">40 METER SPRINT (sec)</label><br><input type="number"
                                     name="sprinttime" step="0.01" required>
                             </th>
+                            <th colspan="4">&nbsp;</th><!--empty-->
+                            <th><label for="stick1">First Trial</label><br><input type="number" name="stick1"
+                                    step="0.01" required>
+                            </th>
+                            <th><label for="stick2">Second Trial</label><br><input type="number" name="stick2"
+                                    step="0.01" required>
+                            </th>
+                            <th><label for="stick3">Third Trial</label><br><input type="number" name="stick3"
+                                    step="0.01" required>
+                            </th>
                         </tr>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        <label for="storkright">Stork Balance Stand Test Right Feet(sec):</label>
-                        <input type="number" name="storkright" required>
-                        <label for="storkleft">Stork Balance Stand Test Left Feet(sec):</label>
-                        <input type="number" name="storkleft" required>
-                        <label for="stick1">Stick Drop Test 1st Trial(cm):</label>
-                        <input type="number" name="stick1" step="0.01" required>
-                        <label for="stick2">Stick Drop Test 2nd Trial(cm):</label>
-                        <input type="number" name="stick2" step="0.01" required>
-                        <label for="stick3">Stick Drop Test 3rd Trial(cm):</label>
-                        <input type="number" name="stick3" step="0.01" required>
                     </table>
                 </div>
+                <!--end of skill related test-->
             </div>
 
             <div class="button-container">
