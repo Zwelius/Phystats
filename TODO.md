@@ -13,7 +13,7 @@ Primarily observable within the Add Student page where the container changes its
 
 ### Unforgivable Errors - A must-fix
 - [ ] No Constraints on Forms
-Especially important on the Add Student form. The user might have different use case that the developers have in mind which might accidentally break the program. Enforce your own use case by placing constraints.
+Especially important on the Add Student form. The user might have different use case than the developers have in mind which might accidentally break the program. Enforce your own use case by placing constraints.
 
 - [ ] Missing Sorting Features
 The lack of an integral promised feature is a no-no. For 50% qualifications, this is okay to ignore but this will be needed if we aim to achieve a 100%.
