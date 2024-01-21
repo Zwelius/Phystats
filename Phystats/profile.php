@@ -73,14 +73,14 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                     <div>
                         <label>Handling PE Grade:</label>
                         <select name='grade' required>
-                            <option value="Four" <?php if (isset($grade) && $grade === "four")
-                                echo 'selected'; ?>>Four
+                            <option value="Four" <?php if (isset($grade) && $grade === "Four"){
+                                echo 'selected'; }?>>Four
                             </option>
-                            <option value="Five" <?php if (isset($grade) && $grade === "five")
-                                echo 'selected'; ?>>Five
+                            <option value="Five" <?php if (isset($grade) && $grade === "Five"){
+                                echo 'selected'; }?>>Five
                             </option>
-                            <option value="Six" <?php if (isset($grade) && $grade === "six")
-                                echo 'selected'; ?>>Six
+                            <option value="Six" <?php if (isset($grade) && $grade === "Six"){
+                                echo 'selected'; }?>>Six
                             </option>
                         </select>
                     </div>
