@@ -212,7 +212,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                                 </select>
                             </th>
                             <th colspan="2">
-                                <input type="number" name="age" value="<?php echo $data['age'] ?>" required>
+                                <input type="number" name="age" value="<?php echo $data['age'] ?>" min="6" max="17" required>
                             </th>
                             <th colspan="2">&nbsp;</th><!--empty-->
                             <th colspan="2">
@@ -250,9 +250,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                         </tr>
                         <tr>
                             <th colspan="2"><input type="number" name="height" step="0.01"
-                                    value="<?php echo $data['height'] ?>" required></th>
+                                    value="<?php echo $data['height'] ?>" min="0" required></th>
                             <th colspan="2"><input type="number" name="weight" step="0.01"
-                                    value="<?php echo $data['weight'] ?>" required></th>
+                                    value="<?php echo $data['weight'] ?>" min="0" required></th>
                         </tr>
                     </table>
                 </div>
@@ -273,10 +273,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                         </tr>
                         <tr>
                             <th><label for="HRbefore">Before Activity</label><br><input type="number" name="HRbefore"
-                                    step="0.01" value="<?php echo $data['HRbefore'] ?>" required>
+                                    step="0.01" value="<?php echo $data['HRbefore'] ?>" min="40" max="220" required>
                             </th>
                             <th><label for="HRafter">After Activity</label><br><input type="number" name="HRafter"
-                                    step="0.01" value="<?php echo $data['HRafter'] ?>" required></th>
+                                    step="0.01" value="<?php echo $data['HRafter'] ?>" min="40" max="220" required></th>
                             <th colspan="3">&nbsp;</th><!--empty-->
                             <th><label for="zipperL">Left</label><br><input type="number" name="zipperL" step="0.01"
                                     value="<?php echo $data['zipperLeft'] ?>" required></th>
@@ -292,14 +292,14 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                         </tr>
                         <tr>
                             <th><label for="pushups">NO. OF PUSH UPS</label><br><input type="number" name="pushups"
-                                    value="<?php echo $data['pushupsNo'] ?>" required></th>
+                                    value="<?php echo $data['pushupsNo'] ?>" min="0" required></th>
                             <th><label for="plank">BASIC PLANK (sec)</label><br><input type="number" name="plank"
-                                    value="<?php echo $data['plankTime'] ?>" required></th>
+                                    value="<?php echo $data['plankTime'] ?>" min="0" required></th>
                             <th colspan="3">&nbsp;</th><!--empty-->
                             <th><label for="sar1">First Trial</label><br><input type="number" name="sar1" step="0.01"
-                                    value="<?php echo $data['SaR1'] ?>" required></th>
+                                    value="<?php echo $data['SaR1'] ?>" min="0" required></th>
                             <th><label for="sar2">Second Trial</label><br><input type="number" name="sar2" step="0.01"
-                                    value="<?php echo $data['SaR2'] ?>" required></th>
+                                    value="<?php echo $data['SaR2'] ?>" min="0" required></th>
                         </tr>
                     </table>
                 </div>
@@ -321,13 +321,13 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                         </tr>
                         <tr>
                             <th><label for="juggling">Juggling:</label><br><input type="number" name="juggling"
-                                    value="<?php echo $data['juggling'] ?>" required></th>
+                                    value="<?php echo $data['juggling'] ?>" min="0" required></th>
                             <th colspan="4">&nbsp;</th><!--empty-->
                             <th><label for="slj1">First Trial</label><br><input type="number" name="slj1" step="0.01"
-                                    value="<?php echo $data['SLJ1'] ?>" required>
+                                    value="<?php echo $data['SLJ1'] ?>" min="0" required>
                             </th>
                             <th><label for="slj2">Second Trial</label><br><input type="number" name="slj2" step="0.01"
-                                    value="<?php echo $data['SLJ2'] ?>" required>
+                                    value="<?php echo $data['SLJ2'] ?>" min="0" required>
                             </th>
                         </tr>
 
@@ -347,15 +347,15 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                         </tr>
                         <tr>
                             <th><label for="clockwise">Clockwise</label><br><input type="number" name="hexclock"
-                                    value="<?php echo $data['hexagonClockwise'] ?>" required></th>
+                                    value="<?php echo $data['hexagonClockwise'] ?>" min="0" required></th>
                             <th><label for="hexcounter">Counter Clockwise</label><br><input type="number"
-                                    name="hexcounter" value="<?php echo $data['hexagonCounter'] ?>" required></th>
+                                    name="hexcounter" value="<?php echo $data['hexagonCounter'] ?>" min="0" required></th>
                             <th colspan="3">&nbsp;</th><!--empty-->
                             <th><label for="storkleft">Left Foot</label><br><input type="number" name="storkleft"
-                                    value="<?php echo $data['storkLeft'] ?>" required>
+                                    value="<?php echo $data['storkLeft'] ?>" min="0" required>
                             </th>
                             <th><label for="storkright">Right Foot</label><br><input type="number" name="storkright"
-                                    value="<?php echo $data['storkRight'] ?>" required>
+                                    value="<?php echo $data['storkRight'] ?>" min="0" required>
                             </th>
                         </tr>
                         <tr>
@@ -373,17 +373,17 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                         </tr>
                         <tr>
                             <th><label for="sprinttime">40 METER SPRINT (sec)</label><br><input type="number"
-                                    name="sprinttime" step="0.01" value="<?php echo $data['sprintTime'] ?>" required>
+                                    name="sprinttime" step="0.01" value="<?php echo $data['sprintTime'] ?>" min="0" required>
                             </th>
                             <th colspan="4">&nbsp;</th><!--empty-->
                             <th><label for="stick1">First Trial</label><br> <input type="number" name="stick1"
-                                    step="0.01" value="<?php echo $data['stick1'] ?>" required>
+                                    step="0.01" value="<?php echo $data['stick1'] ?>" min="0" max="30.48" required>
                             </th>
                             <th><label for="stick2">Second Trial</label><br><input type="number" name="stick2"
-                                    step="0.01" value="<?php echo $data['stick2'] ?>" required>
+                                    step="0.01" value="<?php echo $data['stick2'] ?>" min="0" max="30.48" required>
                             </th>
                             <th><label for="stick3">Third Trial</label><br><input type="number" name="stick3"
-                                    step="0.01" value="<?php echo $data['stick3'] ?>" required>
+                                    step="0.01" value="<?php echo $data['stick3'] ?>" min="0" max="30.48" required>
 
                             </th>
                         </tr>
