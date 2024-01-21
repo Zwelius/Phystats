@@ -35,11 +35,32 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
     } else {
         $t_id = $_SESSION["t_id"];
         $hasStudents = false;
-        $studlist = mysqli_query($connection, "SELECT * FROM `student` INNER JOIN `testdate` ON testdate.tdID = student.tdID WHERE testdate.t_id = $t_id");
+        $list = "SELECT * FROM `student` INNER JOIN `testdate` ON testdate.tdID = student.tdID WHERE testdate.t_id = $t_id";
+        $studlist = mysqli_query($connection, $list);
         $syears = mysqli_query($connection, "SELECT * FROM `schoolyear` ORDER BY `year` DESC");
         $grade = mysqli_query($connection, "SELECT * FROM `gradesection` WHERE t_id = $t_id");
         $quarter = mysqli_query($connection, "SELECT * FROM `quarter`");
         $testtype = mysqli_query($connection, "SELECT * FROM `test`");
+        if (isset($_POST["sort"])) {
+            switch ($_POST["sort"]) {
+                case "name":
+                    $list .= " ORDER BY `name`";
+                    break;
+                case "height":
+                    $list .= " ORDER BY `height`";
+                    break;
+                case "weight":
+                    $list .= " ORDER BY `weight`";
+                    break;
+                case "age":
+                    $list .= " ORDER BY `age`";
+                    break;
+                default:
+                    $list .= " ORDER BY `s_id` DESC";
+                    break;
+            }
+            $studlist = mysqli_query($connection, $list);
+        }
     }
     ?>
 
@@ -89,17 +110,27 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                         ?>
                     </select>
 
-                    <input type="text" name="search" id="search" onkeyup="searchFunction()"
-                        placeholder="Search Names...">
+                    <input type="text" name="search" id="search" onkeyup="searchFunction()" placeholder="Search Names...">
 
                     <div>
-                        <span>SORT BY</span>
-                        <select>
-                            <option>Name</option>
-                            <option>Height</option>
-                            <option>Weight</option>
-                            <option>Age</option>
-                        </select>
+                        <form method="POST" action="">
+                            <span>SORT BY</span>
+                            <select name="sort" onchange="this.form.submit()">
+                                <option>Recent</option>
+                                <option value="name" <?php if (isset($_POST['sort']) && $_POST['sort'] === "name") {
+                                                            echo 'selected';
+                                                        } ?>>Name</option>
+                                <option value="height" <?php if (isset($_POST['sort']) && $_POST['sort'] === "height") {
+                                                            echo 'selected';
+                                                        } ?>>Height</option>
+                                <option value="weight" <?php if (isset($_POST['sort']) && $_POST['sort'] === "weight") {
+                                                            echo 'selected';
+                                                        } ?>>Weight</option>
+                                <option value="age" <?php if (isset($_POST['sort']) && $_POST['sort'] === "age") {
+                                                        echo 'selected';
+                                                    } ?>>Age</option>
+                            </select>
+                        </form>
                     </div>
                     <a href="add.php"><button class="add-student">Add Student</button></a>
                 </div>
