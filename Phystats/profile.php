@@ -38,7 +38,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
         }
 
         if (isset($_POST['update'])) {
-            $updatelogsql = mysqli_query($connection, "UPDATE `login` `email`='" . $_POST['email'] . "', `pass`='" . $_POST['pass'] . "' WHERE `t_id`='" . $_SESSION["t_id"] . "'");
+            $updatelogsql = mysqli_query($connection, "UPDATE `login` SET `email`='" . $_POST['email'] . "', `pass`='" . $_POST['pass'] . "' WHERE `t_id`='" . $_SESSION["t_id"] . "'");
             $updateprofsql = mysqli_query($connection, "UPDATE `teacher` SET `t_fname`='" . $_POST['fname'] . "',`t_lname`='" . $_POST['lname'] . "',`position`='" . $_POST['position'] . "' WHERE `t_id`='" . $_SESSION["t_id"] . "'");
             $updategradesql = mysqli_query($connection, "UPDATE `gradesection` SET `grade`='" . $_POST['grade'] . "',`section`='" . $_POST['section'] . "' WHERE `t_id`='" . $_SESSION["t_id"] . "'");
             echo '<script>alert("Updated successfully");window.location.replace("profile.php");</script>';
