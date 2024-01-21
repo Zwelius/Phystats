@@ -161,6 +161,13 @@ input[name="stick3"] {
     padding: 10px;
 }
 
+input[name="HRbefore"],
+input[name="HRafter"],
+input[name="stick1"],
+input[name="stick2"],
+input[name="stick3"] {
+    width: 86%;
+}
 
 /*****buttons*****/
 .button-container {
@@ -194,5 +201,3 @@ input[name="cancel"] {
 input[name="cancel"]:hover {
     background-color: #c02615;
 }
-
-

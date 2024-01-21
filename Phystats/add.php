@@ -120,12 +120,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
 
                         <tr>
                             <th colspan="6"><label for="name">NAME</label></th>
-                            <th colspan="2">&nbsp;</th><!--empty-->
+                            <th>&nbsp;</th><!--empty-->
                             <th><label for="nutritionalstatus">NUTRITIONAL STATUS</label></th>
                         </tr>
                         <tr>
                             <th colspan="6"><input type="text" name="name" required></th>
-                            <th colspan="2">&nbsp;</th><!--empty-->
+                            <th>&nbsp;</th><!--empty-->
                             <th>
                                 <select name="nutritionalstatus">
                                     <option value="Severely Wasted">Severely Wasted</option>
@@ -140,7 +140,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                         <tr>
                             <th colspan="2"><label for="bday">BIRTH DATE</label></th>
                             <th colspan="2"><label for="sex">SEX</label></th>
-                            <th colspan="2">&nbsp;</th><!--empty-->
+                            <th colspan="3">&nbsp;</th><!--empty-->
                             <th colspan="2"><label for="heightforage">HEIGHT-FOR-AGE</label></th>
                         </tr>
 
@@ -152,7 +152,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                                     <option value="Female">Female</option>
                                 </select>
                             </th>
-                            <th colspan="2">&nbsp;</th><!--empty-->
+                            <th colspan="3">&nbsp;</th><!--empty-->
                             <th colspan="2">
                                 <select name="heightforage">
                                     <option value="Severely Stunted">Severely Stunted</option>

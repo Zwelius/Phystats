@@ -44,7 +44,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
             echo '<script>alert("Updated successfully");window.location.replace("profile.php");</script>';
         } else if (isset($_POST['logout'])) {
             unset($_SESSION["t_id"]);
-            echo '<script>alert("Logged out successfully");window.location.replace("index.php");</script>';
             exit();
         }
     }
@@ -111,7 +110,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
 
                             <label>SECTION</label><br>
                             <input type="text" name="section" value="<?php echo $section ?>" required><br><br>
-                            <input type="submit" name="update" value="Save Changes">
+                            <input type="submit" name="update" value="Save Changes"
+                                onclick="return confirm('You are about to do some changes. Do you want to proceed?')">
                         </div>
 
                         <div class="personal-details-right">
