@@ -8,9 +8,6 @@ Update these pages with the current style.
 - [ ] Inconsistent Stylings on Table Elements
 Make the width of the table be absolute instead of auto and to support for ellipse text overflowing for long names.
 
-- [ ] Inconsistent Stylings on Content Containers
-Primarily observable within the Add Student page where the container changes its width depending on the selected tab.
-
 ### Unforgivable Errors - A must-fix
 - [ ] No Constraints on Forms
 Especially important on the Add Student form. The user might have different use case than the developers have in mind which might accidentally break the program. Enforce your own use case by placing constraints.
