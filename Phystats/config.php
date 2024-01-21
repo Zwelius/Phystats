@@ -284,8 +284,8 @@ function cardiovasulcarEndurance($HRbefore, $HRafter, $age)
 }
 function strength($pushupsNo, $plankTime)
 {
-    $pushupsInterpretation = zippertest_interpretation($pushupsNo);
-    $plankInterpretation = sitAndReach_interpretation($plankTime);
+    $pushupsInterpretation = pushups_interpretation($pushupsNo);
+    $plankInterpretation = plank_interpretation($plankTime);
     $pushupScore = interpretation_score($pushupsInterpretation);
     $plankScore = interpretation_score($plankInterpretation);
     $temp = ($pushupScore + $plankScore) / 2;

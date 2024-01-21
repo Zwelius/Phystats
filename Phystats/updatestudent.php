@@ -43,7 +43,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
             $bmi = number_format((float) $temp, 2, '.', '');
             mysqli_query($connection, "UPDATE `student` SET `tdID`='$tdID', `name`='" . $_POST['name'] . "', `birthdate`='" . $_POST['bday'] . "', `height`='" . $_POST['height'] . "', `weight`='" . $_POST['weight'] . "', `sex`='" . $_POST['sex'] . "', `age`='" . $_POST['age'] . "', `BMI`='$bmi', `nutritional status`='" . $_POST['nutritionalstatus'] . "', `heightforage`='" . $_POST['heightforage'] . "' WHERE `s_id`= $s_id");
             mysqli_query($connection, "UPDATE `testresult` SET `tdID`='$tdID', `HRbefore`='" . $_POST['HRbefore'] . "', `HRafter`='" . $_POST['HRafter'] . "', `pushupsNo`='" . $_POST['pushups'] . "', `plankTime`='" . $_POST['plank'] . "', `zipperRight`='" . $_POST['zipperR'] . "', `zipperLeft`='" . $_POST['zipperL'] . "', `SaR1`='" . $_POST['sar1'] . "', `SaR2`='" . $_POST['sar2'] . "', `juggling`='" . $_POST['juggling'] . "', `hexagonClockwise`='" . $_POST['hexclock'] . "', `hexagonCounter`='" . $_POST['hexcounter'] . "', `sprintTime`='" . $_POST['sprinttime'] . "', `SLJ1`='" . $_POST['slj1'] . "', `SLJ2`='" . $_POST['slj2'] . "', `storkRight`='" . $_POST['storkright'] . "', `storkLeft`='" . $_POST['storkleft'] . "', `stick1`='" . $_POST['stick1'] . "', `stick2`='" . $_POST['stick2'] . "', `stick3`='" . $_POST['stick3'] . "' WHERE `s_id` = $s_id");
-            $tr_ID = mysqli_insert_id($connection);
+            $tr_ID = mysqli_query($connection, "SELECT `tr_ID` from `testresult` INNER JOIN `student` ON student.s_id = testresult.s_id WHERE testresult.s_id = $s_id");
+            $row = mysqli_fetch_assoc($tr_ID);
+            $tr_ID = $row['tr_ID'];
             $bodyComposition = $_POST['nutritionalstatus'];
             $cardiovascularEndurance = cardiovasulcarEndurance($_POST['HRbefore'], $_POST['HRafter'], $_POST['age']);
             $strength = strength($_POST['pushups'], $_POST['plank']);
@@ -55,8 +57,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
             $balance = balance($_POST['storkright'], $_POST['storkleft'], $_POST['age']);
             $reactionTime = reactionTime($_POST['stick1'], $_POST['stick2'], $_POST['stick3']);
             $fitnessResult = physicallyFit($bodyComposition, $cardiovascularEndurance, $strength, $flexibility, $coordination, $agility, $speed, $power, $balance, $reactionTime);
-            mysqli_query($connection, "INSERT INTO `resultinterpretation`(`tr_ID`, `bodyComposition`, `cardiovascularEndurance`, `strength`, `flexibility`, `coordination`, `agility`, `speed`, `power`, `balance`, `reactionTime`, `fitnessResult`) VALUES ($tr_ID, '$bodyComposition', '$cardiovascularEndurance', '$strength', '$flexibility', '$coordination', '$agility', '$speed', '$power', '$balance', '$reactionTime', '$fitnessResult')");
-            mysqli_query($connection, "UPDATE `resultinterpretation` SET `bodyComposition`= '$bodyComposition', `cardiovascularEndurance`= '$cardiovascularEndurance', `strength`= '$strength', `flexibility`= '$flexibility', `coordination`= '$coordination', `agility`= '$agility', `speed`= '$speed', `power`= '$power', `balance`= '$balance', `reactionTime`= '$reactionTime', `fitnessResult`= '$fitnessResult' WHERE `s_id` = $s_id");
+            mysqli_query($connection, "UPDATE `resultinterpretation` SET `bodyComposition`= '$bodyComposition', `cardiovascularEndurance`= '$cardiovascularEndurance', `strength`= '$strength', `flexibility`= '$flexibility', `coordination`= '$coordination', `agility`= '$agility', `speed`= '$speed', `power`= '$power', `balance`= '$balance', `reactionTime`= '$reactionTime', `fitnessResult`= '$fitnessResult' WHERE `tr_ID` = $tr_ID");
             echo '<script>alert("Updated data successfully");</script>';
             echo '<script>window.location.replace("list.php");</script>';
             exit();
