@@ -12,7 +12,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
     <meta charset="UTF-8">
     <title>Phystats - Edit Students</title>
     <link rel="stylesheet" href="css/nav.css" />
-    <link rel="stylesheet" href="css/updatestudent.css" />
+    <link rel="stylesheet" href="css/add.css" />
 </head>
 
 <body>
@@ -76,9 +76,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
         </div>
     </nav>
 
-    <div class="addform">
+    <div class="add-form">
         <form method="POST">
-            <p>Physical Fitness Test</p>
+            <p>Physical Fitness Test | Edit</p>
             <div class="tab-container">
                 <input type="radio" id="student-information" name="tab-container" checked="checked">
                 <label for="student-information">Student Information</label>
