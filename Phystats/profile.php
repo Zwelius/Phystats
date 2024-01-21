@@ -44,6 +44,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
             echo '<script>alert("Updated successfully");window.location.replace("profile.php");</script>';
         } else if (isset($_POST['logout'])) {
             unset($_SESSION["t_id"]);
+            echo '<script>window.location.replace("index.php");</script>';
             exit();
         }
     }
