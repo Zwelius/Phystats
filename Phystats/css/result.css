@@ -8,3 +8,120 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 */
 
 @import url("https://fonts.googleapis.com/css?family=Jura");
+@import url('https://fonts.googleapis.com/css2?family=Poppins');
+
+body {
+    background-color: #C2D7EA;
+    font-family: 'Poppins';
+}
+
+.content {
+    padding: 0 11%;
+    margin: 45px auto;
+}
+
+.student-list {
+    width: 100%;
+}
+
+.filter-content {
+    margin-bottom: 2.5%;
+}
+
+.filter {
+    display: flex;
+    /*justify-content: space-between;*/
+}
+
+.filter select,
+input {
+    margin-right: 8px;
+    color: grey;
+    height: 50px;
+    padding: 0 20px;
+    border-radius: 5px;
+    border: none;
+    font-weight: bold;
+}
+
+input[name="search"] {
+    width: 20%;
+}
+
+span {
+    font-size: 12px;
+    font-weight: bold;
+    margin: 0 10px;
+}
+
+.add-student:hover {
+    background-color: #133A84;
+}
+
+/*****table*****/
+table {
+    width: 100%;
+}
+
+table th {
+    background: #27A655;
+    color: white;
+    padding: 10px;
+}
+
+table td {
+    background: #ffffff;
+    color: grey;
+    padding: 10px;
+}
+
+table {
+    border-radius: 0 5px 5px 5px;
+    text-align: center;
+    font-size: 15px;
+    font-weight: bold;
+    border-spacing: 0;
+    border-collapse: separate;
+    border: var(--border);
+    overflow: hidden;
+}
+
+/*****tabs*****/
+.tab-container {
+    color: white;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.tab-container input[type="radio"] {
+    display: none;
+}
+
+label[for="health-related-test"],
+label[for="skill-related-test"] {
+    background: white;
+    width: 250px;
+    padding: 15px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    text-align: center;
+}
+
+.tab-container .tab {
+    color: black;
+    width: 100%;
+    order: 1;
+    display: none;
+}
+
+.tab-container input[type='radio']:checked+label+.tab {
+    display: block;
+}
+
+.tab-container input[type="radio"]:not(:checked)+label {
+    color: grey;
+}
+
+.tab-container input[type="radio"]:checked+label {
+    background: #27A655;
+}

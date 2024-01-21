@@ -97,22 +97,3 @@ table.rounded-corners {
     border: var(--border);
     overflow: hidden;
 }
-
-table.rounded-corners th:not(:last-child),
-table.rounded-corners td:not(:last-child) {
-    border-right: var(--border);
-}
-
-table.rounded-corners>thead>tr:not(:last-child)>th,
-table.rounded-corners>thead>tr:not(:last-child)>td,
-table.rounded-corners>tbody>tr:not(:last-child)>th,
-table.rounded-corners>tbody>tr:not(:last-child)>td,
-table.rounded-corners>tfoot>tr:not(:last-child)>th,
-table.rounded-corners>tfoot>tr:not(:last-child)>td,
-table.rounded-corners>tr:not(:last-child)>td,
-table.rounded-corners>tr:not(:last-child)>th,
-table.rounded-corners>thead:not(:last-child),
-table.rounded-corners>tbody:not(:last-child),
-table.rounded-corners>tfoot:not(:last-child) {
-    border-bottom: var(--border);
-}

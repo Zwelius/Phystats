@@ -12,7 +12,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
     <meta charset="UTF-8">
     <title>Phystats - Test Results</title>
     <link rel="stylesheet" href="css/nav.css" />
-    <link rel="stylesheet" href="css/list.css" />
+    <link rel="stylesheet" href="css/result.css" />
 </head>
 
 <body>
@@ -41,6 +41,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
             <a href="profile.php" class="nav-options"><img class="profile" src="assets/wprof.png"></a>
         </div>
     </nav>
+
     <section class="content">
         <div class="student-list">
             <div class="filter-content">
@@ -80,51 +81,82 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                 </div>
             </div>
 
-            <div>
-                <table class="rounded-corners">
-                    <tr>
-                        <th>NAME</th>
-                        <th>BODY COMPOSITION</th>
-                        <th>CARDIOVASCULAR ENDURANCE</th>
-                        <th>STRENGTH</th>
-                        <th>FLEXIBILITY</th>
-                        <th>COORDINATION</th>
-                        <th>AGILITY</th>
-                        <th>SPEED</th>
-                        <th>POWER</th>
-                        <th>BALANCE</th>
-                        <th>REACTION TIME</th>
-                        <th>FITNESS RESULT</th>
-                    </tr>
+            <div class="tab-container">
+                <input type="radio" id="health-related-test" name="tab-container" checked="checked">
+                <label for="health-related-test">Health-Related Test Results</label>
+                <!-----health-related test results----->
+                <div class="tab">
+                    <table class="health-related-test">
+                        <tr>
+                            <th>NAME</th>
+                            <th>BODY COMPOSITION</th>
+                            <th>CARDIOVASCULAR ENDURANCE</th>
+                            <th>STRENGTH</th>
+                            <th>FLEXIBILITY</th>
+                            <th>FITNESS RESULT</th>
+                        </tr>
 
-                    <?php
-                    while ($row = mysqli_fetch_assoc($studlist)) {
-                        echo "<tr>";
-                        echo "<td>{$row['name']}</td>";
-                        echo "<td>{$row['bodyComposition']}</td>";
-                        echo "<td>{$row['cardiovascularEndurance']}</td>";
-                        echo "<td>{$row['strength']}</td>";
-                        echo "<td>{$row['flexibility']}</td>";
-                        echo "<td>{$row['coordination']}</td>";
-                        echo "<td>{$row['agility']}</td>";
-                        echo "<td>{$row['speed']}</td>";
-                        echo "<td>{$row['power']}</td>";
-                        echo "<td>{$row['balance']}</td>";
-                        echo "<td>{$row['reactionTime']}</td>";
-                        echo "<td>{$row['fitnessResult']}</td>";
-                        echo "</tr>";
-                        $hasStudents = true;
-                    }
-                    if (!$hasStudents) {
-                        echo "<tr>";
-                        echo "<td class='none' colspan=10>No Students Found</td>";
-                        echo "<tr>";
-                    }
-                    ?>
-                </table>
+                        <?php
+                        while ($row = mysqli_fetch_assoc($studlist)) {
+                            echo "<tr>";
+                            echo "<td>{$row['name']}</td>";
+                            echo "<td>{$row['bodyComposition']}</td>";
+                            echo "<td>{$row['cardiovascularEndurance']}</td>";
+                            echo "<td>{$row['strength']}</td>";
+                            echo "<td>{$row['flexibility']}</td>";
+                            echo "<td>{$row['fitnessResult']}</td>";
+                            echo "</tr>";
+                            $hasStudents = true;
+                        }
+
+                        if (!$hasStudents) {
+                            echo "<tr>";
+                            echo "<td class='none' colspan=10>No Students Found</td>";
+                            echo "<tr>";
+                        }
+                        ?>
+                    </table>
+                </div>
+
+                <!-----skill-related test results----->
+                <input type="radio" id="skill-related-test" name="tab-container">
+                <label for="skill-related-test">Skill-Related Tes Resultst</label>
+                <div class="tab">
+                    <table class="skill-related-test">
+                        <tr>
+                            <th>NAME</th>
+                            <th>COORDINATION</th>
+                            <th>AGILITY</th>
+                            <th>SPEED</th>
+                            <th>POWER</th>
+                            <th>BALANCE</th>
+                            <th>REACTION TIME</th>
+                            <th>FITNESS RESULT</th>
+                        </tr>
+
+                        <?php
+                        while ($row = mysqli_fetch_assoc($studlist)) {
+                            echo "<tr>";
+                            echo "<td>{$row['name']}</td>";
+                            echo "<td>{$row['coordination']}</td>";
+                            echo "<td>{$row['agility']}</td>";
+                            echo "<td>{$row['speed']}</td>";
+                            echo "<td>{$row['power']}</td>";
+                            echo "<td>{$row['balance']}</td>";
+                            echo "<td>{$row['reactionTime']}</td>";
+                            echo "<td>{$row['fitnessResult']}</td>";
+                            echo "</tr>";
+                            $hasStudents = true;
+                        }
+                        if (!$hasStudents) {
+                            echo "<tr>";
+                            echo "<td class='none' colspan=10>No Students Found</td>";
+                            echo "<tr>";
+                        }
+                        ?>
+                    </table>
+                </div>
             </div>
-
-        </div>
     </section>
 </body>
 
