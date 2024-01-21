@@ -13,6 +13,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
     <title>Phystats - Test Results</title>
     <link rel="stylesheet" href="css/nav.css" />
     <link rel="stylesheet" href="css/result.css" />
+    <script type="text/javascript" src="js/script.js"></script>
 </head>
 
 <body>
@@ -77,7 +78,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                         ?>
                     </select>
 
-                    <input type="text" id="search" onkeyup="searchFunction()" placeholder="Search Names...">
+                    <input type="text" id="search" onkeyup="searchFunction(), searchFunction2()" placeholder="Search Names...">
 
                 </div>
             </div>
@@ -87,7 +88,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                 <label for="health-related-test">Health-Related Test Results</label>
                 <!-----health-related test results----->
                 <div class="tab">
-                    <table class="health-related-test">
+                    <table class="health-related-test" id="tebla">
                         <tr>
                             <th>NAME</th>
                             <th>BODY COMPOSITION</th>
@@ -125,7 +126,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                 <input type="radio" id="skill-related-test" name="tab-container">
                 <label for="skill-related-test">Skill-Related Test Results</label>
                 <div class="tab">
-                    <table class="skill-related-test">
+                    <table class="skill-related-test" id="table">
                         <tr>
                             <th>NAME</th>
                             <th>COORDINATION</th>
