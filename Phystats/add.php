@@ -153,7 +153,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                                 </select>
                             </th>
                             <th colspan="2">
-                                <input type="number" name="age" required>
+                                <input type="number" name="age" min="6" max="17" required>
                             </th>
                             <th colspan="2">&nbsp;</th><!--empty-->
                             <th colspan="2">
@@ -174,8 +174,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                             <th colspan="2"><label for="weight">WEIGHT (kg):</label></th>
                         </tr>
                         <tr>
-                            <th colspan="2"><input type="number" name="height" step="0.01" required></th>
-                            <th colspan="2"><input type="number" name="weight" step="0.01" required></th>
+                            <th colspan="2"><input type="number" name="height" min="0" step="0.01" required></th>
+                            <th colspan="2"><input type="number" name="weight" min="0" step="0.01" required></th>
                         </tr>
                     </table>
                 </div>
@@ -190,20 +190,15 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                             <th colspan="2" class="category"><label for="category">CARDIOVASCULAR
                                     ENDURANCE</label><br><label>3-MINUTE STEP (Heart rate per minute)</label></th>
                             <th colspan="3">&nbsp;</th><!--empty-->
-                            <th colspan="2" class="category"><label for="category">FLEXIBILITY</label><br><label
-                                    for="zipper">ZIPPER TEST OVERLAP/GAP (cm)</label></th>
+                            <th colspan="2" class="category"><label for="category">FLEXIBILITY</label><br><label for="zipper">ZIPPER TEST OVERLAP/GAP (cm)</label></th>
 
                         </tr>
                         <tr>
-                            <th><label for="HRbefore">Before Activity</label><br><input type="number" name="HRbefore"
-                                    step="0.01" required></th>
-                            <th><label for="HRafter">After Activity</label><br><input type="number" name="HRafter"
-                                    step="0.01" required></th>
+                            <th><label for="HRbefore">Before Activity</label><br><input type="number" name="HRbefore" step="0.01" min="40" max="220" required></th>
+                            <th><label for="HRafter">After Activity</label><br><input type="number" name="HRafter" step="0.01" min="40" max="220" required></th>
                             <th colspan="3">&nbsp;</th><!--empty-->
-                            <th><label for="zipperL">Left</label><br> <input type="number" name="zipperL" step="0.01"
-                                    required></th>
-                            <th><label for="zipperR">Right</label><br><input type="number" name="zipperR" step="0.01"
-                                    required></th>
+                            <th><label for="zipperL">Left</label><br> <input type="number" name="zipperL" step="0.01" required></th>
+                            <th><label for="zipperR">Right</label><br><input type="number" name="zipperR" step="0.01" required></th>
                         </tr>
                         <tr>
                             <th colspan="2">&nbsp;</th><!--empty-->
@@ -213,15 +208,11 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                             <th><label for="sar">SIT AND REACH SCORE (cm)</label></th>
                         </tr>
                         <tr>
-                            <th><label for="pushups">NO. OF PUSH UPS</label><br> <input type="number" name="pushups"
-                                    required></th>
-                            <th><label for="plank">BASIC PLANK (sec)</label><br><input type="number" name="plank"
-                                    required></th>
+                            <th><label for="pushups">NO. OF PUSH UPS</label><br> <input type="number" name="pushups" min="0" required></th>
+                            <th><label for="plank">BASIC PLANK (sec)</label><br><input type="number" name="plank" min="0" required></th>
                             <th colspan="3">&nbsp;</th><!--empty-->
-                            <th><label for="sar1">First Trial</label><br><input type="number" name="sar1" step="0.01"
-                                    required></th>
-                            <th><label for="sar2">Second Trial</label><br><input type="number" name="sar2" step="0.01"
-                                    required></th>
+                            <th><label for="sar1">First Trial</label><br><input type="number" name="sar1" step="0.01" min="0" required></th>
+                            <th><label for="sar2">Second Trial</label><br><input type="number" name="sar2" step="0.01" min="0" required></th>
                         </tr>
                     </table>
                 </div>
@@ -242,14 +233,13 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                             <th><label for="slg">STANDING LONG JUMP (cm)</label></th>
                         </tr>
                         <tr>
-                            <th><label for="juggling">Juggling:</label><br><input type="number" name="juggling"
-                                    required></th>
+                            <th><label for="juggling">Juggling:</label><br><input type="number" name="juggling" min="0" required></th>
                             <th colspan="4">&nbsp;</th><!--empty-->
                             <th><label for="slj1">First Trial</label><br>
-                                <input type="number" name="slj1" step="0.01" required>
+                                <input type="number" name="slj1" min="0" step="0.01" required>
                             </th>
                             <th><label for="slj2">Second Trial</label><br>
-                                <input type="number" name="slj2" step="0.01" required>
+                                <input type="number" name="slj2" min="0" step="0.01" required>
                             </th>
                         </tr>
 
@@ -268,16 +258,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                             <th><label for="stork-balance">STORK BALANCE TEST (sec)</label></th>
                         </tr>
                         <tr>
-                            <th><label for="clockwise">Clockwise</label><br><input type="number" name="hexclock"
-                                    required></th>
-                            <th><label for="hexcounter">Counter Clockwise</label><br><input type="number"
-                                    name="hexcounter" required></th>
+                            <th><label for="clockwise">Clockwise</label><br><input type="number" name="hexclock" min="0" required></th>
+                            <th><label for="hexcounter">Counter Clockwise</label><br><input type="number" name="hexcounter" min="0" required></th>
                             <th colspan="3">&nbsp;</th><!--empty-->
-                            <th><label for="storkleft">Left Foot</label><br><input type="number" name="storkleft"
-                                    required>
+                            <th><label for="storkleft">Left Foot</label><br><input type="number" name="storkleft" min="0" required>
                             </th>
-                            <th><label for="storkright">Right Foot</label><br><input type="number" name="storkright"
-                                    required>
+                            <th><label for="storkright">Right Foot</label><br><input type="number" name="storkright" min="0" required>
                             </th>
                         </tr>
                         <tr>
@@ -294,18 +280,14 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                             <th colspan="2"><label for="stick">STICK DROP TEST (cm)</label></th>
                         </tr>
                         <tr>
-                            <th><label for="sprinttime">40 METER SPRINT (sec)</label><br><input type="number"
-                                    name="sprinttime" step="0.01" required>
+                            <th><label for="sprinttime">40 METER SPRINT (sec)</label><br><input type="number" name="sprinttime" min="0" step="0.01" required>
                             </th>
                             <th colspan="4">&nbsp;</th><!--empty-->
-                            <th><label for="stick1">First Trial</label><br><input type="number" name="stick1"
-                                    step="0.01" required>
+                            <th><label for="stick1">First Trial</label><br><input type="number" name="stick1" step="0.01" min="0" max="30.48" required>
                             </th>
-                            <th><label for="stick2">Second Trial</label><br><input type="number" name="stick2"
-                                    step="0.01" required>
+                            <th><label for="stick2">Second Trial</label><br><input type="number" name="stick2" step="0.01" min="0" max="30.48" required>
                             </th>
-                            <th><label for="stick3">Third Trial</label><br><input type="number" name="stick3"
-                                    step="0.01" required>
+                            <th><label for="stick3">Third Trial</label><br><input type="number" name="stick3" step="0.01" min="0" max="30.48" required>
                             </th>
                         </tr>
                     </table>

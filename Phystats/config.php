@@ -12,7 +12,7 @@ if (!$connection) {
 
 function minuteStep_interpretation($HRate, $age)
 {
-    if ($age >= 7 && $age <= 11) {
+    if ($age >= 6 && $age <= 11) {
         if (40 <= $HRate && $HRate < 80) {
             return "Excellent";
         } else if (80 <= $HRate && $HRate <= 94) {
@@ -154,8 +154,8 @@ function standingLongJump_interpretation($SLJ)
 }
 function storkBalance_interpretation($score, $age)
 {
-    if ($age >= 9 && $age <= 12) {
-        if ($score >= 41 && $score <= 60) {
+    if ($age >= 6 && $age <= 12) {
+        if ($score >= 41) {
             return "Excellent";
         } elseif ($score >= 31 && $score <= 40) {
             return "Very Good";
@@ -167,7 +167,7 @@ function storkBalance_interpretation($score, $age)
             return "Needs Improvement";
         }
     } elseif ($age >= 13 && $age <= 14) {
-        if ($score >= 81 && $score <= 100) {
+        if ($score >= 81) {
             return "Excellent";
         } elseif ($score >= 61 && $score <= 80) {
             return "Very Good";
@@ -179,7 +179,7 @@ function storkBalance_interpretation($score, $age)
             return "Needs Improvement";
         }
     } elseif ($age >= 15 && $age <= 16) {
-        if ($score >= 121 && $score <= 150) {
+        if ($score >= 121) {
             return "Excellent";
         } elseif ($score >= 91 && $score <= 120) {
             return "Very Good";
@@ -191,7 +191,7 @@ function storkBalance_interpretation($score, $age)
             return "Needs Improvement";
         }
     } elseif ($age >= 17) {
-        if ($score >= 161 && $score <= 180) {
+        if ($score >= 161) {
             return "Excellent";
         } elseif ($score >= 121 && $score <= 160) {
             return "Very Good";
@@ -336,7 +336,7 @@ function agility($hexagon1, $hexagon2)
 function speed($sprintTime, $age, $sex)
 {
     if ($sex == 'Male') {
-        if ($age >= 9 && $age <= 12) {
+        if ($age >= 6 && $age <= 12) {
             if ($sprintTime < 6.0) {
                 return 'Excellent';
             } elseif ($sprintTime >= 6.1 && $sprintTime <= 7.7) {
@@ -388,7 +388,7 @@ function speed($sprintTime, $age, $sex)
             return "Error";
         }
     } elseif ($sex == 'Female') {
-        if ($age >= 9 && $age <= 12) {
+        if ($age >= 6 && $age <= 12) {
             if ($sprintTime < 7.0) {
                 return 'Excellent';
             } elseif ($sprintTime >= 7.1 && $sprintTime <= 8.4) {
