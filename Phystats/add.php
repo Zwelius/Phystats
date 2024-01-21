@@ -314,6 +314,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
             </div>
 
             <div class="button-container">
+                <div id="validation-message"></div>
                 <input type="submit" name="save" value="Save">
                 <input type="submit" name="cancel" value="Cancel" formnovalidate>
             </div>

@@ -132,7 +132,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                         echo "<td>{$row['BMI']}</td>";
                         echo "<td>{$row['nutritional status']}</td>";
                         echo "<td>{$row['heightforage']}</td>";
-                        echo "<td><a href='viewstudent.php?s_id={$row['s_id']}' target='_blank'><img class='action' src='assets/view.png'></a>&nbsp;&nbsp;<a href='updatestudent.php?s_id={$row['s_id']}'><img class='action' src='assets/edit.png'></a>&nbsp;&nbsp;<a href='delete.php?s_id={$row['s_id']}'><img class='action' src='assets/delete.png'></a></td>";
+                        echo "<td><a href='viewstudent.php?s_id={$row['s_id']}' target='_blank'></a>&nbsp;&nbsp;<a href='updatestudent.php?s_id={$row['s_id']}'><img class='action' src='assets/edit.png'></a>&nbsp;&nbsp;<a href='delete.php?s_id={$row['s_id']}'><img class='action' src='assets/delete.png'></a></td>";
                         echo "</tr>";
                         $hasStudents = true;
                     }
