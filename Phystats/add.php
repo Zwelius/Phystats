@@ -288,7 +288,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                             <th colspan="2" class="category"><label for="category">SPEED</label></th>
                         </tr>
                         <tr>
-                            <th><label for="sprinttime">40 METER SPRINT (min.sec)</label><br><input type="number"
+                            <th><label for="sprinttime">40 METER SPRINT (sec)</label><br><input type="number"
                                     name="sprinttime" step="0.01" required>
                             </th>
                         </tr>

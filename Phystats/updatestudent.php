@@ -218,7 +218,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
             <input type="number" name="hexclock" value="<?php echo $data['hexagonClockwise'] ?>" required>
             <label for="hexcounter">Hexagon Agility Test Counter Clockwise Time(sec):</label>
             <input type="number" name="hexcounter" value="<?php echo $data['hexagonCounter'] ?>" required>
-            <label for="sprinttime">40-Meter Sprint(min.sec):</label>
+            <label for="sprinttime">40-Meter Sprint(sec):</label>
             <input type="number" name="sprinttime" step="0.01" value="<?php echo $data['sprintTime'] ?>" required>
             <label for="slj1">Standing Long Jump 1st Trial(cm):</label>
             <input type="number" name="slj1" step="0.01" value="<?php echo $data['SLJ1'] ?>" required>
