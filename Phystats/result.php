@@ -23,7 +23,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
     } else {
         $t_id = $_SESSION["t_id"];
         $hasStudents = false;
-        $studlist = mysqli_query($connection, "SELECT * FROM `student` INNER JOIN `testdate` ON testdate.tdID = student.tdID INNER JOIN `testresult` ON testresult.s_id = student.s_id INNER JOIN resultinterpretation ON resultinterpretation.tr_ID = testresult.tr_ID");
+        $studlist1 = mysqli_query($connection, "SELECT * FROM `student` INNER JOIN `testdate` ON testdate.tdID = student.tdID INNER JOIN `testresult` ON testresult.s_id = student.s_id INNER JOIN resultinterpretation ON resultinterpretation.tr_ID = testresult.tr_ID");
+        $studlist2 = mysqli_query($connection, "SELECT * FROM `student` INNER JOIN `testdate` ON testdate.tdID = student.tdID INNER JOIN `testresult` ON testresult.s_id = student.s_id INNER JOIN resultinterpretation ON resultinterpretation.tr_ID = testresult.tr_ID");
         $syears = mysqli_query($connection, "SELECT * FROM `schoolyear` ORDER BY `year` DESC");
         $grade = mysqli_query($connection, "SELECT * FROM `gradesection` WHERE t_id = $t_id");
         $quarter = mysqli_query($connection, "SELECT * FROM `quarter`");
@@ -97,15 +98,17 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                         </tr>
 
                         <?php
-                        while ($row = mysqli_fetch_assoc($studlist)) {
-                            echo "<tr>";
-                            echo "<td>{$row['name']}</td>";
-                            echo "<td>{$row['bodyComposition']}</td>";
-                            echo "<td>{$row['cardiovascularEndurance']}</td>";
-                            echo "<td>{$row['strength']}</td>";
-                            echo "<td>{$row['flexibility']}</td>";
-                            echo "<td>{$row['fitnessResult']}</td>";
-                            echo "</tr>";
+                        while ($row = mysqli_fetch_assoc($studlist1)) {
+                        ?>
+                            <tr>
+                                <td><?php echo $row['name']; ?></td>
+                                <td><?php echo $row['bodyComposition']; ?></td>
+                                <td><?php echo $row['cardiovascularEndurance']; ?></td>
+                                <td><?php echo $row['strength']; ?></td>
+                                <td><?php echo $row['flexibility']; ?></td>
+                                <td><?php echo $row['fitnessResult']; ?></td>
+                            </tr>
+                        <?php
                             $hasStudents = true;
                         }
 
@@ -120,7 +123,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
 
                 <!-----skill-related test results----->
                 <input type="radio" id="skill-related-test" name="tab-container">
-                <label for="skill-related-test">Skill-Related Tes Resultst</label>
+                <label for="skill-related-test">Skill-Related Test Results</label>
                 <div class="tab">
                     <table class="skill-related-test">
                         <tr>
@@ -135,17 +138,19 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                         </tr>
 
                         <?php
-                        while ($row = mysqli_fetch_assoc($studlist)) {
-                            echo "<tr>";
-                            echo "<td>{$row['name']}</td>";
-                            echo "<td>{$row['coordination']}</td>";
-                            echo "<td>{$row['agility']}</td>";
-                            echo "<td>{$row['speed']}</td>";
-                            echo "<td>{$row['power']}</td>";
-                            echo "<td>{$row['balance']}</td>";
-                            echo "<td>{$row['reactionTime']}</td>";
-                            echo "<td>{$row['fitnessResult']}</td>";
-                            echo "</tr>";
+                        while ($row2 = mysqli_fetch_assoc($studlist2)) {
+                            ?>
+                            <tr>
+                            <td><?php echo $row2['name'];?></td>
+                            <td><?php echo $row2['coordination'];?></td>
+                            <td><?php echo $row2['agility'];?></td>
+                            <td><?php echo $row2['speed'];?></td>
+                            <td><?php echo $row2['power'];?></td>
+                            <td><?php echo $row2['balance'];?></td>
+                            <td><?php echo $row2['reactionTime'];?></td>
+                            <td><?php echo $row2['fitnessResult'];?></td>
+                            </tr>
+                            <?php
                             $hasStudents = true;
                         }
                         if (!$hasStudents) {
