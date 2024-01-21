@@ -61,43 +61,71 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
         </div>
     </nav>
 
-    <section>
-        <form class="prof" method="POST">
-            <div>
-                <h1>Profile</h1>
-                <center>
-                    <input type="text" name="fname" placeholder="First Name" value="<?php echo $fname ?>" required>
-                    <input type="text" name="lname" placeholder="Surname" value="<?php echo $lname ?>" required>
-                    <input type="text" name="position" placeholder="Teaching Position" value="<?php echo $position ?>"
-                        required>
-                    <div>
-                        <label>Handling PE Grade:</label>
-                        <select name='grade' required>
-                            <option value="Four" <?php if (isset($grade) && $grade === "Four"){
-                                echo 'selected'; }?>>Four
-                            </option>
-                            <option value="Five" <?php if (isset($grade) && $grade === "Five"){
-                                echo 'selected'; }?>>Five
-                            </option>
-                            <option value="Six" <?php if (isset($grade) && $grade === "Six"){
-                                echo 'selected'; }?>>Six
-                            </option>
-                        </select>
+    <main>
+        <form method="POST">
+            <section>
+                <div class="left">
+                    <p><span class="account-settings">Account Settings</span><br>
+                        <span class="page-description">Manage your profile</span>
+                    </p>
+                    <div class="personal-details">
+                        <a href="profile.php">
+                            <div class="selected-option">Personal Details</div>
+                        </a>
                     </div>
-                    <input type="text" name="section" placeholder="Section" value="<?php echo $section ?>" required>
-                    <input type="submit" name="update" value="Save Changes">
-                </center>
-            </div>
-            <div>
-                <br><br><br><br><br>
-                <center>
-                    <p>Change Email & Password</p>
-                    <input type="text" name="email" placeholder="Email" value="<?php echo $email ?>" required>
-                    <input type="password" name="pass" placeholder="Password" value="<?php echo $pass ?>" required>
-                    <input class="logout" type="submit" name="logout" value="Logout" formnovalidate>
-                </center>
-            </div>
-        </form </section>
+
+                    <div class="selection-container">
+                        <input type="submit" name="logout" value="Logout" formnovalidate
+                            onclick="return confirm('Are you sure you want to logout?')">
+                    </div>
+                </div>
+
+                <div class="right">
+                    <span>Personal Details</span>
+                    <hr>
+                    <main>
+                        <div class="personal-details-left">
+                            <table>
+
+                            </table>
+                            <label>FIRST NAME</label><br>
+                            <input type="text" name="fname" value="<?php echo $fname ?>" required><br>
+                            <label>LAST NAME</label><br>
+                            <input type="text" name="lname" value="<?php echo $lname ?>" required><br>
+                            <label>POSITION</label><br>
+                            <input type="text" name="position" value="<?php echo $position ?>" required><br>
+                            <label>HANDLING PE GRADE</label><br>
+                            <select name='grade' required>
+                                <option value="Four" <?php if (isset($grade) && $grade === "Four") {
+                                    echo 'selected';
+                                } ?>>Four</option>
+                                <option value="Five" <?php if (isset($grade) && $grade === "Five") {
+                                    echo 'selected';
+                                } ?>>Five</option>
+                                <option value="Six" <?php if (isset($grade) && $grade === "Six") {
+                                    echo 'selected';
+                                } ?>>Six</option>
+                            </select>
+
+                            <br>
+
+                            <label>SECTION</label><br>
+                            <input type="text" name="section" value="<?php echo $section ?>" required><br><br>
+                            <input type="submit" name="update" value="Save Changes">
+                        </div>
+
+                        <div class="personal-details-right">
+                            <p>Change Email & Password</p>
+                            <input type="text" name="email" placeholder="Email" value="<?php echo $email ?>"
+                                required><br><br>
+                            <input type="password" name="pass" placeholder="Password" value="<?php echo $pass ?>"
+                                required><br>
+                        </div>
+                    </main>
+                </div>
+            </section>
+        </form>
+    </main>
 </body>
 
 </html>
