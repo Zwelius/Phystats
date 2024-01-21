@@ -10,6 +10,12 @@ if (!$connection) {
 }
 
 
+function getAge($Birthdate){
+    $nowdate = date("Y-m-d");
+    $getage = date_diff(date_create($Birthdate), date_create($nowdate));
+    $age = $getage->format('%y');
+    return $age;
+}
 function minuteStep_interpretation($HRate, $age)
 {
     if ($age >= 6 && $age <= 11) {

@@ -38,19 +38,20 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
             }
             $temp = $_POST['weight'] / ($_POST['height'] ** 2);
             $bmi = number_format((float) $temp, 2, '.', '');
-            mysqli_query($connection, "INSERT INTO `student` (`tdID`, `name`, `birthdate`, `height`, `weight`, `sex`, `age`, `BMI`, `nutritional status`, `heightforage`) VALUES ('$tdID','" . $_POST['name'] . "','" . $_POST['bday'] . "','" . $_POST['height'] . "','" . $_POST['weight'] . "','" . $_POST['sex'] . "','" . $_POST['age'] . "','$bmi','" . $_POST['nutritionalstatus'] . "','" . $_POST['heightforage'] . "')");
+            $age = getAge($_POST['bday']);
+            mysqli_query($connection, "INSERT INTO `student` (`tdID`, `name`, `birthdate`, `height`, `weight`, `sex`, `age`, `BMI`, `nutritional status`, `heightforage`) VALUES ('$tdID','" . $_POST['name'] . "','" . $_POST['bday'] . "','" . $_POST['height'] . "','" . $_POST['weight'] . "','" . $_POST['sex'] . "','$age','$bmi','" . $_POST['nutritionalstatus'] . "','" . $_POST['heightforage'] . "')");
             $s_id = mysqli_insert_id($connection);
             mysqli_query($connection, "INSERT INTO `testresult`(`s_id`, `tdID`, `HRbefore`, `HRafter`, `pushupsNo`, `plankTime`, `zipperRight`, `zipperLeft`, `SaR1`, `SaR2`, `juggling`, `hexagonClockwise`, `hexagonCounter`, `sprintTime`, `SLJ1`, `SLJ2`, `storkRight`, `storkLeft`, `stick1`, `stick2`, `stick3`) VALUES ('$s_id','$tdID','" . $_POST['HRbefore'] . "','" . $_POST['HRafter'] . "','" . $_POST['pushups'] . "','" . $_POST['plank'] . "','" . $_POST['zipperR'] . "','" . $_POST['zipperL'] . "','" . $_POST['sar1'] . "','" . $_POST['sar2'] . "','" . $_POST['juggling'] . "','" . $_POST['hexclock'] . "','" . $_POST['hexcounter'] . "','" . $_POST['sprinttime'] . "','" . $_POST['slj1'] . "','" . $_POST['slj2'] . "','" . $_POST['storkright'] . "','" . $_POST['storkleft'] . "','" . $_POST['stick1'] . "','" . $_POST['stick2'] . "','" . $_POST['stick3'] . "')");
             $tr_ID = mysqli_insert_id($connection);
             $bodyComposition = $_POST['nutritionalstatus'];
-            $cardiovascularEndurance = cardiovasulcarEndurance($_POST['HRbefore'], $_POST['HRafter'], $_POST['age']);
+            $cardiovascularEndurance = cardiovasulcarEndurance($_POST['HRbefore'], $_POST['HRafter'], $age);
             $strength = strength($_POST['pushups'], $_POST['plank']);
             $flexibility = flexibility($_POST['zipperR'], $_POST['zipperL'], $_POST['sar1'], $_POST['sar2']);
             $coordination = coordination($_POST['juggling']);
             $agility = agility($_POST['hexclock'], $_POST['hexcounter']);
-            $speed = speed($_POST['sprinttime'], $_POST['age'], $_POST['sex']);
+            $speed = speed($_POST['sprinttime'], $age, $_POST['sex']);
             $power = power($_POST['slj1'], $_POST['slj2']);
-            $balance = balance($_POST['storkright'], $_POST['storkleft'], $_POST['age']);
+            $balance = balance($_POST['storkright'], $_POST['storkleft'], $age);
             $reactionTime = reactionTime($_POST['stick1'], $_POST['stick2'], $_POST['stick3']);
             $fitnessResult = physicallyFit($bodyComposition, $cardiovascularEndurance, $strength, $flexibility, $coordination, $agility, $speed, $power, $balance, $reactionTime);
             mysqli_query($connection, "INSERT INTO `resultinterpretation`(`tr_ID`, `bodyComposition`, `cardiovascularEndurance`, `strength`, `flexibility`, `coordination`, `agility`, `speed`, `power`, `balance`, `reactionTime`, `fitnessResult`) VALUES ($tr_ID, '$bodyComposition', '$cardiovascularEndurance', '$strength', '$flexibility', '$coordination', '$agility', '$speed', '$power', '$balance', '$reactionTime', '$fitnessResult')");
@@ -139,21 +140,17 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                         <tr>
                             <th colspan="2"><label for="bday">BIRTH DATE</label></th>
                             <th colspan="2"><label for="sex">SEX</label></th>
-                            <th colspan="2"><label for="age">AGE</label></th>
                             <th colspan="2">&nbsp;</th><!--empty-->
                             <th colspan="2"><label for="heightforage">HEIGHT-FOR-AGE</label></th>
                         </tr>
 
                         <tr>
-                            <th colspan="2"><input type="date" name="bday" required></th>
+                            <th colspan="2"><input type="date" name="bday" min="<?php echo date("Y-m-d", strtotime("-17 years")); ?>" max="<?php echo date("Y-m-d", strtotime("-6 years")); ?>" required></th>
                             <th colspan="2">
                                 <select name="sex">
                                     <option value="Male">Male</option>
                                     <option value="Female">Female</option>
                                 </select>
-                            </th>
-                            <th colspan="2">
-                                <input type="number" name="age" min="6" max="17" required>
                             </th>
                             <th colspan="2">&nbsp;</th><!--empty-->
                             <th colspan="2">
