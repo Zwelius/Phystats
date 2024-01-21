@@ -13,6 +13,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
     <title>Phystats - Student List</title>
     <link rel="stylesheet" href="css/nav.css" />
     <link rel="stylesheet" href="css/list.css" />
+    <script type="text/javascript" src="js/script.js"></script>
     <style>
         img.action {
             width: 17px;
@@ -106,7 +107,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
 
             <div>
 
-                <table class="rounded-corners">
+                <table id="table" class="rounded-corners">
                     <tr>
                         <th>NAME</th>
                         <th>BIRTH DATE</th>
@@ -147,7 +148,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
 
         </div>
     </section>
-    <script type="text/javascript" src="/js/script.js"></script>
 </body>
 
 </html>
