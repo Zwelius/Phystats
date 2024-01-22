@@ -87,55 +87,60 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                 <div class="filter">
                     <form method="POST">
                         <select name="syear" onchange="this.form.submit()">
-                            <option value="">School Year(ALL)</option>
+                            <option value="">School Year (All)</option>
                             <?php
                             while ($row1 = mysqli_fetch_array($syears)) {
-                            ?>
+                                ?>
                                 <option value='<?php echo $row1['sy_id'] ?>' <?php if (isset($_POST['syear']) && $_POST['syear'] === $row1['sy_id']) {
-                                                                                    echo 'selected';
-                                                                                } ?>><?php echo $row1['year']; ?></option>
-                            <?php
+                                       echo 'selected';
+                                   } ?>><?php echo $row1['year']; ?>
+                                </option>
+                                <?php
                             }
                             ?>
                         </select>
                         <select name="grade" onchange="this.form.submit()">
-                            <option value="">Grade & Section(ALL)</option>
+                            <option value="">Grade & Section (All)</option>
                             <?php
                             while ($gs = mysqli_fetch_array($grade)) {
-                            ?>
+                                ?>
                                 <option value='<?php echo $gs['t_id']; ?>' <?php if (isset($_POST['grade']) && $_POST['grade'] === $gs['t_id']) {
-                                                                                echo 'selected';
-                                                                            } ?>><?php echo $gs['grade'] . " - " . $gs['section']; ?></option>
-                            <?php
+                                       echo 'selected';
+                                   } ?>><?php echo $gs['grade'] . " - " . $gs['section']; ?>
+                                </option>
+                                <?php
                             }
                             ?>
                         </select>
                         <select name="quarter" onchange="this.form.submit()">
-                            <option value="">Quarter(ALL)</option>
+                            <option value="">Quarter (All)</option>
                             <?php
                             while ($qtr = mysqli_fetch_array($quarter)) {
-                            ?>
+                                ?>
                                 <option value='<?php echo $qtr['q_id']; ?>' <?php if (isset($_POST['quarter']) && $_POST['quarter'] === $qtr['q_id']) {
-                                                                                echo 'selected';
-                                                                            } ?>><?php echo $qtr['quarter']; ?></option>
-                            <?php
+                                       echo 'selected';
+                                   } ?>><?php echo $qtr['quarter']; ?>
+                                </option>
+                                <?php
                             }
                             ?>
                         </select>
                         <select name="testtype" onchange="this.form.submit()">
-                            <option value="">Test Type(ALL)</option>
+                            <option value="">Test Type (All)</option>
                             <?php
                             while ($tt = mysqli_fetch_array($testtype)) {
-                            ?>
+                                ?>
                                 <option value='<?php echo $tt['testID']; ?>' <?php if (isset($_POST['testtype']) && $_POST['testtype'] === $tt['testID']) {
-                                                                                    echo 'selected';
-                                                                                } ?>><?php echo $tt['testtype']; ?></option>
-                            <?php
+                                       echo 'selected';
+                                   } ?>><?php echo $tt['testtype']; ?>
+                                </option>
+                                <?php
                             }
                             ?>
                         </select>
                     </form>
-                    <input type="text" id="search" onkeyup="searchFunction(), searchFunction2()" placeholder="Search Names...">
+                    <input type="text" id="search" onkeyup="searchFunction(), searchFunction2()"
+                        placeholder="Search Names...">
 
                 </div>
             </div>
@@ -157,17 +162,29 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
 
                         <?php
                         while ($row = mysqli_fetch_assoc($studlist1)) {
-                        ?>
-                            <tr>
-                                <td><?php echo $row['name']; ?></td>
-                                <td><?php echo $row['bodyComposition']; ?></td>
-                                <td><?php echo $row['cardiovascularEndurance']; ?></td>
-                                <td><?php echo $row['strength']; ?></td>
-                                <td><?php echo $row['flexibility']; ?></td>
-                                <td><?php echo $row['fitnessResult']; ?></td>
-                            </tr>
+                            ?>
+                        <tr>
+                            <td>
+                                <?php echo $row['name']; ?>
+                            </td>
+                            <td>
+                                <?php echo $row['bodyComposition']; ?>
+                            </td>
+                            <td>
+                                <?php echo $row['cardiovascularEndurance']; ?>
+                            </td>
+                            <td>
+                                <?php echo $row['strength']; ?>
+                            </td>
+                            <td>
+                                <?php echo $row['flexibility']; ?>
+                            </td>
+                            <td>
+                                <?php echo $row['fitnessResult']; ?>
+                            </td>
+                        </tr>
                         <?php
-                            $hasStudents = true;
+                        $hasStudents = true;
                         }
 
                         if (!$hasStudents) {
@@ -197,19 +214,35 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
 
                         <?php
                         while ($row2 = mysqli_fetch_assoc($studlist2)) {
-                        ?>
-                            <tr>
-                                <td><?php echo $row2['name']; ?></td>
-                                <td><?php echo $row2['coordination']; ?></td>
-                                <td><?php echo $row2['agility']; ?></td>
-                                <td><?php echo $row2['speed']; ?></td>
-                                <td><?php echo $row2['power']; ?></td>
-                                <td><?php echo $row2['balance']; ?></td>
-                                <td><?php echo $row2['reactionTime']; ?></td>
-                                <td><?php echo $row2['fitnessResult']; ?></td>
-                            </tr>
+                            ?>
+                        <tr>
+                            <td>
+                                <?php echo $row2['name']; ?>
+                            </td>
+                            <td>
+                                <?php echo $row2['coordination']; ?>
+                            </td>
+                            <td>
+                                <?php echo $row2['agility']; ?>
+                            </td>
+                            <td>
+                                <?php echo $row2['speed']; ?>
+                            </td>
+                            <td>
+                                <?php echo $row2['power']; ?>
+                            </td>
+                            <td>
+                                <?php echo $row2['balance']; ?>
+                            </td>
+                            <td>
+                                <?php echo $row2['reactionTime']; ?>
+                            </td>
+                            <td>
+                                <?php echo $row2['fitnessResult']; ?>
+                            </td>
+                        </tr>
                         <?php
-                            $hasStudents = true;
+                        $hasStudents = true;
                         }
                         if (!$hasStudents) {
                             echo "<tr>";
