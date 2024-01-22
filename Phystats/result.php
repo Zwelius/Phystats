@@ -24,12 +24,49 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
     } else {
         $t_id = $_SESSION["t_id"];
         $hasStudents = false;
-        $studlist1 = mysqli_query($connection, "SELECT * FROM `student` INNER JOIN `testdate` ON testdate.tdID = student.tdID INNER JOIN `testresult` ON testresult.s_id = student.s_id INNER JOIN resultinterpretation ON resultinterpretation.tr_ID = testresult.tr_ID");
-        $studlist2 = mysqli_query($connection, "SELECT * FROM `student` INNER JOIN `testdate` ON testdate.tdID = student.tdID INNER JOIN `testresult` ON testresult.s_id = student.s_id INNER JOIN resultinterpretation ON resultinterpretation.tr_ID = testresult.tr_ID");
+        $list = "SELECT * FROM `student` INNER JOIN `testdate` ON testdate.tdID = student.tdID INNER JOIN `testresult` ON testresult.s_id = student.s_id INNER JOIN resultinterpretation ON resultinterpretation.tr_ID = testresult.tr_ID";
+        $studlist1 = mysqli_query($connection, $list);
+        $studlist2 = mysqli_query($connection, $list);
         $syears = mysqli_query($connection, "SELECT * FROM `schoolyear` ORDER BY `year` DESC");
         $grade = mysqli_query($connection, "SELECT * FROM `gradesection` WHERE t_id = $t_id");
         $quarter = mysqli_query($connection, "SELECT * FROM `quarter`");
         $testtype = mysqli_query($connection, "SELECT * FROM `test`");
+        if (isset($_POST["syear"])) {
+            if (isset($_POST['syear']) && $_POST['syear'] != "") {
+                $list .= " WHERE testdate.sy_id = '" . $_POST['syear'] . "'";
+                $studlist1 = mysqli_query($connection, $list);
+                $studlist2 = mysqli_query($connection, $list);
+            } else {
+                $list .= " ";
+            }
+        }
+        if (isset($_POST["grade"])) {
+            if (isset($_POST['grade']) && $_POST['grade'] != "") {
+                $list .= " AND testdate.t_id = '" . $_POST['grade'] . "'";
+                $studlist1 = mysqli_query($connection, $list);
+                $studlist2 = mysqli_query($connection, $list);
+            } else {
+                $list .= " ";
+            }
+        }
+        if (isset($_POST["quarter"])) {
+            if (isset($_POST['quarter']) && $_POST['quarter'] != "") {
+                $list .= " AND testdate.q_id = '" . $_POST['quarter'] . "'";
+                $studlist1 = mysqli_query($connection, $list);
+                $studlist2 = mysqli_query($connection, $list);
+            } else {
+                $list .= " ";
+            }
+        }
+        if (isset($_POST["testtype"])) {
+            if (isset($_POST['testtype']) && $_POST['testtype'] != "") {
+                $list .= " AND testdate.testID = '" . $_POST['testtype'] . "'";
+                $studlist1 = mysqli_query($connection, $list);
+                $studlist2 = mysqli_query($connection, $list);
+            } else {
+                $list .= " ";
+            }
+        }
     }
     ?>
     <nav>
@@ -48,36 +85,56 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
         <div class="student-list">
             <div class="filter-content">
                 <div class="filter">
-                    <select name="syear">
-                        <option value="">SCHOOL YEAR</option>
-                        <?php
-                        while ($row1 = mysqli_fetch_array($syears)) {
-                            echo "<option value='" . $row1['sy_id'] . "'>" . $row1['year'] . "</option>";
-                        }
-                        ?>
-                    </select>
-                    <select name="grade">
-                        <?php
-                        while ($gs = mysqli_fetch_array($grade)) {
-                            echo "<option value='" . $gs['t_id'] . "'>" . $gs['grade'] . " - " . $gs['section'] . "</option>";
-                        }
-                        ?>
-                    </select>
-                    <select name="quarter">
-                        <?php
-                        while ($qtr = mysqli_fetch_array($quarter)) {
-                            echo "<option value='" . $qtr['q_id'] . "'>" . $qtr['quarter'] . "</option>";
-                        }
-                        ?>
-                    </select>
-                    <select name="testtype">
-                        <?php
-                        while ($tt = mysqli_fetch_array($testtype)) {
-                            echo "<option value='" . $tt['testID'] . "'>" . $tt['testtype'] . "</option>";
-                        }
-                        ?>
-                    </select>
-
+                    <form method="POST">
+                        <select name="syear" onchange="this.form.submit()">
+                            <option value="">School Year(ALL)</option>
+                            <?php
+                            while ($row1 = mysqli_fetch_array($syears)) {
+                            ?>
+                                <option value='<?php echo $row1['sy_id'] ?>' <?php if (isset($_POST['syear']) && $_POST['syear'] === $row1['sy_id']) {
+                                                                                    echo 'selected';
+                                                                                } ?>><?php echo $row1['year']; ?></option>
+                            <?php
+                            }
+                            ?>
+                        </select>
+                        <select name="grade" onchange="this.form.submit()">
+                            <option value="">Grade & Section(ALL)</option>
+                            <?php
+                            while ($gs = mysqli_fetch_array($grade)) {
+                            ?>
+                                <option value='<?php echo $gs['t_id']; ?>' <?php if (isset($_POST['grade']) && $_POST['grade'] === $gs['t_id']) {
+                                                                                echo 'selected';
+                                                                            } ?>><?php echo $gs['grade'] . " - " . $gs['section']; ?></option>
+                            <?php
+                            }
+                            ?>
+                        </select>
+                        <select name="quarter" onchange="this.form.submit()">
+                            <option value="">Quarter(ALL)</option>
+                            <?php
+                            while ($qtr = mysqli_fetch_array($quarter)) {
+                            ?>
+                                <option value='<?php echo $qtr['q_id']; ?>' <?php if (isset($_POST['quarter']) && $_POST['quarter'] === $qtr['q_id']) {
+                                                                                echo 'selected';
+                                                                            } ?>><?php echo $qtr['quarter']; ?></option>
+                            <?php
+                            }
+                            ?>
+                        </select>
+                        <select name="testtype" onchange="this.form.submit()">
+                            <option value="">Test Type(ALL)</option>
+                            <?php
+                            while ($tt = mysqli_fetch_array($testtype)) {
+                            ?>
+                                <option value='<?php echo $tt['testID']; ?>' <?php if (isset($_POST['testtype']) && $_POST['testtype'] === $tt['testID']) {
+                                                                                    echo 'selected';
+                                                                                } ?>><?php echo $tt['testtype']; ?></option>
+                            <?php
+                            }
+                            ?>
+                        </select>
+                    </form>
                     <input type="text" id="search" onkeyup="searchFunction(), searchFunction2()" placeholder="Search Names...">
 
                 </div>
@@ -140,18 +197,18 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
 
                         <?php
                         while ($row2 = mysqli_fetch_assoc($studlist2)) {
-                            ?>
+                        ?>
                             <tr>
-                            <td><?php echo $row2['name'];?></td>
-                            <td><?php echo $row2['coordination'];?></td>
-                            <td><?php echo $row2['agility'];?></td>
-                            <td><?php echo $row2['speed'];?></td>
-                            <td><?php echo $row2['power'];?></td>
-                            <td><?php echo $row2['balance'];?></td>
-                            <td><?php echo $row2['reactionTime'];?></td>
-                            <td><?php echo $row2['fitnessResult'];?></td>
+                                <td><?php echo $row2['name']; ?></td>
+                                <td><?php echo $row2['coordination']; ?></td>
+                                <td><?php echo $row2['agility']; ?></td>
+                                <td><?php echo $row2['speed']; ?></td>
+                                <td><?php echo $row2['power']; ?></td>
+                                <td><?php echo $row2['balance']; ?></td>
+                                <td><?php echo $row2['reactionTime']; ?></td>
+                                <td><?php echo $row2['fitnessResult']; ?></td>
                             </tr>
-                            <?php
+                        <?php
                             $hasStudents = true;
                         }
                         if (!$hasStudents) {
