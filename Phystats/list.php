@@ -50,7 +50,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
         }
         if (isset($_POST["grade"])) {
             if(isset($_POST['grade']) && $_POST['grade'] != ""){
-                $list .= " AND testdate.t_id = '".$_POST['syear']."'";
+                $list .= " AND testdate.t_id = '".$_POST['grade']."'";
                 mysqli_query($connection, $list);
             }
         }

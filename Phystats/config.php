@@ -483,7 +483,7 @@ function reactionTime($stick1, $stick2, $stick3)
 function physicallyFit($bodyComposition, $cardiovascularEndurance, $strength, $flexibility, $coordination, $agility, $speed, $power, $balance, $reactionTime)
 {
     $fitness = (bodyComposition($bodyComposition) + interpretation_score($cardiovascularEndurance) + interpretation_score($strength) + interpretation_score($flexibility) + interpretation_score($coordination) + interpretation_score($agility) + interpretation_score($speed) + interpretation_score($power) + interpretation_score($balance) + interpretation_score($reactionTime)) / 10;
-    $result = round($fitness);
+    $result = number_format((float)$fitness, 2, '.', '');
     if ($result >= 3) {
         return "Physically Fit";
     } else {
