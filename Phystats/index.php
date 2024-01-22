@@ -24,17 +24,22 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Project/PHP/PHPProject.php to edi
 <body>
     <?php
     include 'config.php';
+    
+    $failedToLogin = '';
+
     if (!empty($_SESSION["t_id"])) {
         header("Location: list.php");
     } else {
         if (isset($_POST['login'])) {
-            $sqlogin = mysqli_query($connection, "SELECT * FROM `login` WHERE `email`='" . $_POST['email'] . "' AND `pass` = '" . $_POST['pass'] . "'");
+            $sqlogin = mysqli_query($connection, "SELECT * FROM `login`");
             while ($row = mysqli_fetch_assoc($sqlogin)) {
                 if ($_POST['email'] === $row['email'] && $_POST['pass'] === $row['pass']) {
                     $_SESSION["t_id"] = $row["t_id"];
                     echo '<script>alert("Logged in successfully");</script>';
                     echo '<script>window.location.replace("list.php");</script>';
                     exit();
+                } else {
+                    $failedToLogin = "User not found. Please check your credentials.";
                 }
             }
         }
@@ -48,6 +53,13 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Project/PHP/PHPProject.php to edi
             </div>
 
             <center>
+                <!---->
+                <?php if (!empty($failedToLogin)): ?>
+                    <div style="color: white;">
+                        <?php echo $failedToLogin; ?>
+                    </div>
+                <?php endif; ?>
+
                 <input type="email" name="email" placeholder="Email" required><br>
                 <input type="password" name="pass" placeholder="Password" required><br>
 
