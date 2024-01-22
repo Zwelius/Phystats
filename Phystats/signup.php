@@ -38,27 +38,50 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
         }
     }
     ?>
-    <div>
-        <h1>Phyll Up Form</h1>
+
+
+    <main>
         <form method="POST">
-            <input type="text" name="fname" placeholder="First Name" required>
-            <input type="text" name="lname" placeholder="Surname" required>
-            <input type="text" name="email" placeholder="Email" required>
-            <input type="password" name="pass" placeholder="Password" required>
-            <input type="password" name="pass2" placeholder="Confirm Password" required>
-            <input type="text" name="position" placeholder="Teaching Position" required>
-            <section>
-                <label>Handling PE Grade:</label>
-                <select name='grade' required>
-                    <option value="Four">Four</option>
-                    <option value="Five">Five</option>
-                    <option value="Six">Six</option>
-                </select>
-            </section>
-            <input type="text" name="section" placeholder="Section" required>
-            <input type="submit" name="signup" value="SIGN UP">
+            <span>Phyll Up Form</span>
+            <div class="container">
+                <div class="left">
+                    <label>FIRST NAME</label><br>
+                    <input type="text" name="fname" class="label" required><br>
+                    <label>SURNAME</label><br>
+                    <input type="text" name="lname" class="label" required><br>
+                    <label>TEACHING METHOD</label><br>
+                    <input type="text" name="position" class="label" required><br>
+                    <div class="handling-pe-grade-and-section-container">
+                        <div class="handling-pe-grade">
+                            <label>HANDLING PE GRADE</label><br>
+                            <select name='grade' required>
+                                <option value="Four">Four</option>
+                                <option value="Five">Five</option>
+                                <option value="Six">Six</option>
+                            </select>
+                        </div>
+                        <div class="section">
+                            <label>SECTION</label><br>
+                            <input type="text" name="section" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="right">
+                    <label>EMAIL</label><br>
+                    <input type="text" name="email" required><br>
+                    <label>PASSWORD</label><br>
+                    <input type="password" name="pass" required><br>
+                    <label>CONFIRM PASSWORD</label><br>
+                    <input type="password" name="pass2" required>
+                </div>
+            </div>
+            <center>
+                <input type="submit" name="signup" value="Sign Up"><br>
+                <p>Already have an account? <a href="index.php">Log in</a></p>
+            </center>
+
         </form>
-    </div>
+    </main>
 </body>
 
 </html>

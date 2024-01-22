@@ -9,92 +9,109 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 
 @import url("https://fonts.googleapis.com/css?family=Jura");
 
-body{
+body {
     margin: 0 auto;
-    padding-top: 5%;
-    padding-bottom: 5%;
+    font-family: 'Poppins';
 }
-div,form{
+
+main {
+    width: 100%;
+    height: 100vh;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    justify-content: space-evenly;
-    font-family: jura;
 }
-div{
-    background-color: #40CFFF;
-    border: 3px solid rgba(21 162 241 / 0.25);
-    border-radius: 30px;
-    box-shadow: 2px 4px 4px 3px rgba(0 0 0 / 0.25);
-    width: 55%;
-    margin: auto;
-    padding-bottom: 1.5%;
+
+form {
+    background-color: #0679E2;
+    width: 45%;
+    height: 70%;
+    padding: 50px 70px;
+    border-radius: 15px;
+    align-items: center;
 }
-h1{
+
+span {
+    font-family: Jura;
     font-size: 36pt;
+    font-weight: bold;
     color: white;
 }
-input[type=text],[type=password]{
-    margin: 2.5%;
-    padding: 1%;
-    padding-left: 50px;
-    padding-right: 30px;
-    width: 120%;
-    height: 60px;
-    border-radius: 45px;
-    border: none;
-    background-color: #B6FFFF;
-    color: #6A6A6A;
-    font-family: jura;
-    font-size: 18pt;
-    font-weight: bold;
-    box-shadow: inset 0px 4px 4px 0px rgba(0 0 0 / 0.25);
+
+.container {
+    margin-top: 30px;
+    display: flex;
 }
-input[type=submit]{
-    margin: 5%;
-    padding: 1.5%;
+
+.left,
+.right {
     width: 50%;
-    height: 60px;
-    border-radius: 25px;
-    border: none;
-    background-color: #FFDE31;
-    color: #2B2B2B;
-    font-family: jura;
-    font-size: 18pt;
+}
+
+label {
+    color: white;
+    font-size: 12px;
     font-weight: bold;
-    box-shadow: 0px 0px 10px 1px rgba(0 0 0 / 0.25);
+}
+
+input[type=text],
+[type=password] {
+    color: #6A6A6A;
+    width: 250px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+select {
+    color: #6A6A6A;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.handling-pe-grade-and-section-container {
+    display: flex;
+}
+
+.handling-pe-grade,
+.section {
+    width: 40%;
+}
+
+/*****buttons*****/
+input[type=submit] {
+    background-color: #133A84;
+    color: white;
+    width: 180px;
+    margin-top: 40px;
+    padding: 10px;
+    border: none;
+    border-radius: 15px;
+    font-size: 20px;
+    font-weight: bold;
     transition: all 400ms ease-in-out;
 }
-input[type=submit]:hover{
-    background-color: #FFFF33;
+
+input[type=submit]:hover {
+    background-color: #08204c;
+    cursor: pointer;
 }
-p{
-    font-size: 14pt;
-    font-weight: bold;
+
+p {
+    font-size: 14px;
+    color: white;
 }
-a{
-    color: #82590A;
+
+a {
+    color: white;
+    text-decoration: none;
     transition: all 400ms;
 }
-a:hover{
-    color: #A5923B;
-}
-section{
-    margin: 5% auto;
-    padding: 1%;
-    width: 120%;
-}
-label{
-    font-size: 18pt;
-    font-weight: bold;
-}
-select{
-    padding: 3.5%;
-    border-radius: 45px;
-    border: none;
-    background-color: #B6FFFF;
-    color: #6A6A6A;
-    font-family: jura;
-    font-size: 18pt;
-    box-shadow: inset 0px 4px 4px 0px rgba(0 0 0 / 0.25);
+
+a:hover {
+    text-decoration: underline;
 }
