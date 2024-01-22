@@ -85,12 +85,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                     <hr>
                     <main>
                         <div class="personal-details-left">
-                            <table>
-
-                            </table>
                             <label>FIRST NAME</label><br>
                             <input type="text" name="fname" value="<?php echo $fname ?>" required><br>
-                            <label>LAST NAME</label><br>
+                            <label>SURNAME</label><br>
                             <input type="text" name="lname" value="<?php echo $lname ?>" required><br>
                             <label>POSITION</label><br>
                             <input type="text" name="position" value="<?php echo $position ?>" required><br>
@@ -116,9 +113,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                         </div>
 
                         <div class="personal-details-right">
-                            <p>Change Email & Password</p>
+                            <label>CHANGE EMAIL & PASSWORD</label><br>
                             <input type="text" name="email" placeholder="Email" value="<?php echo $email ?>"
-                                required><br><br>
+                                required>
                             <input type="password" name="pass" placeholder="Password" value="<?php echo $pass ?>"
                                 required><br>
                         </div>

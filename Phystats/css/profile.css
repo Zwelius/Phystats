@@ -117,12 +117,18 @@ input{
 }
 
 select{
+    width: 165px;
     padding: 10px;
 }
 
 input[name="fname"],
 input[name="lname"]{
     width: 300px;
+}
+
+input[name="email"],
+input[name="pass"]{
+    width: 180px;
 }
 
 input[name="update"] {
