@@ -35,7 +35,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
     } else {
         $t_id = $_SESSION["t_id"];
         $hasStudents = false;
-        $filter = " ";
         $list = "SELECT * FROM `student` INNER JOIN `testdate` ON testdate.tdID = student.tdID";
         $studlist = mysqli_query($connection, $list);
         $syears = mysqli_query($connection, "SELECT * FROM `schoolyear` ORDER BY `year` DESC");
@@ -46,24 +45,32 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
             if(isset($_POST['syear']) && $_POST['syear'] != ""){
                 $list .= " WHERE testdate.sy_id = '".$_POST['syear']."'";
                 mysqli_query($connection, $list);
+            }else{
+                $list .= " ";
             }
         }
         if (isset($_POST["grade"])) {
             if(isset($_POST['grade']) && $_POST['grade'] != ""){
                 $list .= " AND testdate.t_id = '".$_POST['grade']."'";
                 mysqli_query($connection, $list);
+            }else{
+                $list .= " ";
             }
         }
         if (isset($_POST["quarter"])) {
             if(isset($_POST['quarter']) && $_POST['quarter'] != ""){
                 $list .= " AND testdate.q_id = '".$_POST['quarter']."'";
                 mysqli_query($connection, $list);
+            }else{
+                $list .= " ";
             }
         }
         if (isset($_POST["testtype"])) {
             if(isset($_POST['testtype']) && $_POST['testtype'] != ""){
                 $list .= " AND testdate.testID = '".$_POST['testtype']."'";
                 mysqli_query($connection, $list);
+            }else{
+                $list .= " ";
             }
         }
         if (isset($_POST["sort"])) {
@@ -107,6 +114,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                 <div class="filter">
                     <form method="POST">
                         <select name="syear" onchange="this.form.submit()">
+                        <option value="">School Year(ALL)</option>
                             <?php
                             while ($row1 = mysqli_fetch_array($syears)) {
                             ?>
@@ -118,6 +126,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                             ?>
                         </select>
                         <select name="grade" onchange="this.form.submit()">
+                        <option value="">Grade & Section(ALL)</option>
                             <?php
                             while ($gs = mysqli_fetch_array($grade)) {
                             ?>
@@ -129,6 +138,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                             ?>
                         </select>
                         <select name="quarter" onchange="this.form.submit()">
+                        <option value="">Quarter(ALL)</option>
                             <?php
                             while ($qtr = mysqli_fetch_array($quarter)) {
                             ?>
@@ -140,6 +150,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                             ?>
                         </select>
                         <select name="testtype" onchange="this.form.submit()">
+                        <option value="">Test Type(ALL)</option>
                             <?php
                             while ($tt = mysqli_fetch_array($testtype)) {
                             ?>
