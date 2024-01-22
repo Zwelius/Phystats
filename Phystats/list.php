@@ -61,6 +61,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
             }
             $studlist = mysqli_query($connection, $list);
         }
+        if (isset($_POST["syear"]) || isset($_POST["grade"]) || isset($_POST["quarter"]) || isset($_POST["testtype"])){
+            
+        }
     }
     ?>
 
@@ -80,36 +83,37 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
         <div class="student-list">
             <div class="filter-content">
                 <div class="filter">
-                    <select name="syear">
-                        <option value="">SCHOOL YEAR</option>
-                        <?php
-                        while ($row1 = mysqli_fetch_array($syears)) {
-                            echo "<option value='" . $row1['sy_id'] . "'>" . $row1['year'] . "</option>";
-                        }
-                        ?>
-                    </select>
-                    <select name="grade">
-                        <?php
-                        while ($gs = mysqli_fetch_array($grade)) {
-                            echo "<option value='" . $gs['t_id'] . "'>" . $gs['grade'] . " - " . $gs['section'] . "</option>";
-                        }
-                        ?>
-                    </select>
-                    <select name="quarter">
-                        <?php
-                        while ($qtr = mysqli_fetch_array($quarter)) {
-                            echo "<option value='" . $qtr['q_id'] . "'>" . $qtr['quarter'] . "</option>";
-                        }
-                        ?>
-                    </select>
-                    <select name="testtype">
-                        <?php
-                        while ($tt = mysqli_fetch_array($testtype)) {
-                            echo "<option value='" . $tt['testID'] . "'>" . $tt['testtype'] . "</option>";
-                        }
-                        ?>
-                    </select>
-
+                    <form method="POST">
+                        <select name="syear" onchange="this.form.submit()">
+                            <option value="">SCHOOL YEAR</option>
+                            <?php
+                            while ($row1 = mysqli_fetch_array($syears)) {
+                                echo "<option value='" . $row1['sy_id'] . "'>" . $row1['year'] . "</option>";
+                            }
+                            ?>
+                        </select>
+                        <select name="grade" onchange="this.form.submit()">
+                            <?php
+                            while ($gs = mysqli_fetch_array($grade)) {
+                                echo "<option value='" . $gs['t_id'] . "'>" . $gs['grade'] . " - " . $gs['section'] . "</option>";
+                            }
+                            ?>
+                        </select>
+                        <select name="quarter" onchange="this.form.submit()">
+                            <?php
+                            while ($qtr = mysqli_fetch_array($quarter)) {
+                                echo "<option value='" . $qtr['q_id'] . "'>" . $qtr['quarter'] . "</option>";
+                            }
+                            ?>
+                        </select>
+                        <select name="testtype" onchange="this.form.submit()">
+                            <?php
+                            while ($tt = mysqli_fetch_array($testtype)) {
+                                echo "<option value='" . $tt['testID'] . "'>" . $tt['testtype'] . "</option>";
+                            }
+                            ?>
+                        </select>
+                    </form>
                     <input type="text" name="search" id="search" onkeyup="searchFunction()" placeholder="Search Names...">
 
                     <div>
