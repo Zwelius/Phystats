@@ -72,7 +72,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                         <a href="profile.php">
                             <div class="selected-option">Personal Details</div>
                         </a>
-                    </div>
+                    </div> jndksncj
 
                     <div class="selection-container">
                         <input type="submit" name="logout" value="Logout" formnovalidate
