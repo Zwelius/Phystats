@@ -40,25 +40,23 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Project/PHP/PHPProject.php to edi
         }
     }
     ?>
-</body>
+    <main>
+        <form method="POST">
+            <div class="logo">
+                <img src="assets/wlogo.png">
+                <h1>PhyStats</h1>
+            </div>
 
-<main>
-    <form method="POST">
-        <div class="logo">
-            <img src="assets/wlogo.png">
-            <h1>PhyStats</h1>
-        </div>
+            <center>
+                <input type="email" name="email" placeholder="Email" required><br>
+                <input type="password" name="pass" placeholder="Password" required><br>
 
-        <center>
-            <input type="email" name="email" placeholder="Email" required><br>
-            <input type="password" name="pass" placeholder="Password" required><br>
+                <input type="submit" name="login" value="Log In">
 
-            <input type="submit" name="login" value="Log In">
-
-            <p>Don't have an account? <a href="signup.php">Sign Up</a></p>
-        </center>
-    </form>
-</main>
+                <p>Don't have an account? <a href="signup.php">Sign Up</a></p>
+            </center>
+        </form>
+    </main>
 
 </body>
 
