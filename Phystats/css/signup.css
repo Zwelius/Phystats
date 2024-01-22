@@ -65,7 +65,7 @@ input[type=text],
 
 select {
     color: #6A6A6A;
-    width: 100%;
+    width: 95%;
     padding: 10px;
     border: none;
     border-radius: 5px;
@@ -79,6 +79,14 @@ select {
 .handling-pe-grade,
 .section {
     width: 40%;
+}
+
+.section{
+    margin-left: 10px;
+}
+
+.section input.custom-width {
+    width: 100px;
 }
 
 /*****buttons*****/

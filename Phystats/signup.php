@@ -62,7 +62,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                         </div>
                         <div class="section">
                             <label>SECTION</label><br>
-                            <input type="text" name="section" required>
+                            <input type="text" name="section" class="custom-width" required>
                         </div>
                     </div>
                 </div>
@@ -79,7 +79,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                 <input type="submit" name="signup" value="Sign Up"><br>
                 <p>Already have an account? <a href="index.php">Log in</a></p>
             </center>
-
         </form>
     </main>
 </body>
