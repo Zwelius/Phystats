@@ -42,34 +42,34 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
         $quarter = mysqli_query($connection, "SELECT * FROM `quarter`");
         $testtype = mysqli_query($connection, "SELECT * FROM `test`");
         if (isset($_POST["syear"])) {
-            if(isset($_POST['syear']) && $_POST['syear'] != ""){
-                $list .= " WHERE testdate.sy_id = '".$_POST['syear']."'";
+            if (isset($_POST['syear']) && $_POST['syear'] != "") {
+                $list .= " WHERE testdate.sy_id = '" . $_POST['syear'] . "'";
                 mysqli_query($connection, $list);
-            }else{
+            } else {
                 $list .= " ";
             }
         }
         if (isset($_POST["grade"])) {
-            if(isset($_POST['grade']) && $_POST['grade'] != ""){
-                $list .= " AND testdate.t_id = '".$_POST['grade']."'";
+            if (isset($_POST['grade']) && $_POST['grade'] != "") {
+                $list .= " AND testdate.t_id = '" . $_POST['grade'] . "'";
                 mysqli_query($connection, $list);
-            }else{
+            } else {
                 $list .= " ";
             }
         }
         if (isset($_POST["quarter"])) {
-            if(isset($_POST['quarter']) && $_POST['quarter'] != ""){
-                $list .= " AND testdate.q_id = '".$_POST['quarter']."'";
+            if (isset($_POST['quarter']) && $_POST['quarter'] != "") {
+                $list .= " AND testdate.q_id = '" . $_POST['quarter'] . "'";
                 mysqli_query($connection, $list);
-            }else{
+            } else {
                 $list .= " ";
             }
         }
         if (isset($_POST["testtype"])) {
-            if(isset($_POST['testtype']) && $_POST['testtype'] != ""){
-                $list .= " AND testdate.testID = '".$_POST['testtype']."'";
+            if (isset($_POST['testtype']) && $_POST['testtype'] != "") {
+                $list .= " AND testdate.testID = '" . $_POST['testtype'] . "'";
                 mysqli_query($connection, $list);
-            }else{
+            } else {
                 $list .= " ";
             }
         }
@@ -114,77 +114,81 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                 <div class="filter">
                     <form method="POST">
                         <select name="syear" onchange="this.form.submit()">
-                        <option value="">School Year(ALL)</option>
+                            <option value="">School Year (All)</option>
                             <?php
                             while ($row1 = mysqli_fetch_array($syears)) {
-                            ?>
+                                ?>
                                 <option value='<?php echo $row1['sy_id'] ?>' <?php if (isset($_POST['syear']) && $_POST['syear'] === $row1['sy_id']) {
-                                                                                    echo 'selected';
-                                                                                } ?>><?php echo $row1['year']; ?></option>
-                            <?php
+                                       echo 'selected';
+                                   } ?>><?php echo $row1['year']; ?>
+                                </option>
+                                <?php
                             }
                             ?>
                         </select>
                         <select name="grade" onchange="this.form.submit()">
-                        <option value="">Grade & Section(ALL)</option>
+                            <option value="">Grade & Section (All)</option>
                             <?php
                             while ($gs = mysqli_fetch_array($grade)) {
-                            ?>
+                                ?>
                                 <option value='<?php echo $gs['t_id']; ?>' <?php if (isset($_POST['grade']) && $_POST['grade'] === $gs['t_id']) {
-                                                                                echo 'selected';
-                                                                            } ?>><?php echo $gs['grade'] . " - " . $gs['section']; ?></option>
-                            <?php
+                                       echo 'selected';
+                                   } ?>><?php echo $gs['grade'] . " - " . $gs['section']; ?>
+                                </option>
+                                <?php
                             }
                             ?>
                         </select>
                         <select name="quarter" onchange="this.form.submit()">
-                        <option value="">Quarter(ALL)</option>
+                            <option value="">Quarter (All)</option>
                             <?php
                             while ($qtr = mysqli_fetch_array($quarter)) {
-                            ?>
+                                ?>
                                 <option value='<?php echo $qtr['q_id']; ?>' <?php if (isset($_POST['quarter']) && $_POST['quarter'] === $qtr['q_id']) {
-                                                                                echo 'selected';
-                                                                            } ?>><?php echo $qtr['quarter']; ?></option>
-                            <?php
+                                       echo 'selected';
+                                   } ?>><?php echo $qtr['quarter']; ?>
+                                </option>
+                                <?php
                             }
                             ?>
                         </select>
                         <select name="testtype" onchange="this.form.submit()">
-                        <option value="">Test Type(ALL)</option>
+                            <option value="">Test Type (All)</option>
                             <?php
                             while ($tt = mysqli_fetch_array($testtype)) {
-                            ?>
+                                ?>
                                 <option value='<?php echo $tt['testID']; ?>' <?php if (isset($_POST['testtype']) && $_POST['testtype'] === $tt['testID']) {
-                                                                                echo 'selected';
-                                                                            } ?>><?php echo $tt['testtype']; ?></option>
-                            <?php
+                                       echo 'selected';
+                                   } ?>><?php echo $tt['testtype']; ?>
+                                </option>
+                                <?php
                             }
                             ?>
                         </select>
-                            <span>SORT BY</span>
-                            <select name="sort" onchange="this.form.submit()">
-                                <option>None</option>
-                                <option value="name" <?php if (isset($_POST['sort']) && $_POST['sort'] === "name") {
-                                                            echo 'selected';
-                                                        } ?>>Name</option>
-                                <option value="height" <?php if (isset($_POST['sort']) && $_POST['sort'] === "height") {
-                                                            echo 'selected';
-                                                        } ?>>Height</option>
-                                <option value="weight" <?php if (isset($_POST['sort']) && $_POST['sort'] === "weight") {
-                                                            echo 'selected';
-                                                        } ?>>Weight</option>
-                                <option value="age" <?php if (isset($_POST['sort']) && $_POST['sort'] === "age") {
-                                                        echo 'selected';
-                                                    } ?>>Age</option>
-                            </select>
-                        </form>
-                    <input type="text" name="search" id="search" onkeyup="searchFunction()" placeholder="Search Names...">
+                        <span>SORT BY</span>
+                        <select name="sort" onchange="this.form.submit()">
+                            <option>None</option>
+                            <option value="name" <?php if (isset($_POST['sort']) && $_POST['sort'] === "name") {
+                                echo 'selected';
+                            } ?>>Name</option>
+                            <option value="height" <?php if (isset($_POST['sort']) && $_POST['sort'] === "height") {
+                                echo 'selected';
+                            } ?>>Height</option>
+                            <option value="weight" <?php if (isset($_POST['sort']) && $_POST['sort'] === "weight") {
+                                echo 'selected';
+                            } ?>>Weight</option>
+                            <option value="age" <?php if (isset($_POST['sort']) && $_POST['sort'] === "age") {
+                                echo 'selected';
+                            } ?>>Age</option>
+                        </select>
+                    </form>
+                    <input type="text" name="search" id="search" onkeyup="searchFunction()"
+                        placeholder="Search Names...">
                     <a href="add.php"><button class="add-student">Add Student</button></a>
                 </div>
             </div>
 
             <div>
-
                 <table id="table" class="rounded-corners">
                     <tr>
                         <th>NAME</th>
@@ -223,7 +227,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                     ?>
                 </table>
             </div>
-
         </div>
     </section>
 </body>
