@@ -30,10 +30,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
 <body>
     <?php
     include 'config.php';
-    if (empty($_SESSION["t_id"])) {
+    if (empty($_SESSION["id"])) {
         header("Location: index.php");
     } else {
-        $t_id = $_SESSION["t_id"];
+        $t_id = $_SESSION["id"];
         $hasStudents = false;
         $list = "SELECT * FROM `student` INNER JOIN `testdate` ON testdate.tdID = student.tdID";
         $studlist = mysqli_query($connection, $list);

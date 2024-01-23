@@ -24,20 +24,37 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Project/PHP/PHPProject.php to edi
 <body>
     <?php
     include 'config.php';
-    
+
     $failedToLogin = '';
 
-    if (!empty($_SESSION["t_id"])) {
+    if (!empty($_SESSION["id"])) {
         header("Location: list.php");
     } else {
         if (isset($_POST['login'])) {
-            $sqlogin = mysqli_query($connection, "SELECT * FROM `login`");
-            while ($row = mysqli_fetch_assoc($sqlogin)) {
-                if ($_POST['email'] === $row['email'] && $_POST['pass'] === $row['pass']) {
-                    $_SESSION["t_id"] = $row["t_id"];
-                    echo '<script>alert("Logged in successfully");</script>';
-                    echo '<script>window.location.replace("list.php");</script>';
-                    exit();
+            $sqlogin = mysqli_query($connection, "SELECT * FROM `principal` WHERE `email` = '" . $_POST['email'] . "' AND `pass` = '" . $_POST['pass'] . "'");
+            $count = mysqli_num_rows($sqlogin);
+            while ($row = mysqli_fetch_assoc($result)) {
+                if ($count == 1) {
+                    if ($_POST['email'] === $row['email'] && $_POST['pass'] === $row['pass']) {
+                        $_SESSION["id"] = $row["p_id"];
+                        echo '<script>alert("Logged in successfully");</script>';
+                        echo '<script>window.location.replace("list.php");</script>';
+                        exit();
+                    } else {
+                        $failedToLogin = "User not found. Please check your credentials.";
+                    }
+                } else if ($count == 0) {
+                    $sqlogin = mysqli_query($connection, "SELECT * FROM `login`");
+                    while ($row = mysqli_fetch_assoc($sqlogin)) {
+                        if ($_POST['email'] === $row['email'] && $_POST['pass'] === $row['pass']) {
+                            $_SESSION["id"] = $row["t_id"];
+                            echo '<script>alert("Logged in successfully");</script>';
+                            echo '<script>window.location.replace("list.php");</script>';
+                            exit();
+                        } else {
+                            $failedToLogin = "User not found. Please check your credentials.";
+                        }
+                    }
                 } else {
                     $failedToLogin = "User not found. Please check your credentials.";
                 }
@@ -54,7 +71,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Project/PHP/PHPProject.php to edi
 
             <center>
                 <!---->
-                <?php if (!empty($failedToLogin)): ?>
+                <?php if (!empty($failedToLogin)) : ?>
                     <div style="color: white;">
                         <?php echo $failedToLogin; ?>
                     </div>
