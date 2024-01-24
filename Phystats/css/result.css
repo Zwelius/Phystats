@@ -35,10 +35,10 @@ body {
 
 .filter select,
 input {
-    margin-right: 8px;
+    margin-right: 5px;
     color: grey;
     height: 50px;
-    padding: 0 20px;
+    padding: 0 10px;
     border-radius: 5px;
     border: none;
     font-weight: bold;

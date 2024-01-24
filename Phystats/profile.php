@@ -89,23 +89,26 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                             <input type="text" name="fname" value="<?php echo $fname ?>" required><br>
                             <label>SURNAME</label><br>
                             <input type="text" name="lname" value="<?php echo $lname ?>" required><br>
-                            <label>POSITION</label><br>
-                            <input type="text" name="position" value="<?php echo $position ?>" required><br>
-                            <label>HANDLING PE GRADE</label><br>
-                            <select name='grade' required>
-                                <option value="Four" <?php if (isset($grade) && $grade === "Four") {
-                                    echo 'selected';
-                                } ?>>Four</option>
-                                <option value="Five" <?php if (isset($grade) && $grade === "Five") {
-                                    echo 'selected';
-                                } ?>>Five</option>
-                                <option value="Six" <?php if (isset($grade) && $grade === "Six") {
-                                    echo 'selected';
-                                } ?>>Six</option>
-                            </select>
-
-                            <br>
-
+                            <div class="position-and-handling-pe-grade">
+                                <div class="position">
+                                    <label>POSITION</label><br>
+                                    <input type="text" name="position" value="<?php echo $position ?>" required><br>
+                                </div>
+                                <div>
+                                    <label>HANDLING PE GRADE</label><br>
+                                    <select name='grade' required>
+                                        <option value="Four" <?php if (isset($grade) && $grade === "Four") {
+                                            echo 'selected';
+                                        } ?>>Four</option>
+                                        <option value="Five" <?php if (isset($grade) && $grade === "Five") {
+                                            echo 'selected';
+                                        } ?>>Five</option>
+                                        <option value="Six" <?php if (isset($grade) && $grade === "Six") {
+                                            echo 'selected';
+                                        } ?>>Six</option>
+                                    </select>
+                                </div>
+                            </div>
                             <label>SECTION</label><br>
                             <input type="text" name="section" value="<?php echo $section ?>" required><br><br>
                             <input type="submit" name="update" value="Save Changes"
@@ -114,8 +117,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
 
                         <div class="personal-details-right">
                             <label>CHANGE EMAIL & PASSWORD</label><br>
-                            <input type="text" name="email" placeholder="Email" value="<?php echo $email ?>"
-                                required>
+                            <input type="text" name="email" placeholder="Email" value="<?php echo $email ?>" required>
                             <input type="password" name="pass" placeholder="Password" value="<?php echo $pass ?>"
                                 required><br>
                         </div>

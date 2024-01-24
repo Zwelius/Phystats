@@ -35,7 +35,7 @@ section {
 /*****left container*****/
 .left {
     width: 220px;
-    height: 455px;
+    height: 65vh;
     padding: 30px;
 }
 
@@ -79,8 +79,8 @@ input[name="logout"]:hover {
 
 /*****right container*****/
 .right {
-    width: 840px;
-    height: 455px;
+    width: 715px;
+    height: 65vh;
     padding: 30px;
 }
 
@@ -117,8 +117,8 @@ input{
 }
 
 select{
-    width: 165px;
     padding: 10px;
+    width: 145px;
 }
 
 input[name="fname"],
@@ -128,7 +128,7 @@ input[name="lname"]{
 
 input[name="email"],
 input[name="pass"]{
-    width: 180px;
+    width: 130px;
 }
 
 input[name="update"] {
@@ -145,4 +145,12 @@ input[name="update"] {
 
 input[name="update"]:hover {
     background-color: #133A84;
+}
+
+.position-and-handling-pe-grade{
+    display: flex;
+}
+
+.position{
+    margin-right: 10px;
 }
