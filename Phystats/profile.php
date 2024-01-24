@@ -18,10 +18,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
 <body>
     <?php
     include 'config.php';
-    if (empty($_SESSION["id"])) {
+    if (empty($_SESSION["t_id"])) {
         header("Location: index.php");
     } else {
-        $t_id = $_SESSION["id"];
+        $t_id = $_SESSION["t_id"];
 
         $viewsql = mysqli_query($connection, "SELECT * FROM `login` WHERE `t_id`='$t_id'");
         while ($rowlogin = mysqli_fetch_assoc($viewsql)) {
@@ -43,7 +43,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
             $updategradesql = mysqli_query($connection, "UPDATE `gradesection` SET `grade`='" . $_POST['grade'] . "',`section`='" . $_POST['section'] . "' WHERE `t_id`='" . $_SESSION["id"] . "'");
             echo '<script>alert("Updated successfully");window.location.replace("profile.php");</script>';
         } else if (isset($_POST['logout'])) {
-            unset($_SESSION["id"]);
+            unset($_SESSION["t_id"]);
             echo '<script>window.location.replace("index.php");</script>';
             exit();
         }

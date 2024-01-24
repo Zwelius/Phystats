@@ -31,7 +31,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
             $t_id = mysqli_insert_id($connection);
             $gradesql = mysqli_query($connection, "INSERT INTO `gradesection`(`t_id`, `grade`, `section`) VALUES ('$t_id','" . $_POST['grade'] . "','" . $_POST['section'] . "')");
             $loginsql = mysqli_query($connection, "INSERT INTO `login`(`email`, `pass`, `t_id`) VALUES ('" . $_POST['email'] . "','" . $_POST['pass'] . "',$t_id)");
-            $_SESSION["id"] = $t_id;
+            $_SESSION["t_id"] = $t_id;
             echo '<script>alert("Signed up successfully");</script>';
             echo '<script>window.location.replace("profile.php");</script>';
             exit();

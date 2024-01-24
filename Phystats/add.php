@@ -18,10 +18,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
 <body>
     <?php
     include 'config.php';
-    if (empty($_SESSION["id"])) {
+    if (empty($_SESSION["t_id"])) {
         header("Location: index.php");
     } else {
-        $t_id = $_SESSION["id"];
+        $t_id = $_SESSION["t_id"];
         $syears = mysqli_query($connection, "SELECT * FROM `schoolyear` ORDER BY `year` DESC");
         $quarter = mysqli_query($connection, "SELECT * FROM `quarter`");
         $testtype = mysqli_query($connection, "SELECT * FROM `test`");

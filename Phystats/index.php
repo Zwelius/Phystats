@@ -27,7 +27,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Project/PHP/PHPProject.php to edi
 
     $failedToLogin = '';
 
-    if (!empty($_SESSION["id"])) {
+    if (!empty($_SESSION["t_id"])) {
         header("Location: list.php");
     } else {
         if (isset($_POST['login'])) {
@@ -36,7 +36,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Project/PHP/PHPProject.php to edi
             $row = mysqli_fetch_assoc($sqlogin);
             if ($count == 1) {
                 if ($_POST['email'] === $row['email'] && $_POST['pass'] === $row['pass']) {
-                    $_SESSION["id"] = $row["p_id"];
+                    $_SESSION["p_id"] = $row["p_id"];
                     echo '<script>alert("Logged in successfully");</script>';
                     echo '<script>window.location.replace("dashboard.php");</script>';
                     exit();
@@ -47,7 +47,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Project/PHP/PHPProject.php to edi
                 $sqlogin = mysqli_query($connection, "SELECT * FROM `login`");
                 while ($row = mysqli_fetch_assoc($sqlogin)) {
                     if ($_POST['email'] === $row['email'] && $_POST['pass'] === $row['pass']) {
-                        $_SESSION["id"] = $row["t_id"];
+                        $_SESSION["t_id"] = $row["t_id"];
                         echo '<script>alert("Logged in successfully");</script>';
                         echo '<script>window.location.replace("list.php");</script>';
                         exit();
