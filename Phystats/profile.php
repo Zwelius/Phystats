@@ -28,7 +28,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
             $email = $rowlogin['email'];
             $pass = $rowlogin['pass'];
         }
-        $viewsql2 = mysqli_query($connection, "SELECT * FROM `teacher` INNER JOIN `gradesection` ON gradesection.t_id = teacher.t_id WHERE teacher.t_id='" . $_SESSION["id"] . "'");
+        $viewsql2 = mysqli_query($connection, "SELECT * FROM `teacher` INNER JOIN `gradesection` ON gradesection.t_id = teacher.t_id WHERE teacher.t_id='" . $_SESSION["t_id"] . "'");
         while ($rowteach = mysqli_fetch_assoc($viewsql2)) {
             $fname = $rowteach['t_fname'];
             $lname = $rowteach['t_lname'];
@@ -38,9 +38,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
         }
 
         if (isset($_POST['update'])) {
-            $updatelogsql = mysqli_query($connection, "UPDATE `login` SET `email`='" . $_POST['email'] . "', `pass`='" . $_POST['pass'] . "' WHERE `t_id`='" . $_SESSION["id"] . "'");
-            $updateprofsql = mysqli_query($connection, "UPDATE `teacher` SET `t_fname`='" . $_POST['fname'] . "',`t_lname`='" . $_POST['lname'] . "',`position`='" . $_POST['position'] . "' WHERE `t_id`='" . $_SESSION["id"] . "'");
-            $updategradesql = mysqli_query($connection, "UPDATE `gradesection` SET `grade`='" . $_POST['grade'] . "',`section`='" . $_POST['section'] . "' WHERE `t_id`='" . $_SESSION["id"] . "'");
+            $updatelogsql = mysqli_query($connection, "UPDATE `login` SET `email`='" . $_POST['email'] . "', `pass`='" . $_POST['pass'] . "' WHERE `t_id`='" . $_SESSION["t_id"] . "'");
+            $updateprofsql = mysqli_query($connection, "UPDATE `teacher` SET `t_fname`='" . $_POST['fname'] . "',`t_lname`='" . $_POST['lname'] . "',`position`='" . $_POST['position'] . "' WHERE `t_id`='" . $_SESSION["t_id"] . "'");
+            $updategradesql = mysqli_query($connection, "UPDATE `gradesection` SET `grade`='" . $_POST['grade'] . "',`section`='" . $_POST['section'] . "' WHERE `t_id`='" . $_SESSION["t_id"] . "'");
             echo '<script>alert("Updated successfully");window.location.replace("profile.php");</script>';
         } else if (isset($_POST['logout'])) {
             unset($_SESSION["t_id"]);
