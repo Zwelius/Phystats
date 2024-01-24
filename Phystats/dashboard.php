@@ -31,7 +31,7 @@ session_start();
     } else {
         $p_id = $_SESSION["p_id"];
         $syears = mysqli_query($connection, "SELECT * FROM `schoolyear` ORDER BY `year` DESC");
-        $list = "SELECT COUNT(*) FROM `student` INNER JOIN `testdate` ON testdate.tdID = student.tdID INNER JOIN `testresult` ON testresult.s_id = student.s_id INNER JOIN resultinterpretation ON resultinterpretation.tr_ID = testresult.tr_ID INNER JOIN `teacher` ON testdate.t_id = teacher.t_id INNER JOIN `principal` ON teacher.p_id = principal.p_id";
+        $list = "SELECT COUNT(*) as `count` FROM `student` INNER JOIN `testdate` ON testdate.tdID = student.tdID INNER JOIN `testresult` ON testresult.s_id = student.s_id INNER JOIN `resultinterpretation` ON resultinterpretation.tr_ID = testresult.tr_ID INNER JOIN `teacher` ON testdate.t_id = teacher.t_id INNER JOIN `principal` ON teacher.p_id = principal.p_id";
         $overallstudents = mysqli_query($connection, $list);
         
         if (isset($_POST["syear"])) {
@@ -73,7 +73,7 @@ session_start();
         <div>
             <h1>Overall Students</h1>
             <div>
-                <?php $stfs = mysqli_fetch_row($overallstudents); echo $stfs[0];?>
+                <?php $row = mysqli_fetch_assoc($overallstudents); echo $row['count'];?>
             </div>
         </div>
     </div>
