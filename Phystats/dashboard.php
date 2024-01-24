@@ -30,9 +30,9 @@ session_start();
         header("Location: index.php");
     } else {
         $p_id = $_SESSION["p_id"];
+        $syears = mysqli_query($connection, "SELECT * FROM `schoolyear` ORDER BY `year` DESC");
         $list = "SELECT COUNT(*) FROM `student` INNER JOIN `testdate` ON testdate.tdID = student.tdID INNER JOIN `testresult` ON testresult.s_id = student.s_id INNER JOIN resultinterpretation ON resultinterpretation.tr_ID = testresult.tr_ID INNER JOIN `teacher` ON testdate.t_id = teacher.t_id INNER JOIN `principal` ON teacher.p_id = principal.p_id";
         $overallstudents = mysqli_query($connection, $list);
-        $syears = mysqli_query($connection, "SELECT * FROM `schoolyear` ORDER BY `year` DESC");
         
         if (isset($_POST["syear"])) {
             if (isset($_POST['syear']) && $_POST['syear'] != "") {
@@ -58,6 +58,7 @@ session_start();
     </nav>
 
     <div class="content">
+        <form method="POST">
         <select name="syear" onchange="this.form.submit()">
             <option value="">School Year (All)</option>
             <?php
@@ -68,6 +69,7 @@ session_start();
             }
             ?>
         </select>
+        </form>
         <div>
             <h1>Overall Students</h1>
             <div>
