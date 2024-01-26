@@ -30,14 +30,18 @@ session_start();
         header("Location: index.php");
     } else {
         $p_id = $_SESSION["p_id"];
-        $syears = mysqli_query($connection, "SELECT * FROM `schoolyear` ORDER BY `year` DESC");
         $list = "SELECT COUNT(*) as `count` FROM `student` INNER JOIN `testdate` ON testdate.tdID = student.tdID INNER JOIN `testresult` ON testresult.s_id = student.s_id INNER JOIN `resultinterpretation` ON resultinterpretation.tr_ID = testresult.tr_ID INNER JOIN `teacher` ON testdate.t_id = teacher.t_id INNER JOIN `principal` ON teacher.p_id = principal.p_id";
         $overallstudents = mysqli_query($connection, $list);
+        $fit = $list . " WHERE resultinterpretation.fitnessResult = 'Physically Fit'";
+        $physfit = mysqli_query($connection, $fit);
+        $syears = mysqli_query($connection, "SELECT * FROM `schoolyear` ORDER BY `year` DESC");
         
-        if (isset($_POST["syear"])) {
+        if (isset($_POST['syear'])) {
             if (isset($_POST['syear']) && $_POST['syear'] != "") {
                 $list .= " WHERE testdate.sy_id = '" . $_POST['syear'] . "'";
-                mysqli_query($connection, $list);
+                $fit  .= " AND testdate.sy_id = '" . $_POST['syear'] . "'";
+                $overallstudents = mysqli_query($connection, $list);
+                $physfit = mysqli_query($connection, $fit);
             } else {
                 $list .= " ";
             }
@@ -62,7 +66,7 @@ session_start();
         <select name="syear" onchange="this.form.submit()">
             <option value="">School Year (All)</option>
             <?php
-            while ($row1 = mysqli_fetch_array($syears)) {
+            while ($row1 = mysqli_fetch_assoc($syears)) {
             ?>
                 <option value='<?php echo $row1['sy_id'] ?>' <?php if (isset($_POST['syear']) && $_POST['syear'] === $row1['sy_id']) {echo 'selected';} ?>><?php echo $row1['year']; ?></option>
             <?php
@@ -73,9 +77,25 @@ session_start();
         <div>
             <h1>Overall Students</h1>
             <div>
-                <?php $row = mysqli_fetch_assoc($overallstudents); echo $row['count'];?>
+                <?php while ($row = mysqli_fetch_assoc($overallstudents)){ echo $row["count"];}?>
+            </div>
+            <h1>Overall Physically Fit Students</h1>
+            <div>
+                <?php while ($row = mysqli_fetch_assoc($physfit)){ echo $row["count"];}?>
             </div>
         </div>
+        <div>
+            <h1>Grade 6</h1>
+            <h2>Overall Students</h1>
+            <div>
+                <?php while ($row2 = mysqli_fetch_assoc($overallstudents)){ echo $row2["count"];}?>
+            </div>
+            <h2>Overall Physically Fit Students</h1>
+            <div>
+                <?php while ($row2 = mysqli_fetch_assoc($physfit)){ echo $row2["count"];}?>
+            </div>
+        </div>
+
     </div>
 </body>
 

@@ -70,8 +70,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Project/PHP/PHPProject.php to edi
 
             <center>
                 <!---->
-                <?php if (!empty($failedToLogin)) : ?>
-                    <div style="color: white;">
+                <?php if (!empty($failedToLogin)): ?>
+                    <div style="background-color: #facec1; color: red; border-radius: 5px; font-weight: bold">
                         <?php echo $failedToLogin; ?>
                     </div>
                 <?php endif; ?>
