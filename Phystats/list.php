@@ -127,7 +127,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                             ?>
                         </select>
                         <select name="grade" onchange="this.form.submit()">
-                            <option value="">Grade & Section (All)</option>
                             <?php
                             while ($gs = mysqli_fetch_array($grade)) {
                                 ?>
