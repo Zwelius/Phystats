@@ -63,7 +63,7 @@ session_start();
 
     <div class="content">
         <form method="POST">
-        <select name="syear" onchange="this.form.submit()">
+        <select name="syear" onchange="this.form.submit()"> 
             <option value="">School Year (All)</option>
             <?php
             while ($row1 = mysqli_fetch_assoc($syears)) {
