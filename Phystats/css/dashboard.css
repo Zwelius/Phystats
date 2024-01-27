@@ -14,3 +14,36 @@ body {
     background-color: #C2D7EA;
     font-family: 'Poppins';
 }
+
+.content {
+    padding: 2.5vw;
+    margin: 5% auto;
+    width: 80vw;
+    height: auto;
+    background-color: antiquewhite;
+    border: 2px solid black;
+}
+
+.container {
+    padding: 1.5vw;
+    margin: 2.5vw;
+    border: 2px solid black;
+}
+
+.sections {
+    display: flex;
+    justify-content: space-evenly;
+    text-align: center;
+}
+
+.counts {
+    margin: 2.5vw;
+    padding: 0.5vw;
+    width: 20vw;
+    border: 2px solid black;
+}
+select {
+    font-family: Poppins;
+    width: 175px;
+    padding: 10px;
+}

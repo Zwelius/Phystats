@@ -98,7 +98,8 @@ table {
 }
 
 label[for="health-related-test"],
-label[for="skill-related-test"] {
+label[for="skill-related-test"],
+label[for="physical-fitness-result"] {
     background: white;
     width: 250px;
     padding: 15px;

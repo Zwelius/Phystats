@@ -27,6 +27,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
         $list = "SELECT * FROM `student_tb` INNER JOIN `studenttestdata_tb` ON studenttestdata_tb.student_ID = student_tb.student_ID INNER JOIN `testinfo_tb` ON testinfo_tb.testinfo_ID = studenttestdata_tb.testinfo_ID INNER JOIN `studenttestresult_tb` ON studenttestresult_tb.testdata_ID = studenttestdata_tb.testdata_ID WHERE testinfo_tb.teacher_ID = '$teacher_ID'";
         $studlist1 = mysqli_query($connection, $list);
         $studlist2 = mysqli_query($connection, $list);
+        $studlist3 = mysqli_query($connection, $list);
         $syears = mysqli_query($connection, "SELECT * FROM `schoolyear_tb` ORDER BY `schoolYEAR` DESC");
         $grade = mysqli_query($connection, "SELECT * FROM `gradesection_tb` WHERE `teacher_ID` = $teacher_ID");
         $quarter = mysqli_query($connection, "SELECT * FROM `quarter_tb`");
@@ -156,7 +157,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                             <th>CARDIOVASCULAR ENDURANCE</th>
                             <th>STRENGTH</th>
                             <th>FLEXIBILITY</th>
-                            <th>FITNESS RESULT</th>
                         </tr>
 
                         <?php
@@ -177,9 +177,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                             </td>
                             <td>
                                 <?php echo $row['flexibility']; ?>
-                            </td>
-                            <td>
-                                <?php echo $row['fitnessResult']; ?>
                             </td>
                         </tr>
                         <?php
@@ -208,7 +205,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                             <th>POWER</th>
                             <th>BALANCE</th>
                             <th>REACTION TIME</th>
-                            <th>FITNESS RESULT</th>
                         </tr>
 
                         <?php
@@ -235,6 +231,34 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                             </td>
                             <td>
                                 <?php echo $row2['reactionTime']; ?>
+                            </td>
+                        </tr>
+                        <?php
+                        $hasStudents = true;
+                        }
+                        if (!$hasStudents) {
+                            echo "<tr>";
+                            echo "<td class='none' colspan=10>No Students Found</td>";
+                            echo "<tr>";
+                        }
+                        ?>
+                    </table>
+                </div>
+                <input type="radio" id="physical-fitness-result" name="tab-container">
+                <label for="physical-fitness-result">Physical Fitness Result</label>
+                <!-----overall test results----->
+                <div class="tab">
+                    <table class="physical-fitness-result" id="bleta">
+                        <tr>
+                            <th>NAME</th>
+                            <th>FITNESS RESULT</th>
+                        </tr>
+                        <?php
+                        while ($row2 = mysqli_fetch_assoc($studlist3)) {
+                            ?>
+                        <tr>
+                            <td>
+                                <?php echo $row2['studentNAME']; ?>
                             </td>
                             <td>
                                 <?php echo $row2['fitnessResult']; ?>

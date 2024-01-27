@@ -26,22 +26,26 @@ session_start();
 <body>
     <?php
     include 'config.php';
-    if (empty($_SESSION["p_id"])) {
+    if (empty($_SESSION["principal_ID"])) {
         header("Location: index.php");
     } else {
-        $p_id = $_SESSION["p_id"];
-        $list = "SELECT COUNT(*) as `count` FROM `student` INNER JOIN `testdate` ON testdate.tdID = student.tdID INNER JOIN `testresult` ON testresult.s_id = student.s_id INNER JOIN `resultinterpretation` ON resultinterpretation.tr_ID = testresult.tr_ID INNER JOIN `teacher` ON testdate.t_id = teacher.t_id INNER JOIN `principal` ON teacher.p_id = principal.p_id";
+        $p_id = $_SESSION["principal_ID"];
+        $list = "SELECT COUNT(*) as `count` FROM `student_tb` INNER JOIN `studenttestdata_tb` ON studenttestdata_tb.student_ID = student_tb.student_ID INNER JOIN `testinfo_tb` ON testinfo_tb.testinfo_ID = studenttestdata_tb.testinfo_ID INNER JOIN `studenttestresult_tb` ON studenttestresult_tb.testdata_ID = studenttestdata_tb.testdata_ID INNER JOIN `teacher_tb` ON teacher_tb.teacher_ID = testinfo_tb.teacher_ID INNER JOIN `principal_tb` ON principal_tb.principal_ID = teacher_tb.principal_ID";
         $overallstudents = mysqli_query($connection, $list);
-        $fit = $list . " WHERE resultinterpretation.fitnessResult = 'Physically Fit'";
+        $fit = $list . " WHERE studenttestresult_tb.fitnessResult = 'Physically Fit'";
         $physfit = mysqli_query($connection, $fit);
-        $syears = mysqli_query($connection, "SELECT * FROM `schoolyear` ORDER BY `year` DESC");
-        
+        $notfit = $list . " WHERE studenttestresult_tb.fitnessResult = 'Not Physically Fit'";
+        $notphysfit = mysqli_query($connection, $notfit);
+        $syears = mysqli_query($connection, "SELECT * FROM `schoolyear_tb` ORDER BY `schoolYEAR` DESC");
+
         if (isset($_POST['syear'])) {
             if (isset($_POST['syear']) && $_POST['syear'] != "") {
-                $list .= " WHERE testdate.sy_id = '" . $_POST['syear'] . "'";
-                $fit  .= " AND testdate.sy_id = '" . $_POST['syear'] . "'";
+                $list .= " WHERE testinfo_tb.schoolyear_ID = '" . $_POST['syear'] . "'";
+                $fit  .= " AND testinfo_tb.schoolyear_ID = '" . $_POST['syear'] . "'";
+                $notfit  .= " AND testinfo_tb.schoolyear_ID = '" . $_POST['syear'] . "'";
                 $overallstudents = mysqli_query($connection, $list);
                 $physfit = mysqli_query($connection, $fit);
+                $notphysfit = mysqli_query($connection, $notfit);
             } else {
                 $list .= " ";
             }
@@ -55,7 +59,6 @@ session_start();
         </div>
         <div>
             <a href="dashboard.php" class="here nav-options">DASHBOARD</a>
-            <a href="#" class="nav-options">STUDENT PERFORMANCE</a>
             <a href="#" class="nav-options">MANAGE</a>
             <a href="#" class="nav-options"><img class="profile" src="assets/wprof.png"></a>
         </div>
@@ -63,39 +66,42 @@ session_start();
 
     <div class="content">
         <form method="POST">
-        <select name="syear" onchange="this.form.submit()"> 
-            <option value="">School Year (All)</option>
-            <?php
-            while ($row1 = mysqli_fetch_assoc($syears)) {
-            ?>
-                <option value='<?php echo $row1['sy_id'] ?>' <?php if (isset($_POST['syear']) && $_POST['syear'] === $row1['sy_id']) {echo 'selected';} ?>><?php echo $row1['year']; ?></option>
-            <?php
-            }
-            ?>
-        </select>
+            <select name="syear" onchange="this.form.submit()" style="float:right;">
+                <option value="">School Year (All)</option>
+                <?php
+                while ($row1 = mysqli_fetch_assoc($syears)) {
+                ?>
+                    <option value='<?php echo $row1['schoolyear_ID'] ?>' <?php if (isset($_POST['syear']) && $_POST['syear'] === $row1['schoolyear_ID']) {
+                                                                                echo 'selected';
+                                                                            } ?>><?php echo $row1['schoolYEAR']; ?></option>
+                <?php
+                }
+                ?>
+            </select>
         </form>
-        <div>
-            <h1>Overall Students</h1>
-            <div>
-                <?php while ($row = mysqli_fetch_assoc($overallstudents)){ echo $row["count"];}?>
-            </div>
-            <h1>Overall Physically Fit Students</h1>
-            <div>
-                <?php while ($row = mysqli_fetch_assoc($physfit)){ echo $row["count"];}?>
+        <div class="container">
+            <h1>OVERALL</h1>
+            <div class="sections">
+                <div class="counts">
+                    <h2>No. of Students</h2>
+                    <h1><?php while ($row = mysqli_fetch_assoc($overallstudents)) {
+                            echo $row["count"];
+                        } ?></h1>
+                </div>
+                <div class="counts">
+                    <h2>No. of Physically Fit Students</h2>
+                    <h1><?php while ($row = mysqli_fetch_assoc($physfit)) {
+                            echo $row["count"];
+                        } ?></h1>
+                </div>
+                <div class="counts">
+                    <h2>No. of Not Physically Fit Students</h2>
+                    <h1><?php while ($row = mysqli_fetch_assoc($notphysfit)) {
+                            echo $row["count"];
+                        } ?></h1>
+                </div>
             </div>
         </div>
-        <div>
-            <h1>Grade 6</h1>
-            <h2>Overall Students</h1>
-            <div>
-                <?php while ($row2 = mysqli_fetch_assoc($overallstudents)){ echo $row2["count"];}?>
-            </div>
-            <h2>Overall Physically Fit Students</h1>
-            <div>
-                <?php while ($row2 = mysqli_fetch_assoc($physfit)){ echo $row2["count"];}?>
-            </div>
-        </div>
-
     </div>
 </body>
 
