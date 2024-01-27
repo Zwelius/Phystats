@@ -18,32 +18,48 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
 <body>
     <?php
     include 'config.php';
-    if (empty($_SESSION["t_id"])) {
+    if (empty($_SESSION["teacher_ID"])) {
         header("Location: index.php");
     } else {
-        $t_id = $_SESSION["t_id"];
+        $teacher_ID = $_SESSION["teacher_ID"];
 
-        $viewsql = mysqli_query($connection, "SELECT * FROM `login` WHERE `t_id`='$t_id'");
-        while ($rowlogin = mysqli_fetch_assoc($viewsql)) {
-            $email = $rowlogin['email'];
-            $pass = $rowlogin['pass'];
-        }
-        $viewsql2 = mysqli_query($connection, "SELECT * FROM `teacher` INNER JOIN `gradesection` ON gradesection.t_id = teacher.t_id WHERE teacher.t_id='" . $_SESSION["t_id"] . "'");
-        while ($rowteach = mysqli_fetch_assoc($viewsql2)) {
-            $fname = $rowteach['t_fname'];
-            $lname = $rowteach['t_lname'];
-            $position = $rowteach['position'];
+        $viewsql = mysqli_query($connection, "SELECT * FROM `teacher_tb` INNER JOIN `gradesection_tb` ON gradesection_tb.teacher_ID = teacher_tb.teacher_ID WHERE teacher_tb.teacher_ID = '$teacher_ID'");
+        while ($rowteach = mysqli_fetch_assoc($viewsql)) {
+            $fname = $rowteach['teacher_FNAME'];
+            $lname = $rowteach['teacher_LNAME'];
+            $email = $rowteach['teacher_EMAIL'];
+            $pass = $rowteach['teacher_PASSWORD'];
             $grade = $rowteach['grade'];
             $section = $rowteach['section'];
         }
 
         if (isset($_POST['update'])) {
-            $updatelogsql = mysqli_query($connection, "UPDATE `login` SET `email`='" . $_POST['email'] . "', `pass`='" . $_POST['pass'] . "' WHERE `t_id`='" . $_SESSION["t_id"] . "'");
-            $updateprofsql = mysqli_query($connection, "UPDATE `teacher` SET `t_fname`='" . $_POST['fname'] . "',`t_lname`='" . $_POST['lname'] . "',`position`='" . $_POST['position'] . "' WHERE `t_id`='" . $_SESSION["t_id"] . "'");
-            $updategradesql = mysqli_query($connection, "UPDATE `gradesection` SET `grade`='" . $_POST['grade'] . "',`section`='" . $_POST['section'] . "' WHERE `t_id`='" . $_SESSION["t_id"] . "'");
-            echo '<script>alert("Updated successfully");window.location.replace("profile.php");</script>';
+            $teachername = mysqli_query($connection, "SELECT * FROM `teacher_tb` WHERE `teacher_FNAME` = '" . $_POST['fname'] . "' AND `teacher_LNAME` = '" . $_POST['lname'] . "'");
+            $temp = mysqli_fetch_array($teachername);
+            $temp_ID = $temp['teacher_ID'];
+            if ($temp_ID != $teacher_ID && ($teachername && mysqli_num_rows($teachername) > 0)) {
+                //echo '<script>alert("Teacher account already exists. Please go see the admin if there are problems.");</script>';
+            } else {
+                $login = mysqli_query($connection, "SELECT * FROM `teacher_tb` WHERE `teacher_EMAIL` = '" . $_POST['email'] . "'");
+                $temp = mysqli_fetch_array($login);
+                $temp_ID = $temp['teacher_ID'];
+                if ($temp_ID != $teacher_ID && ($login && mysqli_num_rows($login) > 0)) {
+                    echo '<script>alert("This email is already in use. Please go see the admin if there are problems.");</script>';
+                } else {
+                    $gradesection = mysqli_query($connection, "SELECT * FROM `gradesection_tb` WHERE `grade` = '" . $_POST['grade'] . "' AND `section` = '" . $_POST['section'] . "'");
+                    $temp = mysqli_fetch_array($gradesection);
+                    $temp_ID = $temp['teacher_ID'];
+                    if ($temp_ID != $teacher_ID && ($gradesection && mysqli_num_rows($gradesection) > 0)) {
+                        echo '<script>alert("Grade and Section already assigned to a teacher. Please go see the admin if there are problems.");</script>';
+                    } else {
+                        $updateprofsql = mysqli_query($connection, "UPDATE `teacher_tb` SET `teacher_FNAME`='" . $_POST['fname'] . "',`teacher_LNAME`='" . $_POST['lname'] . "', `teacher_EMAIL`='" . $_POST['email'] . "', `teacher_PASSWORD`='" . $_POST['pass'] . "' WHERE `teacher_ID`='$teacher_ID'");
+                        $updategradesql = mysqli_query($connection, "UPDATE `gradesection_tb` SET `grade`='" . $_POST['grade'] . "',`section`='" . $_POST['section'] . "' WHERE `teacher_ID`='$teacher_ID'");
+                        echo '<script>alert("Updated successfully");window.location.replace("profile.php");</script>';
+                    }
+                }
+            }
         } else if (isset($_POST['logout'])) {
-            unset($_SESSION["t_id"]);
+            unset($_SESSION["teacher_ID"]);
             echo '<script>window.location.replace("index.php");</script>';
             exit();
         }
@@ -75,8 +91,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                     </div>
 
                     <div class="selection-container">
-                        <input type="submit" name="logout" value="Logout" formnovalidate
-                            onclick="return confirm('Are you sure you want to logout?')">
+                        <input type="submit" name="logout" value="Logout" formnovalidate onclick="return confirm('Are you sure you want to logout?')">
                     </div>
                 </div>
 
@@ -98,28 +113,26 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                                     <label>HANDLING PE GRADE</label><br>
                                     <select name='grade' required>
                                         <option value="Four" <?php if (isset($grade) && $grade === "Four") {
-                                            echo 'selected';
-                                        } ?>>Four</option>
+                                                                    echo 'selected';
+                                                                } ?>>Four</option>
                                         <option value="Five" <?php if (isset($grade) && $grade === "Five") {
-                                            echo 'selected';
-                                        } ?>>Five</option>
+                                                                    echo 'selected';
+                                                                } ?>>Five</option>
                                         <option value="Six" <?php if (isset($grade) && $grade === "Six") {
-                                            echo 'selected';
-                                        } ?>>Six</option>
+                                                                echo 'selected';
+                                                            } ?>>Six</option>
                                     </select>
                                 </div>
                             </div>
                             <label>SECTION</label><br>
                             <input type="text" name="section" value="<?php echo $section ?>" required><br><br>
-                            <input type="submit" name="update" value="Save Changes"
-                                onclick="return confirm('You are about to do some changes. Do you want to proceed?')">
+                            <input type="submit" name="update" value="Save Changes" onclick="return confirm('You are about to do some changes. Do you want to proceed?')">
                         </div>
 
                         <div class="personal-details-right">
                             <label>CHANGE EMAIL & PASSWORD</label><br>
                             <input type="text" name="email" placeholder="Email" value="<?php echo $email ?>" required>
-                            <input type="password" name="pass" placeholder="Password" value="<?php echo $pass ?>"
-                                required><br>
+                            <input type="password" name="pass" placeholder="Password" value="<?php echo $pass ?>" required><br>
                         </div>
                     </main>
                 </div>

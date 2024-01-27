@@ -6,8 +6,8 @@
  */
 
 require 'config.php';
-if (isset($_GET['s_id'])) {
-    mysqli_query($connection, "DELETE FROM `student` WHERE `s_id` = '" . $_GET['s_id'] . "'");
+if (isset($_GET['student_ID'])) {
+    mysqli_query($connection, "DELETE FROM `student_tb` WHERE `student_ID` = '" . $_GET['student_ID'] . "'");
 
     echo '<script>alert("Student data deleted successfully.");window.location.replace("list.php");</script>';
 }

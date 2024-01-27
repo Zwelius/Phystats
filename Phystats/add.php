@@ -18,32 +18,39 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
 <body>
     <?php
     include 'config.php';
-    if (empty($_SESSION["t_id"])) {
+    if (empty($_SESSION["teacher_ID"])) {
         header("Location: index.php");
     } else {
-        $t_id = $_SESSION["t_id"];
-        $syears = mysqli_query($connection, "SELECT * FROM `schoolyear` ORDER BY `year` DESC");
-        $quarter = mysqli_query($connection, "SELECT * FROM `quarter`");
-        $testtype = mysqli_query($connection, "SELECT * FROM `test`");
+        $teacher_ID = $_SESSION["teacher_ID"];
+
+        $syears = mysqli_query($connection, "SELECT * FROM `schoolyear_tb` ORDER BY `schoolYEAR` DESC");
+        $quarter = mysqli_query($connection, "SELECT * FROM `quarter_tb`");
+        $testtype = mysqli_query($connection, "SELECT * FROM `testtype_tb`");
+        $grade = mysqli_query($connection, "SELECT * FROM `gradesection_tb` WHERE `teacher_ID` = '$teacher_ID'");
+        $rows = mysqli_fetch_assoc($grade);
+        $grade_ID = $rows["grade_ID"];
+
         if (isset($_POST['cancel'])) {
             header("Location: list.php");
         } else if (isset($_POST['save'])) {
-            $query = mysqli_query($connection, "SELECT * FROM `testdate` WHERE `sy_id`='" . $_POST['syear'] . "' AND (`q_id`='" . $_POST['quarter'] . "' AND (`testID`='" . $_POST['testtype'] . "' AND `t_id`='$t_id'))");
+            $query = mysqli_query($connection, "SELECT * FROM `testinfo_tb` WHERE `schoolyear_ID`='" . $_POST['syear'] . "' AND `quarter_ID`='" . $_POST['quarter'] . "' AND `testtype_ID`='" . $_POST['testtype'] . "' AND `teacher_ID`='$teacher_ID'");
             if ($query && mysqli_num_rows($query) < 1) {
-                mysqli_query($connection, "INSERT INTO `testdate` (`sy_id`, `q_id`, `testID`, `t_id`) VALUES ('" . $_POST['syear'] . "','" . $_POST['quarter'] . "','" . $_POST['testtype'] . "','$t_id')");
-                $tdID = mysqli_insert_id($connection);
+                mysqli_query($connection, "INSERT INTO `testinfo_tb` (`schoolyear_ID`, `quarter_ID`, `testtype_ID`, `teacher_ID`) VALUES ('" . $_POST['syear'] . "','" . $_POST['quarter'] . "','" . $_POST['testtype'] . "','$teacher_ID')");
+                $testinfo_ID = mysqli_insert_id($connection);
             } else {
                 $row = mysqli_fetch_assoc($query);
-                $tdID = $row['tdID'];
+                $testinfo_ID = $row['testinfo_ID'];
             }
+            $age = getAge($_POST['bday']);
             $temp = $_POST['weight'] / ($_POST['height'] ** 2);
             $bmi = number_format((float) $temp, 2, '.', '');
-            $age = getAge($_POST['bday']);
-            mysqli_query($connection, "INSERT INTO `student` (`tdID`, `name`, `birthdate`, `height`, `weight`, `sex`, `age`, `BMI`, `nutritional status`, `heightforage`) VALUES ('$tdID','" . $_POST['name'] . "','" . $_POST['bday'] . "','" . $_POST['height'] . "','" . $_POST['weight'] . "','" . $_POST['sex'] . "','$age','$bmi','" . $_POST['nutritionalstatus'] . "','" . $_POST['heightforage'] . "')");
-            $s_id = mysqli_insert_id($connection);
-            mysqli_query($connection, "INSERT INTO `testresult`(`s_id`, `tdID`, `HRbefore`, `HRafter`, `pushupsNo`, `plankTime`, `zipperRight`, `zipperLeft`, `SaR1`, `SaR2`, `juggling`, `hexagonClockwise`, `hexagonCounter`, `sprintTime`, `SLJ1`, `SLJ2`, `storkRight`, `storkLeft`, `stick1`, `stick2`, `stick3`) VALUES ('$s_id','$tdID','" . $_POST['HRbefore'] . "','" . $_POST['HRafter'] . "','" . $_POST['pushups'] . "','" . $_POST['plank'] . "','" . $_POST['zipperR'] . "','" . $_POST['zipperL'] . "','" . $_POST['sar1'] . "','" . $_POST['sar2'] . "','" . $_POST['juggling'] . "','" . $_POST['hexclock'] . "','" . $_POST['hexcounter'] . "','" . $_POST['sprinttime'] . "','" . $_POST['slj1'] . "','" . $_POST['slj2'] . "','" . $_POST['storkright'] . "','" . $_POST['storkleft'] . "','" . $_POST['stick1'] . "','" . $_POST['stick2'] . "','" . $_POST['stick3'] . "')");
-            $tr_ID = mysqli_insert_id($connection);
-            $bodyComposition = $_POST['nutritionalstatus'];
+            $bmiClassification = bmiclassification($_POST['sex'], $age, $bmi);
+
+            mysqli_query($connection, "INSERT INTO `student_tb` (`studentNAME`, `studentBIRTHDATE`, `studentSEX`) VALUES ('" . $_POST['name'] . "','" . $_POST['bday'] . "','" . $_POST['sex'] . "')");
+            $student_ID = mysqli_insert_id($connection);
+            mysqli_query($connection, "INSERT INTO `studenttestdata_tb`(`age`, `height`, `weight`, `BMI`, `bmiClassification`, `HRbefore`, `HRafter`, `pushupsNo`, `plankTime`, `zipperRight`, `zipperLeft`, `sitReach1`, `sitReach2`, `juggling`, `hexagonClockwise`, `hexagonCounter`, `sprintTime`, `longJump1`, `longJump2`, `storkRight`, `storkLeft`, `stickDrop1`, `stickDrop2`, `stickDrop3`, `student_ID`, `grade_ID`, `testinfo_ID`) VALUES ('$age','" . $_POST['height'] . "','" . $_POST['weight'] . "','$bmi','$bmiClassification','" . $_POST['HRbefore'] . "','" . $_POST['HRafter'] . "','" . $_POST['pushups'] . "','" . $_POST['plank'] . "','" . $_POST['zipperR'] . "','" . $_POST['zipperL'] . "','" . $_POST['sar1'] . "','" . $_POST['sar2'] . "','" . $_POST['juggling'] . "','" . $_POST['hexclock'] . "','" . $_POST['hexcounter'] . "','" . $_POST['sprinttime'] . "','" . $_POST['slj1'] . "','" . $_POST['slj2'] . "','" . $_POST['storkright'] . "','" . $_POST['storkleft'] . "','" . $_POST['stick1'] . "','" . $_POST['stick2'] . "','" . $_POST['stick3'] . "', '$student_ID', '$grade_ID','$testinfo_ID')");
+            $testdata_ID = mysqli_insert_id($connection);
+            $bodyComposition = $bmiClassification;
             $cardiovascularEndurance = cardiovasulcarEndurance($_POST['HRbefore'], $_POST['HRafter'], $age);
             $strength = strength($_POST['pushups'], $_POST['plank']);
             $flexibility = flexibility($_POST['zipperR'], $_POST['zipperL'], $_POST['sar1'], $_POST['sar2']);
@@ -54,7 +61,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
             $balance = balance($_POST['storkright'], $_POST['storkleft'], $age);
             $reactionTime = reactionTime($_POST['stick1'], $_POST['stick2'], $_POST['stick3']);
             $fitnessResult = physicallyFit($bodyComposition, $cardiovascularEndurance, $strength, $flexibility, $coordination, $agility, $speed, $power, $balance, $reactionTime);
-            mysqli_query($connection, "INSERT INTO `resultinterpretation`(`tr_ID`, `bodyComposition`, `cardiovascularEndurance`, `strength`, `flexibility`, `coordination`, `agility`, `speed`, `power`, `balance`, `reactionTime`, `fitnessResult`) VALUES ($tr_ID, '$bodyComposition', '$cardiovascularEndurance', '$strength', '$flexibility', '$coordination', '$agility', '$speed', '$power', '$balance', '$reactionTime', '$fitnessResult')");
+            mysqli_query($connection, "INSERT INTO `studenttestresult_tb`(`bodyComposition`, `cardiovascularEndurance`, `strength`, `flexibility`, `coordination`, `agility`, `speed`, `power`, `balance`, `reactionTime`, `fitnessResult`, `testdata_ID`) VALUES ('$bodyComposition', '$cardiovascularEndurance', '$strength', '$flexibility', '$coordination', '$agility', '$speed', '$power', '$balance', '$reactionTime', '$fitnessResult', '$testdata_ID')");
             echo '<script>alert("Added data successfully");</script>';
         }
     }
@@ -89,7 +96,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                             <th colspan="2"><select name="syear">
                                     <?php
                                     while ($row1 = mysqli_fetch_array($syears)) {
-                                        echo "<option value='" . $row1['sy_id'] . "'>" . $row1['year'] . "</option>";
+                                        echo "<option value='" . $row1['schoolyear_ID'] . "'>" . $row1['schoolYEAR'] . "</option>";
                                     }
                                     ?>
                                 </select>
@@ -98,7 +105,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                             <th colspan="2"><select name="quarter">
                                     <?php
                                     while ($qtr = mysqli_fetch_array($quarter)) {
-                                        echo "<option value='" . $qtr['q_id'] . "'>" . $qtr['quarter'] . "</option>";
+                                        echo "<option value='" . $qtr['quarter_ID'] . "'>" . $qtr['quarter'] . "</option>";
                                     }
                                     ?>
                                 </select>
@@ -106,7 +113,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                             <th colspan="2"><select name="testtype">
                                     <?php
                                     while ($tt = mysqli_fetch_array($testtype)) {
-                                        echo "<option value='" . $tt['testID'] . "'>" . $tt['testtype'] . "</option>";
+                                        echo "<option value='" . $tt['testtype_ID'] . "'>" . $tt['testTYPE'] . "</option>";
                                     }
                                     ?>
                                 </select>
@@ -121,27 +128,16 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                         <tr>
                             <th colspan="6"><label for="name">NAME</label></th>
                             <th>&nbsp;</th><!--empty-->
-                            <th><label for="nutritionalstatus">NUTRITIONAL STATUS</label></th>
                         </tr>
                         <tr>
                             <th colspan="6"><input type="text" name="name" required></th>
                             <th>&nbsp;</th><!--empty-->
-                            <th>
-                                <select name="nutritionalstatus">
-                                    <option value="Severely Wasted">Severely Wasted</option>
-                                    <option value="Wasted">Wasted</option>
-                                    <option value="Normal">Normal</option>
-                                    <option value="Overweight">Overweight</option>
-                                    <option value="Obese">Obese</option>
-                                </select>
-                            </th>
                         </tr>
 
                         <tr>
                             <th colspan="2"><label for="bday">BIRTH DATE</label></th>
                             <th colspan="2"><label for="sex">SEX</label></th>
                             <th colspan="3">&nbsp;</th><!--empty-->
-                            <th colspan="2"><label for="heightforage">HEIGHT-FOR-AGE</label></th>
                         </tr>
 
                         <tr>
@@ -153,14 +149,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                                 </select>
                             </th>
                             <th colspan="3">&nbsp;</th><!--empty-->
-                            <th colspan="2">
-                                <select name="heightforage">
-                                    <option value="Severely Stunted">Severely Stunted</option>
-                                    <option value="Stunted">Stunted</option>
-                                    <option value="Normal">Normal</option>
-                                    <option value="Tall">Tall</option>
-                                </select>
-                            </th>
                         </tr>
                         <tr>
                             <!--empty-->

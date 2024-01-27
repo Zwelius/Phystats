@@ -25,25 +25,24 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
     <?php
     include 'config.php';
     if (isset($_POST['signup'])) {
-        $teachername = mysqli_query($connection, "SELECT * FROM `teacher` WHERE `t_fname` = '" . $_POST['fname'] . "' AND `t_lname` = '" . $_POST['lname'] . "'");
+        $teachername = mysqli_query($connection, "SELECT * FROM `teacher_tb` WHERE `teacher_FNAME` = '" . $_POST['fname'] . "' AND `teacher_LNAME` = '" . $_POST['lname'] . "'");
         if ($teachername && mysqli_num_rows($teachername) > 0) {
             echo '<script>alert("Teacher account already exists. Please go see the admin if there are problems.");</script>';
         } else {
-            $login = mysqli_query($connection, "SELECT * FROM `login` WHERE `email` = '" . $_POST['email'] . "'");
+            $login = mysqli_query($connection, "SELECT * FROM `teacher_tb` WHERE `teacher_EMAIL` = '" . $_POST['email'] . "'");
             if ($login && mysqli_num_rows($login) > 0) {
                 echo '<script>alert("This email is already in use. Please go see the admin if there are problems.");</script>';
             } else {
-                $gradesection = mysqli_query($connection, "SELECT * FROM `gradesection` WHERE `grade` = '" . $_POST['grade'] . "' AND `section` = '" . $_POST['section'] . "'");
+                $gradesection = mysqli_query($connection, "SELECT * FROM `gradesection_tb` WHERE `grade` = '" . $_POST['grade'] . "' AND `section` = '" . $_POST['section'] . "'");
                 if ($gradesection && mysqli_num_rows($gradesection) > 0) {
                     echo '<script>alert("Grade and Section already assigned to a teacher. Please go see the admin if there are problems.");</script>';
                 } else {
                     if ($_POST['pass'] === $_POST['pass2']) {
 
-                        $teachersql = mysqli_query($connection, "INSERT INTO `teacher`(`t_fname`, `t_lname`, `position`, `p_id`) VALUES ('" . $_POST['fname'] . "','" . $_POST['lname'] . "','" . $_POST['position'] . "',1)");
-                        $t_id = mysqli_insert_id($connection);
-                        $gradesql = mysqli_query($connection, "INSERT INTO `gradesection`(`t_id`, `grade`, `section`) VALUES ('$t_id','" . $_POST['grade'] . "','" . $_POST['section'] . "')");
-                        $loginsql = mysqli_query($connection, "INSERT INTO `login`(`email`, `pass`, `t_id`) VALUES ('" . $_POST['email'] . "','" . $_POST['pass'] . "',$t_id)");
-                        $_SESSION["t_id"] = $t_id;
+                        $teachersql = mysqli_query($connection, "INSERT INTO `teacher_tb`(`teacher_FNAME`, `teacher_LNAME`, `teacher_EMAIL`, `teacher_PASSWORD`, `principal_ID`) VALUES ('" . $_POST['fname'] . "','" . $_POST['lname'] . "','" . $_POST['email'] . "','" . $_POST['pass'] . "',1)");
+                        $teacher_ID = mysqli_insert_id($connection);
+                        $gradesql = mysqli_query($connection, "INSERT INTO `gradesection_tb`(`grade`, `section`, `teacher_ID`) VALUES ('" . $_POST['grade'] . "','" . $_POST['section'] . "','$teacher_ID')");
+                        $_SESSION["teacher_ID"] = $teacher_ID;
                         echo '<script>alert("Signed up successfully");</script>';
                         echo '<script>window.location.replace("profile.php");</script>';
                         exit();
@@ -64,8 +63,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                     <input type="text" name="fname" class="label" required><br>
                     <label>SURNAME</label><br>
                     <input type="text" name="lname" class="label" required><br>
-                    <label>TEACHING METHOD</label><br>
-                    <input type="text" name="position" class="label" required><br>
                     <div class="handling-pe-grade-and-section-container">
                         <div class="handling-pe-grade">
                             <label>HANDLING PE GRADE</label><br>

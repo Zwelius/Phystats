@@ -4,17 +4,98 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHP.php to edit this template
  */
-$connection = mysqli_connect("localhost", "root", "", "phystatsdb");
+$connection = mysqli_connect("localhost", "root", "", "phystats");
 if (!$connection) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
 
-function getAge($Birthdate){
+function getAge($Birthdate)
+{
     $nowdate = date("Y-m-d");
     $getage = date_diff(date_create($Birthdate), date_create($nowdate));
     $age = $getage->format('%y');
     return $age;
+}
+function bmiclassification($sex, $age, $bmi)
+{
+    if ($sex == 'Male') {
+        if ($age >= 6 && $age <= 12) {
+            if ($bmi <= 12.7) {
+                return "Severely Wasted";
+            } else if ($bmi >= 12.8 && $bmi <= 13.6) {
+                return "Wasted";
+            } else if ($bmi >= 13.7 && $bmi <= 21.1) {
+                return "Normal";
+            } else if ($bmi >= 21.2 && $bmi <= 25.5) {
+                return "Overweight";
+            } else if ($bmi >= 25.6) {
+                return "Obese";
+            }
+        } else if ($age >= 13 && $age <= 15) {
+            if ($bmi <= 14.4) {
+                return "Severely Wasted";
+            } else if ($bmi >= 14.5 && $bmi <= 15.6) {
+                return "Wasted";
+            } else if ($bmi >= 15.7 && $bmi <= 26.4) {
+                return "Normal";
+            } else if ($bmi >= 26.5 && $bmi <= 33.5) {
+                return "Overweight";
+            } else if ($bmi >= 33.6) {
+                return "Obese";
+            }
+        } else if ($age >= 16 && $age <= 17) {
+            if ($bmi <= 15.3) {
+                return "Severely Wasted";
+            } else if ($bmi >= 15.4 && $bmi <= 16.8) {
+                return "Wasted";
+            } else if ($bmi >= 16.9 && $bmi <= 28.6) {
+                return "Normal";
+            } else if ($bmi >= 28.7 && $bmi <= 35.1) {
+                return "Overweight";
+            } else if ($bmi >= 35.2) {
+                return "Obese";
+            }
+        }
+    } else if ($sex == 'Female') {
+        if ($age >= 6 && $age <= 12) {
+            if ($bmi <= 12.3) {
+                return "Severely Wasted";
+            } else if ($bmi >= 12.4 && $bmi <= 13.4) {
+                return "Wasted";
+            } else if ($bmi >= 13.5 && $bmi <= 22.3) {
+                return "Normal";
+            } else if ($bmi >= 22.4 && $bmi <= 27.5) {
+                return "Overweight";
+            } else if ($bmi >= 27.6) {
+                return "Obese";
+            }
+        } else if ($age >= 13 && $age <= 15) {
+            if ($bmi <= 14.1) {
+                return "Severely Wasted";
+            } else if ($bmi >= 14.2 && $bmi <= 15.5) {
+                return "Wasted";
+            } else if ($bmi >= 15.6 && $bmi <= 27.7) {
+                return "Normal";
+            } else if ($bmi >= 27.8 && $bmi <= 35) {
+                return "Overweight";
+            } else if ($bmi >= 35.1) {
+                return "Obese";
+            }
+        } else if ($age >= 16 && $age <= 17) {
+            if ($bmi <= 14.6) {
+                return "Severely Wasted";
+            } else if ($bmi >= 14.7 && $bmi <= 16.2) {
+                return "Wasted";
+            } else if ($bmi >= 16.3 && $bmi <= 29.2) {
+                return "Normal";
+            } else if ($bmi >= 29.3 && $bmi <= 36.2) {
+                return "Overweight";
+            } else if ($bmi >= 36.3) {
+                return "Obese";
+            }
+        }
+    }
 }
 function minuteStep_interpretation($HRate, $age)
 {
@@ -261,9 +342,9 @@ function interpretation_score($interpretation)
             return "Error";
     }
 }
-function bodyComposition($bodyComposition)
+function bodyComposition($bmiclassification)
 {
-    switch ($bodyComposition) {
+    switch ($bmiclassification) {
         case "Severely Wasted":
             return 1;
         case "Obese":

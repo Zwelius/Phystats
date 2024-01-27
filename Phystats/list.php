@@ -30,20 +30,20 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
 <body>
     <?php
     include 'config.php';
-    if (empty($_SESSION["t_id"])) {
+    if (empty($_SESSION["teacher_ID"])) {
         header("Location: index.php");
     } else {
-        $t_id = $_SESSION["t_id"];
+        $teacher_ID = $_SESSION["teacher_ID"];
         $hasStudents = false;
-        $list = "SELECT * FROM `student` INNER JOIN `testdate` ON testdate.tdID = student.tdID";
+        $list = "SELECT * FROM `student_tb` INNER JOIN `studenttestdata_tb` ON studenttestdata_tb.student_ID = student_tb.student_ID INNER JOIN `testinfo_tb` ON testinfo_tb.testinfo_ID = studenttestdata_tb.testinfo_ID WHERE testinfo_tb.teacher_ID = '$teacher_ID'";
         $studlist = mysqli_query($connection, $list);
-        $syears = mysqli_query($connection, "SELECT * FROM `schoolyear` ORDER BY `year` DESC");
-        $grade = mysqli_query($connection, "SELECT * FROM `gradesection` WHERE t_id = $t_id");
-        $quarter = mysqli_query($connection, "SELECT * FROM `quarter`");
-        $testtype = mysqli_query($connection, "SELECT * FROM `test`");
+        $syears = mysqli_query($connection, "SELECT * FROM `schoolyear_tb` ORDER BY `schoolYEAR` DESC");
+        $grade = mysqli_query($connection, "SELECT * FROM `gradesection_tb` INNER JOIN `teacher_tb` ON teacher_tb.teacher_ID = gradesection_tb.teacher_ID WHERE gradesection_tb.teacher_ID = $teacher_ID");
+        $quarter = mysqli_query($connection, "SELECT * FROM `quarter_tb`");
+        $testtype = mysqli_query($connection, "SELECT * FROM `testtype_tb`");
         if (isset($_POST["syear"])) {
             if (isset($_POST['syear']) && $_POST['syear'] != "") {
-                $list .= " WHERE testdate.sy_id = '" . $_POST['syear'] . "'";
+                $list .= " AND testinfo_tb.schoolyear_ID = '" . $_POST['syear'] . "'";
                 mysqli_query($connection, $list);
             } else {
                 $list .= " ";
@@ -51,7 +51,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
         }
         if (isset($_POST["grade"])) {
             if (isset($_POST['grade']) && $_POST['grade'] != "") {
-                $list .= " AND testdate.t_id = '" . $_POST['grade'] . "'";
+                $list .= " AND studenttestdata_tb.grade_ID = '" . $_POST['grade'] . "'";
                 mysqli_query($connection, $list);
             } else {
                 $list .= " ";
@@ -59,7 +59,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
         }
         if (isset($_POST["quarter"])) {
             if (isset($_POST['quarter']) && $_POST['quarter'] != "") {
-                $list .= " AND testdate.q_id = '" . $_POST['quarter'] . "'";
+                $list .= " AND testinfo_tb.quarter_ID = '" . $_POST['quarter'] . "'";
                 mysqli_query($connection, $list);
             } else {
                 $list .= " ";
@@ -67,7 +67,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
         }
         if (isset($_POST["testtype"])) {
             if (isset($_POST['testtype']) && $_POST['testtype'] != "") {
-                $list .= " AND testdate.testID = '" . $_POST['testtype'] . "'";
+                $list .= " AND testinfo_tb.testtype_ID = '" . $_POST['testtype'] . "'";
                 mysqli_query($connection, $list);
             } else {
                 $list .= " ";
@@ -76,7 +76,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
         if (isset($_POST["sort"])) {
             switch ($_POST["sort"]) {
                 case "name":
-                    $list .= " ORDER BY `name`";
+                    $list .= " ORDER BY `studentNAME`";
                     break;
                 case "height":
                     $list .= " ORDER BY `height`";
@@ -86,9 +86,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                     break;
                 case "age":
                     $list .= " ORDER BY `age`";
-                    break;
-                default:
-                    $list .= " ORDER BY `s_id`";
                     break;
             }
             $studlist = mysqli_query($connection, $list);
@@ -118,9 +115,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                             <?php
                             while ($row1 = mysqli_fetch_array($syears)) {
                                 ?>
-                                <option value='<?php echo $row1['sy_id'] ?>' <?php if (isset($_POST['syear']) && $_POST['syear'] === $row1['sy_id']) {
+                                <option value='<?php echo $row1['schoolyear_ID'] ?>' <?php if (isset($_POST['syear']) && $_POST['syear'] === $row1['schoolyear_ID']) {
                                        echo 'selected';
-                                   } ?>><?php echo $row1['year']; ?>
+                                   } ?>><?php echo $row1['schoolYEAR']; ?>
                                 </option>
                                 <?php
                             }
@@ -130,7 +127,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                             <?php
                             while ($gs = mysqli_fetch_array($grade)) {
                                 ?>
-                                <option value='<?php echo $gs['t_id']; ?>' <?php if (isset($_POST['grade']) && $_POST['grade'] === $gs['t_id']) {
+                                <option value='<?php echo $gs['grade_ID']; ?>' <?php if (isset($_POST['grade']) && $_POST['grade'] === $gs['grade_ID']) {
                                        echo 'selected';
                                    } ?>><?php echo $gs['grade'] . " - " . $gs['section']; ?>
                                 </option>
@@ -143,7 +140,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                             <?php
                             while ($qtr = mysqli_fetch_array($quarter)) {
                                 ?>
-                                <option value='<?php echo $qtr['q_id']; ?>' <?php if (isset($_POST['quarter']) && $_POST['quarter'] === $qtr['q_id']) {
+                                <option value='<?php echo $qtr['quarter_ID']; ?>' <?php if (isset($_POST['quarter']) && $_POST['quarter'] === $qtr['quarter_ID']) {
                                        echo 'selected';
                                    } ?>><?php echo $qtr['quarter']; ?>
                                 </option>
@@ -156,9 +153,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                             <?php
                             while ($tt = mysqli_fetch_array($testtype)) {
                                 ?>
-                                <option value='<?php echo $tt['testID']; ?>' <?php if (isset($_POST['testtype']) && $_POST['testtype'] === $tt['testID']) {
+                                <option value='<?php echo $tt['testtype_ID']; ?>' <?php if (isset($_POST['testtype']) && $_POST['testtype'] === $tt['testtype_ID']) {
                                        echo 'selected';
-                                   } ?>><?php echo $tt['testtype']; ?>
+                                   } ?>><?php echo $tt['testTYPE']; ?>
                                 </option>
                                 <?php
                             }
@@ -166,7 +163,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                         </select>
                         <span>SORT BY</span>
                         <select name="sort" onchange="this.form.submit()">
-                            <option>None</option>
                             <option value="name" <?php if (isset($_POST['sort']) && $_POST['sort'] === "name") {
                                 echo 'selected';
                             } ?>>Name</option>
@@ -192,29 +188,23 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                     <tr>
                         <th>NAME</th>
                         <th>BIRTH DATE</th>
+                        <th>SEX</th>
                         <th>HEIGHT (m)</th>
                         <th>WEIGHT (kg)</th>
-                        <th>SEX</th>
                         <th>AGE</th>
-                        <th>BMI</th>
-                        <th>NUTRUTIONAL STATUS</th>
-                        <th>HEIGHT-FOR-AGE</th>
                         <th>ACTION</th>
                     </tr>
 
                     <?php
                     while ($row = mysqli_fetch_assoc($studlist)) {
                         echo "<tr>";
-                        echo "<td id='names'>{$row['name']}</td>";
-                        echo "<td>{$row['birthdate']}</td>";
+                        echo "<td id='names'>{$row['studentNAME']}</td>";
+                        echo "<td>{$row['studentBIRTHDATE']}</td>";
+                        echo "<td>{$row['studentSEX']}</td>";
                         echo "<td>{$row['height']}</td>";
                         echo "<td>{$row['weight']}</td>";
-                        echo "<td>{$row['sex']}</td>";
                         echo "<td>{$row['age']}</td>";
-                        echo "<td>{$row['BMI']}</td>";
-                        echo "<td>{$row['nutritional status']}</td>";
-                        echo "<td>{$row['heightforage']}</td>";
-                        echo "<td><a href='viewstudent.php?s_id={$row['s_id']}' target='_blank'></a>&nbsp;&nbsp;<a href='updatestudent.php?s_id={$row['s_id']}'><img class='action' src='assets/edit.png'></a>&nbsp;&nbsp;<a href='delete.php?s_id={$row['s_id']}'><img class='action' src='assets/delete.png'></a></td>";
+                        echo "<td><a href='viewstudent.php?student_ID={$row['student_ID']}' target='_blank'></a>&nbsp;&nbsp;<a href='updatestudent.php?student_ID={$row['student_ID']}'><img class='action' src='assets/edit.png'></a>&nbsp;&nbsp;<a href='delete.php?student_ID={$row['student_ID']}'><img class='action' src='assets/delete.png'></a></td>";
                         echo "</tr>";
                         $hasStudents = true;
                     }

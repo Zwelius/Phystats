@@ -19,21 +19,21 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
 <body>
     <?php
     include 'config.php';
-    if (empty($_SESSION["t_id"])) {
+    if (empty($_SESSION["teacher_ID"])) {
         header("Location: index.php");
     } else {
-        $t_id = $_SESSION["t_id"];
+        $teacher_ID = $_SESSION["teacher_ID"];
         $hasStudents = false;
-        $list = "SELECT * FROM `student` INNER JOIN `testdate` ON testdate.tdID = student.tdID INNER JOIN `testresult` ON testresult.s_id = student.s_id INNER JOIN resultinterpretation ON resultinterpretation.tr_ID = testresult.tr_ID";
+        $list = "SELECT * FROM `student_tb` INNER JOIN `studenttestdata_tb` ON studenttestdata_tb.student_ID = student_tb.student_ID INNER JOIN `testinfo_tb` ON testinfo_tb.testinfo_ID = studenttestdata_tb.testinfo_ID INNER JOIN `studenttestresult_tb` ON studenttestresult_tb.testdata_ID = studenttestdata_tb.testdata_ID WHERE testinfo_tb.teacher_ID = '$teacher_ID'";
         $studlist1 = mysqli_query($connection, $list);
         $studlist2 = mysqli_query($connection, $list);
-        $syears = mysqli_query($connection, "SELECT * FROM `schoolyear` ORDER BY `year` DESC");
-        $grade = mysqli_query($connection, "SELECT * FROM `gradesection` WHERE t_id = $t_id");
-        $quarter = mysqli_query($connection, "SELECT * FROM `quarter`");
-        $testtype = mysqli_query($connection, "SELECT * FROM `test`");
+        $syears = mysqli_query($connection, "SELECT * FROM `schoolyear_tb` ORDER BY `schoolYEAR` DESC");
+        $grade = mysqli_query($connection, "SELECT * FROM `gradesection_tb` WHERE `teacher_ID` = $teacher_ID");
+        $quarter = mysqli_query($connection, "SELECT * FROM `quarter_tb`");
+        $testtype = mysqli_query($connection, "SELECT * FROM `testtype_tb`");
         if (isset($_POST["syear"])) {
             if (isset($_POST['syear']) && $_POST['syear'] != "") {
-                $list .= " WHERE testdate.sy_id = '" . $_POST['syear'] . "'";
+                $list .= " AND testinfo_tb.schoolyear_ID = '" . $_POST['syear'] . "'";
                 $studlist1 = mysqli_query($connection, $list);
                 $studlist2 = mysqli_query($connection, $list);
             } else {
@@ -42,7 +42,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
         }
         if (isset($_POST["grade"])) {
             if (isset($_POST['grade']) && $_POST['grade'] != "") {
-                $list .= " AND testdate.t_id = '" . $_POST['grade'] . "'";
+                $list .= " AND studenttestdata_tb.grade_ID = '" . $_POST['grade'] . "'";
                 $studlist1 = mysqli_query($connection, $list);
                 $studlist2 = mysqli_query($connection, $list);
             } else {
@@ -51,7 +51,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
         }
         if (isset($_POST["quarter"])) {
             if (isset($_POST['quarter']) && $_POST['quarter'] != "") {
-                $list .= " AND testdate.q_id = '" . $_POST['quarter'] . "'";
+                $list .= " AND testinfo_tb.quarter_ID = '" . $_POST['quarter'] . "'";
                 $studlist1 = mysqli_query($connection, $list);
                 $studlist2 = mysqli_query($connection, $list);
             } else {
@@ -60,7 +60,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
         }
         if (isset($_POST["testtype"])) {
             if (isset($_POST['testtype']) && $_POST['testtype'] != "") {
-                $list .= " AND testdate.testID = '" . $_POST['testtype'] . "'";
+                $list .= " AND testinfo_tb.testtype_ID = '" . $_POST['testtype'] . "'";
                 $studlist1 = mysqli_query($connection, $list);
                 $studlist2 = mysqli_query($connection, $list);
             } else {
@@ -91,20 +91,19 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                             <?php
                             while ($row1 = mysqli_fetch_array($syears)) {
                                 ?>
-                                <option value='<?php echo $row1['sy_id'] ?>' <?php if (isset($_POST['syear']) && $_POST['syear'] === $row1['sy_id']) {
+                                <option value='<?php echo $row1['schoolyear_ID'] ?>' <?php if (isset($_POST['syear']) && $_POST['syear'] === $row1['schoolyear_ID']) {
                                        echo 'selected';
-                                   } ?>><?php echo $row1['year']; ?>
+                                   } ?>><?php echo $row1['schoolYEAR']; ?>
                                 </option>
                                 <?php
                             }
                             ?>
                         </select>
                         <select name="grade" onchange="this.form.submit()">
-                            <option value="">Grade & Section (All)</option>
                             <?php
                             while ($gs = mysqli_fetch_array($grade)) {
                                 ?>
-                                <option value='<?php echo $gs['t_id']; ?>' <?php if (isset($_POST['grade']) && $_POST['grade'] === $gs['t_id']) {
+                                <option value='<?php echo $gs['grade_ID']; ?>' <?php if (isset($_POST['grade']) && $_POST['grade'] === $gs['grade_ID']) {
                                        echo 'selected';
                                    } ?>><?php echo $gs['grade'] . " - " . $gs['section']; ?>
                                 </option>
@@ -117,7 +116,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                             <?php
                             while ($qtr = mysqli_fetch_array($quarter)) {
                                 ?>
-                                <option value='<?php echo $qtr['q_id']; ?>' <?php if (isset($_POST['quarter']) && $_POST['quarter'] === $qtr['q_id']) {
+                                <option value='<?php echo $qtr['quarter_ID']; ?>' <?php if (isset($_POST['quarter']) && $_POST['quarter'] === $qtr['quarter_ID']) {
                                        echo 'selected';
                                    } ?>><?php echo $qtr['quarter']; ?>
                                 </option>
@@ -130,9 +129,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                             <?php
                             while ($tt = mysqli_fetch_array($testtype)) {
                                 ?>
-                                <option value='<?php echo $tt['testID']; ?>' <?php if (isset($_POST['testtype']) && $_POST['testtype'] === $tt['testID']) {
+                                <option value='<?php echo $tt['testtype_ID']; ?>' <?php if (isset($_POST['testtype']) && $_POST['testtype'] === $tt['testtype_ID']) {
                                        echo 'selected';
-                                   } ?>><?php echo $tt['testtype']; ?>
+                                   } ?>><?php echo $tt['testTYPE']; ?>
                                 </option>
                                 <?php
                             }
@@ -147,7 +146,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
 
             <div class="tab-container">
                 <input type="radio" id="health-related-test" name="tab-container" checked="checked">
-                <label for="health-related-test">Health-Related Test Results</label>
+                <label for="health-related-test">Health-Related</label>
                 <!-----health-related test results----->
                 <div class="tab">
                     <table class="health-related-test" id="tebla">
@@ -165,7 +164,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                             ?>
                         <tr>
                             <td>
-                                <?php echo $row['name']; ?>
+                                <?php echo $row['studentNAME']; ?>
                             </td>
                             <td>
                                 <?php echo $row['bodyComposition']; ?>
@@ -198,7 +197,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
 
                 <!-----skill-related test results----->
                 <input type="radio" id="skill-related-test" name="tab-container">
-                <label for="skill-related-test">Skill-Related Test Results</label>
+                <label for="skill-related-test">Skill-Related</label>
                 <div class="tab">
                     <table class="skill-related-test" id="table">
                         <tr>
@@ -217,7 +216,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                             ?>
                         <tr>
                             <td>
-                                <?php echo $row2['name']; ?>
+                                <?php echo $row2['studentNAME']; ?>
                             </td>
                             <td>
                                 <?php echo $row2['coordination']; ?>
