@@ -147,10 +147,14 @@ input[name="update"]:hover {
     background-color: #133A84;
 }
 
-.position-and-handling-pe-grade{
+.handling-pe-grade{
     display: flex;
 }
 
-.position{
+input[name="section"]{
+    width: 145px;
+}
+
+select[name='grade']{
     margin-right: 10px;
 }

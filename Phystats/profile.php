@@ -104,11 +104,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                             <input type="text" name="fname" value="<?php echo $fname ?>" required><br>
                             <label>SURNAME</label><br>
                             <input type="text" name="lname" value="<?php echo $lname ?>" required><br>
-                            <div class="position-and-handling-pe-grade">
-                                <div class="position">
-                                    <label>POSITION</label><br>
-                                    <input type="text" name="position" value="<?php echo $position ?>" required><br>
-                                </div>
+                            <div class="handling-pe-grade">
                                 <div>
                                     <label>HANDLING PE GRADE</label><br>
                                     <select name='grade' required>
@@ -123,9 +119,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                                                             } ?>>Six</option>
                                     </select>
                                 </div>
+                                <div>
+                                    <label>SECTION</label><br>
+                                    <input type="text" name="section" value="<?php echo $section ?>" required><br><br>
+                                    
+                                </div>
                             </div>
-                            <label>SECTION</label><br>
-                            <input type="text" name="section" value="<?php echo $section ?>" required><br><br>
                             <input type="submit" name="update" value="Save Changes" onclick="return confirm('You are about to do some changes. Do you want to proceed?')">
                         </div>
 
