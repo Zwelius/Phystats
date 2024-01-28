@@ -159,7 +159,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                             </tr>
 
                             <tr>
-                                <th colspan="2"><input type="date" name="bday" min="<?php echo date("Y-m-d", strtotime("-17 years")); ?>" max="<?php echo date("Y-m-d", strtotime("-6 years")); ?>" required></th>
+                                <th colspan="2"><input type="date" name="bday"
+                                        min="<?php echo date("Y-m-d", strtotime("-17 years")); ?>"
+                                        max="<?php echo date("Y-m-d", strtotime("-6 years")); ?>" required></th>
                                 <th colspan="2">
                                     <select name="sex">
                                         <option value="Male">Male</option>
@@ -184,25 +186,34 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                                 </th>
                             </tr>
                             <tr>
-                                <th><label for="height">HEIGHT (m):</label><br><input type="number" name="height" min="0" step="0.01" required>
+                                <th><label for="height">HEIGHT (m):</label><br><input type="number" name="height"
+                                        min="0" step="0.01" required>
                                 </th>
-                                <th><label for="weight">WEIGHT (kg):</label><br><input type="number" name="weight" min="0" step="0.01" required>
+                                <th><label for="weight">WEIGHT (kg):</label><br><input type="number" name="weight"
+                                        min="0" step="0.01" required>
                                 </th>
-                                <th><label for="HRbefore">Before Activity</label><br><input type="number" name="HRbefore" step="0.01" min="40" max="220" required></th>
-                                <th><label for="HRafter">After Activity</label><br><input type="number" name="HRafter" step="0.01" min="40" max="220" required></th>
+                                <th><label for="HRbefore">Before Activity</label><br><input type="number"
+                                        name="HRbefore" step="0.01" min="40" max="220" required></th>
+                                <th><label for="HRafter">After Activity</label><br><input type="number" name="HRafter"
+                                        step="0.01" min="40" max="220" required></th>
                             </tr>
                             <tr>
                                 <th colspan="4">&nbsp;</th><!--empty-->
                             </tr>
                             <tr>
-                                <th colspan="2" class="category"><label for="category">FLEXIBILITY</label><br><label for="zipper">ZIPPER TEST OVERLAP/GAP (cm)</label></th>
+                                <th colspan="2" class="category"><label for="category">FLEXIBILITY</label><br><label
+                                        for="zipper">ZIPPER TEST OVERLAP/GAP (cm)</label></th>
                                 <th colspan="2"><br><label for="sar">SIT AND REACH SCORE (cm)</label></th>
                             </tr>
                             <tr>
-                                <th><label for="zipperL">Left</label><br> <input type="number" name="zipperL" step="0.01" required></th>
-                                <th><label for="zipperR">Right</label><br><input type="number" name="zipperR" step="0.01" required></th>
-                                <th><label for="sar1">First Trial</label><br><input type="number" name="sar1" step="0.01" min="0" required></th>
-                                <th><label for="sar2">Second Trial</label><br><input type="number" name="sar2" step="0.01" min="0" required></th>
+                                <th><label for="zipperL">Left</label><br> <input type="number" name="zipperL"
+                                        step="0.01" required></th>
+                                <th><label for="zipperR">Right</label><br><input type="number" name="zipperR"
+                                        step="0.01" required></th>
+                                <th><label for="sar1">First Trial</label><br><input type="number" name="sar1"
+                                        step="0.01" min="0" required></th>
+                                <th><label for="sar2">Second Trial</label><br><input type="number" name="sar2"
+                                        step="0.01" min="0" required></th>
                             </tr>
                             <tr>
                                 <th colspan="2">&nbsp;</th><!--empty-->
@@ -211,8 +222,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                                 <th colspan="2" class="category"><label for="category">STRENGTH</label></th>
                             </tr>
                             <tr>
-                                <th><label for="pushups">NO. OF PUSH UPS</label><br> <input type="number" name="pushups" min="0" required></th>
-                                <th><label for="plank">BASIC PLANK (sec)</label><br><input type="number" name="plank" min="0" required></th>
+                                <th><label for="pushups">NO. OF PUSH UPS</label><br> <input type="number" name="pushups"
+                                        min="0" required></th>
+                                <th><label for="plank">BASIC PLANK (sec)</label><br><input type="number" name="plank"
+                                        min="0" required></th>
                             </tr>
                         </table>
                         <div class="button-container">
@@ -257,11 +270,15 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                                 <th colspan="2"><label for="stork-balance">STORK BALANCE TEST (sec)</label></th>
                             </tr>
                             <tr>
-                                <th><label for="clockwise">Clockwise</label><br><input type="number" name="hexclock" min="0" required></th>
-                                <th><label for="hexcounter">Counter Clockwise</label><br><input type="number" name="hexcounter" min="0" required></th>
-                                <th><label for="storkleft">Left Foot</label><br><input type="number" name="storkleft" min="0" required>
+                                <th><label for="clockwise">Clockwise</label><br><input type="number" name="hexclock"
+                                        min="0" required></th>
+                                <th><label for="hexcounter">Counter Clockwise</label><br><input type="number"
+                                        name="hexcounter" min="0" required></th>
+                                <th><label for="storkleft">Left Foot</label><br><input type="number" name="storkleft"
+                                        min="0" required>
                                 </th>
-                                <th><label for="storkright">Right Foot</label><br><input type="number" name="storkright" min="0" required>
+                                <th><label for="storkright">Right Foot</label><br><input type="number" name="storkright"
+                                        min="0" required>
                                 </th>
                             </tr>
                             <tr>
@@ -275,11 +292,14 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                                 <th colspan="2"><label for="stick">STICK DROP TEST (cm)</label></th>
                             </tr>
                             <tr>
-                                <th><label for="stick1">First Trial</label><br><input type="number" name="stick1" step="0.01" min="0" max="30.48" required>
+                                <th><label for="stick1">First Trial</label><br><input type="number" name="stick1"
+                                        step="0.01" min="0" max="30.48" required>
                                 </th>
-                                <th><label for="stick2">Second Trial</label><br><input type="number" name="stick2" step="0.01" min="0" max="30.48" required>
+                                <th><label for="stick2">Second Trial</label><br><input type="number" name="stick2"
+                                        step="0.01" min="0" max="30.48" required>
                                 </th>
-                                <th><label for="stick3">Third Trial</label><br><input type="number" name="stick3" step="0.01" min="0" max="30.48" required>
+                                <th><label for="stick3">Third Trial</label><br><input type="number" name="stick3"
+                                        step="0.01" min="0" max="30.48" required>
                                 </th>
                             </tr>
                         </table>
@@ -304,21 +324,88 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
         //    modal.style.display = 'block';
         //}
 
-        close.onclick = function() {
+        close.onclick = function () {
             //modal.style.display = 'none';
             window.location.replace("list.php");
+        }
+
+        //validation thingy
+        function validateStudentInformation() {
+            const name = document.querySelector('input[name="name"]').value;
+            const bday = document.querySelector('input[name="bday"]').value;
+            const sex = document.querySelector('select[name="sex"]').value;
+
+            if (name === "" || bday === "" || sex === "") {
+                alert("Please fill in all required fields in student information.");
+                return false;
+            }
+
+            return true;
+        }
+
+        function validateHealthRelated() {
+            const height = document.querySelector('input[name="height"]').value;
+            const weight = document.querySelector('input[name="weight"]').value;
+            const HRbefore = document.querySelector('input[name="HRbefore"]').value;
+            const HRafter = document.querySelector('input[name="HRafter"]').value;
+            const zipperL = document.querySelector('input[name="zipperL"]').value;
+            const zipperR = document.querySelector('input[name="zipperR"]').value;
+            const sar1 = document.querySelector('input[name="sar1"]').value;
+            const sar2 = document.querySelector('input[name="sar2"]').value;
+            const pushups = document.querySelector('input[name="pushups"]').value;
+            const plank = document.querySelector('input[name="plank"]').value;
+
+            if (height === "" || weight === "" || HRbefore === "" || HRafter === "" ||
+                zipperL === "" || zipperR === "" || sar1 === "" || sar2 === "" ||
+                pushups === "" || plank === "") {
+                alert("Please fill in all required fields in health-related.");
+                return false;
+            }
+
+            return true;
+        }
+
+        function validateSkillRelated() {
+            const juggling = document.querySelector('input[name="juggling"]').value;
+            const sprinttime = document.querySelector('input[name="sprinttime"]').value;
+            const slj1 = document.querySelector('input[name="slj1"]').value;
+            const slj2 = document.querySelector('input[name="slj2"]').value;
+            const hexclock = document.querySelector('input[name="hexclock"]').value;
+            const hexcounter = document.querySelector('input[name="hexcounter"]').value;
+            const storkleft = document.querySelector('input[name="storkleft"]').value;
+            const storkright = document.querySelector('input[name="storkright"]').value;
+            const stick1 = document.querySelector('input[name="stick1"]').value;
+            const stick2 = document.querySelector('input[name="stick2"]').value;
+            const stick3 = document.querySelector('input[name="stick3"]').value;
+
+            if (juggling === "" || sprinttime === "" || slj1 === "" || slj2 === "" ||
+                hexclock === "" || hexcounter === "" || storkleft === "" || storkright === "" ||
+                stick1 === "" || stick2 === "" || stick3 === "") {
+                alert("Please fill in all required fields in skill-related.");
+                return false;
+            }
+
+            return true;
         }
 
         //tabs
         let currentTab = 1;
 
         function nextTab() {
-            if (currentTab < 3) {
-                document.getElementById(`tab${currentTab}`).style.display = 'none';
-                currentTab++;
-                document.getElementById(`tab${currentTab}`).style.display = 'block';
-                updateProgressBar();
+            if (currentTab === 1 && !validateStudentInformation()) {
+                return;
             }
+            if (currentTab === 2 && !validateHealthRelated()) {
+                return;
+            }
+            if (currentTab === 3 && !validateSkillRelated()) {
+                return;
+            }
+
+            document.getElementById(`tab${currentTab}`).style.display = 'none';
+            currentTab++;
+            document.getElementById(`tab${currentTab}`).style.display = 'block';
+            updateProgressBar();
         }
 
         function previousTab() {
@@ -328,11 +415,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                 document.getElementById(`tab${currentTab}`).style.display = 'block';
                 updateProgressBar();
             }
-        }
-
-        function updateProgressBar() {
-            const progressBar = document.querySelector('.progress-bar');
-            progressBar.style.width = `${(currentTab - 1) * 50}%`;
         }
     </script>
 </body>
