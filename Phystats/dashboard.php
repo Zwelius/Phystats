@@ -29,7 +29,7 @@ session_start();
     if (empty($_SESSION["principal_ID"])) {
         header("Location: index.php");
     } else {
-        $p_id = $_SESSION["principal_ID"];
+        $principal_ID = $_SESSION["principal_ID"];
         $list = "SELECT COUNT(*) as `count` FROM `student_tb` INNER JOIN `studenttestdata_tb` ON studenttestdata_tb.student_ID = student_tb.student_ID INNER JOIN `testinfo_tb` ON testinfo_tb.testinfo_ID = studenttestdata_tb.testinfo_ID INNER JOIN `studenttestresult_tb` ON studenttestresult_tb.testdata_ID = studenttestdata_tb.testdata_ID INNER JOIN `teacher_tb` ON teacher_tb.teacher_ID = testinfo_tb.teacher_ID INNER JOIN `principal_tb` ON principal_tb.principal_ID = teacher_tb.principal_ID";
         $overallstudents = mysqli_query($connection, $list);
         $fit = $list . " WHERE studenttestresult_tb.fitnessResult = 'Physically Fit'";

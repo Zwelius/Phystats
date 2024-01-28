@@ -78,12 +78,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
         </div>
     </nav>
 
-    <button id="openAddStudent">Add Student</button>
+    <!--<button id="openAddStudent">Add Student</button>-->
 
     <div id="addStudentModal" class="modal">
         <div class="modal-content">
             <form method="POST">
-                <span class="close" id="closeAddStudent">&times;</span>
+                <span class="close" id="closeAddStudent">&#129092; BACK</span>
 
                 <div class="tabs">
                     <div class="tab">Student Information</div>
@@ -320,16 +320,17 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
 
     <script>
         //modal
-        var modal = document.getElementById('addStudentModal');
-        var open = document.getElementById('openAddStudent');
+        //var modal = document.getElementById('addStudentModal');
+        //var open = document.getElementById('openAddStudent');
         var close = document.getElementById('closeAddStudent');
 
-        open.onclick = function () {
-            modal.style.display = 'block';
-        }
+        //open.onclick = function () {
+        //    modal.style.display = 'block';
+        //}
         
         close.onclick = function () {
-            modal.style.display = 'none';
+            //modal.style.display = 'none';
+            window.location.replace("list.php");
         }
 
         //tabs
