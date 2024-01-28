@@ -47,11 +47,6 @@ input[name="age"] {
     padding: 10px;
 }
 
-input[name="weight"],
-input[name="height"] {
-    width: 128px;
-    padding: 10px;
-}
 
 select {
     width: 150px;
@@ -71,6 +66,8 @@ label[for="category"] {
     font-weight: bold;
 }
 
+label[for="weight"],
+label[for="height"],
 label[for="HRbefore"],
 label[for="HRafter"],
 label[for="zipperL"],
@@ -90,6 +87,8 @@ label[for="stick3"] {
     font-weight: lighter;
 }
 
+input[name="weight"],
+input[name="height"],
 input[name="HRbefore"],
 input[name="HRafter"],
 input[name="zipperL"],
@@ -117,7 +116,7 @@ input[name="HRafter"],
 input[name="stick1"],
 input[name="stick2"],
 input[name="stick3"] {
-    width: 86%;
+    width: 87.5%;
 }
 
 /*****buttons*****/
