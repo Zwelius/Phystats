@@ -203,6 +203,6 @@ input[name="save"]:hover,
 
 .content {
     margin-top: 20px;
-    height: 400px;
+    height: 58vh;
     overflow-y: auto;
 }

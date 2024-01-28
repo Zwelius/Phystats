@@ -84,7 +84,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
     <div id="addStudentModal" class="modal">
         <div class="modal-content">
             <form method="POST">
-                <span class="close" id="closeAddStudent">&#129092; BACK</span>
+                <span class="close" id="closeAddStudent">&#129092;</span>
 
                 <div class="tabs">
                     <div class="tab">Student Information</div>
@@ -166,16 +166,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                                 <!--empty-->
                                 <th colspan="6">&nbsp;</th>
                             </tr>
-                            <tr>
-                                <th colspan="2"><label for="height">HEIGHT (m):</label></th>
-                                <th colspan="2"><label for="weight">WEIGHT (kg):</label></th>
-                            </tr>
-                            <tr>
-                                <th colspan="2"><input type="number" name="height" min="0" step="0.01" required>
-                                </th>
-                                <th colspan="2"><input type="number" name="weight" min="0" step="0.01" required>
-                                </th>
-                            </tr>
                         </table>
                         <div class="button-container">
                             <button class="next" onclick="nextTab()">Next</button>
@@ -185,13 +175,27 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                     <div id="tab2" class="tab-content" style="display: none;">
                         <table class="add-students-table">
                             <tr>
+                                <th colspan="2" class="category"><label for="category">BODY
+                                        COMPOSITION</label><br><label>Body Mass Index (BMI)</label>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th colspan="2"><label for="height">HEIGHT (m):</label></th>
+                                <th colspan="2"><label for="weight">WEIGHT (kg):</label></th>
+                            </tr>
+                            <tr>
+                                <th colspan="3"><input type="number" name="height" min="0" step="0.01" required>
+                                </th>
+                                <th colspan="2"><input type="number" name="weight" min="0" step="0.01" required>
+                                </th>
+                            </tr>
+                            <tr>
                                 <th colspan="2" class="category"><label for="category">CARDIOVASCULAR
                                         ENDURANCE</label><br><label>3-MINUTE STEP (Heart rate per minute)</label>
                                 </th>
                                 <th colspan="3">&nbsp;</th><!--empty-->
                                 <th colspan="2" class="category"><label for="category">FLEXIBILITY</label><br><label
                                         for="zipper">ZIPPER TEST OVERLAP/GAP (cm)</label></th>
-
                             </tr>
                             <tr>
                                 <th><label for="HRbefore">Before Activity</label><br><input type="number"
@@ -328,7 +332,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
         //open.onclick = function () {
         //    modal.style.display = 'block';
         //}
-        
+
         close.onclick = function () {
             //modal.style.display = 'none';
             window.location.replace("list.php");
