@@ -23,12 +23,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
         header("Location: index.php");
     } else {
         $teacher_ID = $_SESSION["teacher_ID"];
-        $student_ID = $_GET['student_ID'];
+        $testdata_ID = $_GET['testdata_ID'];
 
         $syears = mysqli_query($connection, "SELECT * FROM `schoolyear_tb` ORDER BY `schoolYEAR` DESC");
         $quarter = mysqli_query($connection, "SELECT * FROM `quarter_tb`");
         $testtype = mysqli_query($connection, "SELECT * FROM `testtype_tb`");
-        $sqlquery = mysqli_query($connection, "SELECT * FROM `student_tb` INNER JOIN `studenttestdata_tb` ON student_tb.student_ID = studenttestdata_tb.student_ID INNER JOIN `testinfo_tb` ON studenttestdata_tb.testinfo_ID = testinfo_tb.testinfo_ID WHERE student_tb.student_ID = $student_ID AND studenttestdata_tb.student_ID = $student_ID");
+        $sqlquery = mysqli_query($connection, "SELECT * FROM `studenttestdata_tb` INNER JOIN `student_tb` ON student_tb.student_ID = studenttestdata_tb.student_ID INNER JOIN `testinfo_tb` ON studenttestdata_tb.testinfo_ID = testinfo_tb.testinfo_ID WHERE studenttestdata_tb.testdata_ID = $testdata_ID");
         $data = mysqli_fetch_assoc($sqlquery);
 
         if (isset($_POST['cancel'])) {
@@ -42,9 +42,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                 $row = mysqli_fetch_assoc($query);
                 $testinfo_ID = $row['testinfo_ID'];
             }
-            $testdata = mysqli_query($connection, "SELECT * FROM `studenttestdata_tb` INNER JOIN `student_tb` ON student_tb.student_ID = studenttestdata_tb.student_ID WHERE studenttestdata_tb.student_ID = $student_ID");
+            $testdata = mysqli_query($connection, "SELECT * FROM `studenttestdata_tb` INNER JOIN `student_tb` ON student_tb.student_ID = studenttestdata_tb.student_ID WHERE studenttestdata_tb.testdata_ID = $testdata_ID");
             $row = mysqli_fetch_assoc($testdata);
-            $testdata_ID = $row['testdata_ID'];
+            $student_ID = $row['student_ID'];
             $age = $row['age'];
 
             $temp = $_POST['weight'] / ($_POST['height'] ** 2);
