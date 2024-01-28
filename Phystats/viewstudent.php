@@ -6,11 +6,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
 <html>
     <head>
         <meta charset="UTF-8">
-        <title></title>
+        <title>Phystats - Student Info</title>
     </head>
     <body>
         <?php
         // put your code here
         ?>
+        YURMOMS AHO
     </body>
 </html>

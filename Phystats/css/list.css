@@ -94,3 +94,6 @@ span {
     color: grey;
     padding: 10px;
 }
+tr:not(:first-child):hover{
+    opacity: 0.7;
+}

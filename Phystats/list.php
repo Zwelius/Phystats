@@ -78,14 +78,11 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                 case "name":
                     $list .= " ORDER BY `studentNAME`";
                     break;
-                case "height":
-                    $list .= " ORDER BY `height`";
+                case "sex":
+                    $list .= " ORDER BY `studentSEX`";
                     break;
-                case "weight":
-                    $list .= " ORDER BY `weight`";
-                    break;
-                case "age":
-                    $list .= " ORDER BY `age`";
+                case "bday":
+                    $list .= " ORDER BY `studentBIRTHDATE`";
                     break;
             }
             $studlist = mysqli_query($connection, $list);
@@ -163,18 +160,16 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                         </select>
                         <span>SORT BY</span>
                         <select name="sort" onchange="this.form.submit()">
+                            <option value="">Date Added</option>
                             <option value="name" <?php if (isset($_POST['sort']) && $_POST['sort'] === "name") {
                                 echo 'selected';
                             } ?>>Name</option>
-                            <option value="height" <?php if (isset($_POST['sort']) && $_POST['sort'] === "height") {
+                            <option value="sex" <?php if (isset($_POST['sort']) && $_POST['sort'] === "sex") {
                                 echo 'selected';
-                            } ?>>Height</option>
-                            <option value="weight" <?php if (isset($_POST['sort']) && $_POST['sort'] === "weight") {
+                            } ?>>Sex</option>
+                            <option value="bday" <?php if (isset($_POST['sort']) && $_POST['sort'] === "bday") {
                                 echo 'selected';
-                            } ?>>Weight</option>
-                            <option value="age" <?php if (isset($_POST['sort']) && $_POST['sort'] === "age") {
-                                echo 'selected';
-                            } ?>>Age</option>
+                            } ?>>Birth Date</option>
                         </select>
                     </form>
                     <input type="text" name="search" id="search" onkeyup="searchFunction()"
@@ -185,27 +180,21 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
 
             <div>
                 <table class="list-table">
-                    <tr>
+                    <tr">
                         <th>NAME</th>
                         <th>BIRTH DATE</th>
                         <th>SEX</th>
-                        <th>HEIGHT (m)</th>
-                        <th>WEIGHT (kg)</th>
-                        <th>AGE</th>
-                        <th>ACTION</th>
-                    </tr>
 
                     <?php
                     while ($row = mysqli_fetch_assoc($studlist)) {
-                        echo "<tr>";
-                        echo "<td id='names'>{$row['studentNAME']}</td>";
-                        echo "<td>{$row['studentBIRTHDATE']}</td>";
-                        echo "<td>{$row['studentSEX']}</td>";
-                        echo "<td>{$row['height']}</td>";
-                        echo "<td>{$row['weight']}</td>";
-                        echo "<td>{$row['age']}</td>";
-                        echo "<td><a href='viewstudent.php?student_ID={$row['student_ID']}' target='_blank'></a>&nbsp;&nbsp;<a href='updatestudent.php?student_ID={$row['student_ID']}'><img class='action' src='assets/edit.png'></a>&nbsp;&nbsp;<a href='delete.php?student_ID={$row['student_ID']}'><img class='action' src='assets/delete.png'></a></td>";
-                        echo "</tr>";
+                        ?>
+                        <tr onclick="window.open('viewstudent.php?student_ID=<?php echo $row['student_ID'];?>', '_blank');">
+                        <td id='names'><?php echo $row['studentNAME']; ?></td>
+                        <td><?php echo $row['studentBIRTHDATE']; ?></td>
+                        <td><?php echo $row['studentSEX']; ?></td>
+                        <!--echo "<td><a href='viewstudent.php?student_ID={$row['student_ID']}' target='_blank'></a>&nbsp;&nbsp;<a href='updatestudent.php?student_ID={$row['student_ID']}'><img class='action' src='assets/edit.png'></a>&nbsp;&nbsp;<a href='delete.php?student_ID={$row['student_ID']}'><img class='action' src='assets/delete.png'></a></td>";
+                    --></tr>
+                        <?php
                         $hasStudents = true;
                     }
                     if (!$hasStudents) {
