@@ -571,3 +571,21 @@ function physicallyFit($bodyComposition, $cardiovascularEndurance, $strength, $f
         return "Not Physically Fit";
     }
 }
+function healthRemarks($bodyComposition, $cardiovascularEndurance, $strength, $flexibility){
+    $health = (bodyComposition($bodyComposition) + interpretation_score($cardiovascularEndurance) + interpretation_score($strength) + interpretation_score($flexibility)) / 4;
+    $result = number_format((float)$health, 2, ".","");
+    if ($result >= 3) {
+        return "PASSED";
+    } else {
+        return "FAILED";
+    }
+}
+function skillRemarks($coordination, $agility, $speed, $power, $balance, $reactionTime){
+    $skill = (interpretation_score($coordination) + interpretation_score($agility) + interpretation_score($speed) + interpretation_score($power) + interpretation_score($balance) + interpretation_score($reactionTime)) /6;
+    $result = number_format((float)$skill, 2, ".","");
+    if ($result >= 3) {
+        return "PASSED";
+    } else {
+        return "FAILED";
+    }
+}

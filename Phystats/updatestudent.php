@@ -11,6 +11,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
 <head>
     <meta charset="UTF-8">
     <title>Phystats - Edit Students</title>
+    <link rel="icon" type="image/x-icon" href="assets/logo.ico">
     <link rel="stylesheet" href="css/nav.css" />
     <link rel="stylesheet" href="css/add.css" />
 </head>

@@ -7,6 +7,7 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <title>Phystats - Dashboard</title>
+    <link rel="icon" type="image/x-icon" href="assets/logo.ico">
     <link rel="stylesheet" href="css/nav.css" />
     <link rel="stylesheet" href="css/dashboard.css" />
     <script type="text/javascript" src="js/script.js"></script>

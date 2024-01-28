@@ -11,6 +11,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
 <head>
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Phystats - Profile</title>
+    <link rel="icon" type="image/x-icon" href="assets/logo.ico">
     <link rel="stylesheet" href="css/nav.css" />
     <link rel="stylesheet" href="css/profile.css" />
 </head>
@@ -38,7 +39,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
             $temp = mysqli_fetch_array($teachername);
             $temp_ID = $temp['teacher_ID'];
             if ($temp_ID != $teacher_ID && ($teachername && mysqli_num_rows($teachername) > 0)) {
-                //echo '<script>alert("Teacher account already exists. Please go see the admin if there are problems.");</script>';
+                echo '<script>alert("Teacher account already exists. Please go see the admin if there are problems.");</script>';
             } else {
                 $login = mysqli_query($connection, "SELECT * FROM `teacher_tb` WHERE `teacher_EMAIL` = '" . $_POST['email'] . "'");
                 $temp = mysqli_fetch_array($login);

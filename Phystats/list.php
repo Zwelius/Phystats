@@ -11,6 +11,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
 <head>
     <meta charset="UTF-8">
     <title>Phystats - Student List</title>
+    <link rel="icon" type="image/x-icon" href="assets/logo.ico">
     <link rel="stylesheet" href="css/nav.css" />
     <link rel="stylesheet" href="css/list.css" />
     <script type="text/javascript" src="js/script.js"></script>
@@ -160,7 +161,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                         </select>
                         <span>SORT BY</span>
                         <select name="sort" onchange="this.form.submit()">
-                            <option value="">Date Added</option>
+                            <option value="">Time Added</option>
                             <option value="name" <?php if (isset($_POST['sort']) && $_POST['sort'] === "name") {
                                 echo 'selected';
                             } ?>>Name</option>
