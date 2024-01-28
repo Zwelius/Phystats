@@ -15,59 +15,9 @@ body {
     font-family: 'Poppins';
 }
 
-.add-form {
-    padding: 0 11%;
-    margin: 45px auto;
-}
-
 form {
     padding: 30px;
     background-color: white;
-    border-radius: 5px;
-}
-
-.add-form p {
-    font-size: 32px;
-    text-align: center;
-    font-weight: bold;
-}
-
-/*****tabs*****/
-.tab-container {
-    color: white;
-    display: flex;
-    flex-wrap: wrap;
-    padding: 25px;
-}
-
-.tab-container input[type="radio"] {
-    display: none;
-}
-
-.tab-container label[for="student-information"],
-.tab-container label[for="health-related-test"],
-.tab-container label[for="skill-related-test"] {
-    background: #C2D7EA;
-    width: 205px;
-    padding: 15px;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    text-align: center;
-}
-
-.tab-container .tab {
-    color: black;
-    width: 100%;
-    order: 1;
-    display: none;
-}
-
-.tab-container input[type='radio']:checked+label+.tab {
-    display: block;
-}
-
-.tab-container input[type="radio"]:checked+label {
-    background: #0679E2;
 }
 
 

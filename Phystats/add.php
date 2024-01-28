@@ -22,7 +22,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
         header("Location: index.php");
     } else {
         $teacher_ID = $_SESSION["teacher_ID"];
-
         $syears = mysqli_query($connection, "SELECT * FROM `schoolyear_tb` ORDER BY `schoolYEAR` DESC");
         $quarter = mysqli_query($connection, "SELECT * FROM `quarter_tb`");
         $testtype = mysqli_query($connection, "SELECT * FROM `testtype_tb`");

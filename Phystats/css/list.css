@@ -86,14 +86,3 @@ table.rounded-corners td {
     color: grey;
     padding: 10px;
 }
-
-table.rounded-corners {
-    border-radius: 5px;
-    text-align: center;
-    font-size: 15px;
-    font-weight: bold;
-    border-spacing: 0;
-    border-collapse: separate;
-    border: var(--border);
-    overflow: hidden;
-}
