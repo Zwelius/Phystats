@@ -17,17 +17,18 @@ body {
 
 form {
     padding: 30px;
+    border-radius: 15px;
     background-color: white;
 }
 
 
 /*****table*****/
-table {
+.add-students-table {
     margin-top: 10px;
     text-align: left;
 }
 
-table label {
+.add-students-table label {
     font-size: 12px;
 }
 
@@ -121,10 +122,13 @@ input[name="stick3"] {
 
 /*****buttons*****/
 .button-container {
-    padding: 0 25px;
+    margin-top: 20px;
+    float: right;
 }
 
-input[type="submit"] {
+input[type="submit"],
+.next,
+.previous {
     color: white;
     width: 100px;
     padding: 10px 15px;
@@ -134,20 +138,79 @@ input[type="submit"] {
     cursor: pointer;
 }
 
-input[name="save"] {
+input[name="save"],
+.next {
     background-color: #0679E2;
     transition: all 400ms ease-in-out;
 }
 
-input[name="save"]:hover {
+input[name="save"]:hover,
+.next:hover {
     background-color: #133A84;
 }
 
-input[name="cancel"] {
+.previous {
     background-color: #FE6F5F;
     transition: all 400ms ease-in-out;
 }
 
-input[name="cancel"]:hover {
+.previous:hover {
     background-color: #c02615;
+}
+
+/*****modal*****/
+.modal {
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 100%;
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.modal-content {
+    width: 65%;
+    margin: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: black;
+}
+
+/*inside modal*/
+.tabs {
+    display: flex;
+    justify-content: space-between;
+}
+
+.tab {
+    color: #0679E2;
+    padding: 10px 20px;
+    font-weight: bold;
+}
+
+.progress-bar {
+    height: 5px;
+    background-color: #0679E2;
+    width: 0;
+    transition: 0.5s ease;
+}
+
+.content {
+    margin-top: 20px;
+    height: 400px;
+    overflow-y: auto;
 }

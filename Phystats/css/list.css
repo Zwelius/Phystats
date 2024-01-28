@@ -71,17 +71,25 @@ span {
     background-color: #133A84;
 }
 
-table {
+.list-table {
     width: 100%;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 15px;
+    font-weight: bold;
+    border-spacing: 0;
+    border-collapse: separate;
+    border: var(--border);
+    overflow: hidden;
 }
 
-table.rounded-corners th {
+.list-table th {
     background: #27A655;
     color: white;
     padding: 10px;
 }
 
-table.rounded-corners td {
+.list-table td {
     background: #ffffff;
     color: grey;
     padding: 10px;

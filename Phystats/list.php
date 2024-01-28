@@ -184,7 +184,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
             </div>
 
             <div>
-                <table id="table" class="rounded-corners">
+                <table class="list-table">
                     <tr>
                         <th>NAME</th>
                         <th>BIRTH DATE</th>
