@@ -13,6 +13,14 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
     <title>Phystats - Student Info</title>
     <link rel="icon" type="image/x-icon" href="assets/logo.ico">
     <link rel="stylesheet" href="css/nav.css">
+    <!--
+    <script defer>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById("test_form").submit();
+            console.log("Content loaded!");
+        });
+    </script>
+    -->
 </head>
 
 <body>
@@ -50,7 +58,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
         <h1><?php echo $studentNAME; ?></h1>
         <h3><?php echo $studentBIRTHDATE . "&nbsp;&nbsp;&nbsp;" . $studentSEX; ?></h3>
         <div>
-            <form method="POST">
+            <form method="POST" id="test_form">
                 <select name="grade" onload="this.form.submit()" onchange="this.form.submit()">
                     <?php
                     while ($gs = mysqli_fetch_array($gradesql)) {
@@ -284,5 +292,4 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
         </div>
     </div>
 </body>
-
 </html>
