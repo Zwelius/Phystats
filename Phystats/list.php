@@ -180,7 +180,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
             </div>
 
             <div>
-                <table class="list-table">
+                <table class="list-table" id="table">
                     <tr">
                         <th>NAME</th>
                         <th>BIRTH DATE</th>

@@ -36,15 +36,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
             $studentBIRTHDATE = $row["studentBIRTHDATE"];
             $studentSEX = $row["studentSEX"];
         }
-        if (empty($_POST['grade'])) {
-            $_POST['grade'] = 1;
-        }
-        if (empty($_POST['quarter'])) {
-            $_POST['quarter'] = 1;
-        }
-        if (empty($_POST['testtype'])) {
-            $_POST['testtype'] = 1;
-        }
     }
     ?>
     <nav>

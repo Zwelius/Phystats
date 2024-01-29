@@ -36,20 +36,23 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
 
         if (isset($_POST['update'])) {
             $teachername = mysqli_query($connection, "SELECT * FROM `teacher_tb` WHERE `teacher_FNAME` = '" . $_POST['fname'] . "' AND `teacher_LNAME` = '" . $_POST['lname'] . "'");
-            $temp = mysqli_fetch_array($teachername);
+            while($temp = mysqli_fetch_array($teachername)){
             $temp_ID = $temp['teacher_ID'];
+            }
             if ($temp_ID != $teacher_ID && ($teachername && mysqli_num_rows($teachername) > 0)) {
                 echo '<script>alert("Teacher account already exists. Please go see the admin if there are problems.");</script>';
             } else {
                 $login = mysqli_query($connection, "SELECT * FROM `teacher_tb` WHERE `teacher_EMAIL` = '" . $_POST['email'] . "'");
-                $temp = mysqli_fetch_array($login);
+                while($temp = mysqli_fetch_array($login)){
                 $temp_ID = $temp['teacher_ID'];
+                }
                 if ($temp_ID != $teacher_ID && ($login && mysqli_num_rows($login) > 0)) {
                     echo '<script>alert("This email is already in use. Please go see the admin if there are problems.");</script>';
                 } else {
                     $gradesection = mysqli_query($connection, "SELECT * FROM `gradesection_tb` WHERE `grade` = '" . $_POST['grade'] . "' AND `section` = '" . $_POST['section'] . "'");
-                    $temp = mysqli_fetch_array($gradesection);
+                    while($temp = mysqli_fetch_array($gradesection)){
                     $temp_ID = $temp['teacher_ID'];
+                    }
                     if ($temp_ID != $teacher_ID && ($gradesection && mysqli_num_rows($gradesection) > 0)) {
                         echo '<script>alert("Grade and Section already assigned to a teacher. Please go see the admin if there are problems.");</script>';
                     } else {
