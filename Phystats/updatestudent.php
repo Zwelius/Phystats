@@ -86,20 +86,27 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
         </div>
     </nav>
 
-    <div class="add-form">
-        <form method="POST">
-            <p>Physical Fitness Test | Edit</p>
-            <div class="tab-container">
-                <input type="radio" id="student-information" name="tab-container" checked="checked">
-                <label for="student-information">Student Information</label>
-                <div class="tab">
-                    <table class="student-information-table">
-                        <tr>
-                            <th colspan="2"><label for="syear">SCHOOL YEAR</label></th>
-                            <th colspan="2"><label for="quarter">QUARTER</label></th>
-                            <th colspan="2"><label for="testtype">TEST TYPE</label></th>
-                        </tr>
-                        <tr>
+    <div id="addStudentModal" class="modal">
+        <div class="modal-content">
+            <form method="POST">
+                <span class="close" id="closeAddStudent">&#129092;</span>
+
+                <div class="tabs">
+                    <div class="tab">Student Information</div>
+                    <div class="tab">Health-Related</div>
+                    <div class="tab">Skill-Related</div>
+                </div>
+
+                <div class="progress-bar"></div>
+
+                <div class="content">
+                    <div id="tab1" class="tab-content">
+                        <table class="add-students-table">
+                            <tr>
+                                <th colspan="2"><label for="syear">SCHOOL YEAR</label></th>
+                                <th colspan="2"><label for="quarter">QUARTER</label></th>
+                                <th colspan="2"><label for="testtype">TEST TYPE</label></th>
+                            </tr>
                             <th colspan="2">
                                 <select name="syear">
                                     <?php
@@ -148,207 +155,307 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                                     ?>
                                 </select>
                             </th>
-                        </tr>
+                            </tr>
 
-                        <tr>
-                            <!--empty-->
-                            <th colspan="6">&nbsp;</th>
-                        </tr>
+                            <tr>
+                                <!--empty-->
+                                <th colspan="6">&nbsp;</th>
+                            </tr>
 
-                        <tr>
-                            <th colspan="6"><label for="name">NAME</label></th>
-                            <th>&nbsp;</th><!--empty-->
-                        </tr>
-                        <tr>
-                            <th colspan="6"><input type="text" name="name" value="<?php echo $data['studentNAME'] ?>" required>
-                            </th>
-                            <th>&nbsp;</th><!--empty-->
-                        </tr>
+                            <tr>
+                                <th colspan="6"><label for="name">FULL NAME</label></th>
+                            </tr>
+                            <tr>
+                                <th colspan="6"><input type="text" name="name"
+                                        value="<?php echo $data['studentNAME'] ?>" required>
+                                </th>
+                                <th>&nbsp;</th><!--empty-->
+                            </tr>
 
-                        <tr>
-                            <th colspan="2"><label for="bday">BIRTH DATE</label></th>
-                            <th colspan="2"><label for="sex">SEX</label></th>
-                            <th colspan="3">&nbsp;</th><!--empty-->
-                        </tr>
+                            <tr>
+                                <th colspan="2"><label for="bday">BIRTH DATE</label></th>
+                                <th colspan="2"><label for="sex">SEX</label></th>
+                            </tr>
 
-                        <tr>
-                            <th colspan="2"><input type="date" name="bday" value="<?php echo $data['studentBIRTHDATE'] ?>"
-                                    min="<?php echo date("Y-m-d", strtotime("-17 years")); ?>" max="<?php echo date("Y-m-d", strtotime("-6 years")); ?>" required></th>
-                            <th colspan="2">
-                                <select name="sex">
-                                    <option value="Male" <?php
-                                    if ($data['studentSEX'] == "Male") {
-                                        echo 'selected';
-                                    }
-                                    ?>>Male</option>
-                                    <option value="Female" <?php
-                                    if ($data['studentSEX'] == "Female") {
-                                        echo 'selected';
-                                    }
-                                    ?>>Female</option>
-                                </select>
-                            </th>
-                            <th colspan="3">&nbsp;</th><!--empty-->
-                        </tr>
-                        <tr>
-                            <!--empty-->
-                            <th colspan="6">&nbsp;</th>
-                        </tr>
-                        <tr>
-                            <th colspan="2"><label for="height">HEIGHT (m):</label></th>
-                            <th colspan="2"><label for="weight">WEIGHT (kg):</label></th>
-                        </tr>
-                        <tr>
-                            <th colspan="2"><input type="number" name="height" step="0.01"
-                                    value="<?php echo $data['height'] ?>" min="0" required></th>
-                            <th colspan="2"><input type="number" name="weight" step="0.01"
-                                    value="<?php echo $data['weight'] ?>" min="0" required></th>
-                        </tr>
-                    </table>
+                            <tr>
+                                <th colspan="2"><input type="date" name="bday"
+                                        value="<?php echo $data['studentBIRTHDATE'] ?>"
+                                        min="<?php echo date("Y-m-d", strtotime("-17 years")); ?>"
+                                        max="<?php echo date("Y-m-d", strtotime("-6 years")); ?>" required></th>
+                                <th colspan="2">
+                                    <select name="sex">
+                                        <option value="Male" <?php
+                                        if ($data['studentSEX'] == "Male") {
+                                            echo 'selected';
+                                        }
+                                        ?>>Male</option>
+                                        <option value="Female" <?php
+                                        if ($data['studentSEX'] == "Female") {
+                                            echo 'selected';
+                                        }
+                                        ?>>Female</option>
+                                    </select>
+                                </th>
+                            </tr>
+                        </table>
+                        <div class="button-container">
+                            <button class="next" onclick="nextTab()">Next</button>
+                        </div>
+                    </div>
+                    <!--end of student info tab-->
+
+                    <!--start of health related test-->
+                    <div id="tab2" class="tab-content" style="display: none;">
+                        <table class="add-students-table">
+                            <tr>
+                                <th colspan="2" class="category"><label for="category">BODY
+                                        COMPOSITION</label><br><label>Body Mass Index (BMI)</label>
+                                </th>
+                                <th colspan="2" class="category"><label for="category">CARDIOVASCULAR
+                                        ENDURANCE</label><br><label>3-MINUTE STEP (Heart rate per minute)</label>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th><label for="height">HEIGHT (m):</label><br><input type="number" name="height"
+                                        step="0.01" value="<?php echo $data['height'] ?>" min="0" required></th>
+                                <th><label for="weight">WEIGHT (kg):</label><br><input type="number" name="weight"
+                                        step="0.01" value="<?php echo $data['weight'] ?>" min="0" required></th>
+                                <th><label for="HRbefore">Before Activity</label><br><input type="number"
+                                        name="HRbefore" step="0.01" value="<?php echo $data['HRbefore'] ?>" min="40"
+                                        max="220" required>
+                                </th>
+                                <th><label for="HRafter">After Activity</label><br><input type="number" name="HRafter"
+                                        step="0.01" value="<?php echo $data['HRafter'] ?>" min="40" max="220" required>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th colspan="4">&nbsp;</th><!--empty-->
+                            </tr>
+                            <tr>
+                                <th colspan="2" class="category"><label for="category">FLEXIBILITY</label><br><label
+                                        for="zipper">ZIPPER TEST OVERLAP/GAP (cm)</label></th>
+                                <th colspan="2"><br><label for="sar">SIT AND REACH SCORE (cm)</label></th>
+                            </tr>
+                            <tr>
+                                <th><label for="zipperL">Left</label><br><input type="number" name="zipperL" step="0.01"
+                                        value="<?php echo $data['zipperLeft'] ?>" required></th>
+                                <th><label for="zipperR">Right</label><br><input type="number" name="zipperR"
+                                        step="0.01" value="<?php echo $data['zipperRight'] ?>" required></th>
+                                <th><label for="sar1">First Trial</label><br><input type="number" name="sar1"
+                                        step="0.01" value="<?php echo $data['sitReach1'] ?>" min="0" required></th>
+                                <th><label for="sar2">Second Trial</label><br><input type="number" name="sar2"
+                                        step="0.01" value="<?php echo $data['sitReach2'] ?>" min="0" required></th>
+                            </tr>
+                            <tr>
+                                <th colspan="2">&nbsp;</th><!--empty-->
+                            </tr>
+                            <tr>
+                                <th colspan="2" class="category"><label for="category">STRENGTH</label></th>
+                            </tr>
+                            <tr>
+                                <th><label for="pushups">NO. OF PUSH UPS</label><br><input type="number" name="pushups"
+                                        value="<?php echo $data['pushupsNo'] ?>" min="0" required>
+                                </th>
+                                <th><label for="plank">BASIC PLANK (sec)</label><br><input type="number" name="plank"
+                                        value="<?php echo $data['plankTime'] ?>" min="0" required></th>
+                        </table>
+                        <div class="button-container">
+                            <button class="previous" onclick="previousTab()">Previous</button>
+                            <button class="next" onclick="nextTab()">Next</button>
+                        </div>
+                    </div>
+
+                    <!--end of health related test-->
+
+                    <!--start of skill related test-->
+                    <div id="tab3" class="tab-content" style="display: none;">
+                        <table class="add-students-table">
+                            <tr>
+                                <th class="category"><label for="category">COORDINATION</label></th>
+                                <th class="category"><label for="category">SPEED</label></th>
+                                <th colspan="2" class="category"><label for="category">POWER</label></th>
+                            </tr>
+                            <tr>
+                                <th><label for="juggling">Juggling:</label></th>
+                                <th><label for="sprinttime">40 METER SPRINT (sec)</label></th>
+                                <th colspan="2"><label for="slg">STANDING LONG JUMP (cm)</label></th>
+                            </tr>
+                            <tr>
+                                <th><br><input type="number" name="juggling" value="<?php echo $data['juggling'] ?>"
+                                        min="0" required></th>
+                                <th><br><input type="number" name="sprinttime" step="0.01"
+                                        value="<?php echo $data['sprintTime'] ?>" min="0" required></th>
+                                <th><label for="slj1">First Trial</label><br><input type="number" name="slj1"
+                                        step="0.01" value="<?php echo $data['longJump1'] ?>" min="0" required></th>
+                                <th><label for="slj2">Second Trial</label><br><input type="number" name="slj2"
+                                        step="0.01" value="<?php echo $data['longJump2'] ?>" min="0" required>
+                                </th>
+                            </tr>
+
+                            <tr>
+                                <th>&nbsp;</th><!--empty-->
+                            </tr>
+
+                            <tr>
+                                <th colspan="2" class="category"><label for="category">AGILITY</label></th>
+                                <th colspan="2" class="category"><label for="category">BALANCE</label></th>
+                            </tr>
+                            <tr>
+                                <th colspan="2"><label for="hexagon">HEXAGON AGILITY TEST (sec)</label></th>
+                                <th colspan="2"><label for="stork-balance">STORK BALANCE TEST (sec)</label></th>
+                            </tr>
+
+                            <tr>
+                                <th><label for="clockwise">Clockwise</label><br><input type="number" name="hexclock"
+                                        value="<?php echo $data['hexagonClockwise'] ?>" min="0" required></th>
+                                <th><label for="hexcounter">Counter Clockwise</label><br><input type="number"
+                                        name="hexcounter" value="<?php echo $data['hexagonCounter'] ?>" min="0"
+                                        required>
+                                </th>
+                                <th><label for="storkleft">Left Foot</label><br><input type="number" name="storkleft"
+                                        value="<?php echo $data['storkLeft'] ?>" min="0" required></th>
+                                <th><label for="storkright">Right Foot</label><br><input type="number" name="storkright"
+                                        value="<?php echo $data['storkRight'] ?>" min="0" required>
+                            </tr>
+
+                            <tr>
+                                <th colspan="4">&nbsp;</th><!--empty-->
+                            </tr>
+
+                            <tr>
+                                <th colspan="2" class="category"><label for="category">REACTION TIME</label></th>
+                            </tr>
+                            <tr>
+                                <th colspan="2"><label for="stick">STICK DROP TEST (cm)</label></th>
+                            </tr>
+
+                            <tr>
+                                <th><label for="stick1">First Trial</label><br><input type="number" name="stick1"
+                                        step="0.01" value="<?php echo $data['stickDrop1'] ?>" min="0" max="30.48"
+                                        required>
+                                </th>
+                                <th><label for="stick2">Second Trial</label><br><input type="number" name="stick2"
+                                        step="0.01" value="<?php echo $data['stickDrop2'] ?>" min="0" max="30.48"
+                                        required>
+                                </th>
+                                <th><label for="stick3">Third Trial</label><br><input type="number" name="stick3"
+                                        step="0.01" value="<?php echo $data['stickDrop3'] ?>" min="0" max="30.48"
+                                        required>
+                                </th>
+                            </tr>
+                        </table>
+                        <div class="button-container">
+                            <button class="previous" onclick="previousTab()">Previous</button>
+                            <input type="submit" name="save" value="Save">
+                        </div>
+                    </div>
                 </div>
-                <!--end of student info tab-->
-
-                <!--start of health related test-->
-                <input type="radio" id="health-related-test" name="tab-container">
-                <label for="health-related-test">Health-Related Test</label>
-                <div class="tab">
-                    <table class="health-related-test">
-                        <tr>
-                            <th colspan="2" class="category"><label for="category">CARDIOVASCULAR
-                                    ENDURANCE</label><br><label>3-MINUTE STEP (Heart rate per minute)</label></th>
-                            <th colspan="3">&nbsp;</th><!--empty-->
-                            <th colspan="2" class="category"><label for="category">FLEXIBILITY</label><br><label
-                                    for="zipper">ZIPPER TEST OVERLAP/GAP (cm)</label></th>
-
-                        </tr>
-                        <tr>
-                            <th><label for="HRbefore">Before Activity</label><br><input type="number" name="HRbefore"
-                                    step="0.01" value="<?php echo $data['HRbefore'] ?>" min="40" max="220" required>
-                            </th>
-                            <th><label for="HRafter">After Activity</label><br><input type="number" name="HRafter"
-                                    step="0.01" value="<?php echo $data['HRafter'] ?>" min="40" max="220" required></th>
-                            <th colspan="3">&nbsp;</th><!--empty-->
-                            <th><label for="zipperL">Left</label><br><input type="number" name="zipperL" step="0.01"
-                                    value="<?php echo $data['zipperLeft'] ?>" required></th>
-                            <th><label for="zipperR">Right</label><br><input type="number" name="zipperR" step="0.01"
-                                    value="<?php echo $data['zipperRight'] ?>" required></th>
-                        </tr>
-                        <tr>
-                            <th colspan="2">&nbsp;</th><!--empty-->
-                        </tr>
-                        <tr>
-                            <th colspan="5" class="category"><label for="category">STRENGTH</label></th>
-                            <th><label for="sar">SIT AND REACH SCORE (cm)</label></th>
-                        </tr>
-                        <tr>
-                            <th><label for="pushups">NO. OF PUSH UPS</label><br><input type="number" name="pushups"
-                                    value="<?php echo $data['pushupsNo'] ?>" min="0" required></th>
-                            <th><label for="plank">BASIC PLANK (sec)</label><br><input type="number" name="plank"
-                                    value="<?php echo $data['plankTime'] ?>" min="0" required></th>
-                            <th colspan="3">&nbsp;</th><!--empty-->
-                            <th><label for="sar1">First Trial</label><br><input type="number" name="sar1" step="0.01"
-                                    value="<?php echo $data['sitReach1'] ?>" min="0" required></th>
-                            <th><label for="sar2">Second Trial</label><br><input type="number" name="sar2" step="0.01"
-                                    value="<?php echo $data['sitReach2'] ?>" min="0" required></th>
-                        </tr>
-                    </table>
-                </div>
-                <!--end of health related test-->
-
-                <!--start of skill related test-->
-                <input type="radio" id="skill-related-test" name="tab-container">
-                <label for="skill-related-test">Skill-Related Test</label>
-                <div class="tab">
-                    <table class="skill-related-test">
-                        <tr>
-                            <th colspan="2" class="category"><label for="category">COORDINATION</label></th>
-                            <th colspan="3">&nbsp;</th><!--empty-->
-                            <th colspan="2" class="category"><label for="category">POWER</label></th>
-                        </tr>
-                        <tr>
-                            <th colspan="5">&nbsp;</th><!--empty-->
-                            <th><label for="slg">STANDING LONG JUMP (cm)</label></th>
-                        </tr>
-                        <tr>
-                            <th><label for="juggling">Juggling:</label><br><input type="number" name="juggling"
-                                    value="<?php echo $data['juggling'] ?>" min="0" required></th>
-                            <th colspan="4">&nbsp;</th><!--empty-->
-                            <th><label for="slj1">First Trial</label><br><input type="number" name="slj1" step="0.01"
-                                    value="<?php echo $data['longJump1'] ?>" min="0" required>
-                            </th>
-                            <th><label for="slj2">Second Trial</label><br><input type="number" name="slj2" step="0.01"
-                                    value="<?php echo $data['longJump2'] ?>" min="0" required>
-                            </th>
-                        </tr>
-
-                        <tr>
-                            <th>&nbsp;</th><!--empty-->
-                        </tr>
-
-                        <tr>
-                            <th colspan="2" class="category"><label for="category">AGILITY</label></th>
-                            <th colspan="3">&nbsp;</th><!--empty-->
-                            <th colspan="2" class="category"><label for="category">BALANCE</label></th>
-                        </tr>
-                        <tr>
-                            <th><label for="hexagon">HEXAGON AGILITY TEST (sec)</label></th>
-                            <th colspan="4">&nbsp;</th><!--empty-->
-                            <th><label for="stork-balance">STORK BALANCE TEST (sec)</label></th>
-                        </tr>
-                        <tr>
-                            <th><label for="clockwise">Clockwise</label><br><input type="number" name="hexclock"
-                                    value="<?php echo $data['hexagonClockwise'] ?>" min="0" required></th>
-                            <th><label for="hexcounter">Counter Clockwise</label><br><input type="number"
-                                    name="hexcounter" value="<?php echo $data['hexagonCounter'] ?>" min="0" required></th>
-                            <th colspan="3">&nbsp;</th><!--empty-->
-                            <th><label for="storkleft">Left Foot</label><br><input type="number" name="storkleft"
-                                    value="<?php echo $data['storkLeft'] ?>" min="0" required>
-                            </th>
-                            <th><label for="storkright">Right Foot</label><br><input type="number" name="storkright"
-                                    value="<?php echo $data['storkRight'] ?>" min="0" required>
-                            </th>
-                        </tr>
-                        <tr>
-                            <th colspan="5">&nbsp;</th><!--empty-->
-                        </tr>
-
-                        <tr>
-                            <th colspan="5">&nbsp;</th><!--empty-->
-                            <th colspan="2" class="category"><label for="category">REACTION TIME</label></th>
-                        </tr>
-                        <tr>
-                            <th colspan="2" class="category"><label for="category">SPEED</label></th>
-                            <th colspan="3">&nbsp;</th><!--empty-->
-                            <th colspan="2"><label for="stick">STICK DROP TEST (cm)</label></th>
-                        </tr>
-                        <tr>
-                            <th><label for="sprinttime">40 METER SPRINT (sec)</label><br><input type="number"
-                                    name="sprinttime" step="0.01" value="<?php echo $data['sprintTime'] ?>" min="0" required>
-                            </th>
-                            <th colspan="4">&nbsp;</th><!--empty-->
-                            <th><label for="stick1">First Trial</label><br> <input type="number" name="stick1"
-                                    step="0.01" value="<?php echo $data['stickDrop1'] ?>" min="0" max="30.48" required>
-                            </th>
-                            <th><label for="stick2">Second Trial</label><br><input type="number" name="stick2"
-                                    step="0.01" value="<?php echo $data['stickDrop2'] ?>" min="0" max="30.48" required>
-                            </th>
-                            <th><label for="stick3">Third Trial</label><br><input type="number" name="stick3"
-                                    step="0.01" value="<?php echo $data['stickDrop3'] ?>" min="0" max="30.48" required>
-
-                            </th>
-                        </tr>
-                    </table>
-                </div>
-                <!--end of skill related test-->
-            </div>
-
-            <div class="button-container">
-                <div id="validation-message"></div>
-                <input type="submit" name="save" value="Save">
-                <input type="submit" name="cancel" value="Cancel" formnovalidate>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
+    <script>
+        //modal
+        //var modal = document.getElementById('addStudentModal');
+        //var open = document.getElementById('openAddStudent');
+        var close = document.getElementById('closeAddStudent');
+
+        //open.onclick = function () {
+        //    modal.style.display = 'block';
+        //}
+
+        close.onclick = function () {
+            //modal.style.display = 'none';
+            window.location.replace("viewstudent.php?student_ID=<?php echo $student_ID; ?>");
+        }
+
+        //validation thingy
+        function validateStudentInformation() {
+            const name = document.querySelector('input[name="name"]').value;
+            const bday = document.querySelector('input[name="bday"]').value;
+            const sex = document.querySelector('select[name="sex"]').value;
+
+            if (name === "" || bday === "" || sex === "") {
+                alert("Please fill in all required fields in student information.");
+                return false;
+            }
+
+            return true;
+        }
+
+        function validateHealthRelated() {
+            const height = document.querySelector('input[name="height"]').value;
+            const weight = document.querySelector('input[name="weight"]').value;
+            const HRbefore = document.querySelector('input[name="HRbefore"]').value;
+            const HRafter = document.querySelector('input[name="HRafter"]').value;
+            const zipperL = document.querySelector('input[name="zipperL"]').value;
+            const zipperR = document.querySelector('input[name="zipperR"]').value;
+            const sar1 = document.querySelector('input[name="sar1"]').value;
+            const sar2 = document.querySelector('input[name="sar2"]').value;
+            const pushups = document.querySelector('input[name="pushups"]').value;
+            const plank = document.querySelector('input[name="plank"]').value;
+
+            if (height === "" || weight === "" || HRbefore === "" || HRafter === "" ||
+                zipperL === "" || zipperR === "" || sar1 === "" || sar2 === "" ||
+                pushups === "" || plank === "") {
+                alert("Please fill in all required fields in health-related.");
+                return false;
+            }
+
+            return true;
+        }
+
+        function validateSkillRelated() {
+            const juggling = document.querySelector('input[name="juggling"]').value;
+            const sprinttime = document.querySelector('input[name="sprinttime"]').value;
+            const slj1 = document.querySelector('input[name="slj1"]').value;
+            const slj2 = document.querySelector('input[name="slj2"]').value;
+            const hexclock = document.querySelector('input[name="hexclock"]').value;
+            const hexcounter = document.querySelector('input[name="hexcounter"]').value;
+            const storkleft = document.querySelector('input[name="storkleft"]').value;
+            const storkright = document.querySelector('input[name="storkright"]').value;
+            const stick1 = document.querySelector('input[name="stick1"]').value;
+            const stick2 = document.querySelector('input[name="stick2"]').value;
+            const stick3 = document.querySelector('input[name="stick3"]').value;
+
+            if (juggling === "" || sprinttime === "" || slj1 === "" || slj2 === "" ||
+                hexclock === "" || hexcounter === "" || storkleft === "" || storkright === "" ||
+                stick1 === "" || stick2 === "" || stick3 === "") {
+                alert("Please fill in all required fields in skill-related.");
+                return false;
+            }
+
+            return true;
+        }
+
+        //tabs
+        let currentTab = 1;
+
+        function nextTab() {
+            if (currentTab === 1 && !validateStudentInformation()) {
+                return;
+            }
+            if (currentTab === 2 && !validateHealthRelated()) {
+                return;
+            }
+            if (currentTab === 3 && !validateSkillRelated()) {
+                return;
+            }
+
+            document.getElementById(`tab${currentTab}`).style.display = 'none';
+            currentTab++;
+            document.getElementById(`tab${currentTab}`).style.display = 'block';
+            updateProgressBar();
+        }
+
+        function previousTab() {
+            if (currentTab > 1) {
+                document.getElementById(`tab${currentTab}`).style.display = 'none';
+                currentTab--;
+                document.getElementById(`tab${currentTab}`).style.display = 'block';
+                updateProgressBar();
+            }
+        }
+    </script>
 </body>
 
 </html>

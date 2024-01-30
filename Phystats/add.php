@@ -174,7 +174,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                             <button class="next" onclick="nextTab()">Next</button>
                         </div>
                     </div>
+                    <!--end of student info tab-->
 
+                    <!--start of health related test-->
                     <div id="tab2" class="tab-content" style="display: none;">
                         <table class="add-students-table">
                             <tr>
@@ -206,7 +208,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                                 <th colspan="2"><br><label for="sar">SIT AND REACH SCORE (cm)</label></th>
                             </tr>
                             <tr>
-                                <th><label for="zipperL">Left</label><br> <input type="number" name="zipperL"
+                                <th><label for="zipperL">Left</label><br><input type="number" name="zipperL"
                                         step="0.01" required></th>
                                 <th><label for="zipperR">Right</label><br><input type="number" name="zipperR"
                                         step="0.01" required></th>
@@ -222,7 +224,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                                 <th colspan="2" class="category"><label for="category">STRENGTH</label></th>
                             </tr>
                             <tr>
-                                <th><label for="pushups">NO. OF PUSH UPS</label><br> <input type="number" name="pushups"
+                                <th><label for="pushups">NO. OF PUSH UPS</label><br><input type="number" name="pushups"
                                         min="0" required></th>
                                 <th><label for="plank">BASIC PLANK (sec)</label><br><input type="number" name="plank"
                                         min="0" required></th>
@@ -233,7 +235,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                             <button class="next" onclick="nextTab()">Next</button>
                         </div>
                     </div>
+                    <!--end of health related test-->
 
+                    <!--start of skill related test-->
                     <div id="tab3" class="tab-content" style="display: none;">
                         <table class="add-students-table">
                             <tr>

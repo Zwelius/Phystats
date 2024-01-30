@@ -36,29 +36,35 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
 
         if (isset($_POST['update'])) {
             $teachername = mysqli_query($connection, "SELECT * FROM `teacher_tb` WHERE `teacher_FNAME` = '" . $_POST['fname'] . "' AND `teacher_LNAME` = '" . $_POST['lname'] . "'");
-            while($temp = mysqli_fetch_array($teachername)){
-            $temp_ID = $temp['teacher_ID'];
-            }
-            if ($temp_ID != $teacher_ID && ($teachername && mysqli_num_rows($teachername) > 0)) {
-                echo '<script>alert("Teacher account already exists. Please go see the admin if there are problems.");</script>';
-            } else {
-                $login = mysqli_query($connection, "SELECT * FROM `teacher_tb` WHERE `teacher_EMAIL` = '" . $_POST['email'] . "'");
-                while($temp = mysqli_fetch_array($login)){
-                $temp_ID = $temp['teacher_ID'];
-                }
-                if ($temp_ID != $teacher_ID && ($login && mysqli_num_rows($login) > 0)) {
-                    echo '<script>alert("This email is already in use. Please go see the admin if there are problems.");</script>';
-                } else {
-                    $gradesection = mysqli_query($connection, "SELECT * FROM `gradesection_tb` WHERE `grade` = '" . $_POST['grade'] . "' AND `section` = '" . $_POST['section'] . "'");
-                    while($temp = mysqli_fetch_array($gradesection)){
+            if ($teachername && mysqli_num_rows($teachername) > 0) {
+                while ($temp = mysqli_fetch_array($teachername)) {
                     $temp_ID = $temp['teacher_ID'];
-                    }
-                    if ($temp_ID != $teacher_ID && ($gradesection && mysqli_num_rows($gradesection) > 0)) {
-                        echo '<script>alert("Grade and Section already assigned to a teacher. Please go see the admin if there are problems.");</script>';
-                    } else {
-                        $updateprofsql = mysqli_query($connection, "UPDATE `teacher_tb` SET `teacher_FNAME`='" . $_POST['fname'] . "',`teacher_LNAME`='" . $_POST['lname'] . "', `teacher_EMAIL`='" . $_POST['email'] . "', `teacher_PASSWORD`='" . $_POST['pass'] . "' WHERE `teacher_ID`='$teacher_ID'");
-                        $updategradesql = mysqli_query($connection, "UPDATE `gradesection_tb` SET `grade`='" . $_POST['grade'] . "',`section`='" . $_POST['section'] . "' WHERE `teacher_ID`='$teacher_ID'");
-                        echo '<script>alert("Updated successfully");window.location.replace("profile.php");</script>';
+                }
+                if ($temp_ID != $teacher_ID) {
+                    echo '<script>alert("Teacher account already exists. Please go see the admin if there are problems.");</script>';
+                } else {
+                    $login = mysqli_query($connection, "SELECT * FROM `teacher_tb` WHERE `teacher_EMAIL` = '" . $_POST['email'] . "'");
+                    if ($login && mysqli_num_rows($login) > 0) {
+                        while ($temp = mysqli_fetch_array($login)) {
+                            $temp_ID = $temp['teacher_ID'];
+                        }
+                        if ($temp_ID != $teacher_ID) {
+                            echo '<script>alert("This email is already in use. Please go see the admin if there are problems.");</script>';
+                        } else {
+                            $gradesection = mysqli_query($connection, "SELECT * FROM `gradesection_tb` WHERE `grade` = '" . $_POST['grade'] . "' AND `section` = '" . $_POST['section'] . "'");
+                            if ($gradesection && mysqli_num_rows($gradesection) > 0) {
+                                while ($temp = mysqli_fetch_array($gradesection)) {
+                                    $temp_ID = $temp['teacher_ID'];
+                                }
+                                if ($temp_ID != $teacher_ID) {
+                                    echo '<script>alert("Grade and Section already assigned to a teacher. Please go see the admin if there are problems.");</script>';
+                                } else {
+                                    $updateprofsql = mysqli_query($connection, "UPDATE `teacher_tb` SET `teacher_FNAME`='" . $_POST['fname'] . "',`teacher_LNAME`='" . $_POST['lname'] . "', `teacher_EMAIL`='" . $_POST['email'] . "', `teacher_PASSWORD`='" . $_POST['pass'] . "' WHERE `teacher_ID`='$teacher_ID'");
+                                    $updategradesql = mysqli_query($connection, "UPDATE `gradesection_tb` SET `grade`='" . $_POST['grade'] . "',`section`='" . $_POST['section'] . "' WHERE `teacher_ID`='$teacher_ID'");
+                                    echo '<script>alert("Updated successfully");window.location.replace("profile.php");</script>';
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -95,7 +101,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                     </div>
 
                     <div class="selection-container">
-                        <input type="submit" name="logout" value="Logout" formnovalidate onclick="return confirm('Are you sure you want to logout?')">
+                        <input type="submit" name="logout" value="Logout" formnovalidate
+                            onclick="return confirm('Are you sure you want to logout?')">
                     </div>
                 </div>
 
@@ -113,29 +120,31 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                                     <label>HANDLING PE GRADE</label><br>
                                     <select name='grade' required>
                                         <option value="Four" <?php if (isset($grade) && $grade === "Four") {
-                                                                    echo 'selected';
-                                                                } ?>>Four</option>
+                                            echo 'selected';
+                                        } ?>>Four</option>
                                         <option value="Five" <?php if (isset($grade) && $grade === "Five") {
-                                                                    echo 'selected';
-                                                                } ?>>Five</option>
+                                            echo 'selected';
+                                        } ?>>Five</option>
                                         <option value="Six" <?php if (isset($grade) && $grade === "Six") {
-                                                                echo 'selected';
-                                                            } ?>>Six</option>
+                                            echo 'selected';
+                                        } ?>>Six</option>
                                     </select>
                                 </div>
                                 <div>
                                     <label>SECTION</label><br>
                                     <input type="text" name="section" value="<?php echo $section ?>" required><br><br>
-                                    
+
                                 </div>
                             </div>
-                            <input type="submit" name="update" value="Save Changes" onclick="return confirm('You are about to do some changes. Do you want to proceed?')">
+                            <input type="submit" name="update" value="Save Changes"
+                                onclick="return confirm('You are about to do some changes. Do you want to proceed?')">
                         </div>
 
                         <div class="personal-details-right">
                             <label>CHANGE EMAIL & PASSWORD</label><br>
                             <input type="text" name="email" placeholder="Email" value="<?php echo $email ?>" required>
-                            <input type="password" name="pass" placeholder="Password" value="<?php echo $pass ?>" required><br>
+                            <input type="password" name="pass" placeholder="Password" value="<?php echo $pass ?>"
+                                required><br>
                         </div>
                     </main>
                 </div>
