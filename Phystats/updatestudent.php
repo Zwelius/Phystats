@@ -264,7 +264,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                             <button class="next" onclick="nextTab()">Next</button>
                         </div>
                     </div>
-
                     <!--end of health related test-->
 
                     <!--start of skill related test-->
@@ -353,109 +352,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
             </form>
         </div>
     </div>
-    <script>
-        //modal
-        //var modal = document.getElementById('addStudentModal');
-        //var open = document.getElementById('openAddStudent');
-        var close = document.getElementById('closeAddStudent');
-
-        //open.onclick = function () {
-        //    modal.style.display = 'block';
-        //}
-
-        close.onclick = function () {
-            //modal.style.display = 'none';
-            window.location.replace("viewstudent.php?student_ID=<?php echo $student_ID; ?>");
-        }
-
-        //validation thingy
-        function validateStudentInformation() {
-            const name = document.querySelector('input[name="name"]').value;
-            const bday = document.querySelector('input[name="bday"]').value;
-            const sex = document.querySelector('select[name="sex"]').value;
-
-            if (name === "" || bday === "" || sex === "") {
-                alert("Please fill in all required fields in student information.");
-                return false;
-            }
-
-            return true;
-        }
-
-        function validateHealthRelated() {
-            const height = document.querySelector('input[name="height"]').value;
-            const weight = document.querySelector('input[name="weight"]').value;
-            const HRbefore = document.querySelector('input[name="HRbefore"]').value;
-            const HRafter = document.querySelector('input[name="HRafter"]').value;
-            const zipperL = document.querySelector('input[name="zipperL"]').value;
-            const zipperR = document.querySelector('input[name="zipperR"]').value;
-            const sar1 = document.querySelector('input[name="sar1"]').value;
-            const sar2 = document.querySelector('input[name="sar2"]').value;
-            const pushups = document.querySelector('input[name="pushups"]').value;
-            const plank = document.querySelector('input[name="plank"]').value;
-
-            if (height === "" || weight === "" || HRbefore === "" || HRafter === "" ||
-                zipperL === "" || zipperR === "" || sar1 === "" || sar2 === "" ||
-                pushups === "" || plank === "") {
-                alert("Please fill in all required fields in health-related.");
-                return false;
-            }
-
-            return true;
-        }
-
-        function validateSkillRelated() {
-            const juggling = document.querySelector('input[name="juggling"]').value;
-            const sprinttime = document.querySelector('input[name="sprinttime"]').value;
-            const slj1 = document.querySelector('input[name="slj1"]').value;
-            const slj2 = document.querySelector('input[name="slj2"]').value;
-            const hexclock = document.querySelector('input[name="hexclock"]').value;
-            const hexcounter = document.querySelector('input[name="hexcounter"]').value;
-            const storkleft = document.querySelector('input[name="storkleft"]').value;
-            const storkright = document.querySelector('input[name="storkright"]').value;
-            const stick1 = document.querySelector('input[name="stick1"]').value;
-            const stick2 = document.querySelector('input[name="stick2"]').value;
-            const stick3 = document.querySelector('input[name="stick3"]').value;
-
-            if (juggling === "" || sprinttime === "" || slj1 === "" || slj2 === "" ||
-                hexclock === "" || hexcounter === "" || storkleft === "" || storkright === "" ||
-                stick1 === "" || stick2 === "" || stick3 === "") {
-                alert("Please fill in all required fields in skill-related.");
-                return false;
-            }
-
-            return true;
-        }
-
-        //tabs
-        let currentTab = 1;
-
-        function nextTab() {
-            if (currentTab === 1 && !validateStudentInformation()) {
-                return;
-            }
-            if (currentTab === 2 && !validateHealthRelated()) {
-                return;
-            }
-            if (currentTab === 3 && !validateSkillRelated()) {
-                return;
-            }
-
-            document.getElementById(`tab${currentTab}`).style.display = 'none';
-            currentTab++;
-            document.getElementById(`tab${currentTab}`).style.display = 'block';
-            updateProgressBar();
-        }
-
-        function previousTab() {
-            if (currentTab > 1) {
-                document.getElementById(`tab${currentTab}`).style.display = 'none';
-                currentTab--;
-                document.getElementById(`tab${currentTab}`).style.display = 'block';
-                updateProgressBar();
-            }
-        }
-    </script>
 </body>
 
 </html>
