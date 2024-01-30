@@ -43,7 +43,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
             }
             $age = getAge($_POST['bday']);
             $temp = $_POST['weight'] / ($_POST['height'] ** 2);
-            $bmi = number_format((float) $temp, 2, '.', '');
+            $bmi = number_format((float) $temp, 1, '.', '');
             $bmiClassification = bmiclassification($_POST['sex'], $age, $bmi);
 
             $studentquery = mysqli_query($connection, "SELECT * FROM `student_tb` WHERE `studentNAME` = '" . $_POST['name'] . "' AND `studentBIRTHDATE` = '" . $_POST['bday'] . "' AND `studentSEX` = '" . $_POST['sex'] . "'");

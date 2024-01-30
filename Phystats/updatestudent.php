@@ -48,7 +48,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
             $age = $row['age'];
 
             $temp = $_POST['weight'] / ($_POST['height'] ** 2);
-            $bmi = number_format((float) $temp, 2, '.', '');
+            $bmi = number_format((float) $temp, 1, '.', '');
             $bmiClassification = bmiclassification($_POST['sex'], $age, $bmi);
 
             mysqli_query($connection, "UPDATE `student_tb` SET `studentNAME`='" . $_POST['name'] . "', `studentBIRTHDATE`='" . $_POST['bday'] . "', `studentSEX`='" . $_POST['sex'] . "' WHERE `student_ID`= $student_ID");

@@ -36,7 +36,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
     } else {
         $teacher_ID = $_SESSION["teacher_ID"];
         $hasStudents = false;
-        $list = "SELECT * FROM `student_tb` INNER JOIN `studenttestdata_tb` ON studenttestdata_tb.student_ID = student_tb.student_ID INNER JOIN `testinfo_tb` ON testinfo_tb.testinfo_ID = studenttestdata_tb.testinfo_ID WHERE testinfo_tb.teacher_ID = '$teacher_ID'";
+        $list = "SELECT DISTINCT student_tb.student_ID, student_tb.studentNAME, student_tb.studentBIRTHDATE, student_tb.studentSEX FROM `student_tb` INNER JOIN `studenttestdata_tb` ON studenttestdata_tb.student_ID = student_tb.student_ID INNER JOIN `testinfo_tb` ON testinfo_tb.testinfo_ID = studenttestdata_tb.testinfo_ID WHERE testinfo_tb.teacher_ID = '$teacher_ID'";
         $studlist = mysqli_query($connection, $list);
         $syears = mysqli_query($connection, "SELECT * FROM `schoolyear_tb` ORDER BY `schoolYEAR` DESC");
         $grade = mysqli_query($connection, "SELECT * FROM `gradesection_tb` INNER JOIN `teacher_tb` ON teacher_tb.teacher_ID = gradesection_tb.teacher_ID WHERE gradesection_tb.teacher_ID = $teacher_ID");

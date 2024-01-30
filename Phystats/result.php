@@ -25,7 +25,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
     } else {
         $teacher_ID = $_SESSION["teacher_ID"];
         $hasStudents = false;
-        $list = "SELECT * FROM `student_tb` INNER JOIN `studenttestdata_tb` ON studenttestdata_tb.student_ID = student_tb.student_ID INNER JOIN `testinfo_tb` ON testinfo_tb.testinfo_ID = studenttestdata_tb.testinfo_ID INNER JOIN `studenttestresult_tb` ON studenttestresult_tb.testdata_ID = studenttestdata_tb.testdata_ID WHERE testinfo_tb.teacher_ID = '$teacher_ID'";
+        $list = "SELECT * FROM `student_tb` INNER JOIN `studenttestdata_tb` ON studenttestdata_tb.student_ID = student_tb.student_ID INNER JOIN `testinfo_tb` ON testinfo_tb.testinfo_ID = studenttestdata_tb.testinfo_ID INNER JOIN `studenttestresult_tb` ON studenttestresult_tb.testdata_ID = studenttestdata_tb.testdata_ID INNER JOIN `quarter_tb` ON quarter_tb.quarter_ID = testinfo_tb.quarter_ID INNER JOIN `testtype_tb` ON testtype_tb.testtype_ID = testinfo_tb.testtype_ID WHERE testinfo_tb.teacher_ID = '$teacher_ID'";
         $studlist1 = mysqli_query($connection, $list);
         $studlist2 = mysqli_query($connection, $list);
         $studlist3 = mysqli_query($connection, $list);
@@ -38,6 +38,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                 $list .= " AND testinfo_tb.schoolyear_ID = '" . $_POST['syear'] . "'";
                 $studlist1 = mysqli_query($connection, $list);
                 $studlist2 = mysqli_query($connection, $list);
+                $studlist3 = mysqli_query($connection, $list);
             } else {
                 $list .= " ";
             }
@@ -47,6 +48,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                 $list .= " AND studenttestdata_tb.grade_ID = '" . $_POST['grade'] . "'";
                 $studlist1 = mysqli_query($connection, $list);
                 $studlist2 = mysqli_query($connection, $list);
+                $studlist3 = mysqli_query($connection, $list);
             } else {
                 $list .= " ";
             }
@@ -56,6 +58,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                 $list .= " AND testinfo_tb.quarter_ID = '" . $_POST['quarter'] . "'";
                 $studlist1 = mysqli_query($connection, $list);
                 $studlist2 = mysqli_query($connection, $list);
+                $studlist3 = mysqli_query($connection, $list);
             } else {
                 $list .= " ";
             }
@@ -65,6 +68,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                 $list .= " AND testinfo_tb.testtype_ID = '" . $_POST['testtype'] . "'";
                 $studlist1 = mysqli_query($connection, $list);
                 $studlist2 = mysqli_query($connection, $list);
+                $studlist3 = mysqli_query($connection, $list);
             } else {
                 $list .= " ";
             }
@@ -146,7 +150,47 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
             </div>
 
             <div class="tab-container">
-                <input type="radio" id="health-related-test" name="tab-container" checked="checked">
+                <input type="radio" id="physical-fitness-result" name="tab-container" checked="checked">
+                <label for="physical-fitness-result">Physical Fitness Result</label>
+                <!-----overall test results----->
+                <div class="tab">
+                    <table class="physical-fitness-result" id="bleta">
+                        <tr>
+                            <th>NAME</th>
+                            <th>QUARTER</th>
+                            <th>TEST TYPE</th>
+                            <th>FITNESS RESULT</th>
+                        </tr>
+                        <?php
+                        while ($row2 = mysqli_fetch_assoc($studlist3)) {
+                        ?>
+                            <tr>
+                                <td>
+                                    <?php echo $row2['studentNAME']; ?>
+                                </td>
+                                <td>
+                                    <?php echo $row2['quarter']; ?>
+                                </td>
+                                <td>
+                                    <?php echo $row2['testTYPE']; ?>
+                                </td>
+                                <td>
+                                    <?php echo $row2['fitnessResult']; ?>
+                                </td>
+                            </tr>
+                        <?php
+                            $hasStudents = true;
+                        }
+                        if (!$hasStudents) {
+                            echo "<tr>";
+                            echo "<td class='none' colspan=10>No Students Found</td>";
+                            echo "<tr>";
+                        }
+                        ?>
+                    </table>
+                </div>
+
+                <input type="radio" id="health-related-test" name="tab-container">
                 <label for="health-related-test">Health-Related</label>
                 <!-----health-related test results----->
                 <div class="tab">
@@ -239,37 +283,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                                 </td>
                                 <td>
                                     <?php echo skillRemarks($row2['coordination'], $row2['agility'], $row2['speed'], $row2['power'], $row2['balance'], $row2['reactionTime']); ?>
-                                </td>
-                            </tr>
-                        <?php
-                            $hasStudents = true;
-                        }
-                        if (!$hasStudents) {
-                            echo "<tr>";
-                            echo "<td class='none' colspan=10>No Students Found</td>";
-                            echo "<tr>";
-                        }
-                        ?>
-                    </table>
-                </div>
-                <input type="radio" id="physical-fitness-result" name="tab-container">
-                <label for="physical-fitness-result">Physical Fitness Result</label>
-                <!-----overall test results----->
-                <div class="tab">
-                    <table class="physical-fitness-result" id="bleta">
-                        <tr>
-                            <th>NAME</th>
-                            <th>FITNESS RESULT</th>
-                        </tr>
-                        <?php
-                        while ($row2 = mysqli_fetch_assoc($studlist3)) {
-                        ?>
-                            <tr>
-                                <td>
-                                    <?php echo $row2['studentNAME']; ?>
-                                </td>
-                                <td>
-                                    <?php echo $row2['fitnessResult']; ?>
                                 </td>
                             </tr>
                         <?php
