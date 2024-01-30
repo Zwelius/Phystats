@@ -307,7 +307,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                                 </th>
                             </tr>
                         </table>
-
                         <div class="button-container">
                             <button class="previous" onclick="previousTab()">Previous</button>
                             <input type="submit" name="save" value="Save">
@@ -419,6 +418,11 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                 document.getElementById(`tab${currentTab}`).style.display = 'block';
                 updateProgressBar();
             }
+        }
+        
+        function updateProgressBar() {
+            const progressBar = document.querySelector('.progress-bar');
+            progressBar.style.width = `${(currentTab - 1) * 50}%`;
         }
     </script>
 </body>
