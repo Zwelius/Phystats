@@ -33,7 +33,6 @@ body {
 .sections {
     display: flex;
     justify-content: space-evenly;
-    text-align: center;
 }
 
 .counts {
@@ -41,9 +40,4 @@ body {
     padding: 0.5vw;
     width: 20vw;
     border: 2px solid black;
-}
-select {
-    font-family: Poppins;
-    width: 175px;
-    padding: 10px;
 }
