@@ -20,7 +20,7 @@
                 <div class="nav-options">
                     <span class="manage">MANAGE</span>
                     <div class="dropdown">
-                        <a href="manageTeachers.php">Manage Teachers</a>
+                        <a href="manageTeachers.php">View Teachers</a>
                         <a href="#"><button onclick="openAddSchoolYear()">Add School Year</button></a>
                     </div>
                 </div>
@@ -30,7 +30,7 @@
 
         <!-- "Automation" lmao -->
         <main>
-            <h1 id="page-header"> Manage Teachers </h1>
+            <h1 id="page-header"> View Teachers </h1>
 
             <h1> GRADE SIX </h1>
             <table class="data-display" id="g6-teachers">
