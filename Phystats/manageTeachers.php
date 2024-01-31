@@ -2,90 +2,35 @@
 
 <!DOCTYPE HTML>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Manage Teachers - Phystats </title>
-    <link rel="icon" type="image/x-icon" href="assets/logo.ico">
-    <link rel="stylesheet" href="css/nav.css" />
-    <link rel="stylesheet" href="css/admin-manage.css" />
-    <link rel="stylesheet" href="css/add-new-school-year.css" />
-</head>
-
-<body>
-    <?php
-    include 'config.php';
-    if (empty($_SESSION["principal_ID"])) {
-        header("Location: index.php");
-    } ?>
-
-    <nav>
-        <div>
-            <img class="logo" src="assets/wlogo.png">
-            <h1 class="title">Phystats</h1>
-        </div>
-        <div>
-            <a href="dashboard.php" class="nav-options">DASHBOARD</a>
-            <div class="nav-options">
-                <span class="here manage">MANAGE</span>
-                <div class="dropdown">
-                    <a href="manageTeachers.php">Manage Teachers</a>
-                    <a href="#"><button onclick="openAddSchoolYear()">Add School Year</button></a>
+    <head>
+        <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
+        <title> Manage Teachers - Phystats </title>
+        <link rel="icon" type="image/x-icon" href="assets/logo.ico">
+        <link rel="stylesheet" href="css/nav.css"/>
+        <link rel="stylesheet" href="css/admin-manage.css"/>
+    </head>
+    <body>
+        <nav>
+            <div>
+                <img class="logo" src="assets/wlogo.png">
+                <h1 class="title">Phystats</h1>
+            </div>
+            <div>
+                <a href="dashboard.php" class="here nav-options">DASHBOARD</a>
+                <div class="nav-options">
+                    <span class="manage">MANAGE</span>
+                    <div class="dropdown">
+                        <a href="manageTeachers.php">Manage Teachers</a>
+                        <a href="#"><button onclick="openAddSchoolYear()">Add School Year</button></a>
+                    </div>
                 </div>
+                <a href="adminProfile.php" class="nav-options"><img class="profile" src="assets/wprof.png"></a>
             </div>
-            <a href="adminProfile.php" class="nav-options"><img class="profile" src="assets/wprof.png"></a>
-        </div>
-    </nav>
+        </nav>
 
-
-    <!-- 'add school year' modal -->
-    <div id="addSchoolYear" class="add-school-year-modal">
-        <div class="add-school-year-content">
-            <span class="close" onclick="closeAddSchoolYearl()">&times;</span>
-
-            <?php
-            if (isset($_POST["add"])) {
-                $schoolYear = $_POST['schoolYear'];
-                $addSchoolYearSQL = "INSERT INTO `schoolyear_tb`(`schoolYEAR`) VALUES ('$schoolYear')";
-                $result = mysqli_query($connection, $addSchoolYearSQL);
-
-                if ($result) {
-                    echo '<script>alert("School year added successfully.");window.location.replace("dashboard.php");</script>';
-                    exit();
-                } else {
-                    echo "Failed: " . mysqli_error($connection);
-                }
-            }
-            $viewSchoolYearSQL = "SELECT * FROM `schoolyear_tb`";
-            $schoolYearResult = mysqli_query($connection, $viewSchoolYearSQL);
-
-            if (!$schoolYearResult) {
-                echo "Error fetching school years: " . mysqli_error($connection);
-            }
-            ?>
-            <h3>School Year</h3>
-            <form method="post">
-                <input type="text" name="schoolYear" placeholder="Eg. 2023 - 2024" required>
-                <button type="submit" name="add">Add</button>
-            </form>
-
-            <br>
-
-            <div class="sy-data">
-                <table>
-                    <?php
-                    while ($row = mysqli_fetch_assoc($schoolYearResult)) {
-                        echo "<tr><td>{$row['schoolYEAR']}</td></tr>";
-                    }
-                    ?>
-                </table>
-            </div>
-        </div>
-    </div>
-
-    <!-- "Automation" lmao -->
-    <main>
-        <h1 id="page-header"> Manage Teachers </h1>
+        <!-- "Automation" lmao -->
+        <main>
+            <h1 id="page-header"> Manage Teachers </h1>
 
         <h1> GRADE SIX </h1>
         <table class="data-display" id="g6-teachers">
