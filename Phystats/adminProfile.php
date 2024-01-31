@@ -66,7 +66,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
             <div class="nav-options">
                 <span class="manage">MANAGE</span>
                 <div class="dropdown">
-                    <a href="#">Manage Teachers</a>
+                    <a href="manageTeachers.php">Manage Teachers</a>
                     <a href="#"><button onclick="openAddSchoolYear()">Add School Year</button></a>
                 </div>
             </div>
