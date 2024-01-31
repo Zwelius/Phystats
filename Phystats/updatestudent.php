@@ -52,7 +52,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
             $bmiClassification = bmiclassification($_POST['sex'], $age, $bmi);
 
             mysqli_query($connection, "UPDATE `student_tb` SET `studentNAME`='" . $_POST['name'] . "', `studentBIRTHDATE`='" . $_POST['bday'] . "', `studentSEX`='" . $_POST['sex'] . "' WHERE `student_ID`= $student_ID");
-            mysqli_query($connection, "UPDATE `studenttestdata_tb` SET `testinfo_ID`='$testinfo_ID', `height`='" . $_POST['height'] . "', `weight`='" . $_POST['weight'] . "', `BMI`='$bmi', `bmiClassification`='$bmiClassification', `HRbefore`='" . $_POST['HRbefore'] . "', `HRafter`='" . $_POST['HRafter'] . "', `pushupsNo`='" . $_POST['pushups'] . "', `plankTime`='" . $_POST['plank'] . "', `zipperRight`='" . $_POST['zipperR'] . "', `zipperLeft`='" . $_POST['zipperL'] . "', `sitReach1`='" . $_POST['sar1'] . "', `sitReach2`='" . $_POST['sar2'] . "', `juggling`='" . $_POST['juggling'] . "', `hexagonClockwise`='" . $_POST['hexclock'] . "', `hexagonCounter`='" . $_POST['hexcounter'] . "', `sprintTime`='" . $_POST['sprinttime'] . "', `longJump1`='" . $_POST['slj1'] . "', `longJump2`='" . $_POST['slj2'] . "', `storkRight`='" . $_POST['storkright'] . "', `storkLeft`='" . $_POST['storkleft'] . "', `stickDrop1`='" . $_POST['stick1'] . "', `stickDrop2`='" . $_POST['stick2'] . "', `stickDrop3`='" . $_POST['stick3'] . "' WHERE `student_ID` = $student_ID");
+            mysqli_query($connection, "UPDATE `studenttestdata_tb` SET `testinfo_ID`='$testinfo_ID', `height`='" . $_POST['height'] . "', `weight`='" . $_POST['weight'] . "', `BMI`='$bmi', `bmiClassification`='$bmiClassification', `HRbefore`='" . $_POST['HRbefore'] . "', `HRafter`='" . $_POST['HRafter'] . "', `pushupsNo`='" . $_POST['pushups'] . "', `plankTime`='" . $_POST['plank'] . "', `zipperRight`='" . $_POST['zipperR'] . "', `zipperLeft`='" . $_POST['zipperL'] . "', `sitReach1`='" . $_POST['sar1'] . "', `sitReach2`='" . $_POST['sar2'] . "', `juggling`='" . $_POST['juggling'] . "', `hexagonClockwise`='" . $_POST['hexclock'] . "', `hexagonCounter`='" . $_POST['hexcounter'] . "', `sprintTime`='" . $_POST['sprinttime'] . "', `longJump1`='" . $_POST['slj1'] . "', `longJump2`='" . $_POST['slj2'] . "', `storkRight`='" . $_POST['storkright'] . "', `storkLeft`='" . $_POST['storkleft'] . "', `stickDrop1`='" . $_POST['stick1'] . "', `stickDrop2`='" . $_POST['stick2'] . "', `stickDrop3`='" . $_POST['stick3'] . "' WHERE `testdata_ID` = $testdata_ID");
 
             $bodyComposition = $bmiClassification;
             $cardiovascularEndurance = cardiovasulcarEndurance($_POST['HRbefore'], $_POST['HRafter'], $age);
@@ -68,7 +68,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
 
             mysqli_query($connection, "UPDATE `studenttestresult_tb` SET `bodyComposition`= '$bodyComposition', `cardiovascularEndurance`= '$cardiovascularEndurance', `strength`= '$strength', `flexibility`= '$flexibility', `coordination`= '$coordination', `agility`= '$agility', `speed`= '$speed', `power`= '$power', `balance`= '$balance', `reactionTime`= '$reactionTime', `fitnessResult`= '$fitnessResult' WHERE `testdata_ID` = $testdata_ID");
             echo '<script>alert("Updated data successfully");</script>';
-            echo '<script>window.location.replace("list.php");</script>';
+            echo '<script>window.location.replace("viewstudent.php?student_ID='.$data["student_ID"].'");</script>';
             exit();
         }
     }
@@ -93,8 +93,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
 
                 <div class="tabs">
                     <div class="tab">Student Information</div>
-                    <div class="tab">Health-Related</div>
-                    <div class="tab">Skill-Related</div>
                 </div>
 
                 <div class="progress-bar"></div>
@@ -198,14 +196,11 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                                 </th>
                             </tr>
                         </table>
-                        <div class="button-container">
-                            <button class="next" onclick="nextTab()">Next</button>
-                        </div>
                     </div>
                     <!--end of student info tab-->
 
                     <!--start of health related test-->
-                    <div id="tab2" class="tab-content" style="display: none;">
+                    <div id="tab2" class="tab-content">
                         <table class="add-students-table">
                             <tr>
                                 <th colspan="2" class="category"><label for="category">BODY
@@ -217,16 +212,15 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                             </tr>
                             <tr>
                                 <th><label for="height">HEIGHT (m):</label><br><input type="number" name="height"
-                                        step="0.01" value="<?php echo $data['height'] ?>" min="0" required></th>
+                                        min="0" step="0.01" value="<?php echo $data['height'] ?>" required>
+                                </th>
                                 <th><label for="weight">WEIGHT (kg):</label><br><input type="number" name="weight"
-                                        step="0.01" value="<?php echo $data['weight'] ?>" min="0" required></th>
+                                        min="0" step="0.01" value="<?php echo $data['weight'] ?>" required>
+                                </th>
                                 <th><label for="HRbefore">Before Activity</label><br><input type="number"
-                                        name="HRbefore" step="0.01" value="<?php echo $data['HRbefore'] ?>" min="40"
-                                        max="220" required>
-                                </th>
+                                        name="HRbefore" step="0.01" min="40" max="220" value="<?php echo $data['HRbefore'] ?>" required></th>
                                 <th><label for="HRafter">After Activity</label><br><input type="number" name="HRafter"
-                                        step="0.01" value="<?php echo $data['HRafter'] ?>" min="40" max="220" required>
-                                </th>
+                                        step="0.01" min="40" max="220" value="<?php echo $data['HRafter'] ?>" required></th>
                             </tr>
                             <tr>
                                 <th colspan="4">&nbsp;</th><!--empty-->
@@ -237,14 +231,14 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                                 <th colspan="2"><br><label for="sar">SIT AND REACH SCORE (cm)</label></th>
                             </tr>
                             <tr>
-                                <th><label for="zipperL">Left</label><br><input type="number" name="zipperL" step="0.01"
-                                        value="<?php echo $data['zipperLeft'] ?>" required></th>
+                                <th><label for="zipperL">Left</label><br><input type="number" name="zipperL"
+                                        step="0.01" value="<?php echo $data['zipperLeft'] ?>" required></th>
                                 <th><label for="zipperR">Right</label><br><input type="number" name="zipperR"
                                         step="0.01" value="<?php echo $data['zipperRight'] ?>" required></th>
                                 <th><label for="sar1">First Trial</label><br><input type="number" name="sar1"
-                                        step="0.01" value="<?php echo $data['sitReach1'] ?>" min="0" required></th>
+                                        step="0.01" min="0" value="<?php echo $data['sitReach1'] ?>" required></th>
                                 <th><label for="sar2">Second Trial</label><br><input type="number" name="sar2"
-                                        step="0.01" value="<?php echo $data['sitReach2'] ?>" min="0" required></th>
+                                        step="0.01" min="0" value="<?php echo $data['sitReach2'] ?>" required></th>
                             </tr>
                             <tr>
                                 <th colspan="2">&nbsp;</th><!--empty-->
@@ -254,21 +248,15 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                             </tr>
                             <tr>
                                 <th><label for="pushups">NO. OF PUSH UPS</label><br><input type="number" name="pushups"
-                                        value="<?php echo $data['pushupsNo'] ?>" min="0" required>
-                                </th>
+                                        min="0" value="<?php echo $data['pushupsNo'] ?>" required></th>
                                 <th><label for="plank">BASIC PLANK (sec)</label><br><input type="number" name="plank"
-                                        value="<?php echo $data['plankTime'] ?>" min="0" required></th>
+                                        min="0" value="<?php echo $data['plankTime'] ?>" required></th>
+                            </tr>
                         </table>
-                        <div class="button-container">
-                            <button class="previous" onclick="previousTab()">Previous</button>
-                            <button class="next" onclick="nextTab()">Next</button>
-                        </div>
                     </div>
-
                     <!--end of health related test-->
-
                     <!--start of skill related test-->
-                    <div id="tab3" class="tab-content" style="display: none;">
+                    <div id="tab3" class="tab-content">
                         <table class="add-students-table">
                             <tr>
                                 <th class="category"><label for="category">COORDINATION</label></th>
@@ -345,8 +333,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                             </tr>
                         </table>
                         <div class="button-container">
-                            <button class="previous" onclick="previousTab()">Previous</button>
-                            <input type="submit" name="save" value="Save">
+                            <input type="submit" name="save" value="Save" onclick="submitTab()">
                         </div>
                     </div>
                 </div>
@@ -428,37 +415,17 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
         }
 
         //tabs
-        let currentTab = 1;
 
-        function nextTab() {
-            if (currentTab === 1 && !validateStudentInformation()) {
+        function submitTab() {
+            if (!validateStudentInformation()) {
                 return;
             }
-            if (currentTab === 2 && !validateHealthRelated()) {
+            if (!validateHealthRelated()) {
                 return;
             }
-            if (currentTab === 3 && !validateSkillRelated()) {
+            if (!validateSkillRelated()) {
                 return;
             }
-
-            document.getElementById(`tab${currentTab}`).style.display = 'none';
-            currentTab++;
-            document.getElementById(`tab${currentTab}`).style.display = 'block';
-            updateProgressBar();
-        }
-
-        function previousTab() {
-            if (currentTab > 1) {
-                document.getElementById(`tab${currentTab}`).style.display = 'none';
-                currentTab--;
-                document.getElementById(`tab${currentTab}`).style.display = 'block';
-                updateProgressBar();
-            }
-        }
-        
-        function updateProgressBar() {
-            const progressBar = document.querySelector('.progress-bar');
-            progressBar.style.width = `${(currentTab - 1) * 50}%`;
         }
     </script>
 </body>
