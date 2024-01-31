@@ -35,9 +35,19 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
         $query = "SELECT * FROM `studenttestdata_tb` INNER JOIN `gradesection_tb` ON gradesection_tb.grade_ID = studenttestdata_tb.grade_ID INNER JOIN `testinfo_tb` ON testinfo_tb.testinfo_ID = studenttestdata_tb.testinfo_ID
          INNER JOIN `quarter_tb` ON quarter_tb.quarter_ID = testinfo_tb.quarter_ID INNER JOIN `testtype_tb` ON testtype_tb.testtype_ID = testinfo_tb.testtype_ID
          INNER JOIN `studenttestresult_tb` ON studenttestresult_tb.testdata_ID = studenttestdata_tb.testdata_ID WHERE `student_ID` = '$student_ID'";
-        $gradesql = mysqli_query($connection, $query);
-        $quartersql = mysqli_query($connection, $query);
-        $testtypesql = mysqli_query($connection, $query);
+        
+        $gradesql = mysqli_query($connection, "SELECT DISTINCT gradesection_tb.grade_ID, gradesection_tb.grade, gradesection_tb.section FROM `studenttestdata_tb` INNER JOIN `gradesection_tb` ON gradesection_tb.grade_ID = studenttestdata_tb.grade_ID INNER JOIN `testinfo_tb` ON testinfo_tb.testinfo_ID = studenttestdata_tb.testinfo_ID
+        INNER JOIN `quarter_tb` ON quarter_tb.quarter_ID = testinfo_tb.quarter_ID INNER JOIN `testtype_tb` ON testtype_tb.testtype_ID = testinfo_tb.testtype_ID
+        INNER JOIN `studenttestresult_tb` ON studenttestresult_tb.testdata_ID = studenttestdata_tb.testdata_ID WHERE `student_ID` = '$student_ID'");
+        
+        $quartersql = mysqli_query($connection, "SELECT DISTINCT quarter_tb.quarter_ID, quarter_tb.quarter FROM `studenttestdata_tb` INNER JOIN `gradesection_tb` ON gradesection_tb.grade_ID = studenttestdata_tb.grade_ID INNER JOIN `testinfo_tb` ON testinfo_tb.testinfo_ID = studenttestdata_tb.testinfo_ID
+        INNER JOIN `quarter_tb` ON quarter_tb.quarter_ID = testinfo_tb.quarter_ID INNER JOIN `testtype_tb` ON testtype_tb.testtype_ID = testinfo_tb.testtype_ID
+        INNER JOIN `studenttestresult_tb` ON studenttestresult_tb.testdata_ID = studenttestdata_tb.testdata_ID WHERE `student_ID` = '$student_ID'");
+        
+        $testtypesql = mysqli_query($connection, "SELECT DISTINCT testtype_tb.testtype_ID, testtype_tb.testTYPE  FROM `studenttestdata_tb` INNER JOIN `gradesection_tb` ON gradesection_tb.grade_ID = studenttestdata_tb.grade_ID INNER JOIN `testinfo_tb` ON testinfo_tb.testinfo_ID = studenttestdata_tb.testinfo_ID
+        INNER JOIN `quarter_tb` ON quarter_tb.quarter_ID = testinfo_tb.quarter_ID INNER JOIN `testtype_tb` ON testtype_tb.testtype_ID = testinfo_tb.testtype_ID
+        INNER JOIN `studenttestresult_tb` ON studenttestresult_tb.testdata_ID = studenttestdata_tb.testdata_ID WHERE `student_ID` = '$student_ID'");
+        
         $sql = "SELECT * FROM `student_tb` WHERE `student_ID` = '$student_ID'";
         $studentinfo = mysqli_query($connection, $sql);
         while ($row = mysqli_fetch_array($studentinfo)) {
@@ -113,9 +123,19 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                     $query = "SELECT * FROM `studenttestdata_tb` INNER JOIN `gradesection_tb` ON gradesection_tb.grade_ID = studenttestdata_tb.grade_ID INNER JOIN `testinfo_tb` ON testinfo_tb.testinfo_ID = studenttestdata_tb.testinfo_ID
                     INNER JOIN `quarter_tb` ON quarter_tb.quarter_ID = testinfo_tb.quarter_ID INNER JOIN `testtype_tb` ON testtype_tb.testtype_ID = testinfo_tb.testtype_ID
                     INNER JOIN `studenttestresult_tb` ON studenttestresult_tb.testdata_ID = studenttestdata_tb.testdata_ID WHERE `student_ID` = '$student_ID'";
-                    $gradesql = mysqli_query($connection, $query);
-                    $quartersql = mysqli_query($connection, $query);
-                    $testtypesql = mysqli_query($connection, $query);
+                    
+                    $gradesql = mysqli_query($connection, "SELECT DISTINCT gradesection_tb.grade_ID, gradesection_tb.grade, gradesection_tb.section FROM `studenttestdata_tb` INNER JOIN `gradesection_tb` ON gradesection_tb.grade_ID = studenttestdata_tb.grade_ID INNER JOIN `testinfo_tb` ON testinfo_tb.testinfo_ID = studenttestdata_tb.testinfo_ID
+                    INNER JOIN `quarter_tb` ON quarter_tb.quarter_ID = testinfo_tb.quarter_ID INNER JOIN `testtype_tb` ON testtype_tb.testtype_ID = testinfo_tb.testtype_ID
+                    INNER JOIN `studenttestresult_tb` ON studenttestresult_tb.testdata_ID = studenttestdata_tb.testdata_ID WHERE `student_ID` = '$student_ID'");
+                    
+                    $quartersql = mysqli_query($connection, "SELECT DISTINCT quarter_tb.quarter_ID, quarter_tb.quarter FROM `studenttestdata_tb` INNER JOIN `gradesection_tb` ON gradesection_tb.grade_ID = studenttestdata_tb.grade_ID INNER JOIN `testinfo_tb` ON testinfo_tb.testinfo_ID = studenttestdata_tb.testinfo_ID
+                    INNER JOIN `quarter_tb` ON quarter_tb.quarter_ID = testinfo_tb.quarter_ID INNER JOIN `testtype_tb` ON testtype_tb.testtype_ID = testinfo_tb.testtype_ID
+                    INNER JOIN `studenttestresult_tb` ON studenttestresult_tb.testdata_ID = studenttestdata_tb.testdata_ID WHERE `student_ID` = '$student_ID'");
+                    
+                    $testtypesql = mysqli_query($connection, "SELECT DISTINCT testtype_tb.testtype_ID, testtype_tb.testTYPE  FROM `studenttestdata_tb` INNER JOIN `gradesection_tb` ON gradesection_tb.grade_ID = studenttestdata_tb.grade_ID INNER JOIN `testinfo_tb` ON testinfo_tb.testinfo_ID = studenttestdata_tb.testinfo_ID
+                    INNER JOIN `quarter_tb` ON quarter_tb.quarter_ID = testinfo_tb.quarter_ID INNER JOIN `testtype_tb` ON testtype_tb.testtype_ID = testinfo_tb.testtype_ID
+                    INNER JOIN `studenttestresult_tb` ON studenttestresult_tb.testdata_ID = studenttestdata_tb.testdata_ID WHERE `student_ID` = '$student_ID'");
+                    
                     $sql = "SELECT * FROM `student_tb` WHERE `student_ID` = '$student_ID'";
                     $studentinfo = mysqli_query($connection, $sql);
                     while ($row = mysqli_fetch_array($studentinfo)) {
@@ -150,38 +170,24 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                                             <?php
                                             while ($gs = mysqli_fetch_array($gradesql)) {
                                                 ?>
-                                                <option value='<?php echo $gs['grade_ID']; ?>' <?php if (isset($_POST['grade']) && $_POST['grade'] === $gs['grade_ID']) {
-                                                       echo 'selected';
-                                                   } ?>><?php echo $gs['grade'] . " - " . $gs['section']; ?>
-                                                </option>
-                                                <?php
-                                            } ?>
+                                            <?php if (isset($_POST['grade']) && $_POST['grade'] === $gs['grade_ID']) {
+                                                       echo $gs['grade'] . " - " . $gs['section']; } }?>
                                         </div>
                                         <div>
                                             <b>QUARTER: </b>
                                             <?php
                                             while ($qtr = mysqli_fetch_array($quartersql)) {
                                                 ?>
-                                                <option value='<?php echo $qtr['quarter_ID']; ?>' <?php if (isset($_POST['quarter']) && $_POST['quarter'] === $qtr['quarter_ID']) {
-                                                       echo 'selected';
-                                                   } ?>><?php echo $qtr['quarter']; ?>
-                                                </option>
-                                                <?php
-                                            }
-                                            ?>
+                                            <?php if (isset($_POST['quarter']) && $_POST['quarter'] === $qtr['quarter_ID']) {
+                                                       echo $qtr['quarter']; }}?>
                                         </div>
                                         <div>
                                             <b>TYPE OF TEST: </b>
                                             <?php
                                             while ($tt = mysqli_fetch_array($testtypesql)) {
                                                 ?>
-                                                <option value='<?php echo $tt['testtype_ID']; ?>' <?php if (isset($_POST['testtype']) && $_POST['testtype'] === $tt['testtype_ID']) {
-                                                       echo 'selected';
-                                                   } ?>><?php echo $tt['testTYPE']; ?>
-                                                </option>
-                                                <?php
-                                            }
-                                            ?>
+                                            <?php if (isset($_POST['testtype']) && $_POST['testtype'] === $tt['testtype_ID']) {
+                                                       echo $tt['testTYPE']; }}?>
                                         </div>
                                     </div>
                                 </div>
