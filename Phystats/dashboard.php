@@ -69,9 +69,9 @@ session_start();
             if (isset($_POST['syear']) && $_POST['syear'] != "") {
                 $list .= " AND testinfo_tb.schoolyear_ID = '" . $_POST['syear'] . "'";
                 $overallstudents = mysqli_query($connection, $list);
-                $fit  .= " AND testinfo_tb.schoolyear_ID = '" . $_POST['syear'] . "'";
+                $fit .= " AND testinfo_tb.schoolyear_ID = '" . $_POST['syear'] . "'";
                 $physfit = mysqli_query($connection, $fit);
-                $notfit  .= " AND testinfo_tb.schoolyear_ID = '" . $_POST['syear'] . "'";
+                $notfit .= " AND testinfo_tb.schoolyear_ID = '" . $_POST['syear'] . "'";
                 $notphysfit = mysqli_query($connection, $notfit);
 
                 $grade6 .= " AND testinfo_tb.schoolyear_ID = '" . $_POST['syear'] . "'";
@@ -165,150 +165,189 @@ session_start();
         </div>
     </nav>
 
-    <div class="content">
+    <main>
         <form method="POST">
-            <select name="syear" onchange="this.form.submit()" style="float:right;">
-                <option value="">School Year (All)</option>
-                <?php
-                while ($row1 = mysqli_fetch_assoc($syears)) {
-                ?>
-                    <option value='<?php echo $row1['schoolyear_ID'] ?>' <?php if (isset($_POST['syear']) && $_POST['syear'] === $row1['schoolyear_ID']) {
-                                                                                echo 'selected';
-                                                                            } ?>><?php echo $row1['schoolYEAR']; ?></option>
-                <?php
-                }
-                ?>
-            </select>
             <div class="container">
-                <h1>OVERALL</h1>
+                <center>
+                    <h2>Overall Grades 4-6 Student Overview</h2>
+                    <select name="syear" onchange="this.form.submit()">
+                        <option value="">School Year (All)</option>
+                        <?php
+                        while ($row1 = mysqli_fetch_assoc($syears)) {
+                            ?>
+                            <option value='<?php echo $row1['schoolyear_ID'] ?>' <?php if (isset($_POST['syear']) && $_POST['syear'] === $row1['schoolyear_ID']) {
+                                   echo 'selected';
+                               } ?>><?php echo $row1['schoolYEAR']; ?>
+                            </option>
+                            <?php
+                        }
+                        ?>
+                    </select>
+                </center>
                 <div class="sections">
-                    <div class="counts">
-                        <h2>No. of Students</h2>
-                        <h1><?php while ($row = mysqli_fetch_assoc($overallstudents)) {
+                    <div class="count-total-students">
+                        <h3>No. of Students</h3>
+                        <h1>
+                            <?php while ($row = mysqli_fetch_assoc($overallstudents)) {
                                 echo $row["count"];
-                            } ?></h1>
+                            } ?>
+                        </h1>
                     </div>
-                    <div class="counts">
-                        <h2>No. of Physically Fit Students</h2>
-                        <h1><?php while ($row = mysqli_fetch_assoc($physfit)) {
+                    <div class="count-physically-fit">
+                        <h3>Physically Fit Students</h3>
+                        <h1>
+                            <?php while ($row = mysqli_fetch_assoc($physfit)) {
                                 echo $row["count"];
-                            } ?></h1>
+                            } ?>
+                        </h1>
                     </div>
-                    <div class="counts">
-                        <h2>No. of Not Physically Fit Students</h2>
-                        <h1><?php while ($row = mysqli_fetch_assoc($notphysfit)) {
+                    <div class="count-not-physically-fit">
+                        <h3>Not Physically Fit Students</h3>
+                        <h1>
+                            <?php while ($row = mysqli_fetch_assoc($notphysfit)) {
                                 echo $row["count"];
-                            } ?></h1>
+                            } ?>
+                        </h1>
                     </div>
                 </div>
             </div>
+
             <div class="container">
-                <select name="section6" onchange="this.form.submit()" style="float:right;">
-                    <option value="">Section (All)</option>
-                    <?php
-                    while ($row = mysqli_fetch_assoc($grade6sections)) {
-                    ?>
-                        <option value='<?php echo $row['section'] ?>' <?php if (isset($_POST['section6']) && $_POST['section6'] === $row['section']) {
-                                                                            echo 'selected';
-                                                                        } ?>><?php echo $row['section']; ?></option>
-                    <?php
-                    }
-                    ?>
-                </select>
-                <h1>Grade 6</h1>
+                <center>
+                    <h2>Grade 6</h2>
+                    <select name="section6" onchange="this.form.submit()">
+                        <option value="">Section (All)</option>
+                        <?php
+                        while ($row = mysqli_fetch_assoc($grade6sections)) {
+                            ?>
+                            <option value='<?php echo $row['section'] ?>' <?php if (isset($_POST['section6']) && $_POST['section6'] === $row['section']) {
+                                   echo 'selected';
+                               } ?>><?php echo $row['section']; ?>
+                            </option>
+                            <?php
+                        }
+                        ?>
+                    </select>
+                </center>
                 <div class="sections">
-                    <div class="counts">
-                        <h2>No. of Students</h2>
-                        <h1><?php while ($row = mysqli_fetch_assoc($g6students)) {
+                    <div class="count-total-students">
+                        <h3>No. of Students</h3>
+                        <h1>
+                            <?php while ($row = mysqli_fetch_assoc($g6students)) {
                                 echo $row["count"];
-                            } ?></h1>
+                            } ?>
+                        </h1>
                     </div>
-                    <div class="counts">
-                        <h2>No. of Physically Fit Students</h2>
-                        <h1><?php while ($row = mysqli_fetch_assoc($g6fit)) {
+                    <div class="count-physically-fit">
+                        <h3>Physically Fit Students</h3>
+                        <h1>
+                            <?php while ($row = mysqli_fetch_assoc($g6fit)) {
                                 echo $row["count"];
-                            } ?></h1>
+                            } ?>
+                        </h1>
                     </div>
-                    <div class="counts">
-                        <h2>No. of Not Physically Fit Students</h2>
-                        <h1><?php while ($row = mysqli_fetch_assoc($g6notfit)) {
+                    <div class="count-not-physically-fit">
+                        <h3>Not Physically Fit Students</h3>
+                        <h1>
+                            <?php while ($row = mysqli_fetch_assoc($g6notfit)) {
                                 echo $row["count"];
-                            } ?></h1>
+                            } ?>
+                        </h1>
                     </div>
                 </div>
             </div>
+
             <div class="container">
-                <select name="section5" onchange="this.form.submit()" style="float:right;">
-                    <option value="">Section (All)</option>
-                    <?php
-                    while ($row = mysqli_fetch_assoc($grade5sections)) {
-                    ?>
-                        <option value='<?php echo $row['section'] ?>' <?php if (isset($_POST['section5']) && $_POST['section5'] === $row['section']) {
-                                                                            echo 'selected';
-                                                                        } ?>><?php echo $row['section']; ?></option>
-                    <?php
-                    }
-                    ?>
-                </select>
-                <h1>Grade 5</h1>
+                <div class="top">
+                    <h2>Grade 5</h2>
+                    <select name="section5" onchange="this.form.submit()">
+                        <option value="">Section (All)</option>
+                        <?php
+                        while ($row = mysqli_fetch_assoc($grade5sections)) {
+                            ?>
+                            <option value='<?php echo $row['section'] ?>' <?php if (isset($_POST['section5']) && $_POST['section5'] === $row['section']) {
+                                   echo 'selected';
+                               } ?>><?php echo $row['section']; ?>
+                            </option>
+                            <?php
+                        }
+                        ?>
+                    </select>
+                </div>
                 <div class="sections">
-                    <div class="counts">
-                        <h2>No. of Students</h2>
-                        <h1><?php while ($row = mysqli_fetch_assoc($g5students)) {
+                    <div class="count-total-students">
+                        <h3>No. of Students</h3>
+                        <h1>
+                            <?php while ($row = mysqli_fetch_assoc($g5students)) {
                                 echo $row["count"];
-                            } ?></h1>
+                            } ?>
+                        </h1>
                     </div>
-                    <div class="counts">
-                        <h2>No. of Physically Fit Students</h2>
-                        <h1><?php while ($row = mysqli_fetch_assoc($g5fit)) {
+                    <div class="count-physically-fit">
+                        <h3>Physically Fit Students</h3>
+                        <h1>
+                            <?php while ($row = mysqli_fetch_assoc($g5fit)) {
                                 echo $row["count"];
-                            } ?></h1>
+                            } ?>
+                        </h1>
                     </div>
-                    <div class="counts">
-                        <h2>No. of Not Physically Fit Students</h2>
-                        <h1><?php while ($row = mysqli_fetch_assoc($g5notfit)) {
+                    <div class="count-not-physically-fit">
+                        <h3>Not Physically Fit Students</h3>
+                        <h1>
+                            <?php while ($row = mysqli_fetch_assoc($g5notfit)) {
                                 echo $row["count"];
-                            } ?></h1>
+                            } ?>
+                        </h1>
                     </div>
                 </div>
             </div>
+
             <div class="container">
-                <select name="section4" onchange="this.form.submit()" style="float:right;">
-                    <option value="">Section (All)</option>
-                    <?php
-                    while ($row = mysqli_fetch_assoc($grade4sections)) {
-                    ?>
-                        <option value='<?php echo $row['section'] ?>' <?php if (isset($_POST['section4']) && $_POST['section4'] === $row['section']) {
-                                                                            echo 'selected';
-                                                                        } ?>><?php echo $row['section']; ?></option>
-                    <?php
-                    }
-                    ?>
-                </select>
-                <h1>Grade 4</h1>
+                <center>
+                    <h2>Grade 4</h2>
+                    <select name="section4" onchange="this.form.submit()">
+                        <option value="">Section (All)</option>
+                        <?php
+                        while ($row = mysqli_fetch_assoc($grade4sections)) {
+                            ?>
+                            <option value='<?php echo $row['section'] ?>' <?php if (isset($_POST['section4']) && $_POST['section4'] === $row['section']) {
+                                   echo 'selected';
+                               } ?>><?php echo $row['section']; ?>
+                            </option>
+                            <?php
+                        }
+                        ?>
+                    </select>
+                </center>
                 <div class="sections">
-                    <div class="counts">
-                        <h2>No. of Students</h2>
-                        <h1><?php while ($row = mysqli_fetch_assoc($g4students)) {
+                    <div class="count-total-students">
+                        <span class="total-no-students">No. of Students</span>
+                        <h1>
+                            <?php while ($row = mysqli_fetch_assoc($g4students)) {
                                 echo $row["count"];
-                            } ?></h1>
+                            } ?>
+                        </h1>
                     </div>
-                    <div class="counts">
-                        <h2>No. of Physically Fit Students</h2>
-                        <h1><?php while ($row = mysqli_fetch_assoc($g4fit)) {
+                    <div class="count-physically-fit">
+                        <h3>Physically Fit Students</h3>
+                        <h1>
+                            <?php while ($row = mysqli_fetch_assoc($g4fit)) {
                                 echo $row["count"];
-                            } ?></h1>
+                            } ?>
+                        </h1>
                     </div>
-                    <div class="counts">
-                        <h2>No. of Not Physically Fit Students</h2>
-                        <h1><?php while ($row = mysqli_fetch_assoc($g4notfit)) {
+                    <div class="count-not-physically-fit">
+                        <h3>Not Physically Fit Students</h3>
+                        <h1>
+                            <?php while ($row = mysqli_fetch_assoc($g4notfit)) {
                                 echo $row["count"];
-                            } ?></h1>
+                            } ?>
+                        </h1>
                     </div>
                 </div>
             </div>
         </form>
-    </div>
+    </main>
 </body>
 
 </html>

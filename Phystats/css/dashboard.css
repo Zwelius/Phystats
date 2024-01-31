@@ -15,19 +15,32 @@ body {
     font-family: 'Poppins';
 }
 
-.content {
-    padding: 2.5vw;
-    margin: 5% auto;
-    width: 80vw;
-    height: auto;
-    background-color: antiquewhite;
-    border: 2px solid black;
+main {
+    padding: 0 11%;
+    margin: 45px auto;
 }
 
 .container {
-    padding: 1.5vw;
-    margin: 2.5vw;
-    border: 2px solid black;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    padding: 15px;
+    margin-bottom: 30px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.top {
+    display: flex;
+}
+
+h2 {
+    color: #133A84;
+}
+
+select {
+    color: gray;
+    padding: 10px;
+    border-radius: 5px;
 }
 
 .sections {
@@ -35,9 +48,26 @@ body {
     justify-content: space-evenly;
 }
 
-.counts {
+.count-total-students,
+.count-physically-fit,
+.count-not-physically-fit {
+    color: white;
     margin: 2.5vw;
     padding: 0.5vw;
     width: 20vw;
-    border: 2px solid black;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+}
+
+.count-total-students {
+    background: linear-gradient(to bottom right, #4fb173, #4CAF50);
+
+}
+
+.count-physically-fit {
+    background: linear-gradient(to bottom right, #c776bf, #ce11a5);
+}
+
+.count-not-physically-fit {
+    background: linear-gradient(to bottom right, #bdaa75, #cda110);
 }
