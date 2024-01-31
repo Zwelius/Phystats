@@ -10,13 +10,42 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 @import url("https://fonts.googleapis.com/css?family=Jura");
 @import url('https://fonts.googleapis.com/css2?family=Poppins');
 
-.content {
+body {
+    background-color: #C2D7EA;
+    font-family: 'Poppins';
+}
+
+main {
     padding: 0 11%;
     margin: 45px auto;
 }
 
 .filter {
-    background-color: blue;
+    background-color: white;
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.filter select,
+input[name="getdata"],
+button[name="print"] {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+}
+
+input[name="getdata"] {
+    background-color: #0679E2;
+    color: white;
+}
+
+button[name="print"] {
+    background-color: lightgray;
 }
 
 @media print {
@@ -28,9 +57,130 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     .print-container * {
         visibility: visible;
     }
+
+    .print-container {
+        position: absolute;
+        left: 0px;
+        top: 0px;
+    }
 }
 
+.content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+}
 
-.section-1 {
-    background-color: red;
+.action {
+    width: 30px;
+}
+
+.basic-info,
+.basic-info .inner {
+    display: flex;
+    font-size: 12px;
+}
+
+.basic-info {
+    margin-bottom: 15px;
+}
+
+.basic-info .inner div {
+    margin-left: 30px;
+}
+
+.student-information,
+.health-related,
+.skill-related,
+.results {
+    background-color: #0679E2;
+    color: white;
+    text-align: center;
+}
+
+.section-1 select {
+    border: none;
+    border-radius: 5px;
+    outline: none;
+}
+
+/*****tables*****/
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table th,
+table td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 5px;
+}
+
+td {
+    text-align: center;
+}
+
+label[for="category"] {
+    color: #133A84;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+label[for="weight"],
+label[for="height"],
+label[for="BMI"],
+label[for="bmiClassification"],
+label[for="HRbefore"],
+label[for="HRafter"],
+label[for="zipperL"],
+label[for="zipperR"],
+label[for="sar1"],
+label[for="sar2"],
+label[for="slj1"],
+label[for="slj2"],
+label[for="clockwise"],
+label[for="hexcounter"],
+label[for="storkleft"],
+label[for="storkright"],
+label[for="stick1"],
+label[for="stick2"],
+label[for="stick3"] {
+    font-size: 12px;
+    font-weight: lighter;
+}
+
+input {
+    padding: 10px;
+}
+
+input[name="HRbefore"],
+input[name="HRafter"],
+input[name="stick1"],
+input[name="stick2"],
+input[name="stick3"] {
+    width: 87.5%;
+}
+
+/*****results*****/
+.health-related-test,
+.skill-related-test {
+    width: 100%;
+}
+
+.physical-fitness-result {
+    width: 300px;
+}
+
+.health-related-test th,
+.skill-related-test th {
+    background-color: #27A655;
+    color: white;
+    font-size: 14px;
+    text-align: center;
+}
+
+.health-related-test td,
+.skill-related-test td {
+    text-align: center;
 }

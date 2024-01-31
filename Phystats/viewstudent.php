@@ -54,67 +54,141 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
         </div>
     </nav>
 
-    <div class="content">
-        <h1>
-            <?php echo $studentNAME; ?>
-        </h1>
-        <h3>
-            <?php echo $studentBIRTHDATE . "&nbsp;&nbsp;&nbsp;" . $studentSEX; ?>
-        </h3>
-        <div>
-            <div class="filter">
-                <form method="POST" id="test_form">
-                    <select name="grade">
-                        <?php
-                        while ($gs = mysqli_fetch_array($gradesql)) {
-                            ?>
-                            <option value='<?php echo $gs['grade_ID']; ?>' <?php if (isset($_POST['grade']) && $_POST['grade'] === $gs['grade_ID']) {
-                                   echo 'selected';
-                               } ?>><?php echo $gs['grade'] . " - " . $gs['section']; ?>
-                            </option>
-                            <?php
-                        }
+    <main>
+        <div class="filter">
+            <form method="POST" id="test_form">
+                <select name="grade">
+                    <?php
+                    while ($gs = mysqli_fetch_array($gradesql)) {
                         ?>
-                    </select>
-                    <select name="quarter">
+                        <option value='<?php echo $gs['grade_ID']; ?>' <?php if (isset($_POST['grade']) && $_POST['grade'] === $gs['grade_ID']) {
+                               echo 'selected';
+                           } ?>><?php echo $gs['grade'] . " - " . $gs['section']; ?>
+                        </option>
                         <?php
-                        while ($qtr = mysqli_fetch_array($quartersql)) {
-                            ?>
-                            <option value='<?php echo $qtr['quarter_ID']; ?>' <?php if (isset($_POST['quarter']) && $_POST['quarter'] === $qtr['quarter_ID']) {
-                                   echo 'selected';
-                               } ?>><?php echo $qtr['quarter']; ?>
-                            </option>
-                            <?php
-                        }
+                    }
+                    ?>
+                </select>
+                <select name="quarter">
+                    <?php
+                    while ($qtr = mysqli_fetch_array($quartersql)) {
                         ?>
-                    </select>
-                    <select name="testtype">
+                        <option value='<?php echo $qtr['quarter_ID']; ?>' <?php if (isset($_POST['quarter']) && $_POST['quarter'] === $qtr['quarter_ID']) {
+                               echo 'selected';
+                           } ?>><?php echo $qtr['quarter']; ?>
+                        </option>
                         <?php
-                        while ($tt = mysqli_fetch_array($testtypesql)) {
-                            ?>
-                            <option value='<?php echo $tt['testtype_ID']; ?>' <?php if (isset($_POST['testtype']) && $_POST['testtype'] === $tt['testtype_ID']) {
-                                   echo 'selected';
-                               } ?>><?php echo $tt['testTYPE']; ?>
-                            </option>
-                            <?php
-                        }
+                    }
+                    ?>
+                </select>
+                <select name="testtype">
+                    <?php
+                    while ($tt = mysqli_fetch_array($testtypesql)) {
                         ?>
-                    </select>
-                    <input type="submit" name="getdata" value="Get Data">
-                </form>
+                        <option value='<?php echo $tt['testtype_ID']; ?>' <?php if (isset($_POST['testtype']) && $_POST['testtype'] === $tt['testtype_ID']) {
+                               echo 'selected';
+                           } ?>><?php echo $tt['testTYPE']; ?>
+                        </option>
+                        <?php
+                    }
+                    ?>
+                </select>
+                <input type="submit" name="getdata" value="Get Data">
+            </form>
+            <div>
+                <button onclick="window.print();" name="print">Print</button>
             </div>
+        </div>
 
-            <?php
-            if (isset($_POST['getdata'])) {
-                $data = $query . "AND studenttestdata_tb.grade_ID = '" . $_POST['grade'] . "' AND testinfo_tb.quarter_ID = '" . $_POST['quarter'] . "' AND testinfo_tb.testtype_ID = '" . $_POST['testtype'] . "'";
-                $thisdata = mysqli_query($connection, $data);
-                if ($thisdata && mysqli_num_rows($thisdata) > 0) {
-                    while ($datarow = mysqli_fetch_array($thisdata)) {
-                        ?>
+        <?php
+        if (isset($_POST['getdata'])) {
+            $data = $query . "AND studenttestdata_tb.grade_ID = '" . $_POST['grade'] . "' AND testinfo_tb.quarter_ID = '" . $_POST['quarter'] . "' AND testinfo_tb.testtype_ID = '" . $_POST['testtype'] . "'";
+            $thisdata = mysqli_query($connection, $data);
+            if ($thisdata && mysqli_num_rows($thisdata) > 0) {
+                while ($datarow = mysqli_fetch_array($thisdata)) {
+                    ?>
+                    <?php
+                    $teacher_ID = $_SESSION["teacher_ID"];
+                    $student_ID = $_GET["student_ID"];
+                    $query = "SELECT * FROM `studenttestdata_tb` INNER JOIN `gradesection_tb` ON gradesection_tb.grade_ID = studenttestdata_tb.grade_ID INNER JOIN `testinfo_tb` ON testinfo_tb.testinfo_ID = studenttestdata_tb.testinfo_ID
+                    INNER JOIN `quarter_tb` ON quarter_tb.quarter_ID = testinfo_tb.quarter_ID INNER JOIN `testtype_tb` ON testtype_tb.testtype_ID = testinfo_tb.testtype_ID
+                    INNER JOIN `studenttestresult_tb` ON studenttestresult_tb.testdata_ID = studenttestdata_tb.testdata_ID WHERE `student_ID` = '$student_ID'";
+                    $gradesql = mysqli_query($connection, $query);
+                    $quartersql = mysqli_query($connection, $query);
+                    $testtypesql = mysqli_query($connection, $query);
+                    $sql = "SELECT * FROM `student_tb` WHERE `student_ID` = '$student_ID'";
+                    $studentinfo = mysqli_query($connection, $sql);
+                    while ($row = mysqli_fetch_array($studentinfo)) {
+                        $studentNAME = $row["studentNAME"];
+                        $studentBIRTHDATE = $row["studentBIRTHDATE"];
+                        $studentSEX = $row["studentSEX"];
+                    }
+                    ?>
+                    <div class="content">
+                        <?php echo "<a href='updatestudent.php?testdata_ID={$datarow['testdata_ID']}'><img class='action' src='assets/edit.png'></a>&nbsp;&nbsp;<a href='delete.php?testdata_ID={$datarow['testdata_ID']}'><img class='action' src='assets/delete.png'></a>"; ?>
 
                         <div class="print-container">
                             <div class="section-1">
-                                <table class="add-students-table">
+                                <center>
+                                    <img src="assets/wlogo.png" class="logo"><br>
+                                    Seaside Elementary School
+                                </center>
+                                <br>
+
+                                <div class="basic-info">
+                                    <div>
+                                        <b>NAME: </b>
+                                        <?php echo $studentNAME; ?><br>
+                                        <b>BIRTHDAY: </b>
+                                        <?php echo $studentBIRTHDATE ?><br>
+                                        <b>SEX: </b>
+                                        <?php echo $studentSEX ?>
+                                    </div>
+                                    <div class="inner">
+                                        <div>
+                                            <b>GRADE & SECTION: </b>
+                                            <?php
+                                            while ($gs = mysqli_fetch_array($gradesql)) {
+                                                ?>
+                                                <option value='<?php echo $gs['grade_ID']; ?>' <?php if (isset($_POST['grade']) && $_POST['grade'] === $gs['grade_ID']) {
+                                                       echo 'selected';
+                                                   } ?>><?php echo $gs['grade'] . " - " . $gs['section']; ?>
+                                                </option>
+                                                <?php
+                                            } ?>
+                                        </div>
+                                        <div>
+                                            <b>QUARTER: </b>
+                                            <?php
+                                            while ($qtr = mysqli_fetch_array($quartersql)) {
+                                                ?>
+                                                <option value='<?php echo $qtr['quarter_ID']; ?>' <?php if (isset($_POST['quarter']) && $_POST['quarter'] === $qtr['quarter_ID']) {
+                                                       echo 'selected';
+                                                   } ?>><?php echo $qtr['quarter']; ?>
+                                                </option>
+                                                <?php
+                                            }
+                                            ?>
+                                        </div>
+                                        <div>
+                                            <b>TYPE OF TEST: </b>
+                                            <?php
+                                            while ($tt = mysqli_fetch_array($testtypesql)) {
+                                                ?>
+                                                <option value='<?php echo $tt['testtype_ID']; ?>' <?php if (isset($_POST['testtype']) && $_POST['testtype'] === $tt['testtype_ID']) {
+                                                       echo 'selected';
+                                                   } ?>><?php echo $tt['testTYPE']; ?>
+                                                </option>
+                                                <?php
+                                            }
+                                            ?>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="student-information">Student Information</div>
+                                <table>
                                     <tr>
                                         <th colspan="2" class="category"><label for="category">BODY
                                                 COMPOSITION</label><br><label>Body Mass Index (BMI)</label>
@@ -173,7 +247,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                                                 value="<?php echo $datarow['plankTime']; ?>" min="0" readonly></th>
                                     </tr>
                                 </table>
-                                <table class="add-students-table">
+
+                                <div class="health-related">Health-Related</div>
+                                <table>
                                     <tr>
                                         <th class="category"><label for="category">COORDINATION</label></th>
                                         <th class="category"><label for="category">SPEED</label></th>
@@ -198,11 +274,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                                                 step="0.01" readonly>
                                         </th>
                                     </tr>
+                                </table>
 
-                                    <tr>
-                                        <th>&nbsp;</th><!--empty-->
-                                    </tr>
-
+                                <div class="skill-related">Skill-Related</div>
+                                <table>
                                     <tr>
                                         <th colspan="2" class="category"><label for="category">AGILITY</label></th>
                                         <th colspan="2" class="category"><label for="category">BALANCE</label></th>
@@ -252,7 +327,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                             </div>
 
                             <div class="section-2">
-                                <table class="health-related-test" id="tebla">
+                                <div class="results">Results</div>
+                                <br>
+                                Health-Related Test Result
+                                <table class="health-related-test">
                                     <tr>
                                         <th>BODY COMPOSITION</th>
                                         <th>CARDIOVASCULAR ENDURANCE</th>
@@ -278,6 +356,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                                         </td>
                                     </tr>
                                 </table>
+                                <br>
+                                Skill-Related Test Result
                                 <table class="skill-related-test" id="table">
                                     <tr>
                                         <th>COORDINATION</th>
@@ -312,9 +392,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                                         </td>
                                     </tr>
                                 </table>
-                                <table class="physical-fitness-result" id="bleta">
+
+                                <br>
+
+                                <table class="physical-fitness-result">
                                     <tr>
-                                        <th>FITNESS RESULT</th>
+                                        <th>PHYSICAL FITNESS RESULT</th>
                                     </tr>
                                     <tr>
                                         <td>
@@ -322,24 +405,21 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                                         </td>
                                     </tr>
                                 </table>
-                                <button onclick="window.print();">Print</button>
-                                <?php echo "<a href='updatestudent.php?testdata_ID={$datarow['testdata_ID']}'><img class='action' src='assets/edit.png'></a>&nbsp;&nbsp;<a href='delete.php?testdata_ID={$datarow['testdata_ID']}'><img class='action' src='assets/delete.png'></a>"; ?>
-                            </div>
-                        </div>
 
-                        <?php
-                    }
-                } else {
-                    ?>
-                    <div><img src="assets/nodata.png"></div>
-                    <?php
+                            </div>
+
+                            <?php
                 }
             } else {
-                echo "<h1>No data retrieved yet</h1>";
+                ?>
+                        <div><img src="assets/nodata.png"></div>
+                        <?php
             }
-            ?>
-        </div>
-    </div>
+        } else {
+            echo "<h1>No data retrieved yet</h1>";
+        }
+        ?>
+    </main>
 </body>
 
 </html>
