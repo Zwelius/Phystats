@@ -21,7 +21,6 @@ form {
     background-color: white;
 }
 
-
 /*****table*****/
 .add-students-table {
     margin-top: 10px;
@@ -188,8 +187,8 @@ input[name="save"]:hover,
 }
 
 .tab {
+    padding-bottom: 10px;
     color: #0679E2;
-    padding: 10px 20px;
     font-weight: bold;
 }
 

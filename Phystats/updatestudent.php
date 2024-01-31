@@ -68,7 +68,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
 
             mysqli_query($connection, "UPDATE `studenttestresult_tb` SET `bodyComposition`= '$bodyComposition', `cardiovascularEndurance`= '$cardiovascularEndurance', `strength`= '$strength', `flexibility`= '$flexibility', `coordination`= '$coordination', `agility`= '$agility', `speed`= '$speed', `power`= '$power', `balance`= '$balance', `reactionTime`= '$reactionTime', `fitnessResult`= '$fitnessResult' WHERE `testdata_ID` = $testdata_ID");
             echo '<script>alert("Updated data successfully");</script>';
-            echo '<script>window.location.replace("viewstudent.php?student_ID='.$data["student_ID"].'");</script>';
+            echo '<script>window.location.replace("viewstudent.php?student_ID=' . $data["student_ID"] . '");</script>';
             exit();
         }
     }
@@ -92,7 +92,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                 <span class="close" id="closeAddStudent">&#129092;</span>
 
                 <div class="tabs">
-                    <div class="tab">Student Information</div>
+                    <div class="tab">Edit Information</div>
                 </div>
 
                 <div class="progress-bar"></div>
@@ -210,6 +210,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                                         ENDURANCE</label><br><label>3-MINUTE STEP (Heart rate per minute)</label>
                                 </th>
                             </tr>
+
+                            <br><hr><br>
+
                             <tr>
                                 <th><label for="height">HEIGHT (m):</label><br><input type="number" name="height"
                                         min="0" step="0.01" value="<?php echo $data['height'] ?>" required>
@@ -218,9 +221,11 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                                         min="0" step="0.01" value="<?php echo $data['weight'] ?>" required>
                                 </th>
                                 <th><label for="HRbefore">Before Activity</label><br><input type="number"
-                                        name="HRbefore" step="0.01" min="40" max="220" value="<?php echo $data['HRbefore'] ?>" required></th>
+                                        name="HRbefore" step="0.01" min="40" max="220"
+                                        value="<?php echo $data['HRbefore'] ?>" required></th>
                                 <th><label for="HRafter">After Activity</label><br><input type="number" name="HRafter"
-                                        step="0.01" min="40" max="220" value="<?php echo $data['HRafter'] ?>" required></th>
+                                        step="0.01" min="40" max="220" value="<?php echo $data['HRafter'] ?>" required>
+                                </th>
                             </tr>
                             <tr>
                                 <th colspan="4">&nbsp;</th><!--empty-->
@@ -231,8 +236,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                                 <th colspan="2"><br><label for="sar">SIT AND REACH SCORE (cm)</label></th>
                             </tr>
                             <tr>
-                                <th><label for="zipperL">Left</label><br><input type="number" name="zipperL"
-                                        step="0.01" value="<?php echo $data['zipperLeft'] ?>" required></th>
+                                <th><label for="zipperL">Left</label><br><input type="number" name="zipperL" step="0.01"
+                                        value="<?php echo $data['zipperLeft'] ?>" required></th>
                                 <th><label for="zipperR">Right</label><br><input type="number" name="zipperR"
                                         step="0.01" value="<?php echo $data['zipperRight'] ?>" required></th>
                                 <th><label for="sar1">First Trial</label><br><input type="number" name="sar1"
@@ -255,6 +260,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                         </table>
                     </div>
                     <!--end of health related test-->
+
+                    <br><hr><br>
+
                     <!--start of skill related test-->
                     <div id="tab3" class="tab-content">
                         <table class="add-students-table">
@@ -292,7 +300,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                                 <th colspan="2"><label for="hexagon">HEXAGON AGILITY TEST (sec)</label></th>
                                 <th colspan="2"><label for="stork-balance">STORK BALANCE TEST (sec)</label></th>
                             </tr>
-
                             <tr>
                                 <th><label for="clockwise">Clockwise</label><br><input type="number" name="hexclock"
                                         value="<?php echo $data['hexagonClockwise'] ?>" min="0" required></th>
@@ -305,18 +312,15 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                                 <th><label for="storkright">Right Foot</label><br><input type="number" name="storkright"
                                         value="<?php echo $data['storkRight'] ?>" min="0" required>
                             </tr>
-
                             <tr>
                                 <th colspan="4">&nbsp;</th><!--empty-->
                             </tr>
-
                             <tr>
                                 <th colspan="2" class="category"><label for="category">REACTION TIME</label></th>
                             </tr>
                             <tr>
                                 <th colspan="2"><label for="stick">STICK DROP TEST (cm)</label></th>
                             </tr>
-
                             <tr>
                                 <th><label for="stick1">First Trial</label><br><input type="number" name="stick1"
                                         step="0.01" value="<?php echo $data['stickDrop1'] ?>" min="0" max="30.48"
