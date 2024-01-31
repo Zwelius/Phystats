@@ -31,7 +31,7 @@ session_start();
         header("Location: index.php");
     } else {
         $principal_ID = $_SESSION["principal_ID"];
-        $list = "SELECT COUNT(*) as `count` FROM `student_tb` INNER JOIN `studenttestdata_tb` ON studenttestdata_tb.student_ID = student_tb.student_ID INNER JOIN `testinfo_tb` ON testinfo_tb.testinfo_ID = studenttestdata_tb.testinfo_ID
+        $list = "SELECT COUNT(DISTINCT student_tb.student_ID) as `count` FROM `student_tb` INNER JOIN `studenttestdata_tb` ON studenttestdata_tb.student_ID = student_tb.student_ID INNER JOIN `testinfo_tb` ON testinfo_tb.testinfo_ID = studenttestdata_tb.testinfo_ID
          INNER JOIN `studenttestresult_tb` ON studenttestresult_tb.testdata_ID = studenttestdata_tb.testdata_ID INNER JOIN `teacher_tb` ON teacher_tb.teacher_ID = testinfo_tb.teacher_ID
          INNER JOIN `gradesection_tb` ON gradesection_tb.grade_ID = studenttestdata_tb.grade_ID INNER JOIN `principal_tb` ON principal_tb.principal_ID = teacher_tb.principal_ID WHERE principal_tb.principal_ID = $principal_ID";
         $overallstudents = mysqli_query($connection, $list);

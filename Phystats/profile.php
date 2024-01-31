@@ -33,38 +33,22 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
             $grade = $rowteach['grade'];
             $section = $rowteach['section'];
         }
-
         if (isset($_POST['update'])) {
-            $teachername = mysqli_query($connection, "SELECT * FROM `teacher_tb` WHERE `teacher_FNAME` = '" . $_POST['fname'] . "' AND `teacher_LNAME` = '" . $_POST['lname'] . "'");
+            $teachername = mysqli_query($connection, "SELECT * FROM `teacher_tb` WHERE `teacher_FNAME` = '" . $_POST['fname'] . "' AND `teacher_LNAME` = '" . $_POST['lname'] . "' AND `teacher_ID` != $teacher_ID");
             if ($teachername && mysqli_num_rows($teachername) > 0) {
-                while ($temp = mysqli_fetch_array($teachername)) {
-                    $temp_ID = $temp['teacher_ID'];
-                }
-                if ($temp_ID != $teacher_ID) {
-                    echo '<script>alert("Teacher account already exists. Please go see the admin if there are problems.");</script>';
+                echo '<script>alert("Teacher account already exists with the same first and last name. Please go see the admin if there are problems.");</script>';
+            } else {
+                $login = mysqli_query($connection, "SELECT * FROM `teacher_tb` WHERE `teacher_EMAIL` = '" . $_POST['email'] . "' AND `teacher_ID` != $teacher_ID");
+                if ($login && mysqli_num_rows($login) > 0) {
+                    echo '<script>alert("This email is already in use by another teacher. Please go see the admin if there are problems.");</script>';
                 } else {
-                    $login = mysqli_query($connection, "SELECT * FROM `teacher_tb` WHERE `teacher_EMAIL` = '" . $_POST['email'] . "'");
-                    if ($login && mysqli_num_rows($login) > 0) {
-                        while ($temp = mysqli_fetch_array($login)) {
-                            $temp_ID = $temp['teacher_ID'];
-                        }
-                        if ($temp_ID != $teacher_ID) {
-                            echo '<script>alert("This email is already in use. Please go see the admin if there are problems.");</script>';
-                        } else {
-                            $gradesection = mysqli_query($connection, "SELECT * FROM `gradesection_tb` WHERE `grade` = '" . $_POST['grade'] . "' AND `section` = '" . $_POST['section'] . "'");
-                            if ($gradesection && mysqli_num_rows($gradesection) > 0) {
-                                while ($temp = mysqli_fetch_array($gradesection)) {
-                                    $temp_ID = $temp['teacher_ID'];
-                                }
-                                if ($temp_ID != $teacher_ID) {
-                                    echo '<script>alert("Grade and Section already assigned to a teacher. Please go see the admin if there are problems.");</script>';
-                                } else {
-                                    $updateprofsql = mysqli_query($connection, "UPDATE `teacher_tb` SET `teacher_FNAME`='" . $_POST['fname'] . "',`teacher_LNAME`='" . $_POST['lname'] . "', `teacher_EMAIL`='" . $_POST['email'] . "', `teacher_PASSWORD`='" . $_POST['pass'] . "' WHERE `teacher_ID`='$teacher_ID'");
-                                    $updategradesql = mysqli_query($connection, "UPDATE `gradesection_tb` SET `grade`='" . $_POST['grade'] . "',`section`='" . $_POST['section'] . "' WHERE `teacher_ID`='$teacher_ID'");
-                                    echo '<script>alert("Updated successfully");window.location.replace("profile.php");</script>';
-                                }
-                            }
-                        }
+                    $gradesection = mysqli_query($connection, "SELECT * FROM `gradesection_tb` WHERE `grade` = '" . $_POST['grade'] . "' AND `section` = '" . $_POST['section'] . "' AND `teacher_ID` != $teacher_ID");
+                    if ($gradesection && mysqli_num_rows($gradesection) > 0) {
+                        echo '<script>alert("Grade and Section are already assigned to another teacher. Please go see the admin if there are problems.");</script>';
+                    } else {
+                        $updateprofsql = mysqli_query($connection, "UPDATE `teacher_tb` SET `teacher_FNAME`='" . $_POST['fname'] . "',`teacher_LNAME`='" . $_POST['lname'] . "', `teacher_EMAIL`='" . $_POST['email'] . "', `teacher_PASSWORD`='" . $_POST['pass'] . "' WHERE `teacher_ID`='$teacher_ID'");
+                        $updategradesql = mysqli_query($connection, "UPDATE `gradesection_tb` SET `grade`='" . $_POST['grade'] . "',`section`='" . $_POST['section'] . "' WHERE `teacher_ID`='$teacher_ID'");
+                        echo '<script>alert("Updated successfully");window.location.replace("profile.php");</script>';
                     }
                 }
             }

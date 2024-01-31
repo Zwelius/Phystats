@@ -32,26 +32,14 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
         }
 
         if (isset($_POST['update'])) {
-            $principalname = mysqli_query($connection, "SELECT * FROM `principal_tb` WHERE `principal_NAME` = '" . $_POST['name'] . "'");
-            if ($principalname && mysqli_num_rows($principalname) > 0) {
-                while ($temp = mysqli_fetch_array($principalname)) {
-                    $temp_ID = $temp['principal_ID'];
-                }
-                if ($temp_ID != $principal_ID) {
-                    echo '<script>alert("Principal account already exists. Please your IT support if there are problems.");</script>';
+            if (isset($_POST['update'])) {
+                $updateprofsql = mysqli_query($connection, "UPDATE `principal_tb` SET `principal_NAME`='" . $_POST['name'] . "', `principal_EMAIL`='" . $_POST['email'] . "', `principal_PASSWORD`='" . $_POST['pass'] . "' WHERE `principal_ID`='$principal_ID'");
+                if (mysqli_errno($connection) == 1062) {
+                    echo '<script>alert("Principal account or email already exists. Please your IT support if there are problems.");</script>';
+                } elseif (mysqli_errno($connection)) {
+                    echo '<script>alert("An error occurred while updating your profile. Please try again later.");</script>';
                 } else {
-                    $login = mysqli_query($connection, "SELECT * FROM `principal_tb` WHERE `principal_EMAIL` = '" . $_POST['email'] . "'");
-                    if ($login && mysqli_num_rows($login) > 0) {
-                        while ($temp = mysqli_fetch_array($login)) {
-                            $temp_ID = $temp['principal_ID'];
-                        }
-                        if ($temp_ID != $principal_ID) {
-                            echo '<script>alert("This email is already in use. Please go see the admin if there are problems.");</script>';
-                        } else {
-                            $updateprofsql = mysqli_query($connection, "UPDATE `principal_tb` SET `principal_NAME`='" . $_POST['name'] . "', `principal_EMAIL`='" . $_POST['email'] . "', `principal_PASSWORD`='" . $_POST['pass'] . "' WHERE `principal_ID`='$principal_ID'");
-                            echo '<script>alert("Updated successfully");window.location.replace("profile.php");</script>';
-                        }
-                    }
+                    echo '<script>alert("Updated successfully");window.location.replace("adminProfile.php");</script>';
                 }
             }
         } else if (isset($_POST['logout'])) {
@@ -60,7 +48,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
             exit();
         } else if (isset($_POST['reset'])) {
             $updateprofsql = mysqli_query($connection, "UPDATE `principal_tb` SET `principal_NAME`='Seaside Elementary School', `principal_EMAIL`='seasideadmin@gmail.com', `principal_PASSWORD`='seaside123' WHERE `principal_ID`='$principal_ID'");
-                            
+
             unset($_SESSION["principal_ID"]);
             echo '<script>window.location.replace("index.php");</script>';
             exit();
