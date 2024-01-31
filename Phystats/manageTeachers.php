@@ -1,3 +1,5 @@
+<?php session_start() ?>
+
 <!DOCTYPE HTML>
 <html lang="en">
     <head>
@@ -14,9 +16,15 @@
                 <h1 class="title">Phystats</h1>
             </div>
             <div>
-                <a href="dashboard.php" class="nav-options">DASHBOARD</a>
-                <a href="#" class="nav-options">MANAGE</a>
-                <a href="adminProfile.php" class="here nav-options"><img class="profile" src="assets/wprof.png"></a>
+                <a href="dashboard.php" class="here nav-options">DASHBOARD</a>
+                <div class="nav-options">
+                    <span class="manage">MANAGE</span>
+                    <div class="dropdown">
+                        <a href="manageTeachers.php">Manage Teachers</a>
+                        <a href="#"><button onclick="openAddSchoolYear()">Add School Year</button></a>
+                    </div>
+                </div>
+                <a href="adminProfile.php" class="nav-options"><img class="profile" src="assets/wprof.png"></a>
             </div>
         </nav>
 
@@ -30,8 +38,7 @@
                     <th style="width: 10%;"> No. </th>
                     <th style="width: 30%;"> Name </th>
                     <th style="width: 30%;"> Email </th>
-                    <th style="width: 20%;"> Section </th>
-                    <th style="width: 10%;"> Actions </th>
+                    <th style="width: 30%;"> Section </th>
                 </tr>
                 <?php echo retrieveTeachersFromGrade("Six") ?>
             </table>
@@ -41,8 +48,7 @@
                     <th style="width: 10%;"> No. </th>
                     <th style="width: 30%;"> Name </th>
                     <th style="width: 30%;"> Email </th>
-                    <th style="width: 20%;"> Section </th>
-                    <th style="width: 10%;"> Actions </th>
+                    <th style="width: 30%;"> Section </th>
                 </tr>
                 <?php echo retrieveTeachersFromGrade("Five") ?>
             </table>
@@ -52,8 +58,7 @@
                     <th style="width: 10%;"> No. </th>
                     <th style="width: 30%;"> Name </th>
                     <th style="width: 30%;"> Email </th>
-                    <th style="width: 20%;"> Section </th>
-                    <th style="width: 10%;"> Actions </th>
+                    <th style="width: 30%;"> Section </th>
                 </tr>
                 <?php echo retrieveTeachersFromGrade("Four") ?>
             </table>
@@ -63,12 +68,11 @@
 
 
 <?php 
-    session_start();
     function retrieveTeachersFromGrade($grade) {
         $entry_number = 1;
         $data_sheet = "";
         $DB_CONNECTION = mysqli_connect("localhost", "root", "", "phystats");
-        $SQL_QUERY = "SELECT CONCAT_WS(' ', t.teacher_FNAME, t.teacher_LNAME) AS teacher_name, t.teacher_EMAIL AS email, g.section AS section
+        $SQL_QUERY = "SELECT t.teacher_ID, CONCAT_WS(' ', t.teacher_FNAME, t.teacher_LNAME) AS teacher_name, t.teacher_EMAIL AS email, g.section AS section
                       FROM teacher_tb AS t, gradesection_tb AS g 
                       WHERE g.grade=\"".$grade."\" AND g.teacher_ID=t.teacher_ID AND t.teacher_ID=g.teacher_ID;";
         $RESULT_SET = mysqli_query($DB_CONNECTION, $SQL_QUERY);
@@ -76,10 +80,9 @@
         while( $data = mysqli_fetch_row($RESULT_SET) ) {
             $data_sheet .= "<tr>
                                 <td> ".$entry_number." </td>
-                                <td> ".$data[0]." </td>
                                 <td> ".$data[1]." </td>
                                 <td> ".$data[2]." </td>
-                                <td> Delete </td>
+                                <td> ".$data[3]." </td>
                             </tr>
                             ";
             $entry_number++;
@@ -87,11 +90,11 @@
 
         if ($data_sheet == "") {
             $data_sheet .= "<tr>
-                                <td class='none' colspan=10>No Students Found</td>
+                                <td class='none' colspan=5 style=\"font-size: 30px; padding: 25px 0px 25px 0px\">No Teachers in this Grade Level</td>
                             <tr>";
             return $data_sheet;
         } else {
             return $data_sheet;
         }
     }
-?>
+?> 

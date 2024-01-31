@@ -47,8 +47,65 @@ tr:not(:first-child):hover{
     opacity: 0.7;
 }
 
+.nav-options:hover .dropdown {
+    display: block;
+}
+
+/* Dropdown on Nav */
+.dropdown {
+    background-color: white;
+    top: 100%;
+    left: 0;
+    position: absolute;
+    display: none;
+    border-radius: 2px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 160px;
+}
+.dropdown a {
+    color: black;
+    padding: 10px;
+    text-decoration: none;
+    display: block;
+    font-size: 12px;
+}
+.dropdown a:hover {
+    background-color: lightgrey;
+}
+.dropdown button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+.nav-options {
+    position: relative;
+}
+.nav-options .dropdown {
+    position: absolute;
+    top: 100%;
+    display: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.nav-options:hover .dropdown {
+    display: block;
+}
+.manage {
+    color: white;
+    cursor: pointer;
+}
+
+
 #page-header {
     font-size: 50px;
     font-family: 'Poppins';
     padding-bottom: 60px;
+}
+#delete-button {
+    border: none;
+    background-color: rgb(201, 0, 0);
+    color: white;
+    padding: 10px 25px 10px 25px;
+}
+#delete-button:hover {
+    background-color: rgb(121, 0, 0);
 }
