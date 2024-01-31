@@ -258,7 +258,7 @@ session_start();
             </div>
 
             <div class="container">
-                <div class="top">
+                <center>
                     <h2>Grade 5</h2>
                     <select name="section5" onchange="this.form.submit()">
                         <option value="">Section (All)</option>
@@ -273,7 +273,7 @@ session_start();
                         }
                         ?>
                     </select>
-                </div>
+                </center>
                 <div class="sections">
                     <div class="count-total-students">
                         <h3>No. of Students</h3>

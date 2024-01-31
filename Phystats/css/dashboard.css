@@ -29,10 +29,6 @@ main {
     text-align: center;
 }
 
-.top {
-    display: flex;
-}
-
 h2 {
     color: #133A84;
 }
@@ -69,5 +65,5 @@ select {
 }
 
 .count-not-physically-fit {
-    background: linear-gradient(to bottom right, #bdaa75, #cda110);
+    background: linear-gradient(to bottom right, #d5c56a, #cfc20d);
 }
