@@ -1,0 +1,48 @@
+@import url("https://fonts.googleapis.com/css?family=Jura");
+@import url('https://fonts.googleapis.com/css2?family=Poppins');
+
+body {
+    margin: 0px;
+    padding: 0px;
+    height: 100%;
+    width: 100%;
+    background-color: #C2D7EA;
+    font-family: 'Poppins';
+}
+main {
+    padding-left: 11%;
+    padding-right: 11%;
+    margin-top: 85px;
+}
+h1 {
+    font-family: 'Poppins';
+    font-size: 45px;
+    line-height: 3px;
+}
+
+/*Imported from list.css*/
+.data-display {
+    width: 100%;
+    padding-bottom: 25px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 15px;
+    font-weight: bold;
+    border-spacing: 0;
+    border-collapse: separate;
+    border: var(--border);
+    overflow: hidden;
+}
+.data-display th {
+    background: #27A655;
+    color: white;
+    padding: 10px;
+}
+.data-display td {
+    background: #ffffff;
+    color: grey;
+    padding: 10px;
+}
+tr:not(:first-child):hover{
+    opacity: 0.7;
+}
