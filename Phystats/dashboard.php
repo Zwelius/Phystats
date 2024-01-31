@@ -39,6 +39,12 @@ session_start();
             background-color: lightgrey;
         }
 
+        .dropdown button {
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
         .nav-options {
             position: relative;
         }
@@ -201,7 +207,7 @@ session_start();
                 <span class="manage">MANAGE</span>
                 <div class="dropdown">
                     <a href="#">Manage Teachers</a>
-                    <a href="#">Add School Year</a>
+                    <a href="#"><button onclick="openAddSchoolYear()">Add School Year</button></a>
                 </div>
             </div>
             <a href="adminProfile.php" class="nav-options"><img class="profile" src="assets/wprof.png"></a>
@@ -209,6 +215,14 @@ session_start();
     </nav>
 
     <main>
+        <!--'add school year' modal-->
+        <div id="addSchoolYear" class="add-school-year-modal">
+            <div class="add-school-year-content">
+                <span class="close" onclick="closeAddSchoolYearl()">&times;</span>
+                <p>modal heehoo</p>
+            </div>
+        </div>
+
         <form method="POST">
             <div class="container">
                 <center>
@@ -391,6 +405,16 @@ session_start();
             </div>
         </form>
     </main>
+
+    <script>
+        function openAddSchoolYear() {
+            document.getElementById('addSchoolYear').style.display = 'block';
+        }
+
+        function closeAddSchoolYearl() {
+            document.getElementById('addSchoolYear').style.display = 'none';
+        }
+    </script>
 </body>
 
 </html>
