@@ -14,6 +14,54 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
     <link rel="icon" type="image/x-icon" href="assets/logo.ico">
     <link rel="stylesheet" href="css/nav.css" />
     <link rel="stylesheet" href="css/profile.css" />
+    <style>
+        .nav-options:hover .dropdown {
+            display: block;
+        }
+
+        .dropdown {
+            background-color: white;
+            top: 100%;
+            left: 0;
+            position: absolute;
+            display: none;
+            border-radius: 2px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 160px;
+        }
+
+        .dropdown a {
+            color: black;
+            padding: 10px;
+            text-decoration: none;
+            display: block;
+            font-size: 12px;
+        }
+
+        .dropdown a:hover {
+            background-color: lightgrey;
+        }
+
+        .nav-options {
+            position: relative;
+        }
+
+        .nav-options .dropdown {
+            position: absolute;
+            top: 100%;
+            display: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-options:hover .dropdown {
+            display: block;
+        }
+
+        .manage {
+            color: white;
+            cursor: pointer;
+        }
+    </style>
 </head>
 
 <body>
@@ -62,7 +110,13 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
         </div>
         <div>
             <a href="dashboard.php" class="nav-options">DASHBOARD</a>
-            <a href="#" class="nav-options">MANAGE</a>
+            <div class="nav-options">
+                <span class="manage">MANAGE</span>
+                <div class="dropdown">
+                    <a href="#">Manage Teachers</a>
+                    <a href="#">Add School Year</a>
+                </div>
+            </div>
             <a href="adminProfile.php" class="here nav-options"><img class="profile" src="assets/wprof.png"></a>
         </div>
     </nav>
@@ -81,11 +135,13 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                     </div>
 
                     <div class="selection-container">
-                        <input type="submit" name="reset" value="Reset Principal Account" formnovalidate onclick="return confirm('Are you sure you want to reset account?')">
+                        <input type="submit" name="reset" value="Reset Principal Account" formnovalidate
+                            onclick="return confirm('Are you sure you want to reset account?')">
                     </div>
 
                     <div class="selection-container">
-                        <input type="submit" name="logout" value="Logout" formnovalidate onclick="return confirm('Are you sure you want to logout?')">
+                        <input type="submit" name="logout" value="Logout" formnovalidate
+                            onclick="return confirm('Are you sure you want to logout?')">
                     </div>
                 </div>
 
@@ -97,9 +153,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                             <label>PRINCIPAL NAME</label><br>
                             <input type="text" name="name" value="<?php echo $principal_NAME ?>" required><br>
                             <label>CHANGE EMAIL & PASSWORD</label><br>
-                            <input type="text" name="email" placeholder="Email" value="<?php echo $principal_EMAIL ?>" required>
-                            <input type="password" name="pass" placeholder="Password" value="<?php echo $principal_PASSWORD ?>" required><br><br><br>
-                            <input type="submit" name="update" value="Save Changes" onclick="return confirm('You are about to do some changes. Do you want to proceed?')">
+                            <input type="text" name="email" placeholder="Email" value="<?php echo $principal_EMAIL ?>"
+                                required>
+                            <input type="password" name="pass" placeholder="Password"
+                                value="<?php echo $principal_PASSWORD ?>" required><br><br><br>
+                            <input type="submit" name="update" value="Save Changes"
+                                onclick="return confirm('You are about to do some changes. Do you want to proceed?')">
                         </div>
                     </main>
                 </div>

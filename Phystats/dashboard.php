@@ -12,14 +12,51 @@ session_start();
     <link rel="stylesheet" href="css/dashboard.css" />
     <script type="text/javascript" src="js/script.js"></script>
     <style>
-        img.action {
-            width: 17px;
-            vertical-align: central;
+        .nav-options:hover .dropdown {
+            display: block;
         }
 
-        td.none {
-            height: 40px;
-            font-size: 24pt;
+        .dropdown {
+            background-color: white;
+            top: 100%;
+            left: 0;
+            position: absolute;
+            display: none;
+            border-radius: 2px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 160px;
+        }
+
+        .dropdown a {
+            color: black;
+            padding: 10px;
+            text-decoration: none;
+            display: block;
+            font-size: 12px;
+        }
+
+        .dropdown a:hover {
+            background-color: lightgrey;
+        }
+
+        .nav-options {
+            position: relative;
+        }
+
+        .nav-options .dropdown {
+            position: absolute;
+            top: 100%;
+            display: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-options:hover .dropdown {
+            display: block;
+        }
+
+        .manage {
+            color: white;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -160,7 +197,13 @@ session_start();
         </div>
         <div>
             <a href="dashboard.php" class="here nav-options">DASHBOARD</a>
-            <a href="#" class="nav-options">MANAGE</a>
+            <div class="nav-options">
+                <span class="manage">MANAGE</span>
+                <div class="dropdown">
+                    <a href="#">Manage Teachers</a>
+                    <a href="#">Add School Year</a>
+                </div>
+            </div>
             <a href="adminProfile.php" class="nav-options"><img class="profile" src="assets/wprof.png"></a>
         </div>
     </nav>
