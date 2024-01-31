@@ -61,7 +61,7 @@ section {
 
 }
 
-input[name="logout"] {
+input[name="logout"],input[name="reset"] {
     width: 100%;
     display: flex;
     padding: 15px;
@@ -73,7 +73,7 @@ input[name="logout"] {
     cursor: pointer;
 }
 
-input[name="logout"]:hover {
+input[name="logout"]:hover,input[name="reset"]:hover {
     background-color: #e4e4e4;
 }
 
