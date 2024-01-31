@@ -200,7 +200,7 @@ session_start();
             <div class="nav-options">
                 <span class="manage">MANAGE</span>
                 <div class="dropdown">
-                    <a href="#">Manage Teachers</a>
+                    <a href="manageTeachers.php">Manage Teachers</a>
                     <a href="#">Add School Year</a>
                 </div>
             </div>

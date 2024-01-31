@@ -20,9 +20,11 @@
             </div>
         </nav>
 
-        <!-- Automation lmao -->
+        <!-- "Automation" lmao -->
         <main>
-            <h1> Grade Six </h1>
+            <h1 id="page-header"> Manage Teachers </h1>
+
+            <h1> GRADE SIX </h1>
             <table class="data-display" id="g6-teachers">
                 <tr>
                     <th style="width: 10%;"> No. </th>
@@ -33,7 +35,7 @@
                 </tr>
                 <?php echo retrieveTeachersFromGrade("Six") ?>
             </table>
-            <h1> Grade Five </h1>
+            <h1> GRADE FIVE </h1>
             <table class="data-display" id="g5-teachers">
                 <tr>
                     <th style="width: 10%;"> No. </th>
@@ -44,7 +46,7 @@
                 </tr>
                 <?php echo retrieveTeachersFromGrade("Five") ?>
             </table>
-            <h1> Grade Four </h1>
+            <h1> GRADE FOUR </h1>
             <table class="data-display" id="g4-teachers">
                 <tr>
                     <th style="width: 10%;"> No. </th>
@@ -82,6 +84,14 @@
                             ";
             $entry_number++;
         }
-        return $data_sheet;
+
+        if ($data_sheet == "") {
+            $data_sheet .= "<tr>
+                                <td class='none' colspan=10>No Students Found</td>
+                            <tr>";
+            return $data_sheet;
+        } else {
+            return $data_sheet;
+        }
     }
 ?>
