@@ -10,60 +10,8 @@ session_start();
     <link rel="icon" type="image/x-icon" href="assets/logo.ico">
     <link rel="stylesheet" href="css/nav.css" />
     <link rel="stylesheet" href="css/dashboard.css" />
+    <link rel="stylesheet" href="css/add-new-school-year.css" />
     <script type="text/javascript" src="js/script.js"></script>
-    <style>
-        .nav-options:hover .dropdown {
-            display: block;
-        }
-
-        .dropdown {
-            background-color: white;
-            top: 100%;
-            left: 0;
-            position: absolute;
-            display: none;
-            border-radius: 2px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 160px;
-        }
-
-        .dropdown a {
-            color: black;
-            padding: 10px;
-            text-decoration: none;
-            display: block;
-            font-size: 12px;
-        }
-
-        .dropdown a:hover {
-            background-color: lightgrey;
-        }
-
-        .dropdown button {
-            background: none;
-            border: none;
-            cursor: pointer;
-        }
-
-        .nav-options {
-            position: relative;
-        }
-
-        .nav-options .dropdown {
-            position: absolute;
-            top: 100%;
-            display: none;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .nav-options:hover .dropdown {
-            display: block;
-        }
-
-        .manage {
-            color: white;
-            cursor: pointer;
-        }
     </style>
 </head>
 
@@ -215,11 +163,48 @@ session_start();
     </nav>
 
     <main>
-        <!--'add school year' modal-->
+        <!-- 'add school year' modal -->
         <div id="addSchoolYear" class="add-school-year-modal">
             <div class="add-school-year-content">
                 <span class="close" onclick="closeAddSchoolYearl()">&times;</span>
-                <p>modal heehoo</p>
+
+                <?php
+                if (isset($_POST["add"])) {
+                    $schoolYear = $_POST['schoolYear'];
+                    $addSchoolYearSQL = "INSERT INTO `schoolyear_tb`(`schoolYEAR`) VALUES ('$schoolYear')";
+                    $result = mysqli_query($connection, $addSchoolYearSQL);
+
+                    if ($result) {
+                        echo '<script>alert("School year added successfully.");window.location.replace("dashboard.php");</script>';
+                        exit();
+                    } else {
+                        echo "Failed: " . mysqli_error($connection);
+                    }
+                }
+                $viewSchoolYearSQL = "SELECT * FROM `schoolyear_tb`";
+                $schoolYearResult = mysqli_query($connection, $viewSchoolYearSQL);
+
+                if (!$schoolYearResult) {
+                    echo "Error fetching school years: " . mysqli_error($connection);
+                }
+                ?>
+                <h3>School Year</h3>
+                <form method="post">
+                    <input type="text" name="schoolYear" placeholder="Eg. 2023 - 2024" required>
+                    <button type="submit" name="add">Add</button>
+                </form>
+
+                <br>
+
+                <div class="sy-data">
+                    <table>
+                        <?php
+                        while ($row = mysqli_fetch_assoc($schoolYearResult)) {
+                            echo "<tr><td>{$row['schoolYEAR']}</td></tr>";
+                        }
+                        ?>
+                    </table>
+                </div>
             </div>
         </div>
 

@@ -13,55 +13,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
     <title>Phystats - Admin Profile</title>
     <link rel="icon" type="image/x-icon" href="assets/logo.ico">
     <link rel="stylesheet" href="css/nav.css" />
+    <link rel="stylesheet" href="css/add-new-school-year.css" />
     <link rel="stylesheet" href="css/profile.css" />
-    <style>
-        .nav-options:hover .dropdown {
-            display: block;
-        }
-
-        .dropdown {
-            background-color: white;
-            top: 100%;
-            left: 0;
-            position: absolute;
-            display: none;
-            border-radius: 2px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 160px;
-        }
-
-        .dropdown a {
-            color: black;
-            padding: 10px;
-            text-decoration: none;
-            display: block;
-            font-size: 12px;
-        }
-
-        .dropdown a:hover {
-            background-color: lightgrey;
-        }
-
-        .nav-options {
-            position: relative;
-        }
-
-        .nav-options .dropdown {
-            position: absolute;
-            top: 100%;
-            display: none;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .nav-options:hover .dropdown {
-            display: block;
-        }
-
-        .manage {
-            color: white;
-            cursor: pointer;
-        }
-    </style>
 </head>
 
 <body>
@@ -114,7 +67,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                 <span class="manage">MANAGE</span>
                 <div class="dropdown">
                     <a href="#">Manage Teachers</a>
-                    <a href="#">Add School Year</a>
+                    <a href="#"><button onclick="openAddSchoolYear()">Add School Year</button></a>
                 </div>
             </div>
             <a href="adminProfile.php" class="here nav-options"><img class="profile" src="assets/wprof.png"></a>
@@ -122,6 +75,51 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
     </nav>
 
     <main>
+        <!-- 'add school year' modal -->
+        <div id="addSchoolYear" class="add-school-year-modal">
+            <div class="add-school-year-content">
+                <span class="close" onclick="closeAddSchoolYearl()">&times;</span>
+
+                <?php
+                if (isset($_POST["add"])) {
+                    $schoolYear = $_POST['schoolYear'];
+                    $addSchoolYearSQL = "INSERT INTO `schoolyear_tb`(`schoolYEAR`) VALUES ('$schoolYear')";
+                    $result = mysqli_query($connection, $addSchoolYearSQL);
+
+                    if ($result) {
+                        echo '<script>alert("School year added successfully.");window.location.replace("dashboard.php");</script>';
+                        exit();
+                    } else {
+                        echo "Failed: " . mysqli_error($connection);
+                    }
+                }
+                $viewSchoolYearSQL = "SELECT * FROM `schoolyear_tb`";
+                $schoolYearResult = mysqli_query($connection, $viewSchoolYearSQL);
+
+                if (!$schoolYearResult) {
+                    echo "Error fetching school years: " . mysqli_error($connection);
+                }
+                ?>
+                <h3>School Year</h3>
+                <form method="post">
+                    <input type="text" name="schoolYear" placeholder="Eg. 2023 - 2024" required>
+                    <button type="submit" name="add">Add</button>
+                </form>
+
+                <br>
+
+                <div class="sy-data">
+                    <table>
+                        <?php
+                        while ($row = mysqli_fetch_assoc($schoolYearResult)) {
+                            echo "<tr><td>{$row['schoolYEAR']}</td></tr>";
+                        }
+                        ?>
+                    </table>
+                </div>
+            </div>
+        </div>
+
         <form method="POST">
             <section>
                 <div class="left">
@@ -165,6 +163,16 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
             </section>
         </form>
     </main>
+
+    <script>
+        function openAddSchoolYear() {
+            document.getElementById('addSchoolYear').style.display = 'block';
+        }
+
+        function closeAddSchoolYearl() {
+            document.getElementById('addSchoolYear').style.display = 'none';
+        }
+    </script>
 </body>
 
 </html>
