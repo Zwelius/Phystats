@@ -67,3 +67,37 @@ select {
 .count-not-physically-fit {
     background: linear-gradient(to bottom right, #d5c56a, #cfc20d);
 }
+
+/*****add school year modal*****/
+.add-school-year-modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.add-school-year-content {
+    background-color: white;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%;
+}
+
+.close {
+    color: grey;
+    float: right;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.close:hover{
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
