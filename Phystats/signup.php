@@ -40,10 +40,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                 } else {
                     if ($_POST['pass'] === $_POST['pass2']) {
 
-                        $teachersql = mysqli_query($connection, "INSERT INTO `teacher_tb`(`teacher_FNAME`, `teacher_LNAME`, `teacher_EMAIL`, `teacher_PASSWORD`, `principal_ID`, `status`) VALUES ('" . $_POST['fname'] . "','" . $_POST['lname'] . "','" . $_POST['email'] . "','" . $_POST['pass'] . "',1, 'Archive')");
+                        $teachersql = mysqli_query($connection, "INSERT INTO `teacher_tb`(`teacher_FNAME`, `teacher_LNAME`, `teacher_EMAIL`, `teacher_PASSWORD`, `principal_ID`, `status`) VALUES ('" . $_POST['fname'] . "','" . $_POST['lname'] . "','" . $_POST['email'] . "','" . $_POST['pass'] . "',1, 'Archived')");
                         $teacher_ID = mysqli_insert_id($connection);
                         $gradesql = mysqli_query($connection, "INSERT INTO `gradesection_tb`(`grade`, `section`, `teacher_ID`) VALUES ('" . $_POST['grade'] . "','" . $_POST['section'] . "','$teacher_ID')");
-                        $_SESSION["teacher_ID"] = $teacher_ID;
                         echo '<script>alert("Signed up successfully please check with your Admin to verify account");</script>';
                         echo '<script>window.location.replace("index.php");</script>';
                         exit();
