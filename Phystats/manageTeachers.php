@@ -91,8 +91,10 @@
             <tr>
                 <th style="width: 10%;"> No. </th>
                 <th style="width: 30%;"> Name </th>
-                <th style="width: 30%;"> Email </th>
-                <th style="width: 30%;"> Section </th>
+                <th style="width: 20%;"> Email </th>
+                <th style="width: 15%;"> Section </th>
+                <th style="width: 10%;"> Status </th>
+                <th style="width: 15%;"> Action </th>
             </tr>
             <?php echo retrieveTeachersFromGrade("Six") ?>
         </table>
@@ -101,8 +103,10 @@
             <tr>
                 <th style="width: 10%;"> No. </th>
                 <th style="width: 30%;"> Name </th>
-                <th style="width: 30%;"> Email </th>
-                <th style="width: 30%;"> Section </th>
+                <th style="width: 20%;"> Email </th>
+                <th style="width: 15%;"> Section </th>
+                <th style="width: 10%;"> Status </th>
+                <th style="width: 15%;"> Action </th>
             </tr>
             <?php echo retrieveTeachersFromGrade("Five") ?>
         </table>
@@ -111,8 +115,10 @@
             <tr>
                 <th style="width: 10%;"> No. </th>
                 <th style="width: 30%;"> Name </th>
-                <th style="width: 30%;"> Email </th>
-                <th style="width: 30%;"> Section </th>
+                <th style="width: 20%;"> Email </th>
+                <th style="width: 15%;"> Section </th>
+                <th style="width: 10%;"> Status </th>
+                <th style="width: 15%;"> Action </th>
             </tr>
             <?php echo retrieveTeachersFromGrade("Four") ?>
         </table>
@@ -138,7 +144,7 @@ function retrieveTeachersFromGrade($grade)
     $entry_number = 1;
     $data_sheet = "";
     $DB_CONNECTION = mysqli_connect("localhost", "root", "", "phystats");
-    $SQL_QUERY = "SELECT t.teacher_ID, CONCAT_WS(' ', t.teacher_FNAME, t.teacher_LNAME) AS teacher_name, t.teacher_EMAIL AS email, g.section AS section
+    $SQL_QUERY = "SELECT t.teacher_ID, CONCAT_WS(' ', t.teacher_FNAME, t.teacher_LNAME) AS teacher_name, t.teacher_EMAIL AS email, g.section AS section, t.status
                       FROM teacher_tb AS t, gradesection_tb AS g 
                       WHERE g.grade=\"" . $grade . "\" AND g.teacher_ID=t.teacher_ID AND t.teacher_ID=g.teacher_ID;";
     $RESULT_SET = mysqli_query($DB_CONNECTION, $SQL_QUERY);
@@ -149,6 +155,8 @@ function retrieveTeachersFromGrade($grade)
                                 <td> " . $data[1] . " </td>
                                 <td> " . $data[2] . " </td>
                                 <td> " . $data[3] . " </td>
+                                <td> " . $data[4] . " </td>
+                                <td><a href='archive.php?teacher_ID=".$data[0]."&status=".$data[4]."'>Archive</a>&nbsp;&nbsp;<a href='unarchive.php?teacher_ID=".$data[0]."&status=".$data[4]."'>Unarchive</a></td>
                             </tr>
                             ";
         $entry_number++;
@@ -156,7 +164,7 @@ function retrieveTeachersFromGrade($grade)
 
     if ($data_sheet == "") {
         $data_sheet .= "<tr>
-                                <td class='none' colspan=5 style=\"font-size: 30px; padding: 25px 0px 25px 0px\">No Teachers in this Grade Level</td>
+                                <td class='none' colspan=6 style=\"font-size: 30px; padding: 25px 0px 25px 0px\">No Teachers in this Grade Level</td>
                             <tr>";
         return $data_sheet;
     } else {

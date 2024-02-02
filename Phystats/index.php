@@ -47,7 +47,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Project/PHP/PHPProject.php to edi
                     $failedToLogin = "User not found. Please check your credentials.";
                 }
             } else if ($count == 0) {
-                $sqlogin = mysqli_query($connection, "SELECT * FROM `teacher_tb`");
+                $sqlogin = mysqli_query($connection, "SELECT * FROM `teacher_tb` WHERE `status` = 'Teaching'");
                 while ($row = mysqli_fetch_assoc($sqlogin)) {
                     if ($_POST['email'] === $row['teacher_EMAIL'] && $_POST['pass'] === $row['teacher_PASSWORD']) {
                         $_SESSION["teacher_ID"] = $row["teacher_ID"];
@@ -55,7 +55,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Project/PHP/PHPProject.php to edi
                         echo '<script>window.location.replace("list.php");</script>';
                         exit();
                     } else {
-                        $failedToLogin = "User not found. Please check your credentials.";
+                        $failedToLogin = "User not found. Please check your credentials or check with your admin.";
                     }
                 }
             } else {
